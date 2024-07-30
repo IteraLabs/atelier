@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.0, mkdocs-terminal-4.4.0">
+    
+    <meta name="description" content="An Experimental, Rust-based, Python-wrapped, Workshop for ML"> 
+     
+    <link rel="icon" type="image/png" sizes="192x192" href="../../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>Installation - Atelier</title>
+
+
+<link href="../../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../../css/normalize.css" rel="stylesheet">
+<link href="../../css/terminal.css" rel="stylesheet">
+<link href="../../css/theme.css" rel="stylesheet">
+<link href="../../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../../css/theme.footer.css" rel="stylesheet">
+<!-- default color palette -->
+<link href="../../css/palettes/default.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+
+
+     
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "../..",
+    shortcuts = "{}";
+</script>
+<script src="../../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="../../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="/" class="no-style">Atelier</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../.." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Welcome</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="../../changelog/" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Changelog</span>
+                    </a>
+                    <meta property="position" content="1">
+                </li>
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="2">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+  
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../..">Welcome</a>
+        
+    
+    
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+
+        
+            
+    
+        
+        <span class="
+        
+    
+
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">User Guide</span>
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="
+
+    terminal-mkdocs-side-nav-item--active">Installation</span>
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../../changelog/">Changelog</a>
+        
+    
+    
+    
+  </li>
+        
+    </ul>
+  
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#ubuntu-with-torch-and-mps-gpu">Ubuntu with Torch and MPS-GPU</a></li><li><a href="#target-development">Target: Development</a></li><li><a href="#rustc-online-installation">rustc online installation</a></li><li><a href="#target-compilation">Target: Compilation</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="installation">Installation</h1>
+<p>Atelier has a Rust component, a Python component, Docker tools. </p>
+<h2 id="ubuntu-with-torch-and-mps-gpu">Ubuntu with Torch and MPS-GPU</h2>
+<ul>
+<li>Lower Vulverabilities</li>
+<li>Lower Compressed size</li>
+<li>Lower Software Footprint</li>
+<li>
+<p>High Stability</p>
+</li>
+<li>
+<p>optional: </p>
+<ul>
+<li>Exploration: Common dev tools, infrastructure agnostic, unoptimized</li>
+<li>Development: Targeted or Flexible Infrastructure, Performant Dev Tools</li>
+<li>Production: Minimalistic dev tools, high infrastructure-driven optimization</li>
+</ul>
+</li>
+</ul>
+<h2 id="target-development">Target: Development</h2>
+<ul>
+<li>linux: debian:bullseye-slim</li>
+<li>gpu: MPS | CUDA</li>
+<li>python: 3.11</li>
+</ul>
+<h3 id="rust">Rust</h3>
+<p><strong>components</strong></p>
+<ul>
+<li><code>rustc</code> which is the Rust compiler nad Rustdoc</li>
+<li><code>cargo</code> package manager and build tool.</li>
+<li><code>rustfmt</code> automatically formatting code.</li>
+<li><code>rust-std</code> Rust standard library (with optional further target specification)</li>
+<li><code>rust-docs</code> A local copy of Rust documentation</li>
+<li><code>rust-analyzer</code> language server for editors</li>
+<li><code>clippy</code> Linting tool</li>
+<li><code>rust-src</code> local copy of the source code of the RUst standard library.</li>
+<li><code>llvm-tools</code> A collection of LLVM tools for multi-architecture support.</li>
+</ul>
+<p><strong>Unselected components</strong></p>
+<ul>
+<li><code>rustc-codegen-cranelift</code> experimental version of alternative compiler to <code>llvm</code></li>
+<li><code>miri</code> experimental version of rust interpreter.</li>
+<li><code>rustc-dev</code> a library version of the compiler, not used for similicity.</li>
+<li><code>rls</code> deprecated language server</li>
+<li><code>rust-analysis</code> Metadata generator used by <code>rls</code>. </li>
+<li><code>rust-mingw</code> tools to build for windows-based platforms.</li>
+</ul>
+<h3 id="specific-compilation-process">Specific compilation process</h3>
+<p>instead of <code>cargo</code> we use <code>rustc</code> with specifications tailored to optimize the compilation
+to work optimally in specific hosts architectures and operative systems.</p>
+<div class="highlight"><pre><span></span><code>rustc<span class="w"> </span>src/main.rs<span class="w"> </span>--target<span class="o">=</span>&lt;target-specification-here&gt;
+</code></pre></div>
+<p>Check for more details in the official doc for <a href="" title="https://doc.rust-lang.org/nightly/rustc/command-line-arguments.html">Command-line arguments</a></p>
+<h3 id="rustc-compiler-tiered-support"><code>rustc</code> compiler Tiered support</h3>
+<p><strong>host</strong>: The host platform is considered both from architecture and operating system. </p>
+<p>Currently, the Rust programming language is supported differently across different hosts 
+according to their architecture. There are 3 tiers. Tier 1 is the "guaranteed to work", 
+<a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html#tier-2-with-host-tools">Tier 2: with Host Tools</a> "guaranteed to build", <a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html#tier-2-without-host-tools">Tier: without Host Tools</a> <a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html#tier-3">Tier 3</a> "no guarantees"</p>
+<p>for 64-bit OS, linux and macOS, these are the preffered ones:</p>
+<p>goal is to select a target build in order to have Rust running natively in the machine. </p>
+<p>Here at the <a href="https://rust-lang.github.io/rustup-components-history/">rustup-components</a> the full compatibility list can be verified, depending on the selected target build, different tools that are going to be availale. </p>
+<ul>
+<li>macOS (Tier 2 with Host Tools): The <code>aarch64-apple-darwin</code> is used so to take advantage of the apple silicon. </li>
+<li>linux with x86 CPU (Tier 1): The <code>x86_64-unknown-linux-gnu</code> is selected, this will be the most widely used option.</li>
+<li>linux with ARM CPU (Tier 1): The <code>aarch64-unknown-linux-gnu</code> is selected for ARM-based architectures like AWS: Graviton Lambdas.</li>
+</ul>
+<h3 id="cross-compilation">Cross-compilation</h3>
+<p>Now, <a href="" title="https://rust-lang.github.io/rustup/cross-compilation.html#cross-compilation">cross-compilation</a> can utilized for the cases where the Target host is different than the Comipiling host. e.g. you are using your macOS machine to build a project meant to be running on a Ubuntu Server with ARM64 (AWS: Graviton lambdas)</p>
+<h2 id="rustc-online-installation">rustc online installation</h2>
+<div class="highlight"><pre><span></span><code>curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh -s --target
+</code></pre></div>
+<p>for offline installation strictly in macOS.</p>
+<p>using the <code>aarch64-apple-darwin</code> Mac installers (.pkg) hosted as <a href="https://forge.rust-lang.org/infra/other-installation-methods.html#standalone-installers">standalone files</a>, download them and install with:</p>
+<div class="highlight"><pre><span></span><code>sudo installer -pkg aarch64-apple-darwin.pkg -target &quot;/&quot;
+</code></pre></div>
+<p>These installers come with rustc, cargo, rustdoc, the standard library, and the standard documentation, but do not provide access to additional cross-targets like rustup does</p>
+<h2 id="target-compilation">Target: Compilation</h2>
+<p>universal set of rustup tools</p>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+            
+            <p class="text-center text-muted">Copyright &copy; 2024 Iteralabs</p>
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>
