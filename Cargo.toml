@@ -25,3 +25,7 @@ crate-type = ["lib"]
 test = true
 doctest = true
 
+[[example]]
+name = "orderbook_metrics"
+path = "examples/quant/orderbook_metrics.rs"
+

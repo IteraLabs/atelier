@@ -46,11 +46,10 @@ pub fn randomize_order(side: Side, price: f64, order_type: OrderType) -> Order {
     }
 }
 
-pub fn gbm_return(s0: f64, mu: f64, sigma: f64, t:f64) -> f64 {
+pub fn gbm_return(s0: f64, mu: f64, sigma: f64, t: f64) -> f64 {
     let dwt = generators::pdf_standard_normal();
     let drift = mu * s0 * t;
     let diffusion = sigma * s0 * dwt;
     let dst = drift + diffusion;
     dst
 }
-

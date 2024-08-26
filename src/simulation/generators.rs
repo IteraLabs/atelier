@@ -15,13 +15,10 @@ pub struct Poisson {
 }
 
 impl Distribution for Poisson {
-
-    fn sample(&self, n:usize) -> Vec<f64> {
-        
+    fn sample(&self, n: usize) -> Vec<f64> {
         let mut samples = Vec::new();
-        
-        for _ in 0..n {
 
+        for _ in 0..n {
             // Inverse Method for Random Sampling
             let mut x = 0;
             let mut p = 1.0;
@@ -34,9 +31,9 @@ impl Distribution for Poisson {
                 x += 1;
             }
 
-        samples.push(x as f64);
+            samples.push(x as f64);
         }
-    samples
+        samples
     }
 }
 
@@ -45,16 +42,14 @@ pub struct Exponential {
 }
 
 impl Distribution for Exponential {
-
-    fn sample(&self, n:usize) -> Vec<f64> {
+    fn sample(&self, n: usize) -> Vec<f64> {
         let mut samples = Vec::new();
 
         // Inverse Method for Random Sampling
         for _ in 0..n {
-            let x = (-1.0/self.lambda) * (rand::random::<f64>().ln()) as f64;
+            let x = (-1.0 / self.lambda) * (rand::random::<f64>().ln()) as f64;
             samples.push(x);
         }
-    samples
+        samples
     }
 }
-

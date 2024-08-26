@@ -1,3 +1,2 @@
-pub mod randomizer;
 pub mod generators;
-
+pub mod randomizer;

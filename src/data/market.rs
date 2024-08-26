@@ -1,3 +1,4 @@
+use crate::metrics::ob_metrics;
 use crate::simulation::randomizer::randomize_order;
 
 #[derive(Debug, Copy, Clone, PartialEq)]
@@ -6,13 +7,14 @@ pub enum Side {
     Asks,
 }
 
-// ------------------------------------------------------------------------- //
-
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub enum OrderType {
     Market,
     Limit,
 }
+
+// ---------------------------------------------------------------- ORDER -- //
+// ------------------------------------------------------------------------- //
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Order {
@@ -63,6 +65,7 @@ impl Order {
     }
 }
 
+// ---------------------------------------------------------------- LEVEL -- //
 // ------------------------------------------------------------------------- //
 
 #[derive(Debug)]
@@ -74,7 +77,12 @@ pub struct Level {
 }
 
 impl Level {
-    pub fn new(level_id: u32, side: Side, price: f64, orders: Vec<Order>) -> Self {
+    pub fn new(
+        level_id: u32,
+        side: Side,
+        price: f64,
+        orders: Vec<Order>,
+    ) -> Self {
         match side {
             Side::Bids => Level {
                 level_id,
@@ -99,6 +107,7 @@ impl Level {
     }
 }
 
+// ------------------------------------------------------------ ORDERBOOK -- //
 // ------------------------------------------------------------------------- //
 
 #[derive(Debug)]
@@ -128,6 +137,50 @@ impl Orderbook {
         }
     }
 
+    // Create the TOB (Top Of the Book)
+    // --------------------------------------------------------------------- //
+    /*
+    pub fn tob(&self) -> Vec<f64> {
+
+        match (self.bids, self.asks) {
+            Some()
+        }
+
+    }
+    */
+
+    // Weighted Midprice computation
+    // ------------------------------------------------------------------ -- //
+    pub fn weighted_mid_price(&self) -> f64 {
+        use crate::metrics::ob_metrics::PriceVolumeMetric;
+
+        let depth_midprice: u32 = 0;
+        
+        let vec_asks: Vec<f64> =
+            vec![self.asks[depth_midprice].price, 
+                 self.asks[depth_midprice].orders[0].amount];
+        let vec_bids: Vec<f64> =
+            vec![self.bids[0].price, self.bids[0].orders[0].amount];
+
+        let weightedmidprice =
+            ob_metrics::WeightedMidPrice::compute(vec_bids, vec_asks, depth_midprice);
+        weightedmidprice
+    }
+
+    // Midprice computation
+    // ------------------------------------------------------------------ -- //
+    pub fn mid_price(&self) -> f64 {
+        use crate::metrics::ob_metrics::PriceVolumeMetric;
+        
+        let midprice = ob_metrics::Midprice::compute(
+            vec![self.bids[0].price],
+            vec![self.asks[0].price],
+
+        );
+        midprice
+    }
+
+    // Creates a synthetic orderbook
     pub fn synthetize(
         bid_price: f64,
         ask_price: f64,
