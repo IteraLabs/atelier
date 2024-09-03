@@ -1,0 +1,13 @@
+[package]
+name = "tests"
+version = "0.0.5"
+edition = "2021"
+publish = false
+
+[dependencies]
+atelier = { path = "../atelier" }
+
+[[test]]
+name = "test_orderbook"
+path = "test_orderbook.rs"
+

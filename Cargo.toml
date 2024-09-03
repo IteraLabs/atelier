@@ -1,31 +1,12 @@
-[package]
-name = "atelier"
-version = "0.0.4"
-edition = "2021"
-description = "Computational Workshop and framework for Market microstructure replay and simulation"
-authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
-license = "Apache-2.0"
-repository = "https://github.com/iteralabs/atelier"
-keywords = ["machine-learning", "framework", "math", "crypto"]
-categories = ["data-structures", "development-tools", "finance", "simulation"]
+[workspace]
 
-[dependencies]
-serde = { version = "1.0.203", features = ["derive"] }
-criterion = "0.5.0"  # for benchmarking
+members = [
+  "atelier",
+  "tests",
+]
 
-rand = {version="0.8.5", features=["small_rng"]}
-rand_distr = "0.4.3"
+resolver = "2"
 
-[dev-dependencies]
-rustfmt = "0.10.0"    # for code formatting
-
-[lib]
-name = "atelier"
-crate-type = ["lib"]
-test = true
-doctest = true
-
-[[example]]
-name = "orderbook_metrics"
-path = "examples/quant/orderbook_metrics.rs"
-
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unused_extern_crates = "warn"

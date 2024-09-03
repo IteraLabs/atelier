@@ -1,0 +1,29 @@
+[package]
+name = "atelier"
+version = "0.0.5"
+edition = "2021"
+description = "a Computational Workshop for Market Microstructure Modeling, Synthetic Simulation and Historical Replay"
+authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
+license = "Apache-2.0"
+repository = "https://github.com/iteralabs/atelier"
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+
+[dependencies]
+serde = { version = "1.0.203", features = ["derive"] }
+
+rand = {version="0.8.5"}
+rand_distr = "0.4.3"
+
+[dev-dependencies]
+rustfmt = "0.10.0"
+
+[lib]
+name = "atelier"
+crate-type = ["lib"]
+test = true
+doctest = true
+
+[lints]
+workspace = true
+

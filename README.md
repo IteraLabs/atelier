@@ -1,13 +1,13 @@
 
 # atelier
 
-A computational workshop and framework for Market Microstructure Replay and Simulation.
+A Computational Workshop for Market Microstructure Modeling, Synthetic Simulation and Historical Replay.
 
-## Installation
+## Overview
 
-## Examples
+Use `atelier` for modeling market microstructure dynamics, it supports an `orderbook-based` market structure. Whether you need a high quality reproduction of any given market within a defined period of time (market replay), or, to generate `what-if` scnearios either completely random, or, with model specification (market simulation). 
 
-## References
+## Contribute
 
-https://rust-lang.github.io/api-guidelines/checklist.html
+Feel free to contribute, just make sure you check the [CONTRIBUTING]() guidelines. Also consider to pick-up the existing [issues]().
 
