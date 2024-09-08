@@ -14,8 +14,7 @@ serde = { version = "1.0.203", features = ["derive"] }
 
 rand = {version="0.8.5"}
 rand_distr = "0.4.3"
-
-[dev-dependencies]
+trolly = { version = "*", git = "https://github.com/CAGS295/trolly.git" }
 
 [lib]
 name = "atelier"

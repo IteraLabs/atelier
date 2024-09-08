@@ -93,7 +93,6 @@ impl Order {
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Level {
     pub level_id: u32,
-    pub side: Side,
     pub price: f64,
     pub volume: f64,
     pub orders: Vec<Order>,
@@ -113,27 +112,9 @@ impl Level {
     /// # Returns
     ///
     /// Returns a new `Level` instance with the specified parameters.
-    pub fn new(level_id: u32, side: Side, price: f64, volume: f64, orders: Vec<Order>) -> Self {
-        match side {
-            Side::Bids => Level {
-                level_id,
-                side: Side::Bids,
-                price,
-                volume,
-                orders: orders.clone(),
-            },
-            Side::Asks => Level {
-                level_id,
-                side: Side::Asks,
-                price,
-                volume,
-                orders: orders.clone(),
-            },
-        };
-
+    pub fn new(level_id: u32, price: f64, volume: f64, orders: Vec<Order>) -> Self {
         Level {
             level_id,
-            side,
             price,
             volume,
             orders,
@@ -236,7 +217,6 @@ impl Orderbook {
 
             i_bids.push(Level {
                 level_id: i,
-                side: i_bid_side,
                 price: i_bid_price,
                 volume: i_bid_volume,
                 orders: v_bid_orders,
@@ -255,7 +235,6 @@ impl Orderbook {
 
             i_asks.push(Level {
                 level_id: i,
-                side: i_ask_side,
                 price: i_ask_price,
                 volume: i_ask_volume,
                 orders: v_ask_orders,
@@ -286,9 +265,7 @@ pub mod test {
         let n_levels = 10;
         let n_orders = 2;
 
-        let i_ob = Orderbook::synthetize(
-            bid_price, ask_price, tick_size, n_levels, n_orders,
-        );
+        let i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
         assert_eq!(i_ob.bids.len(), n_levels as usize);
         assert_eq!(i_ob.asks.len(), n_levels as usize);
@@ -299,27 +276,19 @@ pub mod test {
     fn orderbook_insert_levels() {
         let bid_level = vec![Level {
             level_id: 1,
-            side: Side::Bids,
             price: 60_000.00,
             volume: 1.0,
-            orders: None,
+            orders: vec![],
         }];
 
         let ask_level = vec![Level {
             level_id: 1,
-            side: Side::Asks,
             price: 60_001.00,
             volume: 1.1,
-            orders: None,
+            orders: vec![],
         }];
 
-        let i_ob = Orderbook::new(
-            123,
-            123,
-            String::from("BTCUSDT"),
-            bid_level,
-            ask_level,
-        );
+        let i_ob = Orderbook::new(123, 123, String::from("BTCUSDT"), bid_level, ask_level);
 
         println!("pre-bid_price {}", i_ob.bids[0].price);
         println!("pre-ask_price {}", i_ob.asks[0].price);
@@ -341,20 +310,16 @@ pub mod test {
         let mu = 0.0001;
         let sigma = 0.0025;
 
-        let orderbook = Orderbook::synthetize(
-            bid_price, ask_price, tick_size, n_levels, n_orders,
-        );
+        let orderbook = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
         let mut n_orderbooks: Vec<Orderbook> = vec![];
         n_orderbooks.push(orderbook);
 
         for i in 0..=3 {
             let i_bid_price = n_orderbooks[i].bids[0].price;
-            let i_ret_gbm_bids: f64 =
-                randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
+            let i_ret_gbm_bids: f64 = randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
 
             let i_ask_price = n_orderbooks[i].asks[0].price;
-            let i_ret_gbm_asks: f64 =
-                randomizer::gbm_return(i_ask_price, mu, sigma, 1.0);
+            let i_ret_gbm_asks: f64 = randomizer::gbm_return(i_ask_price, mu, sigma, 1.0);
 
             let i_orderbook = Orderbook::synthetize(
                 i_bid_price - i_ret_gbm_bids,
@@ -370,29 +335,13 @@ pub mod test {
         // for the first and second orderbook, compare the first order of the first level
 
         // for the bid side
-        let t0_bids0_order0 = n_orderbooks[0].bids[0]
-            .orders
-            .as_ref()
-            .map(|o| o[0])
-            .unwrap();
-        let t1_bids0_order0 = n_orderbooks[1].bids[0]
-            .orders
-            .as_ref()
-            .map(|o| o[0])
-            .unwrap();
+        let t0_bids0_order0 = n_orderbooks[0].bids[0].orders.first().unwrap();
+        let t1_bids0_order0 = n_orderbooks[1].bids[0].orders.first().unwrap();
         assert_ne!(t0_bids0_order0, t1_bids0_order0);
 
         // for ask side
-        let t0_asks0_order0 = n_orderbooks[0].asks[0]
-            .orders
-            .as_ref()
-            .map(|o| o[0])
-            .unwrap();
-        let t1_asks0_order0 = n_orderbooks[1].asks[0]
-            .orders
-            .as_ref()
-            .map(|o| o[0])
-            .unwrap();
+        let t0_asks0_order0 = n_orderbooks[0].asks[0].orders.first().unwrap();
+        let t1_asks0_order0 = n_orderbooks[1].asks[0].orders.first().unwrap();
         assert_ne!(t0_asks0_order0, t1_asks0_order0);
     }
 }
