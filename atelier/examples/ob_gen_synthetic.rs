@@ -18,14 +18,8 @@ fn main() {
     let mut n_orderbooks: Vec<Orderbook> = vec![];
     n_orderbooks.push(orderbook);
 
-    println!(
-        "pre-bid_price {}",
-        n_orderbooks[0].bids[0].price
-    );
-    println!(
-        "pre-ask_price {}",
-        n_orderbooks[0].asks[0].price
-    );
+    println!("pre-bid_price {}", n_orderbooks[0].bids[0].price);
+    println!("pre-ask_price {}", n_orderbooks[0].asks[0].price);
     println!(
         "pre-mid_price {}",
         (n_orderbooks[0].bids[0].price + n_orderbooks[0].asks[0].price) / 2.0
@@ -38,11 +32,7 @@ fn main() {
         println!("{}-ask_price: {}", i, i_ask_price);
         let i_mid_price = (i_bid_price + i_ask_price) / 2.0;
         println!("{}-mid_price: {}", i, i_mid_price);
-        println!(
-            "{}-spread: {}",
-            i,
-            i_ask_price - i_bid_price
-        );
+        println!("{}-spread: {}", i, i_ask_price - i_bid_price);
 
         let i_ret_gbm_bids: f64 =
             randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
