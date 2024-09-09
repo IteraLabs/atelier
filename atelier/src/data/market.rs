@@ -1,13 +1,12 @@
-use crate::metrics::ob_metrics;
 use crate::simulation::randomizer::randomize_order;
 
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum Side {
     Bids,
     Asks,
 }
 
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum OrderType {
     Market,
     Limit,
@@ -16,7 +15,7 @@ pub enum OrderType {
 // ---------------------------------------------------------------- ORDER -- //
 // ------------------------------------------------------------------------- //
 
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub struct Order {
     pub order_id: u32,
     pub order_ts: u64,
@@ -68,11 +67,12 @@ impl Order {
 // ---------------------------------------------------------------- LEVEL -- //
 // ------------------------------------------------------------------------- //
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Level {
     pub level_id: u32,
     pub side: Side,
     pub price: f64,
+    pub volume: f64,
     pub orders: Vec<Order>,
 }
 
@@ -81,6 +81,7 @@ impl Level {
         level_id: u32,
         side: Side,
         price: f64,
+        volume: f64,
         orders: Vec<Order>,
     ) -> Self {
         match side {
@@ -88,12 +89,14 @@ impl Level {
                 level_id,
                 side: Side::Bids,
                 price,
+                volume,
                 orders: orders.clone(),
             },
             Side::Asks => Level {
                 level_id,
                 side: Side::Asks,
                 price,
+                volume,
                 orders: orders.clone(),
             },
         };
@@ -102,6 +105,7 @@ impl Level {
             level_id,
             side,
             price,
+            volume,
             orders,
         }
     }
@@ -110,7 +114,7 @@ impl Level {
 // ------------------------------------------------------------ ORDERBOOK -- //
 // ------------------------------------------------------------------------- //
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Orderbook {
     pub orderbook_id: u32,
     pub orderbook_ts: u64,
@@ -120,7 +124,9 @@ pub struct Orderbook {
 }
 
 impl Orderbook {
-    // Create a new abstraction of Orderbook
+    // ---------------------------------------------------- New Orderbook -- //
+    // ------------------------------------------------------------------ -- //
+
     pub fn new(
         orderbook_id: u32,
         orderbook_ts: u64,
@@ -137,50 +143,30 @@ impl Orderbook {
         }
     }
 
-    // Create the TOB (Top Of the Book)
-    // --------------------------------------------------------------------- //
-    /*
-    pub fn tob(&self) -> Vec<f64> {
-
-        match (self.bids, self.asks) {
-            Some()
-        }
-
-    }
-    */
-
-    // Weighted Midprice computation
+    // --------------------------------------------------------- Midprice -- //
     // ------------------------------------------------------------------ -- //
-    pub fn weighted_mid_price(&self) -> f64 {
-        use crate::metrics::ob_metrics::PriceVolumeMetric;
 
-        let depth_midprice: u32 = 0;
-        
-        let vec_asks: Vec<f64> =
-            vec![self.asks[depth_midprice].price, 
-                 self.asks[depth_midprice].orders[0].amount];
-        let vec_bids: Vec<f64> =
-            vec![self.bids[0].price, self.bids[0].orders[0].amount];
-
-        let weightedmidprice =
-            ob_metrics::WeightedMidPrice::compute(vec_bids, vec_asks, depth_midprice);
-        weightedmidprice
-    }
-
-    // Midprice computation
-    // ------------------------------------------------------------------ -- //
     pub fn mid_price(&self) -> f64 {
-        use crate::metrics::ob_metrics::PriceVolumeMetric;
-        
-        let midprice = ob_metrics::Midprice::compute(
-            vec![self.bids[0].price],
-            vec![self.asks[0].price],
-
-        );
-        midprice
+        (self.bids[0].price + self.asks[0].price) / 2.0
     }
 
-    // Creates a synthetic orderbook
+    // ------------------------------------------------------------- VWAP -- //
+    // ------------------------------------------------------------------ -- //
+
+    pub fn vwap(&self, _depth: usize) -> f64 {
+        1.0
+    }
+
+    // ------------------------------------------------- Volume Imbalance -- //
+    // ------------------------------------------------------------------ -- //
+
+    pub fn vol_imbalance(&self) -> f64 {
+        1.0
+    }
+
+    // ---------------------------------------------- Synthetic Orderbook -- //
+    // ------------------------------------------------------------------ -- //
+
     pub fn synthetize(
         bid_price: f64,
         ask_price: f64,
@@ -202,10 +188,14 @@ impl Orderbook {
 
             v_bid_orders.sort_by_key(|order| order.order_ts);
 
+            let i_bid_volume: f64 =
+                v_bid_orders.iter().map(|order| order.amount).sum();
+
             i_bids.push(Level {
                 level_id: i,
                 side: i_bid_side,
                 price: i_bid_price,
+                volume: i_bid_volume,
                 orders: v_bid_orders,
             });
 
@@ -218,10 +208,14 @@ impl Orderbook {
 
             v_ask_orders.sort_by_key(|order| order.order_ts);
 
+            let i_ask_volume: f64 =
+                v_ask_orders.iter().map(|order| order.amount).sum();
+
             i_asks.push(Level {
                 level_id: i,
                 side: i_ask_side,
                 price: i_ask_price,
+                volume: i_ask_volume,
                 orders: v_ask_orders,
             });
         }
