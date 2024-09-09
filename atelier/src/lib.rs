@@ -1,5 +1,5 @@
 //! # Atelier
-//! [`Atelier`] provides a computational framework that can be used as a workshop to develop Financial Machine Learning models, especifically battle tested to the level of Market microstructure.
+//! provides a computational framework that can be used as a workshop to develop Financial Machine Learning models, especifically battle tested to the level of Market microstructure.
 //! Features include:
 //! * **Market Replay**: A high-fidelity reproduction of what actually happened, all the way down to the data granularity that is provided.
 //! * **Market Simulation**: A synthetic simulation of a market, as detailed as the provided configuration.
