@@ -15,6 +15,10 @@ pub enum OrderType {
 // ---------------------------------------------------------------- ORDER -- //
 // ------------------------------------------------------------------------- //
 
+/// Represents a single order in the Orderbook.
+///
+/// The `Order` struct contains details about an individual order, including
+/// its unique identifier, timestamp, type, side (buy/sell), price, and amount.
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub struct Order {
     pub order_id: u32,
@@ -26,6 +30,26 @@ pub struct Order {
 }
 
 impl Order {
+    /// Creates a new instance of `Order`.
+    ///
+    /// # Parameters
+    ///
+    /// - `order_id`: The unique identifier for the order.
+    /// - `order_ts`: The timestamp for when the order was created.
+    /// - `order_type`: The type of the order (e.g., `OrderType::Limit`).
+    /// - `side`: The side of the order, either `Side::Bids` or `Side::Asks`.
+    /// - `price`: The price at which the order is placed.
+    /// - `amount`: The amount of the asset being ordered.
+    ///
+    /// # Returns
+    ///
+    /// Returns a new `Order` instance with the specified parameters.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let order = Order::new(1, 1627891234, OrderType::Limit, Side::Bids, 45000.0, 0.5);
+    /// ```
     pub fn new(
         order_id: u32,
         order_ts: u64,
@@ -67,6 +91,11 @@ impl Order {
 // ---------------------------------------------------------------- LEVEL -- //
 // ------------------------------------------------------------------------- //
 
+/// Represents a price level in an order book.
+///
+/// The `Level` struct contains details about a specific price level, including
+/// its unique identifier, side (buy/sell), price, total volume at that price,
+/// and a vector of orders associated with that level.
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Level {
     pub level_id: u32,
@@ -77,6 +106,25 @@ pub struct Level {
 }
 
 impl Level {
+    /// Creates a new instance of `Level`.
+    ///
+    /// # Parameters
+    ///
+    /// - `level_id`: The unique identifier for the price level.
+    /// - `side`: The side of the order book, either `Side::Bids` or `Side::Asks`.
+    /// - `price`: The price at which orders are placed at this level.
+    /// - `volume`: The total volume of orders at this price level.
+    /// - `orders`: A vector of `Order` representing the orders at this level.
+    ///
+    /// # Returns
+    ///
+    /// Returns a new `Level` instance with the specified parameters.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let level = Level::new(1, Side::Bids, 45000.0, 5.0, vec![]);
+    /// ```
     pub fn new(
         level_id: u32,
         side: Side,
@@ -114,6 +162,13 @@ impl Level {
 // ------------------------------------------------------------ ORDERBOOK -- //
 // ------------------------------------------------------------------------- //
 
+/// Represents a Limit Order Book for a specific market.
+///
+/// This `Orderbook` structure is different than 99.99% of other structs
+/// within other Rust pojects, and that is the 3rd level of composition.
+/// 1) Has both bids and asks sides (aham....)
+/// 2) for each side, another Level struct with price, volume, etc (hemm ...)
+/// 3) and for each Level, a queue (vector) of Order structs, (now we are talking)
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Orderbook {
     pub orderbook_id: u32,
@@ -127,6 +182,19 @@ impl Orderbook {
     // ---------------------------------------------------- New Orderbook -- //
     // ------------------------------------------------------------------ -- //
 
+    /// Creates a new instance of `Orderbook`.
+    ///
+    /// # Parameters
+    ///
+    /// - `orderbook_id`: The unique identifier for the order book.
+    /// - `orderbook_ts`: The timestamp for the order book.
+    /// - `symbol`: The trading symbol for the order book.
+    /// - `bids`: A vector of `Level` representing the buy orders.
+    /// - `asks`: A vector of `Level` representing the sell orders.
+    ///
+    /// # Returns
+    ///
+    /// Returns a new `Orderbook` instance.
     pub fn new(
         orderbook_id: u32,
         orderbook_ts: u64,
@@ -143,30 +211,30 @@ impl Orderbook {
         }
     }
 
-    // --------------------------------------------------------- Midprice -- //
-    // ------------------------------------------------------------------ -- //
-
-    pub fn mid_price(&self) -> f64 {
-        (self.bids[0].price + self.asks[0].price) / 2.0
-    }
-
-    // ------------------------------------------------------------- VWAP -- //
-    // ------------------------------------------------------------------ -- //
-
-    pub fn vwap(&self, _depth: usize) -> f64 {
-        1.0
-    }
-
-    // ------------------------------------------------- Volume Imbalance -- //
-    // ------------------------------------------------------------------ -- //
-
-    pub fn vol_imbalance(&self) -> f64 {
-        1.0
-    }
-
     // ---------------------------------------------- Synthetic Orderbook -- //
     // ------------------------------------------------------------------ -- //
 
+    /// Generates a synthetic order book with specified parameters.
+    ///
+    /// This method is useful for benchmarking and simulation purposes.
+    ///
+    /// # Parameters
+    ///
+    /// - `bid_price`: The starting price for the bids.
+    /// - `ask_price`: The starting price for the asks.
+    /// - `tick_size`: The minimum price increment between levels.
+    /// - `n_levels`: Number of price levels to generate for both bids and asks.
+    /// - `n_orders`: Number of individual orders to create at each price level.
+    ///
+    /// # Returns
+    ///
+    /// Returns a new `Orderbook` instance populated with synthetic bid and ask levels.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let synthetic_orderbook = Orderbook::synthetize(105.0, 107.0, 1.0, 5, 10);
+    /// ```
     pub fn synthetize(
         bid_price: f64,
         ask_price: f64,
