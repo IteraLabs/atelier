@@ -1,5 +1,5 @@
 //! # Random Distribution Sampling
-//! 
+//!
 //! This module provides implementations for sampling from various probability distributions, including
 //! the standard Normal distribution, Poisson distribution, and Exponential distribution.
 use rand::prelude::*;

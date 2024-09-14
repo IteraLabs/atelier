@@ -211,7 +211,7 @@ impl Orderbook {
     /// # Returns
     ///
     /// Returns a new `Orderbook` instance populated with synthetic bid and ask levels.
-     pub fn synthetize(
+    pub fn synthetize(
         bid_price: f64,
         ask_price: f64,
         tick_size: f64,
