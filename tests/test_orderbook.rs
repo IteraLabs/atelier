@@ -11,9 +11,7 @@ mod tests {
         let n_levels = 10;
         let n_orders = 2;
 
-        let i_ob = Orderbook::synthetize(
-            bid_price, ask_price, tick_size, n_levels, n_orders,
-        );
+        let i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
         assert_eq!(i_ob.bids.len(), n_levels as usize);
         assert_eq!(i_ob.asks.len(), n_levels as usize);
@@ -36,20 +34,16 @@ mod tests {
         let mu = 0.0001;
         let sigma = 0.0025;
 
-        let orderbook = Orderbook::synthetize(
-            bid_price, ask_price, tick_size, n_levels, n_orders,
-        );
+        let orderbook = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
         let mut n_orderbooks: Vec<Orderbook> = vec![];
         n_orderbooks.push(orderbook);
 
         for i in 0..=3 {
             let i_bid_price = n_orderbooks[i].bids[0].price;
-            let i_ret_gbm_bids: f64 =
-                randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
+            let i_ret_gbm_bids: f64 = randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
 
             let i_ask_price = n_orderbooks[i].asks[0].price;
-            let i_ret_gbm_asks: f64 =
-                randomizer::gbm_return(i_ask_price, mu, sigma, 1.0);
+            let i_ret_gbm_asks: f64 = randomizer::gbm_return(i_ask_price, mu, sigma, 1.0);
 
             let i_orderbook = Orderbook::synthetize(
                 i_bid_price - i_ret_gbm_bids,

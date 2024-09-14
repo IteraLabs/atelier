@@ -57,11 +57,7 @@ impl MarketMetric<Vec<Vec<f64>>> for VWAP {
     ///
     /// # Returns
     /// Returns the VWAP as a `f64`.
-    fn compute(
-        bids: &Vec<Vec<f64>>,
-        asks: &Vec<Vec<f64>>,
-        depth: usize,
-    ) -> f64 {
+    fn compute(bids: &Vec<Vec<f64>>, asks: &Vec<Vec<f64>>, depth: usize) -> f64 {
         let mut bids_mult: Vec<f64> = vec![];
         let mut asks_mult: Vec<f64> = vec![];
         let mut vol_sum: Vec<f64> = vec![];

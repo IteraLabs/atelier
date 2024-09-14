@@ -44,12 +44,6 @@ impl Order {
     /// # Returns
     ///
     /// Returns a new `Order` instance with the specified parameters.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// let order = Order::new(1, 1627891234, OrderType::Limit, Side::Bids, 45000.0, 0.5);
-    /// ```
     pub fn new(
         order_id: u32,
         order_ts: u64,
@@ -119,19 +113,7 @@ impl Level {
     /// # Returns
     ///
     /// Returns a new `Level` instance with the specified parameters.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// let level = Level::new(1, Side::Bids, 45000.0, 5.0, vec![]);
-    /// ```
-    pub fn new(
-        level_id: u32,
-        side: Side,
-        price: f64,
-        volume: f64,
-        orders: Vec<Order>,
-    ) -> Self {
+    pub fn new(level_id: u32, side: Side, price: f64, volume: f64, orders: Vec<Order>) -> Self {
         match side {
             Side::Bids => Level {
                 level_id,
@@ -229,12 +211,6 @@ impl Orderbook {
     /// # Returns
     ///
     /// Returns a new `Orderbook` instance populated with synthetic bid and ask levels.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// let synthetic_orderbook = Orderbook::synthetize(105.0, 107.0, 1.0, 5, 10);
-    /// ```
     pub fn synthetize(
         bid_price: f64,
         ask_price: f64,
@@ -256,8 +232,7 @@ impl Orderbook {
 
             v_bid_orders.sort_by_key(|order| order.order_ts);
 
-            let i_bid_volume: f64 =
-                v_bid_orders.iter().map(|order| order.amount).sum();
+            let i_bid_volume: f64 = v_bid_orders.iter().map(|order| order.amount).sum();
 
             i_bids.push(Level {
                 level_id: i,
@@ -276,8 +251,7 @@ impl Orderbook {
 
             v_ask_orders.sort_by_key(|order| order.order_ts);
 
-            let i_ask_volume: f64 =
-                v_ask_orders.iter().map(|order| order.amount).sum();
+            let i_ask_volume: f64 = v_ask_orders.iter().map(|order| order.amount).sum();
 
             i_asks.push(Level {
                 level_id: i,

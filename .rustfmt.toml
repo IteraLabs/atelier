@@ -1,4 +1,0 @@
-fn_call_width = 60
-fn_params_layout = "Tall"
-struct_variant_width = 60
-max_width = 80
