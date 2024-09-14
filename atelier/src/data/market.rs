@@ -44,12 +44,6 @@ impl Order {
     /// # Returns
     ///
     /// Returns a new `Order` instance with the specified parameters.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// let order = Order::new(1, 1627891234, OrderType::Limit, Side::Bids, 45000.0, 0.5);
-    /// ```
     pub fn new(
         order_id: u32,
         order_ts: u64,
@@ -119,12 +113,6 @@ impl Level {
     /// # Returns
     ///
     /// Returns a new `Level` instance with the specified parameters.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// let level = Level::new(1, Side::Bids, 45000.0, 5.0, vec![]);
-    /// ```
     pub fn new(level_id: u32, side: Side, price: f64, volume: f64, orders: Vec<Order>) -> Self {
         match side {
             Side::Bids => Level {
@@ -223,13 +211,7 @@ impl Orderbook {
     /// # Returns
     ///
     /// Returns a new `Orderbook` instance populated with synthetic bid and ask levels.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// let synthetic_orderbook = Orderbook::synthetize(105.0, 107.0, 1.0, 5, 10);
-    /// ```
-    pub fn synthetize(
+     pub fn synthetize(
         bid_price: f64,
         ask_price: f64,
         tick_size: f64,

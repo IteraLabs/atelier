@@ -13,8 +13,6 @@
 /// alpha: Excitation factor (how much each event excites the future events).
 /// beta: Decay rate (how quickly the excitement diminishes).
 ///
-/// ##
-///
 /// ## Context usage
 /// When used this approach arount the Orderbook, the arrival of an order
 /// can increase the likelihood of subsequent orders.
