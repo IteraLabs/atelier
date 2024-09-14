@@ -11,9 +11,7 @@ fn main() {
     let mu = 0.0001;
     let sigma = 0.0025;
 
-    let orderbook = Orderbook::synthetize(
-        bid_price, ask_price, tick_size, n_levels, n_orders,
-    );
+    let orderbook = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
     let mut n_orderbooks: Vec<Orderbook> = vec![];
     n_orderbooks.push(orderbook);
@@ -34,12 +32,10 @@ fn main() {
         println!("{}-mid_price: {}", i, i_mid_price);
         println!("{}-spread: {}", i, i_ask_price - i_bid_price);
 
-        let i_ret_gbm_bids: f64 =
-            randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
+        let i_ret_gbm_bids: f64 = randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
         println!("{}-ret_gbm_bids: {}", i, i_ret_gbm_bids);
 
-        let i_ret_gbm_asks: f64 =
-            randomizer::gbm_return(i_ask_price, mu, sigma, 1.0);
+        let i_ret_gbm_asks: f64 = randomizer::gbm_return(i_ask_price, mu, sigma, 1.0);
         println!("{}-ret_gbm_asks: {}", i, i_ret_gbm_asks);
 
         let i_orderbook = Orderbook::synthetize(

@@ -125,13 +125,7 @@ impl Level {
     /// ```
     /// let level = Level::new(1, Side::Bids, 45000.0, 5.0, vec![]);
     /// ```
-    pub fn new(
-        level_id: u32,
-        side: Side,
-        price: f64,
-        volume: f64,
-        orders: Vec<Order>,
-    ) -> Self {
+    pub fn new(level_id: u32, side: Side, price: f64, volume: f64, orders: Vec<Order>) -> Self {
         match side {
             Side::Bids => Level {
                 level_id,
@@ -256,8 +250,7 @@ impl Orderbook {
 
             v_bid_orders.sort_by_key(|order| order.order_ts);
 
-            let i_bid_volume: f64 =
-                v_bid_orders.iter().map(|order| order.amount).sum();
+            let i_bid_volume: f64 = v_bid_orders.iter().map(|order| order.amount).sum();
 
             i_bids.push(Level {
                 level_id: i,
@@ -276,8 +269,7 @@ impl Orderbook {
 
             v_ask_orders.sort_by_key(|order| order.order_ts);
 
-            let i_ask_volume: f64 =
-                v_ask_orders.iter().map(|order| order.amount).sum();
+            let i_ask_volume: f64 = v_ask_orders.iter().map(|order| order.amount).sum();
 
             i_asks.push(Level {
                 level_id: i,

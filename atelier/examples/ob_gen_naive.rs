@@ -7,9 +7,7 @@ fn main() {
     let n_levels = 200;
     let n_orders = 300;
 
-    let i_ob = Orderbook::synthetize(
-        bid_price, ask_price, tick_size, n_levels, n_orders,
-    );
+    let i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
     println!("\nlevel_id {:?}", i_ob.bids[199].level_id);
     println!("side {:?}", i_ob.bids[199].side);

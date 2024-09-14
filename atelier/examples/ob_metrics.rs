@@ -1,7 +1,5 @@
 use atelier::data::market::Orderbook;
-use atelier::metrics::market::{
-    MarketMetric, Midprice, Spread, VolumeImbalance, VWAP,
-};
+use atelier::metrics::market::{MarketMetric, Midprice, Spread, VolumeImbalance, VWAP};
 
 fn main() {
     // Parameters for synthetic orderbook generation
@@ -12,9 +10,7 @@ fn main() {
     let n_orders = 2;
 
     // Generate a synthetic orderbook for testing
-    let i_ob = Orderbook::synthetize(
-        bid_price, ask_price, tick_size, n_levels, n_orders,
-    );
+    let i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
     // extract tob values
     let tob_bid: f64 = i_ob.bids[0].price;
@@ -29,10 +25,8 @@ fn main() {
     println!("Midprice: {}", midprice_value);
 
     // Compute the Volume Imbalance
-    let iter_bids: Vec<f64> =
-        i_ob.bids.clone().into_iter().map(|x| x.volume).collect();
-    let iter_asks: Vec<f64> =
-        i_ob.asks.clone().into_iter().map(|x| x.volume).collect();
+    let iter_bids: Vec<f64> = i_ob.bids.clone().into_iter().map(|x| x.volume).collect();
+    let iter_asks: Vec<f64> = i_ob.asks.clone().into_iter().map(|x| x.volume).collect();
 
     let obimb_value = VolumeImbalance::compute(&iter_bids, &iter_asks, 1);
     println!("Volume Imbalance: {:?}", obimb_value);
