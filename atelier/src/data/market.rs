@@ -1,4 +1,7 @@
+use std::ops::Deref;
+
 use crate::simulation::randomizer::randomize_order;
+use trolly::lob::ops::PartitionPredicate;
 
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum Side {
@@ -122,8 +125,21 @@ impl Level {
     }
 }
 
+// This is how the updater knows the Ordering of the Bids
+impl PartitionPredicate for Bids {
+    fn partition_predicate<P: PartialOrd>(lhs: &P, rhs: &P) -> bool {
+        lhs > rhs
+    }
+}
+
+// This is how the updater knows the Ordering of the Asks
+impl PartitionPredicate for Asks {
+    fn partition_predicate<P: PartialOrd>(lhs: &P, rhs: &P) -> bool {
+        lhs < rhs
+    }
+}
+
 // ------------------------------------------------------------ ORDERBOOK -- //
-// ------------------------------------------------------------------------- //
 
 /// Represents a Limit Order Book for a specific market.
 ///
@@ -137,9 +153,14 @@ pub struct Orderbook {
     pub orderbook_id: u32,
     pub orderbook_ts: u64,
     pub symbol: String,
-    pub bids: Vec<Level>,
-    pub asks: Vec<Level>,
+    pub bids: Bids,
+    pub asks: Asks,
 }
+
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
+pub struct Bids(pub Vec<Level>);
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
+pub struct Asks(pub Vec<Level>);
 
 impl Orderbook {
     // ---------------------------------------------------- New Orderbook -- //
@@ -162,8 +183,8 @@ impl Orderbook {
         orderbook_id: u32,
         orderbook_ts: u64,
         symbol: String,
-        bids: Vec<Level>,
-        asks: Vec<Level>,
+        bids: Bids,
+        asks: Asks,
     ) -> Self {
         Orderbook {
             orderbook_id,
@@ -245,9 +266,25 @@ impl Orderbook {
             orderbook_id: 123,
             orderbook_ts: 321,
             symbol: String::from("BTCUSDT"),
-            bids: i_bids,
-            asks: i_asks,
+            bids: Bids(i_bids),
+            asks: Asks(i_asks),
         }
+    }
+}
+
+impl Deref for Bids {
+    type Target = Vec<Level>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl Deref for Asks {
+    type Target = Vec<Level>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
     }
 }
 
@@ -288,7 +325,13 @@ pub mod test {
             orders: vec![],
         }];
 
-        let i_ob = Orderbook::new(123, 123, String::from("BTCUSDT"), bid_level, ask_level);
+        let i_ob = Orderbook::new(
+            123,
+            123,
+            String::from("BTCUSDT"),
+            Bids(bid_level),
+            Asks(ask_level),
+        );
 
         println!("pre-bid_price {}", i_ob.bids[0].price);
         println!("pre-ask_price {}", i_ob.asks[0].price);
