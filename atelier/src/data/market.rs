@@ -1,7 +1,10 @@
-use std::ops::Deref;
+use std::ops::{Deref, DerefMut};
 
 use crate::simulation::randomizer::randomize_order;
-use trolly::lob::ops::PartitionPredicate;
+use trolly::lob::{
+    ops::{update_strategies::ReplaceOrRemove, PartitionPredicate, Update},
+    price_and_quantity::{Price, Quantity},
+};
 
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum Side {
@@ -128,14 +131,80 @@ impl Level {
 // This is how the updater knows the Ordering of the Bids
 impl PartitionPredicate for Bids {
     fn partition_predicate<P: PartialOrd>(lhs: &P, rhs: &P) -> bool {
-        lhs > rhs
+        lhs < rhs
     }
 }
 
 // This is how the updater knows the Ordering of the Asks
 impl PartitionPredicate for Asks {
     fn partition_predicate<P: PartialOrd>(lhs: &P, rhs: &P) -> bool {
-        lhs < rhs
+        lhs > rhs
+    }
+}
+
+impl Update<ReplaceOrRemove> for Bids {
+    type Level = Level;
+    type Key = usize;
+
+    fn entry(&mut self, level_update: &Self::Level) -> (Self::Key, Option<&Self::Level>)
+    where
+        <Self::Level as trolly::lob::price_and_quantity::Price>::P: PartialOrd,
+    {
+        let index = self.partition_point(|value| {
+            Self::partition_predicate(Price::to_ref(value), Price::to_ref(level_update))
+        });
+        (index, self.get(index))
+    }
+
+    fn digest_operation(
+        &mut self,
+        operator: ReplaceOrRemove,
+        key: &Self::Key,
+        level_update: Self::Level,
+    ) {
+        match operator {
+            ReplaceOrRemove::Replace => {
+                self[*key] = level_update;
+            }
+            ReplaceOrRemove::Remove => {
+                self.remove(*key);
+            }
+            ReplaceOrRemove::Displace => self.insert(*key, level_update),
+            ReplaceOrRemove::Noop => {}
+        }
+    }
+}
+
+impl Update<ReplaceOrRemove> for Asks {
+    type Level = Level;
+    type Key = usize;
+
+    fn entry(&mut self, level_update: &Self::Level) -> (Self::Key, Option<&Self::Level>)
+    where
+        <Self::Level as trolly::lob::price_and_quantity::Price>::P: PartialOrd,
+    {
+        let index = self.partition_point(|value| {
+            Self::partition_predicate(Price::to_ref(value), Price::to_ref(level_update))
+        });
+        (index, self.get(index))
+    }
+
+    fn digest_operation(
+        &mut self,
+        operator: ReplaceOrRemove,
+        key: &Self::Key,
+        level_update: Self::Level,
+    ) {
+        match operator {
+            ReplaceOrRemove::Replace => {
+                self[*key] = level_update;
+            }
+            ReplaceOrRemove::Remove => {
+                self.remove(*key);
+            }
+            ReplaceOrRemove::Displace => self.insert(*key, level_update),
+            ReplaceOrRemove::Noop => {}
+        }
     }
 }
 
@@ -193,6 +262,16 @@ impl Orderbook {
             bids,
             asks,
         }
+    }
+
+    pub fn insert_bid(&mut self, level: Level) {
+        // If an old level is found, replace it; if the Level is not found, insert the new one.
+        Update::<ReplaceOrRemove>::process(&mut self.bids, level);
+    }
+
+    pub fn insert_ask(&mut self, level: Level) {
+        // If an old level is found, replace it; if the Level is not found, insert the new one.
+        Update::<ReplaceOrRemove>::process(&mut self.asks, level);
     }
 
     // ---------------------------------------------- Synthetic Orderbook -- //
@@ -280,11 +359,51 @@ impl Deref for Bids {
     }
 }
 
+impl DerefMut for Bids {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
 impl Deref for Asks {
     type Target = Vec<Level>;
 
     fn deref(&self) -> &Self::Target {
         &self.0
+    }
+}
+
+impl DerefMut for Asks {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
+impl Quantity for Level {
+    type Q = f64;
+
+    fn to_ref(&self) -> &Self::Q {
+        &self.volume
+    }
+}
+
+impl Price for Level {
+    type P = f64;
+
+    fn to_ref(&self) -> &Self::P {
+        &self.price
+    }
+}
+
+impl Bids {
+    pub fn new() -> Self {
+        Self(vec![])
+    }
+}
+
+impl Asks {
+    pub fn new() -> Self {
+        Self(vec![])
     }
 }
 
@@ -386,5 +505,51 @@ pub mod test {
         let t0_asks0_order0 = n_orderbooks[0].asks[0].orders.first().unwrap();
         let t1_asks0_order0 = n_orderbooks[1].asks[0].orders.first().unwrap();
         assert_ne!(t0_asks0_order0, t1_asks0_order0);
+    }
+
+    #[test]
+    fn insert_bid_works() {
+        let mut ob = Orderbook::new(0, 0, String::from("btc"), Bids::new(), Asks::new());
+        let level = Level::new(0, 1., 1., vec![]);
+        ob.insert_bid(level);
+        assert_eq!(ob.bids.0, [Level::new(0, 1., 1., vec![])]);
+        let level = Level::new(0, 0., 1., vec![]);
+        ob.insert_bid(level);
+        assert_eq!(
+            ob.bids.0,
+            [Level::new(0, 0., 1., vec![]), Level::new(0, 1., 1., vec![])]
+        );
+        let level = Level::new(0, 1., 2., vec![]);
+        ob.insert_bid(level);
+        assert_eq!(
+            ob.bids.0,
+            [Level::new(0, 0., 1., vec![]), Level::new(0, 1., 2., vec![])]
+        );
+        let level = Level::new(0, 1., 0., vec![]);
+        ob.insert_bid(level);
+        assert_eq!(ob.bids.0, [Level::new(0, 0., 1., vec![])]);
+    }
+
+    #[test]
+    fn insert_ask_works() {
+        let mut ob = Orderbook::new(0, 0, String::from("btc"), Bids::new(), Asks::new());
+        let level = Level::new(0, 1., 1., vec![]);
+        ob.insert_ask(level);
+        assert_eq!(ob.asks.0, [Level::new(0, 1., 1., vec![])]);
+        let level = Level::new(0, 0., 1., vec![]);
+        ob.insert_ask(level);
+        assert_eq!(
+            ob.asks.0,
+            [Level::new(0, 1., 1., vec![]), Level::new(0, 0., 1., vec![])]
+        );
+        let level = Level::new(0, 1., 2., vec![]);
+        ob.insert_ask(level);
+        assert_eq!(
+            ob.asks.0,
+            [Level::new(0, 1., 2., vec![]), Level::new(0, 0., 1., vec![])]
+        );
+        let level = Level::new(0, 1., 0., vec![]);
+        ob.insert_ask(level);
+        assert_eq!(ob.asks.0, [Level::new(0, 0., 1., vec![])]);
     }
 }
