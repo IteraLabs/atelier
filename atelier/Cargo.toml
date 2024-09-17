@@ -1,6 +1,6 @@
 [package]
 name = "atelier"
-version = "0.0.7"
+version = "0.0.8"
 edition = "2021"
 description = "a Computational Workshop for Market Microstructure Modeling, Synthetic Simulation and Historical Replay"
 authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
