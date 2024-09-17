@@ -5,11 +5,11 @@
 //!
 //! ## Simplest case (Linear regression on past events).
 //!
-//! In one dimension, this process is self-exciting, i.e. the arrival 
-//! of an event increases the likelihood of observing events in the 
-//! near future. It is also useful to consider the case when there is 
-//! more than one type of event, and there is mutual excitement 
-//! between the different events. For $d$ such events, we define a 
+//! In one dimension, this process is self-exciting, i.e. the arrival
+//! of an event increases the likelihood of observing events in the
+//! near future. It is also useful to consider the case when there is
+//! more than one type of event, and there is mutual excitement
+//! between the different events. For $d$ such events, we define a
 //! $d$-dimensional Hawkes process:
 //!
 //! $$
@@ -28,12 +28,12 @@
 //! processes due to their simplicity and mathematical properties:
 //!
 //! $$
-//!  \phi_{ij}(t) = \alpha_{ij} e^{-\beta_{ij}t} 
+//!  \phi_{ij}(t) = \alpha_{ij} e^{-\beta_{ij}t}
 //! $$
 //!
 //! Where:
 //!
-//! $\alpha$: Excitation factor (how much each event excites the 
+//! $\alpha$: Excitation factor (how much each event excites the
 //! future events). \
 //! $\beta$: Decay rate (how quickly the excitement diminishes).\
 //!
