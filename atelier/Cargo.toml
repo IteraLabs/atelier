@@ -1,6 +1,6 @@
 [package]
 name = "atelier"
-version = "0.0.82"
+version = "0.0.84"
 edition = "2021"
 description = "a Computational Workshop for Market Microstructure Modeling, Synthetic Simulation and Historical Replay"
 authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
@@ -9,6 +9,8 @@ keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
 categories = ["data-structures", "development-tools", "finance", "simulation"]
 documentation = "https://docs.rs/atelier/"
 repository = "https://github.com/iteralabs/atelier"
+
+include = ["src/**/*", "katex-header.html"]
 
 [dependencies]
 serde = { version = "1.0.203", features = ["derive"] }
