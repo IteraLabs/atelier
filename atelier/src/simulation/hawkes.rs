@@ -20,8 +20,9 @@
 //!
 //! $\mu_{i} \in R_{+}$: Base line (exogenous) intensities. \
 //! $\phi_{ij}$: The (exciting) Kernel functions. \
-//! $t_{j,r}$ : the time of the $j^{th}$ event of type $r$.\
-//!
+//! $t_{j,r}$ : the time of the $j^{th}$ event of type $r$
+//! \
+//! \
 //! As for the $\phi_{ij}$ kernel definition, exponential kernels
 //! are among the most commonly used in Hawkes
 //! processes due to their simplicity and mathematical properties:
