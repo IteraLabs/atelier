@@ -1,3 +1,5 @@
+//! # Misc Random Generation
+
 use crate::data::market::{Order, OrderType, Side};
 use crate::simulation::generators;
 use rand::distributions::Uniform;
