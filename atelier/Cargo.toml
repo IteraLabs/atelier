@@ -1,13 +1,16 @@
 [package]
 name = "atelier"
-version = "0.0.7"
+version = "0.0.86"
 edition = "2021"
 description = "a Computational Workshop for Market Microstructure Modeling, Synthetic Simulation and Historical Replay"
 authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
 license = "Apache-2.0"
-repository = "https://github.com/iteralabs/atelier"
 keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
 categories = ["data-structures", "development-tools", "finance", "simulation"]
+documentation = "https://docs.rs/atelier/"
+repository = "https://github.com/iteralabs/atelier"
+
+include = ["src/**/*", "katex-header.html"]
 
 [dependencies]
 serde = { version = "1.0.203", features = ["derive"] }
@@ -26,3 +29,5 @@ doctest = true
 [lints]
 workspace = true
 
+[package.metadata.docs.rs]
+rustdoc-args = [ "--html-in-header", "katex-header.html" ]

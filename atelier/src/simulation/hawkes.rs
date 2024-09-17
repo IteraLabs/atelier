@@ -1,21 +1,45 @@
-/// A Hawkes Process is a self-exciting point process where the intensity of events
-/// increases following the occurrence of previous events.
-///
-/// ## Simplest case
-///
-/// Univariate (self-exciting) linear regression with exponential decay
-///
-/// \begin{equation}
-///     \lambda{t} = \mu_{t} + \phi_{ij}(t) = \alpha_{ij} e^{-\beta_{ij} t}
-/// \end{equation}
-///
-/// mu: Base line intensity.
-/// alpha: Excitation factor (how much each event excites the future events).
-/// beta: Decay rate (how quickly the excitement diminishes).
-///
-/// ## Context usage
-/// When used this approach arount the Orderbook, the arrival of an order
-/// can increase the likelihood of subsequent orders.
+//! # Point process discrete simulation
+//!
+//! A Hawkes Process is a self-exciting point process where the intensity of events
+//! increases following the occurrence of previous events.
+//!
+//! ## Simplest case (Linear regression on past events).
+//!
+//! In one dimension, this process is self-exciting, i.e. the arrival
+//! of an event increases the likelihood of observing events in the
+//! near future. It is also useful to consider the case when there is
+//! more than one type of event, and there is mutual excitement
+//! between the different events. For $d$ such events, we define a
+//! $d$-dimensional Hawkes process:
+//!
+//! $$
+//!  \lambda_{i}(t) = \mu_{i} + \sum_{j=1}^{d} \sum_{t_{j,r} \leq t} \phi_{ij}(t - t_{j,r})
+//! $$
+//!
+//! Where:
+//!
+//! $\mu_{i} \in R_{+}$: Base line (exogenous) intensities. \
+//! $\phi_{ij}$: The (exciting) Kernel functions. \
+//! $t_{j,r}$ : the time of the $j^{th}$ event of type $r$
+//! \
+//! \
+//! As for the $\phi_{ij}$ kernel definition, exponential kernels
+//! are among the most commonly used in Hawkes
+//! processes due to their simplicity and mathematical properties:
+//!
+//! $$
+//!  \phi_{ij}(t) = \alpha_{ij} e^{-\beta_{ij}t}
+//! $$
+//!
+//! Where:
+//!
+//! $\alpha$: Excitation factor (how much each event excites the
+//! future events). \
+//! $\beta$: Decay rate (how quickly the excitement diminishes).\
+//!
+//! ## Context usage
+//! When used this approach arount the Orderbook, the arrival of an
+//! order can increase the likelihood of subsequent orders.
 use rand::Rng;
 pub struct HawkesProcess {
     pub mu: f64,
