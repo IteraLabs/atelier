@@ -1,18 +1,23 @@
 use std::ops::{Deref, DerefMut};
 
 use crate::simulation::randomizer::randomize_order;
+use chrono::Utc;
+use serde::{
+    de::{SeqAccess, Visitor},
+    Deserialize, Deserializer,
+};
 use trolly::lob::{
     ops::{update_strategies::ReplaceOrRemove, PartitionPredicate, Update},
     price_and_quantity::{Price, Quantity},
 };
 
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Deserialize)]
 pub enum Side {
     Bids,
     Asks,
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Deserialize)]
 pub enum OrderType {
     Market,
     Limit,
@@ -25,7 +30,7 @@ pub enum OrderType {
 ///
 /// The `Order` struct contains details about an individual order, including
 /// its unique identifier, timestamp, type, side (buy/sell), price, and amount.
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Deserialize)]
 pub struct Order {
     pub order_id: u32,
     pub order_ts: u64,
@@ -128,6 +133,49 @@ impl Level {
     }
 }
 
+impl Level {
+    fn vec_tuple_to_level<'de, D: Deserializer<'de>>(d: D) -> Result<Vec<Self>, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct FloatStringTuple;
+
+        impl<'de> Visitor<'de> for FloatStringTuple {
+            type Value = Vec<(f64, f64)>;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                formatter.write_str("expecting tuple [f64,f64]")
+            }
+
+            fn visit_seq<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+            where
+                A: SeqAccess<'de>,
+            {
+                let mut result = Vec::new();
+                while let Some((p, q)) = seq.next_element::<(&str, &str)>()? {
+                    result.push((
+                        p.parse().map_err(serde::de::Error::custom)?,
+                        q.parse().map_err(serde::de::Error::custom)?,
+                    ));
+                }
+                Ok(result)
+            }
+        }
+
+        let p_q: Vec<(f64, f64)> = d.deserialize_seq(FloatStringTuple)?;
+
+        Ok(p_q
+            .into_iter()
+            .map(|(p, q)| Level {
+                level_id: 0,
+                price: p,
+                volume: q,
+                orders: vec![],
+            })
+            .collect())
+    }
+}
+
 // This is how the updater knows the Ordering of the Bids
 impl PartitionPredicate for Bids {
     fn partition_predicate<P: PartialOrd>(lhs: &P, rhs: &P) -> bool {
@@ -217,19 +265,22 @@ impl Update<ReplaceOrRemove> for Asks {
 /// 1) Has both bids and asks sides (aham....)
 /// 2) for each side, another Level struct with price, volume, etc (hemm ...)
 /// 3) and for each Level, a queue (vector) of Order structs, (now we are talking)
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Deserialize)]
 pub struct Orderbook {
+    #[serde(alias = "lastUpdateId")]
     pub orderbook_id: u64,
-    pub orderbook_ts: u64,
+    #[serde(skip, default = "current_timestamp")]
+    pub orderbook_ts: i64,
+    #[serde(skip)]
     pub symbol: String,
     pub bids: Bids,
     pub asks: Asks,
 }
 
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
-pub struct Bids(pub Vec<Level>);
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
-pub struct Asks(pub Vec<Level>);
+#[derive(Debug, Clone, PartialEq, PartialOrd, Deserialize)]
+pub struct Bids(#[serde(deserialize_with = "Level::vec_tuple_to_level")] pub Vec<Level>);
+#[derive(Debug, Clone, PartialEq, PartialOrd, Deserialize)]
+pub struct Asks(#[serde(deserialize_with = "Level::vec_tuple_to_level")] pub Vec<Level>);
 
 impl Orderbook {
     // ---------------------------------------------------- New Orderbook -- //
@@ -250,7 +301,7 @@ impl Orderbook {
     /// Returns a new `Orderbook` instance.
     pub fn new(
         orderbook_id: u64,
-        orderbook_ts: u64,
+        orderbook_ts: i64,
         symbol: String,
         bids: Bids,
         asks: Asks,
@@ -395,9 +446,21 @@ impl Price for Level {
     }
 }
 
+impl Default for Bids {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Bids {
     pub fn new() -> Self {
         Self(vec![])
+    }
+}
+
+impl Default for Asks {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -405,6 +468,10 @@ impl Asks {
     pub fn new() -> Self {
         Self(vec![])
     }
+}
+
+fn current_timestamp() -> i64 {
+    Utc::now().timestamp()
 }
 
 #[cfg(test)]
@@ -551,5 +618,75 @@ pub mod test {
         let level = Level::new(0, 1., 0., vec![]);
         ob.insert_ask(level);
         assert_eq!(ob.asks.0, [Level::new(0, 0., 1., vec![])]);
+    }
+
+    #[test]
+    fn deserialize_from_snapshot() {
+        let snapshot = r#"
+            {
+                "lastUpdateId": 17866404615,
+                "bids": [
+                    [
+                        "27826.89000000",
+                        "2.50099000"
+                    ],
+                    [
+                        "27826.10000000",
+                        "0.69556000"
+                    ]
+                ],
+                "asks": [
+                    [
+                        "27826.90000000",
+                        "4.80586000"
+                    ],
+                    [
+                        "27826.91000000",
+                        "0.26959000"
+                    ]
+                ]
+            }
+         "#;
+
+        let book: Orderbook = serde_json::from_str(snapshot).unwrap();
+        let expected = Orderbook {
+            orderbook_id: 17866404615,
+            bids: Bids(vec![
+                Level {
+                    level_id: 0,
+                    price: 27826.89000000,
+                    volume: 2.50099000,
+                    orders: vec![],
+                },
+                Level {
+                    level_id: 0,
+                    price: 27826.10000000,
+                    volume: 0.69556000,
+                    orders: vec![],
+                },
+            ]),
+            asks: Asks(vec![
+                Level {
+                    level_id: 0,
+                    price: 27826.90000000,
+                    volume: 4.80586000,
+                    orders: vec![],
+                },
+                Level {
+                    level_id: 0,
+                    price: 27826.91000000,
+                    volume: 0.26959000,
+                    orders: vec![],
+                },
+            ]),
+            orderbook_ts: 0,
+            symbol: String::new(),
+        };
+
+        assert_eq!(expected.orderbook_id, book.orderbook_id);
+        //assert_eq!(expected.orderbook_ts, book.orderbook_ts);
+        assert_eq!(expected.symbol, book.symbol);
+        assert_eq!(expected.bids, book.bids);
+        assert_eq!(expected.asks, book.asks);
     }
 }

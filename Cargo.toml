@@ -13,3 +13,6 @@ unused_extern_crates = "warn"
 
 #[patch."https://github.com/CAGS295/trolly.git"]
 #trolly = { path = "../trolly"}
+
+[profile.dev]
+panic = "abort"

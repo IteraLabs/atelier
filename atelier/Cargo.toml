@@ -18,6 +18,11 @@ serde = { version = "1.0.203", features = ["derive"] }
 rand = {version="0.8.5"}
 rand_distr = "0.4.3"
 trolly = { version = "*", git = "https://github.com/CAGS295/trolly.git" , default-features = false }
+serde_json = "1.0.128"
+reqwest = { version = "0.12.7", default-features = false }
+anyhow = "1.0.89"
+tokio = { version = "1.40.0", default-features = false }
+chrono = "0.4.38"
 
 [lib]
 name = "atelier"
@@ -30,3 +35,7 @@ workspace = true
 
 [package.metadata.docs.rs]
 rustdoc-args = [ "--html-in-header", "katex-header.html" ]
+
+[dev-dependencies]
+tokio = { version = "*", features = ["rt"]} 
+tracing-subscriber = "0.3.18"
