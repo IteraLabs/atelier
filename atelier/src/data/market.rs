@@ -219,7 +219,7 @@ impl Update<ReplaceOrRemove> for Asks {
 /// 3) and for each Level, a queue (vector) of Order structs, (now we are talking)
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Orderbook {
-    pub orderbook_id: u32,
+    pub orderbook_id: u64,
     pub orderbook_ts: u64,
     pub symbol: String,
     pub bids: Bids,
@@ -249,7 +249,7 @@ impl Orderbook {
     ///
     /// Returns a new `Orderbook` instance.
     pub fn new(
-        orderbook_id: u32,
+        orderbook_id: u64,
         orderbook_ts: u64,
         symbol: String,
         bids: Bids,
