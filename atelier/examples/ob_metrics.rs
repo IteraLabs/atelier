@@ -12,6 +12,10 @@ fn main() {
     // Generate a synthetic orderbook for testing
     let i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
+    // get the TOB
+    let tob_data = i_ob.get_tob();
+    println!("TOB: {:?}", tob_data);
+
     // extract tob values
     let tob_bid: f64 = i_ob.bids[0].price;
     let tob_ask: f64 = i_ob.asks[0].price;
@@ -46,4 +50,5 @@ fn main() {
     // Compute the VWAP
     let vwap_value = VWAP::compute(&iter_bids.clone(), &iter_asks.clone(), 1);
     println!("VWAP: {:?}", vwap_value);
+
 }
