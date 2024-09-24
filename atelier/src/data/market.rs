@@ -1,3 +1,5 @@
+use rand_distr::num_traits::ToPrimitive;
+
 use crate::simulation::randomizer::randomize_order;
 
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
@@ -11,7 +13,7 @@ pub enum OrderType {
     Market,
     Limit,
 }
-
+use std::any::type_name_of_val;
 // ---------------------------------------------------------------- ORDER -- //
 // ------------------------------------------------------------------------- //
 
@@ -195,31 +197,65 @@ impl Orderbook {
 
     // ------------------------------------------------------ Get the TOB -- //
     // ------------------------------------------------------ ----------- -- //
-    
+
     pub fn get_tob(&self) -> Vec<&f64> {
-    
-        let bid_volume = self.bids.get(0).map(|bid| &bid.volume);
-        let bid_price = self.bids.get(0).map(|bid| &bid.price);
-
-        let ask_price = self.asks.get(0).map(|ask| &ask.price);
-        let ask_volume = self.asks.get(0).map(|ask| &ask.volume);
-
-        vec![&bid_volume.unwrap_or(&0.0), 
-             &bid_price.unwrap_or(&0.0), 
-             &ask_price.unwrap_or(&0.0),
-             &ask_volume.unwrap_or(&0.0)
-        ]
+        let bid_volume = self.bids.get(0).map(|bid| &bid.volume).unwrap_or(&0.0);
+        let bid_price = self.bids.get(0).map(|bid| &bid.price).unwrap_or(&0.0);
+        let ask_price = self.asks.get(0).map(|ask| &ask.price).unwrap_or(&0.0);
+        let ask_volume = self.asks.get(0).map(|ask| &ask.volume).unwrap_or(&0.0);
+        vec![&bid_volume, &bid_price, &ask_price, &ask_volume]
     }
-     
+
     // ----------------------------------------------------- Find a Level -- //
     // ----------------------------------------------------- ------------ -- //
-    
-    //pub fn find_level(&self, target_price: f64) -> f64 {
-    //   1.0 
-    //}
+
+    pub fn find_level(&self, level_price: f64) -> Result<i32, i32> {
+        // -1 : -n for indexes within the bid side
+        // +1 : +n for indexes within the ask side
+        // 0  : level does not exist
+
+        if level_price <= self.bids[0].price {
+            let mut i_level: i32 = 0;
+
+            for i_bid in &self.bids {
+                i_level -= 1;
+                if level_price == i_bid.price {
+                    return Ok(i_level);
+                }
+            }
+        }
+
+        if level_price >= self.asks[0].price {
+            let mut i_level: i32 = 0;
+
+            for i_ask in &self.asks {
+                i_level += 1;
+                if level_price == i_ask.price {
+                    return Ok(i_level);
+                }
+            }
+        }
+        Ok(0)
+    }
 
     // --------------------------------------- Retrieve an Existing Level -- //
     // --------------------------------------- -------------------------- -- //
+
+    pub fn retrieve_level(&self, level_price: f64) -> Result<Level, i32> {
+        // Call previous function to see if a Level exists.
+        let i_level = self.find_level(level_price).unwrap();
+
+        if i_level < 0 {
+            let i_level = i_level.abs() - 1;
+            return Ok(self.bids[i_level as usize].clone());
+        }
+        if i_level > 0 {
+            let i_level = i_level - 1;
+            return Ok(self.asks[i_level as usize].clone());
+        } else {
+            Err(0)
+        }
+    }
 
     // ----------------------------------------- Delete an Existing Level -- //
     // ----------------------------------------- ------------------------ -- //
