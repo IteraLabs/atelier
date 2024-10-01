@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use atelier::data::market::Orderbook;
-    use atelier::simulation::randomizer;
+    use atelier::generators::randomizer;
 
     #[test]
     fn symmetric_sides() {
