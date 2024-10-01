@@ -1,4 +1,3 @@
-use rand_distr::num_traits::ToPrimitive;
 
 use crate::simulation::randomizer::randomize_order;
 
@@ -13,7 +12,7 @@ pub enum OrderType {
     Market,
     Limit,
 }
-use std::any::type_name_of_val;
+
 // ---------------------------------------------------------------- ORDER -- //
 // ------------------------------------------------------------------------- //
 
@@ -242,13 +241,16 @@ impl Orderbook {
     // --------------------------------------- -------------------------- -- //
 
     pub fn retrieve_level(&self, level_price: f64) -> Result<Level, i32> {
-        // Call previous function to see if a Level exists.
+        // Validate the existence of the level.
         let i_level = self.find_level(level_price).unwrap();
 
+        // On the Bid side
         if i_level < 0 {
             let i_level = i_level.abs() - 1;
             return Ok(self.bids[i_level as usize].clone());
         }
+
+        // On the Ask side
         if i_level > 0 {
             let i_level = i_level - 1;
             return Ok(self.asks[i_level as usize].clone());
@@ -292,7 +294,8 @@ impl Orderbook {
     ///
     /// # Returns
     ///
-    /// Returns a new `Orderbook` instance populated with synthetic bid and ask levels.
+    /// Returns a new `Orderbook` instance populated with synthetic bid and 
+    /// ask levels.
     pub fn synthetize(
         bid_price: f64,
         ask_price: f64,
