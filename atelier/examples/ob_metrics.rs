@@ -25,23 +25,15 @@ fn main() {
     println!("Midprice: {}", midprice_value);
 
     // Compute the Volume Imbalance
-    let iter_bids: Vec<f64> = i_ob.bids.clone().into_iter().map(|x| x.volume).collect();
-    let iter_asks: Vec<f64> = i_ob.asks.clone().into_iter().map(|x| x.volume).collect();
+    let iter_bids: Vec<f64> = i_ob.bids.iter().map(|x| x.volume).collect();
+    let iter_asks: Vec<f64> = i_ob.asks.iter().map(|x| x.volume).collect();
 
     let obimb_value = VolumeImbalance::compute(&iter_bids, &iter_asks, 1);
     println!("Volume Imbalance: {:?}", obimb_value);
 
     // Compute the Volume-Weighted Average Price
-    let iter_bids: Vec<_> = i_ob
-        .bids
-        .into_iter()
-        .map(|x| vec![x.price, x.volume])
-        .collect();
-    let iter_asks: Vec<_> = i_ob
-        .asks
-        .into_iter()
-        .map(|x| vec![x.price, x.volume])
-        .collect();
+    let iter_bids: Vec<_> = i_ob.bids.iter().map(|x| vec![x.price, x.volume]).collect();
+    let iter_asks: Vec<_> = i_ob.asks.iter().map(|x| vec![x.price, x.volume]).collect();
 
     // Compute the VWAP
     let vwap_value = VWAP::compute(&iter_bids.clone(), &iter_asks.clone(), 1);

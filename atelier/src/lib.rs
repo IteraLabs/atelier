@@ -15,3 +15,4 @@ pub mod simulation;
 
 /// Calculations and metrics useful to test performance of many kinds.
 pub mod metrics;
+pub mod net;

@@ -1,9 +1,9 @@
-on: 
-  pull_request
-
-name: 
-  Rust
-
+name: Rust
+permissions:
+  pull-requests: read
+  statuses: write
+on:
+  pull_request:
 env: 
   CARGO_TERM_COLOR: always
   RUSTFLAGS: -D warnings
