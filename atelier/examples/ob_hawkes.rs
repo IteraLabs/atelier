@@ -1,4 +1,4 @@
-use atelier::simulation::hawkes;
+use atelier::generators::hawkes;
 
 fn main() {
     // Average ocurrence rate of events.

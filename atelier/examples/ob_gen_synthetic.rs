@@ -1,5 +1,5 @@
 use atelier::data::market::Orderbook;
-use atelier::simulation::randomizer;
+use atelier::generators::randomizer;
 
 fn main() {
     let bid_price = 50_000.00;

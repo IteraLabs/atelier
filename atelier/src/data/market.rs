@@ -1,4 +1,4 @@
-use crate::simulation::randomizer::randomize_order;
+use crate::generators::randomizer::randomize_order;
 
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum Side {

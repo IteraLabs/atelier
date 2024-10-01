@@ -11,7 +11,10 @@ pub mod data;
 
 /// Tools to create generators of data from specification
 /// of parametric probability distributions.
-pub mod simulation;
+pub mod generators;
 
 /// Calculations and metrics useful to test performance of many kinds.
 pub mod metrics;
+
+/// Messages structures and functionality for: Logs, Errors, Events. 
+pub mod messages;

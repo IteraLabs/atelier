@@ -52,15 +52,3 @@ pub enum OrderError {
 
 }
 
-#[derive(Error, Debug)]
-pub enum GeneratorError {
-    
-    // Generator not found
-    #[error("Generator not found")]
-    GeneratorNotFound,
-
-    // Value not supported
-    #[error("The provided value is not supported by the generator")]
-    GeneratorValueError,
-}
-
