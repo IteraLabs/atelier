@@ -1,4 +1,6 @@
-use crate::simulation::randomizer::randomize_order;
+use crate::generators::randomizer::randomize_order;
+use rand::distributions::Uniform;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum Side {
@@ -30,7 +32,7 @@ pub struct Order {
 }
 
 impl Order {
-    /// Creates a new instance of `Order`.
+    /// Creates a new _empty_ instance of an `Order`.
     ///
     /// # Parameters
     ///
@@ -41,9 +43,6 @@ impl Order {
     /// - `price`: The price at which the order is placed.
     /// - `amount`: The amount of the asset being ordered.
     ///
-    /// # Returns
-    ///
-    /// Returns a new `Order` instance with the specified parameters.
     pub fn new(
         order_id: u32,
         order_ts: u64,
@@ -78,6 +77,47 @@ impl Order {
             side,
             price,
             amount,
+        }
+    }
+
+    /// Creates a new _random_ instance of an `Order`.
+    ///
+    /// # Parameters
+    ///
+    /// - `order_id`: The unique identifier for the order.
+    /// - `order_ts`: The timestamp for when the order was created.
+    /// - `order_type`: The type of the order (e.g., `OrderType::Limit`).
+    /// - `side`: The side of the order, either `Side::Bids` or `Side::Asks`.
+    /// - `price`: The price at which the order is placed.
+    /// - `amount`: The amount of the asset being ordered.
+    ///
+    pub fn randomize(side: Side, price: f64, order_type: OrderType) -> Self {
+        // Randomize order_ts
+        let now_ts = SystemTime::now();
+
+        let since_epoch_ts = now_ts
+            .duration_since(UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_millis();
+
+        let order_ts_gen = since_epoch_ts as u64;
+
+        // Randomize amount
+        let order_amount_gen = 123.456;
+
+        // Randomize order_id
+        let order_id_gen: u32 = 123;
+
+        // Parse Order Type
+        let order_type_gen = order_type;
+
+        Order {
+            order_id: order_id_gen,
+            order_ts: order_ts_gen,
+            order_type: order_type_gen,
+            side,
+            price,
+            amount: order_amount_gen,
         }
     }
 }

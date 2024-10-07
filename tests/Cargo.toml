@@ -10,4 +10,6 @@ atelier = { path = "../atelier" }
 [[test]]
 name = "test_orderbook"
 path = "test_orderbook.rs"
-
+[[test]]
+name = "test_processes"
+path = "test_processes.rs"
