@@ -11,5 +11,5 @@ atelier = { path = "../atelier" }
 name = "test_orderbook"
 path = "test_orderbook.rs"
 [[test]]
-name = "test_generators"
-path = "test_generators.rs"
+name = "test_processes"
+path = "test_processes.rs"

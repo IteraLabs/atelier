@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use atelier::data::market::Orderbook;
-    use atelier::generators::randomizer;
+    use atelier::generators::brownian;
 
     #[test]
     fn symmetric_sides() {
@@ -40,10 +40,10 @@ mod tests {
 
         for i in 0..=3 {
             let i_bid_price = n_orderbooks[i].bids[0].price;
-            let i_ret_gbm_bids: f64 = randomizer::gbm_return(i_bid_price, mu, sigma, 1.0);
+            let i_ret_gbm_bids: f64 = brownian::gbm_return(i_bid_price, mu, sigma, 1.0).unwrap();
 
             let i_ask_price = n_orderbooks[i].asks[0].price;
-            let i_ret_gbm_asks: f64 = randomizer::gbm_return(i_ask_price, mu, sigma, 1.0);
+            let i_ret_gbm_asks: f64 = brownian::gbm_return(i_ask_price, mu, sigma, 1.0).unwrap();
 
             let i_orderbook = Orderbook::synthetize(
                 i_bid_price - i_ret_gbm_bids,
