@@ -6,12 +6,14 @@
 
 #![allow(dead_code)]
 
-/// Definition of data structures and core datatypes
+/// Data structures and core datatypes.
 pub mod data;
 
-/// Tools to create generators of data from specification
-/// of parametric probability distributions.
-pub mod simulation;
+/// Data Generation from parametric probability distributions.
+pub mod generators;
 
-/// Calculations and metrics useful to test performance of many kinds.
+/// Calculations and metrics about performance of many kinds.
 pub mod metrics;
+
+/// Messages structures and functionalities for: Errors, Events, Logs.
+pub mod messages;

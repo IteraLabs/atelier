@@ -1,6 +1,11 @@
-//! # Random Distribution Sampling
+//! # Probabilistic generators
 //!
 //! This module provides implementations for sampling from various probability distributions, including
+//!
+//! ## References
+//!
+//! - [rand_distr](https://docs.rs/rand_distr/latest/rand_distr/)
+//!
 //! the standard Normal distribution, Poisson distribution, and Exponential distribution.
 use rand::prelude::*;
 use rand_distr::StandardNormal;

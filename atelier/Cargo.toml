@@ -1,6 +1,6 @@
 [package]
 name = "atelier"
-version = "0.0.86"
+version = "0.0.87"
 edition = "2021"
 description = "a Computational Workshop for Market Microstructure Modeling, Synthetic Simulation and Historical Replay"
 authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
@@ -14,7 +14,7 @@ include = ["src/**/*", "katex-header.html"]
 
 [dependencies]
 serde = { version = "1.0.203", features = ["derive"] }
-
+thiserror = { version = "1.0.64" }
 rand = {version="0.8.5"}
 rand_distr = "0.4.3"
 

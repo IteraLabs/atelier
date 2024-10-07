@@ -1,7 +1,6 @@
 //! # Misc Random Generation
 
 use crate::data::market::{Order, OrderType, Side};
-use crate::simulation::generators;
 use rand::distributions::Uniform;
 use rand::Rng;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -46,12 +45,4 @@ pub fn randomize_order(side: Side, price: f64, order_type: OrderType) -> Order {
         price,
         amount,
     }
-}
-
-pub fn gbm_return(s0: f64, mu: f64, sigma: f64, t: f64) -> f64 {
-    let dwt = generators::pdf_standard_normal();
-    let drift = mu * s0 * t;
-    let diffusion = sigma * s0 * dwt;
-    let dst = drift + diffusion;
-    dst
 }
