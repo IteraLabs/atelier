@@ -81,7 +81,7 @@ impl Order {
     }
 
     /// Creates a new _random_ instance of an `Order`.
-    /// 
+    ///
     /// # Parameters
     ///
     /// - `order_id`: The unique identifier for the order.
@@ -92,7 +92,6 @@ impl Order {
     /// - `amount`: The amount of the asset being ordered.
     ///
     pub fn randomize(side: Side, price: f64, order_type: OrderType) -> Self {
-        
         // Randomize order_ts
         let now_ts = SystemTime::now();
 
