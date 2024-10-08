@@ -1,5 +1,4 @@
-use atelier::data::market::{Orderbook, Side};
-use atelier::metrics::market::{MarketMetric, Midprice, Spread, VolumeImbalance, VWAP};
+use atelier::data::market::{Level, Order, OrderType, Orderbook, Side};
 
 fn main() {
     // Parameters for synthetic orderbook generation
@@ -18,8 +17,14 @@ fn main() {
     // let find_ob_level = i_ob.find_level(50_200.0);
     // println!("{:?}", new_ob_level);
 
-    let content_ob_level = i_ob.retrieve_level(50_200.0);
-    println!("found:\n {:?}", content_ob_level);
+    // let content_ob_level = i_ob.retrieve_level(50_200.0);
+    // println!("found:\n {:?}", content_ob_level);
+
+    let new_order: Order = Order::new(123, 123, OrderType::Limit, Side::Bids, 50_000.00, 123.123);
+
+    let insert_new = i_ob.insert_level(Side::Bids, 49_900.0, 123.123, vec![new_order]);
+
+    // println!("{:?}", insert_new);
 
     // get the TOB
     // let tob_data = i_ob.get_tob();

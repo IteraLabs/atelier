@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-
-use crate::simulation::randomizer::randomize_order;
-=======
 use crate::generators::randomizer::randomize_order;
-use rand::distributions::Uniform;
+use crate::messages::errors::{OrderError, LevelError};
+use core::f64;
 use std::time::{SystemTime, UNIX_EPOCH};
->>>>>>> origin/main
 
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum Side {
@@ -246,20 +242,27 @@ impl Orderbook {
         let bid_price = self.bids.get(0).map(|bid| &bid.price).unwrap_or(&0.0);
         let ask_price = self.asks.get(0).map(|ask| &ask.price).unwrap_or(&0.0);
         let ask_volume = self.asks.get(0).map(|ask| &ask.volume).unwrap_or(&0.0);
+
         vec![&bid_volume, &bid_price, &ask_price, &ask_volume]
     }
 
     // ----------------------------------------------------- Find a Level -- //
     // ----------------------------------------------------- ------------ -- //
 
-    pub fn find_level(&self, level_price: f64) -> Result<i32, i32> {
-        // -1 : -n for indexes within the bid side
-        // +1 : +n for indexes within the ask side
-        // 0  : level does not exist
+    /// If a level exists, either within the Bids, or, the Asks,
+    /// it will return the index of it, positive for asks, negative for bids.
+    ///
+    /// ## Parameters
+    /// level_price: f64 = The Level's price to be used as index.
+    ///
+    /// ## Returns
+    /// Ok(i32): Index of the Level (sign encodes the side)
+    /// Err(LevelError): with LevelNotFound
+    ///
+    pub fn find_level(&self, level_price: f64) -> Result<i32, LevelError> {
+        let mut i_level: i32 = 0;
 
         if level_price <= self.bids[0].price {
-            let mut i_level: i32 = 0;
-
             for i_bid in &self.bids {
                 i_level -= 1;
                 if level_price == i_bid.price {
@@ -269,8 +272,6 @@ impl Orderbook {
         }
 
         if level_price >= self.asks[0].price {
-            let mut i_level: i32 = 0;
-
             for i_ask in &self.asks {
                 i_level += 1;
                 if level_price == i_ask.price {
@@ -278,48 +279,216 @@ impl Orderbook {
                 }
             }
         }
-        Ok(0)
+        Err(LevelError::LevelNotFound)
     }
 
     // --------------------------------------- Retrieve an Existing Level -- //
     // --------------------------------------- -------------------------- -- //
 
-    pub fn retrieve_level(&self, level_price: f64) -> Result<Level, i32> {
-        // Validate the existence of the level.
-        let i_level = self.find_level(level_price).unwrap();
+    /// If a Level exists, either within the Bids, or, the Asks, it will
+    /// return a _cloned()_ version of it.
+    ///
+    /// ## Parameters
+    /// level_price: f64 : The level's price to be used as index.
+    ///
+    /// ## Returns
+    /// Ok(Level) : A cloned version of the founded Level. \
+    /// Err(LevelError): A custom error type as LevelError:LevelNotFound
+    ///
+    pub fn get_level(&self, level_price: f64) -> Result<Level, LevelError> {
+        // return the level_price if it exists, or, LevelError::LevelNotFound
+        if let Ok(i_level) = self.find_level(level_price) {
+            // Level is on the Bid side
+            if i_level < 0 {
+                let i_level = i_level.abs() - 1;
+                return Ok(self.bids[i_level as usize].clone());
 
-        // On the Bid side
-        if i_level < 0 {
-            let i_level = i_level.abs() - 1;
-            return Ok(self.bids[i_level as usize].clone());
-        }
+            // Level is on the Ask side
+            } else if i_level > 0 {
+                let i_level = i_level - 1;
+                return Ok(self.asks[i_level as usize].clone());
 
-        // On the Ask side
-        if i_level > 0 {
-            let i_level = i_level - 1;
-            return Ok(self.asks[i_level as usize].clone());
+            // level is not present
+            } else {
+                return Err(LevelError::LevelInfoNotAvailable);
+            }
+
+        // find_level returned err in the first place
         } else {
-            Err(0)
+            return Err(LevelError::LevelNotFound);
         }
     }
 
     // ----------------------------------------- Delete an Existing Level -- //
     // ----------------------------------------- ------------------------ -- //
 
+    pub fn delete_level(&self) -> Result<(), LevelError> {
+        Ok(())
+    }
+
     // ----------------------------------------------- Insert a New Level -- //
     // --------------------------------------------------- -------------- -- //
+
+    /// Inserts a new level. If the level already exists, the new level over
+    /// rides the existing one, if it does not exists, the new level is inserted
+    /// in its corresponding slot within the Vec<Level> for the corresponding
+    /// side.
+    ///
+    /// ## Parameters
+    /// side: Side = {Side::Bids, Side::Asks}
+    /// level_price: f64 = The Level's price to be used as index.
+    /// volume: f64 = a single quantity for an empty `Vec<Order>`, the sum of
+    /// all the order's amount.
+    /// orders: Vec<Order> = The vector of `Order` structs.
+    ///
+    /// ## Returns
+    /// Ok(Level)
+    /// Err(LevelError): Custom Error Type of LevelInsertionFailed.
+    ///
+    pub fn insert_level(
+        mut self,
+        side: Side,
+        level_price: f64,
+        volume: f64,
+        orders: Vec<Order>,
+    ) -> Result<(), LevelError> {
+        // return the level_price if it exists, or, LevelError::LevelNotFound
+        if let Ok(i_level) = self.find_level(level_price) {
+            // Level is on the Bid side
+            if i_level < 0 {
+                // updated counter to this side
+                let i_level = i_level.abs() - 1;
+                // override existing level with the new one
+                let same_level_id = &self.bids[i_level as usize].level_id;
+                self.bids[i_level as usize] =
+                    Level::new(*same_level_id, side, level_price, volume, orders);
+
+                Ok(())
+
+            // Level is on the Ask side
+            } else if i_level > 0 {
+                // update counter to this side
+                let i_level = i_level - 1;
+                // override existing level with new one
+                let same_level_id = &self.asks[i_level as usize].level_id;
+                self.asks[i_level as usize] =
+                    Level::new(*same_level_id, side, level_price, volume, orders);
+
+                Ok(())
+
+            // level is not present
+            } else {
+
+                // find the right position within the vector and insert new Level there
+                return Err(LevelError::LevelNotFound);
+            
+            }
+        } else {
+            return Err(LevelError::LevelNotFound);
+        }
+    }
 
     // ---------------------------------------------------- Find an Order -- //
     // ---------------------------------------------------- ------------- -- //
 
+    /// To find whether an `Order` exists or not.
+    ///
+    /// ## Parameters
+    /// side: Side = {Side::Bids, Side::Asks}
+    /// price: f64 = the order's price, which is the same as the Level's price
+    /// order_id: u32 = Order's unique ID
+    /// order_ts: u64 = Order's timestamp
+    ///
+    /// Take the following sequence for validation of existence
+    /// 
+    /// 1) side:
+    ///     use it as the Side::Bids or Side::Asks, to find whether the side
+    ///     exists.
+    ///
+    /// 2) price:
+    ///     use it as the level_price, to find whether a level already exists.
+    ///     
+    /// 3) timestamp:
+    ///     use it as the order index to find whether the order exists.
+    ///
+    /// ## Results
+    ///
+    
+    pub fn find_order(
+        &self, 
+        side: Side, 
+        price: f64, 
+        order_id: u32, 
+        order_ts: u64
+        ) -> Result<(), OrderError> {
+   
+        // Find if side exists
+        let order_found = match side {
+            
+            Side::Bids => {
+                
+                if self.bids.len() > 0 {
+                   return Ok(())
+                
+                } else {
+                    return Err(OrderError::OrderNotFound);
+                }
+            },
+
+            Side::Asks => {
+
+                if self.asks.len() > 0 {
+                    return Ok(())
+                
+                } else {
+                    return Err(OrderError::OrderNotFound);
+                }
+            }
+        };
+    
+    }
+
     // --------------------------------------- Retrieve an Existing Order -- //
     // --------------------------------------- -------------------------- -- //
+
+    /// To retrieve info about an existing `Order`.
+    ///
+    /// ## Parameters
+    ///
+    /// ## Results
+    ///
+    
+    pub fn get_order() ->  Result<(), OrderError> {
+        Ok(())
+    }
 
     // ----------------------------------------- Delete an Existing Order -- //
     // ----------------------------------------- ------------------------ -- //
 
+    /// To delete an existing `Order`.
+    ///
+    /// ## Parameters
+    ///
+    /// ## Results
+    ///
+    
+    pub fn delete_order() -> Result<(), OrderError> {
+        Ok(())
+    }
+
     // ----------------------------------------------- Insert a New Order -- //
     // ----------------------------------------------- ------------------ -- //
+
+    /// To insert a new `Order`.
+    ///
+    /// ## Parameters
+    ///
+    /// ## Results
+    ///
+    
+    pub fn insert_order() -> Result<(), OrderError> {
+        Ok(())
+    }
 
     // ---------------------------------------------- Synthetic Orderbook -- //
     // ------------------------------------------------------------------ -- //
@@ -338,7 +507,7 @@ impl Orderbook {
     ///
     /// # Returns
     ///
-    /// Returns a new `Orderbook` instance populated with synthetic bid and 
+    /// Returns a new `Orderbook` instance populated with synthetic bid and
     /// ask levels.
     pub fn synthetize(
         bid_price: f64,
