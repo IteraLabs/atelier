@@ -253,22 +253,22 @@ impl Orderbook {
     /// the sign encodes the side, negative (bids) and positive (asks)
     /// Err(LevelError): with LevelNotFound
     ///
-    pub fn find_level(&self, level_price: f64) -> Result<i32, LevelError> {
+    pub fn find_level(&self, level_price: &f64) -> Result<i32, LevelError> {
         let mut i_level: i32 = 0;
 
-        if level_price <= self.bids[0].price {
+        if level_price <= &self.bids[0].price {
             for i_bid in &self.bids {
                 i_level -= 1;
-                if level_price == i_bid.price {
+                if level_price == &i_bid.price {
                     return Ok(i_level);
                 }
             }
         }
 
-        if level_price >= self.asks[0].price {
+        if level_price >= &self.asks[0].price {
             for i_ask in &self.asks {
                 i_level += 1;
-                if level_price == i_ask.price {
+                if level_price == &i_ask.price {
                     return Ok(i_level);
                 }
             }
@@ -290,7 +290,7 @@ impl Orderbook {
     /// Ok(Level) : A cloned version of the founded Level. \
     /// Err(LevelError): A custom error type as LevelError:LevelNotFound
     ///
-    pub fn retrieve_level(&self, level_price: f64) -> Result<Level, LevelError> {
+    pub fn retrieve_level(&self, level_price: &f64) -> Result<Level, LevelError> {
         // return the level_price if it exists, or, LevelError::LevelNotFound
         if let Ok(i_level) = self.find_level(level_price) {
             
@@ -318,11 +318,12 @@ impl Orderbook {
     // ----------------------------------------- Delete an Existing Level -- //
     // ----------------------------------------- ------------------------ -- //
 
-    /// To delete an existing level
+    /// Deletes an existing level
     ///
-    ///
+    /// ## Parameters
+    /// level_price: &f64
     
-    pub fn delete_level(&mut self, level_price: f64) -> Result<(), LevelError> {
+    pub fn delete_level(&mut self, level_price: &f64) -> Result<(), LevelError> {
         
         // see if level exists
         let find_level_ob = self.find_level(level_price);
@@ -358,78 +359,117 @@ impl Orderbook {
     /// side.
     ///
     /// ## Parameters
-    /// side: Side = {Side::Bids, Side::Asks}
-    /// level_price: f64 = The Level's price to be used as index.
-    /// volume: f64 = a single quantity for an empty `Vec<Order>`, the sum of
-    /// all the order's amount.
-    /// orders: Vec<Order> = The vector of `Order` structs.
+    /// level: With a Level::new()
     ///
     /// ## Returns
     /// Ok(Level)
     /// Err(LevelError): Custom Error Type of LevelInsertionFailed.
     ///
-    pub fn insert_level(
-        mut self,
-        side: Side,
-        level_price: f64,
-        volume: f64,
-        orders: Vec<Order>,
+    pub fn insert_level(&mut self, level: Level,
     ) -> Result<(), LevelError> {
+
         // return the level_price if it exists, or, LevelError::LevelNotFound
-        if let Ok(i_level) = self.find_level(level_price) {
+        if let Ok(i_level) = self.find_level(&level.price) {
+
+            println!("i_level found: {:?}", &i_level);
             
             // -- Level exist on the Bid side (to be replaced)
             if i_level < 0 {
                 // updated counter to this side
                 let i_level = i_level.abs() - 1;
-                // override existing level with the new one
+                // use the same id for the level
                 let same_level_id = &self.bids[i_level as usize].level_id;
+                // override existing level with the new one
                 self.bids[i_level as usize] =
-                    Level::new(*same_level_id, side, level_price, volume, orders);
-
-                Ok(())
+                    Level::new(
+                        *same_level_id,
+                        Side::Bids,
+                        level.price,
+                        level.volume,
+                        level.orders);
+                
+                return Ok(())
 
             // -- Level exist on the Ask side (to be replaced)
             } else if i_level > 0 {
                 // update counter to this side
                 let i_level = i_level - 1;
-                // override existing level with new one
+                // use the same id for the level
                 let same_level_id = &self.asks[i_level as usize].level_id;
+                // override existing level with new one
                 self.asks[i_level as usize] =
-                    Level::new(*same_level_id, side, level_price, volume, orders);
-
-                Ok(())
-
+                    Level::new(
+                        *same_level_id,
+                        level.side,
+                        level.price,
+                        level.volume,
+                        level.orders);
+                
+                return Ok(())
+            
             // A response was produced but with an error on level index
             } else {
                 
                 // find the right position within the vector
                 // and insert new Level there
                 
+                println!("i_level found: {:?}", &i_level);
+                
                 return Err(LevelError::LevelNotFound);
             }
-
-        // Level not found, so insert a new one
+        // Level not found.
+        // Localize index, insert into vector.
         } else {
 
-            match side {
+            match level.side {
                 
                 Side::Bids => {
 
+                    // Get the level_price for all levels in the vector
+                    let mut v_bids = self.bids.clone().into_iter();
+                    
+                    // Find position : Start with the upper most position 
+                    // (given the ordering in orders)
+                    let index_level = v_bids.position(
+                        |existing_level| level.price > existing_level.price)
+                        .unwrap_or(v_bids.len());
+
+                    // Insert new Level into the existing vector of levels.
+                    self.bids.insert(index_level,
+                        Level::new(index_level as u32,
+                        level.side,
+                        level.price,
+                        level.volume,
+                        level.orders)
+                        );
+                    return Ok(())
                 },
 
                 Side::Asks => {
 
-                },
+                    // get the level_price for all levels in the vector
+                    let mut v_asks = self.asks.clone().into_iter();
 
-            }
-            
-            // insert into the vector
-            self.asks.insert(1); 
+                    // Find position : Start with the lower and top most position 
+                    // (given the ordering in orders)
+                    let index_level = v_asks.position(
+                        |existing_level| level.price < existing_level.price)
+                        .unwrap_or(v_asks.len());
 
-            return Err(LevelError::LevelNotFound);
-        
+                    // Insert the new level into the existing vector of levels.
+                    self.asks.insert(index_level,
+                        Level::new(index_level as u32, 
+                            level.side, 
+                            level.price, 
+                            level.volume, 
+                            level.orders));
+                    return Ok(())
+                }
+            }    
         }
+    
+        return Err(LevelError::LevelNotFound);
+
     }
 
     // ---------------------------------------------------- Find an Order -- //

@@ -6,10 +6,14 @@ fn main() {
     let bid_price = 50_000.00;
     let ask_price = 50_100.00;
     let tick_size = 100.0;
-    let n_levels = 10;
-    let n_orders = 2;
+    let n_levels = 2;
+    let n_orders = 1;
 
     // Generate a synthetic orderbook for testing
+    // this determines the order of the Level objects within 
+    // the bids and asks vectors, and also, the order of each
+    // order within each level.
+    
     let mut i_ob = Orderbook::synthetize(
         bid_price, 
         ask_price, 
@@ -24,7 +28,7 @@ fn main() {
     // ------------------------------------------------------- ---------- -- //
     
     let price_level = 50_200.0;
-    let find_level_ob = i_ob.find_level(price_level);
+    let find_level_ob = i_ob.find_level(&price_level);
 
     println!("\n -- Find Level --");
 
@@ -67,7 +71,7 @@ fn main() {
     // --------------------------------------------------- -------------- -- //
 
     let find_this: f64 = 50_200.0;
-    let content_ob_level = i_ob.retrieve_level(find_this).unwrap();
+    let content_ob_level = i_ob.retrieve_level(&find_this).unwrap();
 
     println!("\n -- Retrieve Level --");
     println!("
@@ -84,11 +88,21 @@ fn main() {
     // ----------------------------------------------------- Delete Level -- //
     // ----------------------------------------------------- ------------ -- //
    
+    println!("\n -- Delete Level --");
     let delete_this: f64 = 50_200.0;
-    i_ob.delete_level(delete_this).unwrap();
+    println!(" 
+        Delete the level with this price: {:?}",
+        &delete_this
+    );
+    i_ob.delete_level(&delete_this).unwrap();
+    println!("\nNew state of the OB.bids: \n{:?}", i_ob.bids);
+    println!("\nNew state of the OB.asks: \n{:?}", i_ob.asks);
 
     // ----------------------------------------------------- Insert Level -- //
     // ----------------------------------------------------- ------------ -- //
+    
+    println!("\n -- Insert Level --");
+    println!("");
     
     let new_order = Order {
         order_id: 123,
@@ -103,9 +117,31 @@ fn main() {
         level_id: 123, 
         side: Side::Asks, 
         price: 50_200.0, 
-        volume: 0.123,
+        volume: 0.987,
         orders: vec![new_order], 
     };
+
+    let insert_this: &Level = &new_level;
+    println!("
+        Level to be inserted: {:?}",
+        &insert_this
+    );
+
+    println!("\nResult of insertion: {:?}", i_ob.insert_level(new_level));
+    
+    // let find_this: &f64 = &new_level.price;
+    println!("i_ob content: {:?}", i_ob);
+
+    println!("\n -- Retrieve Level --");
+    println!("
+        NEW level to be retrieved: {:?},
+        NEW retrieved Level index: {:?},
+        NEW retrieved Level price: {:?}, 
+        NEW retrieved Level orders: {:?}",
+        find_this,
+        content_ob_level.level_id,
+        content_ob_level.price,
+        content_ob_level.orders.len());
     
     /*
     let new_order: Order = Order::new(123, 123, OrderType::Limit,
