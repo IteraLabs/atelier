@@ -1,28 +1,121 @@
 use atelier::data::market::{Level, Order, OrderType, Orderbook, Side};
 
 fn main() {
+
     // Parameters for synthetic orderbook generation
     let bid_price = 50_000.00;
     let ask_price = 50_100.00;
     let tick_size = 100.0;
-    let n_levels = 2;
-    let n_orders = 1;
+    let n_levels = 10;
+    let n_orders = 2;
 
     // Generate a synthetic orderbook for testing
-    let i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
+    let mut i_ob = Orderbook::synthetize(
+        bid_price, 
+        ask_price, 
+        tick_size, 
+        n_levels, 
+        n_orders);
 
     // Generated Orderbook
-    println!("{:?}", i_ob);
+    // println!("{:?}", i_ob);
+    
+    // ------------------------------------------------------- Find Level -- //
+    // ------------------------------------------------------- ---------- -- //
+    
+    let price_level = 50_200.0;
+    let find_level_ob = i_ob.find_level(price_level);
 
-    // let find_ob_level = i_ob.find_level(50_200.0);
-    // println!("{:?}", new_ob_level);
+    println!("\n -- Find Level --");
 
-    // let content_ob_level = i_ob.retrieve_level(50_200.0);
-    // println!("found:\n {:?}", content_ob_level);
+    match find_level_ob {
 
-    let new_order: Order = Order::new(123, 123, OrderType::Limit, Side::Bids, 50_000.00, 123.123);
+        Ok(n) if n < 0 => {
+    
+            let bid_found = find_level_ob.unwrap().abs() as usize -1;
 
-    let insert_new = i_ob.insert_level(Side::Bids, 49_900.0, 123.123, vec![new_order]);
+            println!("
+                The search price: {:?} is in the bid side, 
+                with an index: {:?},
+                with a price level: {:?},
+                with {:?} orders.",
+                &price_level,
+                i_ob.bids[bid_found].level_id,
+                i_ob.bids[bid_found].price,
+                i_ob.bids[bid_found].orders.len())
+        },
+        
+        Ok(n) if n > 0 => {
+        
+            let ask_found = find_level_ob.unwrap() as usize -1 ;
+            
+            println!("
+                The price: {:?} is in the ask side,
+                with an index: {:?},
+                with a price level: {:?},
+                with {:?} orders", 
+                &price_level,
+                i_ob.asks[ask_found].level_id,
+                i_ob.asks[ask_found].price,
+                i_ob.asks[ask_found].orders.len())
+        },
+        Err(e) => println!("Error encountered : {:?}", e),
+        Ok(_) => println!("Error not mapped"),
+    }
+    
+    // --------------------------------------------------- Retrieve Level -- //
+    // --------------------------------------------------- -------------- -- //
+
+    let find_this: f64 = 50_200.0;
+    let content_ob_level = i_ob.retrieve_level(find_this).unwrap();
+
+    println!("\n -- Retrieve Level --");
+    println!("
+        level to be retrieved: {:?},
+        retrieved Level index: {:?},
+        retrieved Level price: {:?}, 
+        retrieved Level orders: {:?}",
+        find_this,
+        content_ob_level.level_id,
+        content_ob_level.price,
+        content_ob_level.orders.len(),
+    );
+
+    // ----------------------------------------------------- Delete Level -- //
+    // ----------------------------------------------------- ------------ -- //
+   
+    let delete_this: f64 = 50_200.0;
+    i_ob.delete_level(delete_this).unwrap();
+
+    // ----------------------------------------------------- Insert Level -- //
+    // ----------------------------------------------------- ------------ -- //
+    
+    let new_order = Order {
+        order_id: 123,
+        order_ts: 456,
+        order_type: OrderType::Limit,
+        side: Side::Asks,
+        price: 50_200.0,
+        amount: 0.123,
+    };
+
+    let new_level = Level { 
+        level_id: 123, 
+        side: Side::Asks, 
+        price: 50_200.0, 
+        volume: 0.123,
+        orders: vec![new_order], 
+    };
+    
+    /*
+    let new_order: Order = Order::new(123, 123, OrderType::Limit,
+        Side::Bids, 50_000.00, 123.123);
+    let insert_new = i_ob.insert_level(Side::Bids, 49_900.0, 123.123,
+        vec![new_order]);
+    */
+
+    // let r_result = i_ob.delete_level(50_000.01);
+    // println!("{:?}", r_result);
 
     // println!("{:?}", insert_new);
 

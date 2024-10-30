@@ -5,6 +5,7 @@
 //! * **Market Replay**: A high-fidelity reproduction of what actually happened, all the way down to the data granularity that is provided.
 
 #![allow(dead_code)]
+#![allow(warnings)]
 
 /// Data structures and core datatypes.
 pub mod data;
