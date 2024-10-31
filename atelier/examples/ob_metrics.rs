@@ -1,7 +1,6 @@
 use atelier::data::market::{Level, Order, OrderType, Orderbook, Side};
 
 fn main() {
-
     // Parameters for synthetic orderbook generation
     let bid_price = 50_000.00;
     let ask_price = 50_100.00;
@@ -10,35 +9,29 @@ fn main() {
     let n_orders = 1;
 
     // Generate a synthetic orderbook for testing
-    // this determines the order of the Level objects within 
+    // this determines the order of the Level objects within
     // the bids and asks vectors, and also, the order of each
     // order within each level.
-    
-    let mut i_ob = Orderbook::synthetize(
-        bid_price, 
-        ask_price, 
-        tick_size, 
-        n_levels, 
-        n_orders);
+
+    let mut i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
     // Generated Orderbook
     // println!("{:?}", i_ob);
-    
+
     // ------------------------------------------------------- Find Level -- //
     // ------------------------------------------------------- ---------- -- //
-    
+
     let price_level = 50_200.0;
     let find_level_ob = i_ob.find_level(&price_level);
 
     println!("\n -- Find Level --");
 
     match find_level_ob {
-
         Ok(n) if n < 0 => {
-    
-            let bid_found = find_level_ob.unwrap().abs() as usize -1;
+            let bid_found = find_level_ob.unwrap().abs() as usize - 1;
 
-            println!("
+            println!(
+                "
                 The search price: {:?} is in the bid side, 
                 with an index: {:?},
                 with a price level: {:?},
@@ -46,27 +39,29 @@ fn main() {
                 &price_level,
                 i_ob.bids[bid_found].level_id,
                 i_ob.bids[bid_found].price,
-                i_ob.bids[bid_found].orders.len())
-        },
-        
+                i_ob.bids[bid_found].orders.len()
+            )
+        }
+
         Ok(n) if n > 0 => {
-        
-            let ask_found = find_level_ob.unwrap() as usize -1 ;
-            
-            println!("
+            let ask_found = find_level_ob.unwrap() as usize - 1;
+
+            println!(
+                "
                 The price: {:?} is in the ask side,
                 with an index: {:?},
                 with a price level: {:?},
-                with {:?} orders", 
+                with {:?} orders",
                 &price_level,
                 i_ob.asks[ask_found].level_id,
                 i_ob.asks[ask_found].price,
-                i_ob.asks[ask_found].orders.len())
-        },
+                i_ob.asks[ask_found].orders.len()
+            )
+        }
         Err(e) => println!("Error encountered : {:?}", e),
         Ok(_) => println!("Error not mapped"),
     }
-    
+
     // --------------------------------------------------- Retrieve Level -- //
     // --------------------------------------------------- -------------- -- //
 
@@ -74,7 +69,8 @@ fn main() {
     let content_ob_level = i_ob.retrieve_level(&find_this).unwrap();
 
     println!("\n -- Retrieve Level --");
-    println!("
+    println!(
+        "
         level to be retrieved: {:?},
         retrieved Level index: {:?},
         retrieved Level price: {:?}, 
@@ -87,10 +83,11 @@ fn main() {
 
     // ----------------------------------------------------- Delete Level -- //
     // ----------------------------------------------------- ------------ -- //
-   
+
     println!("\n -- Delete Level --");
     let delete_this: f64 = 50_200.0;
-    println!(" 
+    println!(
+        " 
         Delete the level with this price: {:?}",
         &delete_this
     );
@@ -100,10 +97,10 @@ fn main() {
 
     // ----------------------------------------------------- Insert Level -- //
     // ----------------------------------------------------- ------------ -- //
-    
+
     println!("\n -- Insert Level --");
     println!("");
-    
+
     let new_order = Order {
         order_id: 123,
         order_ts: 456,
@@ -113,27 +110,29 @@ fn main() {
         amount: 0.123,
     };
 
-    let new_level = Level { 
-        level_id: 123, 
-        side: Side::Asks, 
-        price: 50_200.0, 
+    let new_level = Level {
+        level_id: 123,
+        side: Side::Asks,
+        price: 50_200.0,
         volume: 0.987,
-        orders: vec![new_order], 
+        orders: vec![new_order],
     };
 
     let insert_this: &Level = &new_level;
-    println!("
+    println!(
+        "
         Level to be inserted: {:?}",
         &insert_this
     );
 
     println!("\nResult of insertion: {:?}", i_ob.insert_level(new_level));
-    
+
     // let find_this: &f64 = &new_level.price;
     println!("i_ob content: {:?}", i_ob);
 
     println!("\n -- Retrieve Level --");
-    println!("
+    println!(
+        "
         NEW level to be retrieved: {:?},
         NEW retrieved Level index: {:?},
         NEW retrieved Level price: {:?}, 
@@ -141,65 +140,53 @@ fn main() {
         find_this,
         content_ob_level.level_id,
         content_ob_level.price,
-        content_ob_level.orders.len());
+        content_ob_level.orders.len()
+    );
 
     // ------------------------------------------------------- Find Order -- //
     // ------------------------------------------------------- ---------- -- //
 
     println!("\n -- Find Order --");
     let i_order = &i_ob.bids[0].orders[0];
-    
-    let found_order = i_ob.find_order(
-        i_order.side,
-        i_order.price,
-        i_order.order_ts);
 
-    println!("
+    let found_order = i_ob.find_order(i_order.side, i_order.price, i_order.order_ts);
+
+    println!(
+        "
         Order to be found,
         side: {:?},
         price: {:?},
         order_ts: {:?}",
-        i_order.side,
-        i_order.price,
-        i_order.order_ts,
+        i_order.side, i_order.price, i_order.order_ts,
     );
 
     println!("\nOrder found: {:?}", found_order.unwrap());
 
     // --------------------------------------------------- Retrieve Order -- //
     // --------------------------------------------------- -------------- -- //
-    
+
     println!("\n -- Retrieve Order --");
     let i_order = &i_ob.bids[0].orders[0];
-    
-    let retrieved_order = i_ob.retrieve_order(
-        i_order.side,
-        i_order.price,
-        i_order.order_ts);
 
-    println!("
+    let retrieved_order = i_ob.retrieve_order(i_order.side, i_order.price, i_order.order_ts);
+
+    println!(
+        "
         Order to be found,
         side: {:?},
         price: {:?},
         order_ts: {:?}",
-        i_order.side,
-        i_order.price,
-        i_order.order_ts,
+        i_order.side, i_order.price, i_order.order_ts,
     );
 
     println!("Retrieved Order: {:?}", retrieved_order);
 
     // ----------------------------------------------------- Delete Order -- //
     // ----------------------------------------------------- ------------ -- //
-    
 
-    
     // ----------------------------------------------------- Insert Order -- //
     // ----------------------------------------------------- ------------ -- //
-    
-
 
     // ----------------------------------------------------- Modify Order -- //
     // ----------------------------------------------------- ------------ -- //
-
 }
