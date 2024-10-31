@@ -4,6 +4,9 @@ mod tests {
     use atelier::generators::brownian;
 
     #[test]
+    fn new_order() {}
+
+    #[test]
     fn symmetric_sides() {
         let bid_price = 50_000.00;
         let ask_price = 50_100.00;

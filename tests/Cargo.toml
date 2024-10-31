@@ -8,8 +8,18 @@ publish = false
 atelier = { path = "../atelier" }
 
 [[test]]
-name = "test_orderbook"
-path = "test_orderbook.rs"
-[[test]]
-name = "test_processes"
-path = "test_processes.rs"
+name = "tests_orderbook_implementations"
+path = "orderbook/implementations.rs"
+
+# [[test]]
+# name = "tests_orderbook_progressions"
+# path = "orderbook/progressions.rs"
+
+# [[test]]
+# name = "tests_process_brownian"
+# path = "process/brownian.rs"
+
+# [[test]]
+# name = "tests_process_hawkes"
+# path = "process/hawkes.rs"
+
