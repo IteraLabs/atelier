@@ -481,50 +481,66 @@ impl Orderbook {
     /// side: Side = {Side::Bids, Side::Asks}
     /// price: f64 = the order's price, which is the same as the Level's price
     /// order_ts: u64 = Order's timestamp
-    /// order_id: u32 = Order's unique ID
-    ///
-    /// Take the following sequence for validation of existence
-    ///
-    /// 1) side:
-    ///     use it as the Side::Bids or Side::Asks, to find whether the side
-    ///     exists.
-    ///
-    /// 2) price:
-    ///     use it as the level_price, to find whether a level already exists.
-    ///     
-    /// 3) timestamp:
-    ///     use it as the order index to find whether the order exists.
     ///
     /// ## Results
+    /// Ok: (level_index: usize, order_index: usize)
+    /// Err: OrderError
     ///
 
     pub fn find_order(
         &self,
         side: Side,
         price: f64,
-        order_id: u32,
         order_ts: u64,
-    ) -> Result<(), OrderError> {
-        // Find if side exists
-        let order_search = match side {
-            //
-            Side::Bids => {
-                //
-                if self.bids.len() > 0 {
-                    return Ok(());
-                } else {
-                    return Err(OrderError::OrderNotFound);
-                }
-            }
+    ) -> Result<(i32, usize), OrderError> {
+        
+        // see if level exists
+        let find_level_ob = self.find_level(&price);
+        match find_level_ob {
 
-            Side::Asks => {
-                if self.asks.len() > 0 {
-                    return Ok(());
+            Ok(n) if n < 0 => {
+    
+                let level_found = find_level_ob.unwrap().abs() as usize -1;
+                let level_orders = &self.bids[level_found].orders;
+
+                // Level has orders
+                if level_orders.len() > 0 {
+                    
+                    let r_level = level_orders
+                        .binary_search_by(|order| order.order_ts.cmp(&order_ts))
+                        .unwrap();
+                    
+                    Ok((n, r_level))
+
+                // Level is empty
                 } else {
-                    return Err(OrderError::OrderNotFound);
+                    Err(OrderError::OrderNotFound)
                 }
-            }
-        };
+            },
+
+            Ok(n) if n > 0 => {
+                
+                let level_found = find_level_ob.unwrap().abs() as usize -1;
+                let level_orders = &self.asks[level_found].orders;
+
+                // Level has orders
+                if level_orders.len() > 0 {
+                    
+                    let r_level = level_orders
+                        .binary_search_by(|order| order.order_ts.cmp(&order_ts))
+                        .unwrap();
+                    
+                    Ok((n, r_level))
+                
+                // Level is empty
+                } else {
+                    Err(OrderError::OrderNotFound)
+                }
+            },
+            
+            Err(e) => Err(OrderError::OrderNotFound),
+            Ok(_) => Err(OrderError::OrderInfoNotAvailable),
+        }
     }
 
     // --------------------------------------- Retrieve an Existing Order -- //
@@ -533,12 +549,30 @@ impl Orderbook {
     /// To retrieve info about an existing `Order`.
     ///
     /// ## Parameters
+    /// Order
     ///
     /// ## Results
-    ///
+    ///  
 
-    pub fn retrieve_order() -> Result<(), OrderError> {
-        Ok(())
+    pub fn retrieve_order(
+        &self,
+        side: Side,
+        price: f64, 
+        order_ts: u64,
+    ) -> Result<(Order), OrderError> {
+
+        if let Ok((found_level, found_order)) = self.find_order(
+            side, price, order_ts) {
+
+            if found_level > 0 {
+                Ok(self.asks[found_level.abs() as usize].orders[found_order])
+            } else {
+                Ok(self.bids[found_level.abs() as usize].orders[found_order])
+            }
+             
+        } else {
+            Err(OrderError::OrderNotFound)
+        }
     }
 
     // ----------------------------------------- Delete an Existing Order -- //
@@ -551,8 +585,32 @@ impl Orderbook {
     /// ## Results
     ///
 
-    pub fn delete_order() -> Result<(), OrderError> {
-        Ok(())
+    pub fn delete_order(
+        &self,
+        side: Side,
+        price: f64,
+        order_ts: u64) -> Result<(), OrderError> {
+        
+        // find the order
+        // delete the order
+        
+         if let Ok((found_level, found_order)) = self.find_order(
+            side, price, order_ts) {
+
+            if found_level > 0 {
+                
+                self.asks[found_level.abs() as usize].orders[found_order]
+            
+            } else {
+
+                self.bids[found_level.abs() as usize].orders[found_order]
+            }
+             
+        } else {
+            Err(OrderError::OrderNotFound)
+        }
+
+    
     }
 
     // ----------------------------------------------- Insert a New Order -- //

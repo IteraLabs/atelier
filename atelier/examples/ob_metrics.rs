@@ -142,55 +142,64 @@ fn main() {
         content_ob_level.level_id,
         content_ob_level.price,
         content_ob_level.orders.len());
+
+    // ------------------------------------------------------- Find Order -- //
+    // ------------------------------------------------------- ---------- -- //
+
+    println!("\n -- Find Order --");
+    let i_order = &i_ob.bids[0].orders[0];
     
-    /*
-    let new_order: Order = Order::new(123, 123, OrderType::Limit,
-        Side::Bids, 50_000.00, 123.123);
-    let insert_new = i_ob.insert_level(Side::Bids, 49_900.0, 123.123,
-        vec![new_order]);
-    */
+    let found_order = i_ob.find_order(
+        i_order.side,
+        i_order.price,
+        i_order.order_ts);
 
-    // let r_result = i_ob.delete_level(50_000.01);
-    // println!("{:?}", r_result);
+    println!("
+        Order to be found,
+        side: {:?},
+        price: {:?},
+        order_ts: {:?}",
+        i_order.side,
+        i_order.price,
+        i_order.order_ts,
+    );
 
-    // println!("{:?}", insert_new);
+    println!("\nOrder found: {:?}", found_order.unwrap());
 
-    // get the TOB
-    // let tob_data = i_ob.get_tob();
-    // println!("TOB: {:?}", tob_data);
+    // --------------------------------------------------- Retrieve Order -- //
+    // --------------------------------------------------- -------------- -- //
+    
+    println!("\n -- Retrieve Order --");
+    let i_order = &i_ob.bids[0].orders[0];
+    
+    let retrieved_order = i_ob.retrieve_order(
+        i_order.side,
+        i_order.price,
+        i_order.order_ts);
 
-    // extract tob values
-    // let tob_bid: f64 = i_ob.bids[0].price;
-    // let tob_ask: f64 = i_ob.asks[0].price;
+    println!("
+        Order to be found,
+        side: {:?},
+        price: {:?},
+        order_ts: {:?}",
+        i_order.side,
+        i_order.price,
+        i_order.order_ts,
+    );
 
-    // Compute the Spread
-    // let spread_value = Spread::compute(&tob_bid, &tob_ask, 0);
-    // println!("Spread: {:?}", spread_value);
+    println!("Retrieved Order: {:?}", retrieved_order);
 
-    // Compute the Midprice
-    // let midprice_value = Midprice::compute(&tob_bid, &tob_ask, 0);
-    // println!("Midprice: {}", midprice_value);
+    // ----------------------------------------------------- Delete Order -- //
+    // ----------------------------------------------------- ------------ -- //
+    
 
-    // Compute the Volume Imbalance
-    // let iter_bids: Vec<f64> = i_ob.bids.clone().into_iter().map(|x| x.volume).collect();
-    // let iter_asks: Vec<f64> = i_ob.asks.clone().into_iter().map(|x| x.volume).collect();
+    
+    // ----------------------------------------------------- Insert Order -- //
+    // ----------------------------------------------------- ------------ -- //
+    
 
-    // let obimb_value = VolumeImbalance::compute(&iter_bids, &iter_asks, 1);
-    // println!("Volume Imbalance: {:?}", obimb_value);
 
-    // Compute the Volume-Weighted Average Price
-    //let iter_bids: Vec<_> = i_ob
-    //     .bids
-    //    .into_iter()
-    //    .map(|x| vec![x.price, x.volume])
-    //   .collect();
-    // let iter_asks: Vec<_> = i_ob
-    //    .asks
-    //    .into_iter()
-    //    .map(|x| vec![x.price, x.volume])
-    //    .collect();
+    // ----------------------------------------------------- Modify Order -- //
+    // ----------------------------------------------------- ------------ -- //
 
-    // Compute the VWAP
-    // let vwap_value = VWAP::compute(&iter_bids.clone(), &iter_asks.clone(), 1);
-    // println!("VWAP: {:?}", vwap_value);
 }
