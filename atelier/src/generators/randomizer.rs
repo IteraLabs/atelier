@@ -18,14 +18,14 @@ pub fn randomize_order(side: Side, price: f64, order_type: OrderType) -> Order {
     let since_epoch_ts = now_ts
         .duration_since(UNIX_EPOCH)
         .expect("Time went backwards")
-        .as_millis();
+        .as_nanos();
     // println!("since_epoch_ts: {:?}", since_epoch_ts);
 
     // Random millis between orders ~Uniform(1,30)
     let ms_offset = uni_rand.sample(Uniform::new(1, 30));
     // println!("ms_offset: {:?}", ms_offset);
 
-    let order_ts = since_epoch_ts as u64 + ms_offset;
+    let order_ts = since_epoch_ts + ms_offset as u128;
     // println!("order_ts: {}", order_ts);
 
     // Randomize amount
