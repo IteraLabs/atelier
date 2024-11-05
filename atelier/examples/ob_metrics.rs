@@ -1,4 +1,5 @@
 use atelier::data::market::{Level, Order, OrderType, Orderbook, Side};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 fn main() {
     // Parameters for synthetic orderbook generation
@@ -6,7 +7,7 @@ fn main() {
     let ask_price = 50_100.00;
     let tick_size = 100.0;
     let n_levels = 2;
-    let n_orders = 1;
+    let n_orders = 2;
 
     // Generate a synthetic orderbook for testing
     // this determines the order of the Level objects within
@@ -148,7 +149,6 @@ fn main() {
 
     println!("\n -- Find Order --");
     let i_order = &i_ob.bids[0].orders[0];
-
     let found_order = i_ob.find_order(i_order.side, i_order.price, i_order.order_ts);
 
     println!(
@@ -184,9 +184,58 @@ fn main() {
     // ----------------------------------------------------- Delete Order -- //
     // ----------------------------------------------------- ------------ -- //
 
+    println!("\n -- Delete Order --");
+    let to_delete_order = i_ob.bids[0].orders[0].clone();
+
+    println!(
+        "
+        Order to be deleted,
+        side: {:?},
+        price: {:?},
+        amount: {:?},
+        order_ts {:?}",
+        to_delete_order.side,
+        to_delete_order.price,
+        to_delete_order.amount,
+        to_delete_order.order_ts,
+    );
+
+    println!("\nPrevious orderbook.bids has :\n{:?}", i_ob.bids);
+
+    let _deleted = i_ob.delete_order(
+        to_delete_order.side,
+        to_delete_order.price,
+        to_delete_order.order_ts,
+    );
+
+    println!("\nNow orderbook.bids has :\n{:?}", i_ob.bids);
+
     // ----------------------------------------------------- Insert Order -- //
     // ----------------------------------------------------- ------------ -- //
 
+    println!("\n -- Insert Order --");
+    let inserted_order = i_ob.insert_order(Side::Bids, 50_200.0, 0.1986);
+    match inserted_order {
+        Ok(result) => {
+            println!("This is the result: {:?}", result);
+        }
+        Err(result) => {
+            eprintln!("This was the error: {:?}", result);
+        }
+    }
+
     // ----------------------------------------------------- Modify Order -- //
     // ----------------------------------------------------- ------------ -- //
+
+    println!("\n -- Modify Order --");
+    let to_modify_order = i_ob.asks[0].orders[0].clone();
+
+    let moded = i_ob.modify_order(
+        to_modify_order.order_ts,
+        to_modify_order.side,
+        to_modify_order.price,
+        999.999,
+    );
+
+    println!("moded_order: {:?}", moded.unwrap());
 }
