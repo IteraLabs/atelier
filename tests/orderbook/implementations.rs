@@ -17,12 +17,10 @@ mod tests {
         let test_ob = Orderbook::synthetize(BID_PRICE, ASK_PRICE, TICK_SIZE, N_LEVELS, N_ORDERS);
 
         // the price of the level to be searched.
-
         let t_level_price = 50_300.00;
         let level_found = test_ob.find_level(&t_level_price).unwrap();
 
         // println!("level_found content: {:?}", level_found);
-
         assert_eq!(level_found, 1);
     }
 }

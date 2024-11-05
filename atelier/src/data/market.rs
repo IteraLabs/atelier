@@ -142,10 +142,9 @@ pub struct Level {
 }
 
 impl Level {
-
     // ------------------------------------------------------------------ New Level -- //
     // ------------------------------------------------------------------ ------------ //
-    
+
     /// Creates a new instance of `Level`.
     ///
     /// # Parameters
@@ -159,14 +158,8 @@ impl Level {
     /// # Returns
     ///
     /// Returns a new `Level` instance with the specified parameters.
-    
-    pub fn new(
-        level_id: u32,
-        side: Side,
-        price: f64,
-        volume: f64,
-        orders: Vec<Order>
-    ) -> Self {
+
+    pub fn new(level_id: u32, side: Side, price: f64, volume: f64, orders: Vec<Order>) -> Self {
         match side {
             Side::Bids => Level {
                 level_id,
@@ -558,11 +551,12 @@ impl Orderbook {
         price: f64,
         order_ts: u128,
     ) -> Result<(Order), OrderError> {
-
         if let Ok((found_level, found_order)) = self.find_order(side, price, order_ts) {
-
-                // Get the curren timestamp
-                let bid_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
+            // Get the curren timestamp
+            let bid_ts = SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_nanos();
 
             if found_level > 0 {
                 Ok(self.asks[found_level.abs() as usize].orders[found_order])
@@ -588,27 +582,21 @@ impl Orderbook {
         &mut self,
         side: Side,
         price: f64,
-        order_ts: u128
+        order_ts: u128,
     ) -> Result<(), OrderError> {
-        
-        if let Ok((found_level, found_order)) = self.find_order(
-            side, price, order_ts) {
-            
+        if let Ok((found_level, found_order)) = self.find_order(side, price, order_ts) {
             if found_level > 0 {
-
                 self.asks[found_level.abs() as usize - 1]
-                    .orders.remove(found_order);
+                    .orders
+                    .remove(found_order);
 
                 Ok(())
-
             } else {
-
-                self.bids[found_level.abs() as usize -1]
-                    .orders.remove(found_order);
+                self.bids[found_level.abs() as usize - 1]
+                    .orders
+                    .remove(found_order);
                 Ok(())
-
             }
-            
         } else {
             Err(OrderError::OrderNotFound)
         }
@@ -629,23 +617,17 @@ impl Orderbook {
     /// ## Results
     ///
 
-    pub fn insert_order(
-        &mut self, 
-        side: Side,
-        price: f64,
-        amount: f64,
-    ) -> Result<(), OrderError> {
-
+    pub fn insert_order(&mut self, side: Side, price: f64, amount: f64) -> Result<(), OrderError> {
         // see if level exists
         let find_level_ob = self.find_level(&price);
-        
-        
+
         match find_level_ob {
-
             Ok(n) if n < 0 => {
-
                 // Get the curren timestamp
-                let bid_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
+                let bid_ts = SystemTime::now()
+                    .duration_since(UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos();
 
                 let i_order = Order::new(
                     123,
@@ -656,16 +638,20 @@ impl Orderbook {
                     amount,
                 );
 
-                self.bids[find_level_ob.unwrap() as usize].orders.push(i_order);
-                
+                self.bids[find_level_ob.unwrap() as usize]
+                    .orders
+                    .push(i_order);
+
                 Ok(())
-            },
+            }
 
             Ok(n) if n > 0 => {
-
                 // Get the curren timestamp
-                let ask_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
-                
+                let ask_ts = SystemTime::now()
+                    .duration_since(UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos();
+
                 let i_order = Order::new(
                     123,
                     ask_ts,
@@ -674,9 +660,11 @@ impl Orderbook {
                     self.asks[n as usize].price,
                     amount,
                 );
-            
-                self.asks[find_level_ob.unwrap() as usize].orders.push(i_order);
-                
+
+                self.asks[find_level_ob.unwrap() as usize]
+                    .orders
+                    .push(i_order);
+
                 Ok(())
             }
 
@@ -702,78 +690,69 @@ impl Orderbook {
         price: f64,
         amount: f64,
     ) -> Result<Order, OrderError> {
-
         match self.find_order(side, price, order_ts) {
-
             Ok((found_level, found_order)) => {
-
                 if found_level < 0 {
-                    
-                    println!("\nfounded level: {:?}", found_level.abs() as usize -1);
-                    
-                    let founded_order = self.bids[found_level.abs() as usize]
-                        .orders[found_order].clone();
-                    
+                    println!("\nfounded level: {:?}", found_level.abs() as usize - 1);
+
+                    let founded_order =
+                        self.bids[found_level.abs() as usize].orders[found_order].clone();
+
                     println!("\nfounded order: {:?}", founded_order);
 
                     let moded_ts = SystemTime::now()
                         .duration_since(UNIX_EPOCH)
                         .unwrap()
                         .as_nanos();
-                    
+
                     let to_moded_order = Order::new(
                         founded_order.order_id,
                         moded_ts,
                         founded_order.order_type,
                         founded_order.side,
                         founded_order.price,
-                        amount);
+                        amount,
+                    );
 
-                    let moded_order = self.bids[found_level.abs() as usize - 1]
-                        .orders[found_order];
-                    
+                    let moded_order = self.bids[found_level.abs() as usize - 1].orders[found_order];
+
                     let moded_order = to_moded_order;
 
                     Ok(moded_order.clone())
-
                 } else if found_level > 0 {
-                    
-                    println!("\nfounded_level: {:?}", found_level.abs() as usize -1);
-                    
-                    let founded_order = self.asks[found_level.abs() as usize]
-                        .orders[found_order].clone();
-                    
+                    println!("\nfounded_level: {:?}", found_level.abs() as usize - 1);
+
+                    let founded_order =
+                        self.asks[found_level.abs() as usize].orders[found_order].clone();
+
                     println!("founded order: {:?}", founded_order);
 
                     let moded_ts = SystemTime::now()
                         .duration_since(UNIX_EPOCH)
                         .unwrap()
                         .as_nanos();
-                    
+
                     let to_moded_order = Order::new(
                         founded_order.order_id,
                         moded_ts,
                         founded_order.order_type,
                         founded_order.side,
                         founded_order.price,
-                        amount);
+                        amount,
+                    );
 
-                    let moded_order = self.asks[found_level.abs() as usize - 1]
-                        .orders[found_order];
-                    
+                    let moded_order = self.asks[found_level.abs() as usize - 1].orders[found_order];
+
                     let moded_order = to_moded_order;
 
                     Ok(moded_order.clone())
-                
                 } else {
-
                     println!("else");
 
                     Err(OrderError::OrderNotFound)
-
                 }
-            },
-            Err(e) => Err(OrderError::OrderNotFound)
+            }
+            Err(e) => Err(OrderError::OrderNotFound),
         }
     }
 
@@ -817,10 +796,7 @@ impl Orderbook {
 
             v_bid_orders.sort_by_key(|order| order.order_ts);
 
-            let i_bid_volume: f64 = v_bid_orders
-                    .iter()
-                    .map(|order| order.amount)
-                    .sum();
+            let i_bid_volume: f64 = v_bid_orders.iter().map(|order| order.amount).sum();
 
             i_bids.push(Level {
                 level_id: i,
@@ -839,10 +815,7 @@ impl Orderbook {
 
             v_ask_orders.sort_by_key(|order| order.order_ts);
 
-            let i_ask_volume: f64 = v_ask_orders
-                    .iter()
-                    .map(|order| order.amount)
-                    .sum();
+            let i_ask_volume: f64 = v_ask_orders.iter().map(|order| order.amount).sum();
 
             i_asks.push(Level {
                 level_id: i,
@@ -862,4 +835,3 @@ impl Orderbook {
         }
     }
 }
-

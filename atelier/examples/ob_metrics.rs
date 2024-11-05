@@ -145,14 +145,11 @@ fn main() {
     );
 
     // ------------------------------------------------------- Find Order -- //
-    // ------------------------------------------------------- ---------- -- // 
+    // ------------------------------------------------------- ---------- -- //
 
     println!("\n -- Find Order --");
     let i_order = &i_ob.bids[0].orders[0];
-    let found_order = i_ob.find_order(
-        i_order.side,
-        i_order.price,
-        i_order.order_ts);
+    let found_order = i_ob.find_order(i_order.side, i_order.price, i_order.order_ts);
 
     println!(
         "
@@ -186,11 +183,12 @@ fn main() {
 
     // ----------------------------------------------------- Delete Order -- //
     // ----------------------------------------------------- ------------ -- //
-    
+
     println!("\n -- Delete Order --");
     let to_delete_order = i_ob.bids[0].orders[0].clone();
-    
-    println!("
+
+    println!(
+        "
         Order to be deleted,
         side: {:?},
         price: {:?},
@@ -201,8 +199,8 @@ fn main() {
         to_delete_order.amount,
         to_delete_order.order_ts,
     );
-    
-    println!("\nPrevious orderbook.bids has :\n{:?}", i_ob.bids); 
+
+    println!("\nPrevious orderbook.bids has :\n{:?}", i_ob.bids);
 
     let _deleted = i_ob.delete_order(
         to_delete_order.side,
@@ -210,28 +208,28 @@ fn main() {
         to_delete_order.order_ts,
     );
 
-    println!("\nNow orderbook.bids has :\n{:?}", i_ob.bids); 
+    println!("\nNow orderbook.bids has :\n{:?}", i_ob.bids);
 
     // ----------------------------------------------------- Insert Order -- //
     // ----------------------------------------------------- ------------ -- //
-   
+
     println!("\n -- Insert Order --");
     let inserted_order = i_ob.insert_order(Side::Bids, 50_200.0, 0.1986);
     match inserted_order {
         Ok(result) => {
             println!("This is the result: {:?}", result);
-        },
+        }
         Err(result) => {
             eprintln!("This was the error: {:?}", result);
         }
     }
-    
+
     // ----------------------------------------------------- Modify Order -- //
     // ----------------------------------------------------- ------------ -- //
 
     println!("\n -- Modify Order --");
     let to_modify_order = i_ob.asks[0].orders[0].clone();
-    
+
     let moded = i_ob.modify_order(
         to_modify_order.order_ts,
         to_modify_order.side,
@@ -240,5 +238,4 @@ fn main() {
     );
 
     println!("moded_order: {:?}", moded.unwrap());
-
 }
