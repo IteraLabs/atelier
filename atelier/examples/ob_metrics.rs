@@ -1,5 +1,4 @@
 use atelier::data::market::{Level, Order, OrderType, Orderbook, Side};
-use std::time::{SystemTime, UNIX_EPOCH};
 
 fn main() {
     // Parameters for synthetic orderbook generation
