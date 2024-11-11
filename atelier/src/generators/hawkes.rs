@@ -3,9 +3,9 @@
 //! A Hawkes Process is a self-exciting point process where the intensity of events
 //! increases following the occurrence of previous events.
 //!
-//! ## Simplest case (Linear regression on past events).
+//! ## Linear - Univariate.
 //!
-//! In one dimension, this process is self-exciting, i.e. the arrival
+//! The simplest caset is a self-exciting, one dimensional effect, i.e. the arrival
 //! of an event increases the likelihood of observing events in the
 //! near future. It is also useful to consider the case when there is
 //! more than one type of event, and there is mutual excitement
@@ -37,10 +37,10 @@
 //! future events). \
 //! $\beta$: Decay rate (how quickly the excitement diminishes).\
 //!
-//! ## Context usage
-//! When used this approach arount the Orderbook, the arrival of an
-//! order can increase the likelihood of subsequent orders.
+
+use crate::messages::errors;
 use rand::Rng;
+
 pub struct HawkesProcess {
     pub mu: f64,
     pub alpha: f64,
@@ -48,16 +48,42 @@ pub struct HawkesProcess {
 }
 
 impl HawkesProcess {
+    pub fn hawkes_valid_inputs(
+        mu: &f64,
+        alpha: &f64,
+        beta: &f64,
+    ) -> Result<(), errors::GeneratorError> {
+        match mu >= &0.0 && alpha >= &0.0 && beta > &0.0 {
+            true => Ok(()),
+            false => Err(errors::GeneratorError::GeneratorInputTypeFailure),
+        }
+    }
+
     // Constructor to initialize the Hawkes process parameters
-    pub fn new(mu: f64, alpha: f64, beta: f64) -> Self {
-        Self { mu, alpha, beta }
+    pub fn new(mu: f64, alpha: f64, beta: f64) -> Result<Self, errors::GeneratorError> {
+        match Self::hawkes_valid_inputs(&mu, &alpha, &beta) {
+            Ok(()) => Ok(Self { mu, alpha, beta }),
+            Err(e) => Err(errors::GeneratorError::GeneratorInputTypeFailure),
+            _ => Err(errors::GeneratorError::GeneratorUndefinedError),
+        }
+    }
+
+    // Method to compute the intensity at a given time based on past events
+    fn lambda(&self, t: f64, event_times: &[f64]) -> f64 {
+        let mut intensity = self.mu;
+        for &event_time in event_times {
+            if event_time < t {
+                intensity += self.alpha * (-self.beta * (t - event_time)).exp();
+            }
+        }
+        intensity
     }
 
     // Method to generate N synthetic timestamps
-    pub fn generate_times(&self, n: usize) -> Vec<f64> {
+    pub fn generate_values(&self, mut current_ts: f64, n: usize) -> Vec<f64> {
         let mut rng = rand::thread_rng();
         let mut event_times = Vec::new();
-        let mut current_time = 1726356610031.0;
+        let mut current_time = current_ts.clone();
 
         for _ in 0..n {
             // Calculate the current intensity
@@ -71,16 +97,5 @@ impl HawkesProcess {
             event_times.push(current_time);
         }
         event_times
-    }
-
-    // Method to compute the intensity at a given time based on past events
-    fn lambda(&self, t: f64, event_times: &[f64]) -> f64 {
-        let mut intensity = self.mu;
-        for &event_time in event_times {
-            if event_time < t {
-                intensity += self.alpha * (-self.beta * (t - event_time)).exp();
-            }
-        }
-        intensity
     }
 }
