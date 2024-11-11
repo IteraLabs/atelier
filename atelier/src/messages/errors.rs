@@ -51,7 +51,15 @@ pub enum OrderError {
 
 #[derive(Error, Debug)]
 pub enum GeneratorError {
-    // not a number
+    // Undefined Generator Error
+    #[error("The Generator presented an Undefined Error")]
+    GeneratorUndefinedError,
+
+    // Not a valid number on the input
+    #[error("The Generator did not recived a valid number")]
+    GeneratorInputTypeFailure,
+
+    // Not a valid number on the output
     #[error("The Generator did not produced a valid number")]
     GeneratorOutputTypeFailure,
 }

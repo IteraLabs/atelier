@@ -7,14 +7,14 @@
 #![allow(dead_code)]
 #![allow(warnings)]
 
-/// Data structures and core datatypes.
+/// Core data types and data structures.
 pub mod data;
 
-/// Data Generation from parametric probability distributions.
+/// Stochastic data generation with probabilistic models.
 pub mod generators;
 
-/// Calculations and metrics about performance of many kinds.
+/// Metrics calculation about various aspects and processes.
 pub mod metrics;
 
-/// Messages structures and functionalities for: Errors, Events, Logs.
+/// Messages structures for: Errors, Success, Events, and Logs.
 pub mod messages;

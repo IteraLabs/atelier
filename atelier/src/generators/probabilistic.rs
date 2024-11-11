@@ -1,29 +1,46 @@
 //! # Probabilistic generators
 //!
-//! This module provides implementations for sampling from various probability distributions, including
+//! This module provides implementations for sampling from various probability
+//! distributions, including:
+//!
+//! - Normal
+//! - Poisson
+//! - Exponential
 //!
 //! ## References
 //!
 //! - [rand_distr](https://docs.rs/rand_distr/latest/rand_distr/)
 //!
-//! the standard Normal distribution, Poisson distribution, and Exponential distribution.
 use rand::prelude::*;
-use rand_distr::StandardNormal;
+use rand_distr::{Normal, StandardNormal};
 
-pub fn pdf_standard_normal() -> f64 {
-    let val: f64 = thread_rng().sample(StandardNormal);
-    val
+pub trait Sampling {
+    fn sample(&self, n: usize) -> Vec<f64>;
 }
 
-pub trait Distribution {
-    fn sample(&self, n: usize) -> Vec<f64>;
+pub struct NormalDistribution {
+    pub mu: f64,
+    pub sigma: f64,
+}
+
+impl Sampling for NormalDistribution {
+    fn sample(&self, n: usize) -> Vec<f64> {
+        let mut rng = thread_rng();
+
+        if self.mu == 0.0 && self.sigma == 1.0 {
+            StandardNormal.sample_iter(&mut rng).take(n).collect()
+        } else {
+            let normal = Normal::new(self.mu, self.sigma).unwrap();
+            normal.sample_iter(&mut rng).take(n).collect()
+        }
+    }
 }
 
 pub struct Poisson {
     pub lambda: f64,
 }
 
-impl Distribution for Poisson {
+impl Sampling for Poisson {
     fn sample(&self, n: usize) -> Vec<f64> {
         let mut samples = Vec::new();
 
@@ -50,7 +67,7 @@ pub struct Exponential {
     pub lambda: f64,
 }
 
-impl Distribution for Exponential {
+impl Sampling for Exponential {
     fn sample(&self, n: usize) -> Vec<f64> {
         let mut samples = Vec::new();
 
