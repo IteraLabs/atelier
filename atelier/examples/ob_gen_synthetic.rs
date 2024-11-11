@@ -32,10 +32,10 @@ fn main() {
         println!("{}-mid_price: {}", i, i_mid_price);
         println!("{}-spread: {}", i, i_ask_price - i_bid_price);
 
-        let i_ret_gbm_bids: f64 = brownian::gbm_return(i_bid_price, mu, sigma, 1.0).unwrap();
+        let i_ret_gbm_bids: f64 = brownian::gbm_return(i_bid_price, mu, sigma, 0.1, 1).unwrap()[0];
         println!("{}-ret_gbm_bids: {}", i, i_ret_gbm_bids);
 
-        let i_ret_gbm_asks: f64 = brownian::gbm_return(i_ask_price, mu, sigma, 1.0).unwrap();
+        let i_ret_gbm_asks: f64 = brownian::gbm_return(i_ask_price, mu, sigma, 0.1, 1).unwrap()[0];
         println!("{}-ret_gbm_asks: {}", i, i_ret_gbm_asks);
 
         let i_orderbook = Orderbook::synthetize(
