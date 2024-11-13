@@ -1,22 +1,33 @@
+use crate::data::market::Level;
+
 /// A trait for computing market metrics based on Bids and Asks levels
 /// at a specified depth.
 ///
 /// Any implementation of this trait does not consume the inputs.
 ///
 /// # Parameters
-/// - `bids`: A collection of bid prices and quantities.
-/// - `asks`: A collection of ask prices and quantities.
+/// - `levels`: A generic collection of levels [(price, amount), (price, amount)]
 /// - `depth`: The depth level from which to compute the metric.
 ///
 /// # Returns
 /// Returns the computed market metric as a `f64`.
-pub trait MarketMetric<V> {
-    fn compute(bids: &V, asks: &V, depth: usize) -> f64;
+
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
+pub enum MetricResult {
+    Value(f64),
+    Values(Vec<f64>),
 }
 
+pub trait OrderBookMetric<V> {
+    fn compute(levels: &V, depth: usize) -> MetricResult;
+}
+
+// ----------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------- //
 /// A struct to represent the Spread as a market metric.
+
 pub struct Spread;
-impl MarketMetric<f64> for Spread {
+impl OrderBookMetric<Vec<f64>> for Spread {
     /// Compute the Spread from the given bids and asks.
     /// # Parameters
     /// - `bids` : A f64 with the Bid price.
@@ -24,14 +35,18 @@ impl MarketMetric<f64> for Spread {
     ///
     /// # Returns
     /// Returns the Spread as a `f64`.
-    fn compute(bids: &f64, asks: &f64, _depth: usize) -> f64 {
-        asks - bids
+    // fn compute(bids: &f64, asks: &f64, _depth: usize) -> f64 {
+    fn compute(levels_prices: &Vec<f64>, _depth: usize) -> MetricResult {
+        MetricResult::Value(levels_prices[1] - levels_prices[0] as f64)
     }
 }
 
+// ----------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------- //
 /// A struct to represent the midprice as a market metric.
+
 pub struct Midprice;
-impl MarketMetric<f64> for Midprice {
+impl OrderBookMetric<Vec<f64>> for Midprice {
     /// Computes the Midprice from the given bids and asks at the specified depth.
     /// # Parameters
     /// - `bids` : A vector of tupples where each contains the price and volume for the bids.
@@ -40,14 +55,17 @@ impl MarketMetric<f64> for Midprice {
     ///
     /// # Returns
     /// Returns the Midprice as a `f64`.
-    fn compute(bids: &f64, asks: &f64, _depth: usize) -> f64 {
-        (bids + asks) / 2.0
+    fn compute(levels_prices: &Vec<f64>, _depth: usize) -> MetricResult {
+        MetricResult::Value((levels_prices[1] + levels_prices[0]) / 2.0 as f64)
     }
 }
 
+// ----------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------- //
 /// A struct to represent the Volume-Weighted Average Price as a market metric.
+
 pub struct VWAP;
-impl MarketMetric<Vec<Vec<f64>>> for VWAP {
+impl OrderBookMetric<(Vec<Vec<f64>>, Vec<Vec<f64>>)> for VWAP {
     /// Computes the Volume-Weighted Average Price (VWAP) from the given
     /// bids and asks.
     /// # Parameters
@@ -57,27 +75,35 @@ impl MarketMetric<Vec<Vec<f64>>> for VWAP {
     ///
     /// # Returns
     /// Returns the VWAP as a `f64`.
-    fn compute(bids: &Vec<Vec<f64>>, asks: &Vec<Vec<f64>>, depth: usize) -> f64 {
+
+    // fn compute(bids: &Vec<Vec<f64>>, asks: &Vec<Vec<f64>>, depth: usize) -> MetricResult {
+    fn compute(levels: &(Vec<Vec<f64>>, Vec<Vec<f64>>), depth: usize) -> MetricResult {
         let mut bids_mult: Vec<f64> = vec![];
         let mut asks_mult: Vec<f64> = vec![];
         let mut vol_sum: Vec<f64> = vec![];
 
         for i_level in 0..=depth {
-            bids_mult.push(bids[i_level][0] * bids[i_level][1]);
-            asks_mult.push(asks[i_level][0] * asks[i_level][1]);
-            vol_sum.push(bids[i_level][1] + asks[i_level][1]);
+            bids_mult.push(levels.0[i_level][0] * levels.0[i_level][1]);
+
+            asks_mult.push(levels.1[i_level][0] * levels.1[i_level][1]);
+
+            vol_sum.push(levels.0[i_level][1] + levels.1[i_level][1]);
         }
 
         let r_vwap_1: f64 = bids_mult.iter().sum();
         let r_vwap_2: f64 = asks_mult.iter().sum();
         let r_vwap_3: f64 = vol_sum.iter().sum();
-        (r_vwap_1 + r_vwap_2) / r_vwap_3
+
+        MetricResult::Value((r_vwap_1 + r_vwap_2) / r_vwap_3 as f64)
     }
 }
 
+// ----------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------- //
 /// A struct to represent the OrderBook Volume Imbalance as a market metric.
+
 pub struct VolumeImbalance;
-impl MarketMetric<Vec<f64>> for VolumeImbalance {
+impl OrderBookMetric<Vec<Vec<f64>>> for VolumeImbalance {
     /// Computes the Order book Volume Imbalance from the given bids and asks.
     ///
     /// # Parameters
@@ -88,17 +114,68 @@ impl MarketMetric<Vec<f64>> for VolumeImbalance {
     /// # Returns
     /// Returns the Volume Imbalance as a `f64`.
 
-    fn compute(bids: &Vec<f64>, asks: &Vec<f64>, depth: usize) -> f64 {
+    fn compute(levels: &Vec<Vec<f64>>, depth: usize) -> MetricResult {
         let mut bids_mult: Vec<f64> = vec![];
         let mut asks_mult: Vec<f64> = vec![];
 
         for i_level in 0..=depth {
-            bids_mult.push(bids[i_level]);
-            asks_mult.push(asks[i_level]);
+            bids_mult.push(levels[0][i_level]);
+            asks_mult.push(levels[1][i_level]);
         }
 
         let r_obimb_1: f64 = bids_mult.iter().sum();
         let r_obimb_2: f64 = asks_mult.iter().sum();
-        (r_obimb_1 - r_obimb_2) / (r_obimb_1 + r_obimb_2)
+
+        MetricResult::Value((r_obimb_1 - r_obimb_2) / (r_obimb_1 + r_obimb_2))
+    }
+}
+
+// ----------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------- //
+/// A struct to represent the TickSize as the difference between price among levels
+
+pub struct TickSize;
+impl OrderBookMetric<Vec<f64>> for TickSize {
+    /// Compute all the ticks in the provided Order Book, calculated as the
+    /// difference between two adjacent price levels, for all levels, for boths sides.
+    ///
+    /// # Parameters
+    /// - `levels`: A vector with all the Levels, agnostic of their side
+    ///
+    /// # Returns
+    /// A vector with the difference among all pair of levels.
+
+    fn compute(levels_prices: &Vec<f64>, depth: usize) -> MetricResult {
+        let mut v_ticks = vec![];
+
+        for i_price in 0..levels_prices.len() - 1 {
+            v_ticks.push(levels_prices[i_price] - levels_prices[i_price + 1])
+        }
+        MetricResult::Values(v_ticks)
+    }
+}
+
+// ----------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------- //
+/// A struct to represent the Amount of Orders from TOB up to a Depth of the Orderbook
+
+pub struct OrdersAmount;
+impl OrderBookMetric<Vec<Level>> for OrdersAmount {
+    /// Compute the amount of orders present in all the Levels, up to the
+    /// defined depth
+    ///
+    /// # Parameters
+    /// - `levels`: A Vector of Level objects
+    ///
+    /// # Returns
+    /// MetricResult with a single Value.
+    ///
+
+    fn compute(levels: &Vec<Level>, depth: usize) -> MetricResult {
+        let mut v_orders = vec![];
+        for i_level in 0..depth {
+            v_orders.push(levels[i_level].orders.len() as f64);
+        }
+        MetricResult::Value(v_orders.into_iter().sum())
     }
 }
