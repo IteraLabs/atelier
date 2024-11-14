@@ -1,7 +1,5 @@
 use atelier::data::market::Orderbook;
 use atelier::generators::brownian;
-use atelier::metrics::market;
-use atelier::metrics::market::MarketMetric;
 
 fn main() {
     // Parameters for the first Order Book
@@ -41,55 +39,4 @@ fn main() {
         );
         n_orderbooks.push(i_orderbook);
     }
-
-    // ------------------------------------------------ Market Metrics Calculations -- //
-    // ------------------------------------------------ --------------------------- -- //
-
-    let mut v_mids: Vec<f64> = vec![];
-    let mut v_vwap: Vec<f64> = vec![];
-    let mut v_spreads: Vec<f64> = vec![];
-
-    //Compute the Spread
-    for i in 0..=n_progressions {
-        // Compute the spreads
-        v_spreads.push(market::Spread::compute(
-            &n_orderbooks[i].bids[0].price,
-            &n_orderbooks[i].asks[0].price,
-            0,
-        ));
-
-        // Compute the mids
-        v_mids.push(market::Midprice::compute(
-            &n_orderbooks[i].bids[0].price,
-            &n_orderbooks[i].asks[0].price,
-            0,
-        ));
-
-        // Compute the Volume-Weighted Average Price
-        let iter_bids: Vec<_> = n_orderbooks[i]
-            .bids
-            .clone()
-            .into_iter()
-            .map(|x| vec![x.price, x.volume])
-            .collect();
-
-        let iter_asks: Vec<_> = n_orderbooks[i]
-            .asks
-            .clone()
-            .into_iter()
-            .map(|x| vec![x.price, x.volume])
-            .collect();
-
-        // Compute the VWAP
-        v_vwap.push(market::VWAP::compute(
-            &iter_bids.clone(),
-            &iter_asks.clone(),
-            4,
-        ));
-    }
-
-    // Generate output data
-    println!("v_spreads: {:?}", v_spreads);
-    println!("v_mids: {:?}", v_mids);
-    println!("v_vwap: {:?}", v_vwap);
 }
