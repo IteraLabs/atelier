@@ -8,19 +8,27 @@ publish = false
 atelier = { path = "../atelier" }
 approx = { version = "0.5.1"}
 
-# [[test]]
-# name = "tests_orderbook_implementations"
-# path = "orderbook/implementations.rs"
-
-# [[test]]
-# name = "tests_orderbook_progressions"
-# path = "orderbook/progressions.rs"
+[[test]]
+name = "tests_orderbook_implementations"
+path = "orderbook/implementations.rs"
 
 [[test]]
-name = "test_brownian_motion"
+name = "tests_orderbook_progressions"
+path = "orderbook/progressions.rs"
+
+[[test]]
+name = "test_process_brownian"
 path = "process/brownian.rs"
 
 [[test]]
-name = "test_hawkes_process"
+name = "test_process_hawkes"
 path = "process/hawkes.rs"
+
+[[test]]
+name = "test_metrics_orderbook"
+path = "metrics/orderbook.rs"
+
+[[test]]
+name = "test_metrics_market"
+path = "metrics/market.rs"
 
