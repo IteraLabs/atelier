@@ -18,3 +18,6 @@ pub mod metrics;
 
 /// Messages structures for: Errors, Success, Events, and Logs.
 pub mod messages;
+
+/// Market event generator.
+pub mod events;
