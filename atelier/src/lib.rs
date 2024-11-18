@@ -21,3 +21,6 @@ pub mod messages;
 
 /// Market event generator.
 pub mod events;
+
+/// The Order Management and Matching Engine logics.
+pub mod engine;
