@@ -11,12 +11,7 @@ fn main() {
     let n_orders = 2;
 
     // Create synthetic progression of orderbooks
-    let n_orderbooks = Orderbook::synthetize(
-        bid_price,
-        ask_price,
-        tick_size,
-        n_levels,
-        n_orders);
+    let n_orderbooks = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
     // sides of the order book Vec<Level>
     let v_bids = n_orderbooks.bids;
@@ -77,7 +72,7 @@ fn main() {
         "The Volume, at the Bid Side, of each level up to: {:?} depth is: {:?}",
         book_depth, bids_orders_volume
     );
-    
+
     println!(
         "The Volume, at the Ask Side, of each level up to: {:?} depth is: {:?}",
         book_depth, asks_orders_volume

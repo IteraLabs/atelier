@@ -50,7 +50,7 @@ impl OrderBookMetric<Vec<f64>> for Spread {
 pub struct Midprice;
 impl OrderBookMetric<Vec<f64>> for Midprice {
     /// Computes the Midprice from the given bids and asks at the specified depth.
-    /// 
+    ///
     /// # Parameters
     /// - `levels_prices` : A Vec<f64> with the Bid and Ask price.
     ///
@@ -72,7 +72,7 @@ impl OrderBookMetric<(&Vec<Level>, &Vec<Level>)> for VWAP {
     /// bids and asks.
     ///
     /// # Parameters
-    /// - `levels`: A tupple with the vectors of bids and asks. 
+    /// - `levels`: A tupple with the vectors of bids and asks.
     /// - `depth`: The number of levels to compute results.
     ///
     /// # Returns
@@ -80,12 +80,11 @@ impl OrderBookMetric<(&Vec<Level>, &Vec<Level>)> for VWAP {
     ///
 
     fn compute(levels: &(&Vec<Level>, &Vec<Level>), depth: usize) -> MetricResult {
-        
         let mut bids_mult: Vec<f64> = vec![];
         let mut asks_mult: Vec<f64> = vec![];
         let mut vol_sum: Vec<f64> = vec![];
 
-        for i_level in 0..=depth-1 {
+        for i_level in 0..=depth - 1 {
             bids_mult.push(levels.0[i_level].price * levels.0[i_level].volume);
             asks_mult.push(levels.1[i_level].price * levels.1[i_level].volume);
             vol_sum.push(levels.0[i_level].volume + levels.1[i_level].volume);
@@ -108,15 +107,14 @@ impl OrderBookMetric<(&Vec<Level>, &Vec<Level>)> for VolumeImbalance {
     /// Computes the Order book Volume Imbalance from the given bids and asks.
     ///
     /// # Parameters
-    /// - `levels`: A tupple with the vectors of bids and asks. 
+    /// - `levels`: A tupple with the vectors of bids and asks.
     /// - `depth`: The number of levels to compute results.
     ///
     /// # Returns
     /// Returns the MetricResult::Value(f64)
-    /// 
+    ///
 
     fn compute(levels: &(&Vec<Level>, &Vec<Level>), depth: usize) -> MetricResult {
-
         let mut bids_mult: Vec<f64> = vec![];
         let mut asks_mult: Vec<f64> = vec![];
 
@@ -144,7 +142,7 @@ impl OrderBookMetric<Vec<Level>> for TickSize {
     /// # Parameters
     /// - `levels`: A vector with all the Levels, agnostic of their side
     /// - `depth`: The number of levels to compute results.
-    /// 
+    ///
     /// # Returns
     /// Returns the MetricResult::Values(f64)
     ///
@@ -157,7 +155,6 @@ impl OrderBookMetric<Vec<Level>> for TickSize {
         }
 
         MetricResult::Values(v_ticks)
-    
     }
 }
 
@@ -204,7 +201,6 @@ impl OrderBookMetric<Vec<Level>> for OrdersVolume {
     ///
 
     fn compute(levels: &Vec<Level>, depth: usize) -> MetricResult {
-        
         let mut v_orders: Vec<f64> = vec![];
 
         for i_level in 0..depth {
@@ -220,4 +216,3 @@ impl OrderBookMetric<Vec<Level>> for OrdersVolume {
         MetricResult::Value(v_orders.into_iter().sum())
     }
 }
-

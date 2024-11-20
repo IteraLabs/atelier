@@ -12,11 +12,10 @@ pub enum Side {
 
 impl Side {
     pub fn random() -> Self {
-
         let now_ts = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .expect("Time went backwards");
-        
+
         if now_ts.subsec_nanos() % 2 == 0 {
             Side::Bids
         } else {
@@ -24,7 +23,6 @@ impl Side {
         }
     }
 }
-
 
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum OrderType {

@@ -66,9 +66,7 @@ pub enum GeneratorError {
 
 #[derive(Error, Debug)]
 pub enum EventError {
-
     // Event generator failed
     #[error("The Event Generator function failed")]
     EventFailure,
-
 }

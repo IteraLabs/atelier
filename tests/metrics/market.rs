@@ -18,25 +18,20 @@ mod test_orderbook_utils {
         ask_price: f64,
         tick_size: f64,
         n_levels: u32,
-        n_orders: u32
+        n_orders: u32,
     ) -> Orderbook {
-        Orderbook::synthetize(
-            bid_price,
-            ask_price,
-            tick_size,
-            n_levels,
-            n_orders)
+        Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders)
     }
-    
+
     // ---------------------------------------------------------- DEFAULT ORDERBOOK -- //
-    
+
     pub fn default_test_orderbook() -> Orderbook {
         create_test_deep_orderbook(
             DEFAULT_BID_PRICE,
             DEFAULT_ASK_PRICE,
             DEFAULT_TICK_SIZE,
             DEFAULT_N_LEVELS,
-            DEFAULT_N_ORDERS
+            DEFAULT_N_ORDERS,
         )
     }
 }
@@ -48,12 +43,8 @@ mod tests {
 
     // -- ---------------------------------------------------------------- -------- -- //
     // -- ---------------------------------------------------------------- -------- -- //
-    
+
     #[test]
     // -- ---------------------------------------------------------------------------- //
-    fn test_type() {
-   
-    }
-
+    fn test_type() {}
 }
-

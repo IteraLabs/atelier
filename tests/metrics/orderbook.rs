@@ -1,4 +1,3 @@
-
 #[cfg(test)]
 
 // -- ----------------------------------------------------------------- TESTS UTILS -- //
@@ -19,25 +18,20 @@ mod test_orderbook_utils {
         ask_price: f64,
         tick_size: f64,
         n_levels: u32,
-        n_orders: u32
+        n_orders: u32,
     ) -> Orderbook {
-        Orderbook::synthetize(
-            bid_price,
-            ask_price,
-            tick_size,
-            n_levels,
-            n_orders)
+        Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders)
     }
-    
+
     // ---------------------------------------------------------- DEFAULT ORDERBOOK -- //
-    
+
     pub fn default_test_orderbook() -> Orderbook {
         create_test_deep_orderbook(
             DEFAULT_BID_PRICE,
             DEFAULT_ASK_PRICE,
             DEFAULT_TICK_SIZE,
             DEFAULT_N_LEVELS,
-            DEFAULT_N_ORDERS
+            DEFAULT_N_ORDERS,
         )
     }
 }
@@ -49,15 +43,14 @@ mod tests {
 
     use approx::assert_abs_diff_eq;
     use atelier::metrics::orderbook;
-    use atelier::metrics::orderbook::{OrderBookMetric, MetricResult};
+    use atelier::metrics::orderbook::{MetricResult, OrderBookMetric};
 
     // -- ---------------------------------------------------------------- TickSize -- //
     // -- ---------------------------------------------------------------- -------- -- //
-    
-    #[test] 
+
+    #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_ticksize_output_type() {
-        
         use super::*;
         use test_orderbook_utils::*;
         let testable_ob = default_test_orderbook();
@@ -66,13 +59,11 @@ mod tests {
         let test_result = orderbook::TickSize::compute(t_levels_bids, 4);
 
         assert!(matches!(test_result, MetricResult::Values(_)));
-
     }
-    
-    #[test] 
+
+    #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_ticksize_output_value() {
-        
         use super::*;
         use test_orderbook_utils::*;
         let testable_ob = default_test_orderbook();
@@ -85,93 +76,86 @@ mod tests {
             MetricResult::Value(_f64) => panic!("Unexpected variant of the MetricResult"),
         };
 
-        let result:f64 = test_result.iter().sum();
+        let result: f64 = test_result.iter().sum();
         let after = f64::trunc(result * 1_000_000.0) / 1_000_000.0;
-         
-        assert_eq!(after, 30.0);
 
+        assert_eq!(after, 30.0);
     }
-    
+
     // -- --------------------------------------------------------- VolumeImbalance -- //
     // -- -------------------------------------------------------------------- ---- -- //
 
-    #[test] 
+    #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_volumeimbalance_output_type() {
-        
         use super::*;
         use test_orderbook_utils::*;
         let testable_ob = default_test_orderbook();
         let t_levels = &(&testable_ob.bids, &testable_ob.asks);
         let test_result = orderbook::VolumeImbalance::compute(t_levels, 4);
-        
-        assert!(matches!(test_result, MetricResult::Value(_)));
 
+        assert!(matches!(test_result, MetricResult::Value(_)));
     }
-    
+
     // -- ------------------------------------------------------------ OrdersAmount -- //
     // -- -------------------------------------------------------------------- ---- -- //
-    
-    #[test] 
+
+    #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_ordersamount_output_type() {
-        
         use super::*;
         use test_orderbook_utils::*;
         let testable_ob = default_test_orderbook();
 
         let t_levels_bids = &testable_ob.bids;
         let test_result = orderbook::OrdersAmount::compute(t_levels_bids, 4);
-        
-        assert!(matches!(test_result, MetricResult::Value(_)));
 
+        assert!(matches!(test_result, MetricResult::Value(_)));
     }
 
     // -- ------------------------------------------------------------ OrdersVolume -- //
     // -- -------------------------------------------------------------------- ---- -- //
-    
-    #[test] 
+
+    #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_ordersvolume_output_type() {
-        
         use super::*;
         use test_orderbook_utils::*;
         let testable_ob = default_test_orderbook();
 
         let t_levels_bids = &testable_ob.bids;
         let test_result = orderbook::OrdersVolume::compute(t_levels_bids, 4);
-        
-        assert!(matches!(test_result, MetricResult::Value(_)));
 
+        assert!(matches!(test_result, MetricResult::Value(_)));
     }
 
     // -- -------------------------------------------------------------------- VWAP -- //
     // -- -------------------------------------------------------------------- ---- -- //
-    
+
     #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_vwap_output_type() {
         use super::*;
         use test_orderbook_utils::*;
         let testable_ob = default_test_orderbook();
-    
+
         let t_levels = &(&testable_ob.bids, &testable_ob.asks);
         // Get the result for this test
         let test_result = orderbook::VWAP::compute(t_levels, 4);
         assert!(matches!(test_result, MetricResult::Value(_f64)));
     }
-    
+
     #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_vwap_expectation() {
         use super::*;
         use test_orderbook_utils::*;
         let testable_ob = default_test_orderbook();
-        
+
         let t_levels = &(&testable_ob.bids, &testable_ob.asks);
         let metric_result = orderbook::VWAP::compute(t_levels, 4);
         let expected_result = 55_000.00;
-        
+
         let test_result = match metric_result {
             MetricResult::Value(value) => value,
             MetricResult::Values(_) => panic!("Unexpected variant of the MetricResult"),
@@ -181,26 +165,26 @@ mod tests {
 
     // -- ---------------------------------------------------------------- Midprice -- //
     // -- ---------------------------------------------------------------- -------- -- //
-    
+
     #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_midprice_output_type() {
         // Parameters for this test
         let v_prices = vec![70_000.00, 70_100.00];
-    
+
         // Get the result for this test
         let test_result = orderbook::Midprice::compute(&v_prices, 0);
 
         // assert_matches!(MetricResult::Value);
         assert!(matches!(test_result, MetricResult::Value(_f64)));
     }
-    
+
     #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_midprice_expectation() {
         // Parameters for this test
         let v_prices = vec![70_000.00, 70_100.00];
-    
+
         // Get the result for this test
         let metric_result = orderbook::Midprice::compute(&v_prices, 0);
 
@@ -208,27 +192,27 @@ mod tests {
             MetricResult::Value(value) => value,
             MetricResult::Values(_) => panic!("Unexpected variant of the MetricResult"),
         };
-        
+
         // assert_matches!(MetricResult::Value);
         assert_eq!(test_result, 70_050.00);
     }
-    
+
     // -- ------------------------------------------------------------------ Spread -- //
     // -- ------------------------------------------------------------------ ------ -- //
-    
+
     #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_spread_output_type() {
         // Parameters for this test
         let v_prices = vec![70_000.00, 70_100.00];
-    
+
         // Get the result for this test
         let test_result = orderbook::Spread::compute(&v_prices, 0);
 
         // assert_matches!(MetricResult::Value);
         assert!(matches!(test_result, MetricResult::Value(_f64)));
     }
-    
+
     #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_spread_expectation() {

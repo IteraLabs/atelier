@@ -1,12 +1,10 @@
-/// Market event generator module
-
-use rand::thread_rng;
-use rand::seq::SliceRandom;
-use atelier::events::templates::enum_create;
 use atelier::events::templates;
+use atelier::events::templates::enum_create;
+use rand::seq::SliceRandom;
+/// Market event generator module
+use rand::thread_rng;
 
 fn main() {
-
     // -------------------------------------------------------------- new limit order -- //
     // -------------------------------------------------------------- --------------- -- //
 
@@ -16,32 +14,25 @@ fn main() {
         CancelLimitOrder,
         NewMarketOrder,
         ModifyLimitOrder,
-        NewLimitOrder);
+        NewLimitOrder
+    );
 
     // Now you can use the enum
     let _variants = EventType::variants();
     let _r_variants = EventType::random_variants(2);
 
     // -- Thread for Event Queue : New Market Order
-    let mut new_mo_queue:Vec<templates::MarketEvent> = vec![];
+    let mut new_mo_queue: Vec<templates::MarketEvent> = vec![];
     for _ in 1..4 {
-        new_mo_queue.push(
-            templates::random_new_mo(
-            ).unwrap()
-        )
+        new_mo_queue.push(templates::random_new_mo().unwrap())
     }
 
     // -- Thread for Event Queue : Cancel Limit Order
-    let mut cancel_lo_queue:Vec<templates::MarketEvent> = vec![];
+    let mut cancel_lo_queue: Vec<templates::MarketEvent> = vec![];
     for _ in 1..4 {
-        cancel_lo_queue.push(
-            templates::random_cancel_lo(
-            ).unwrap()
-        )
+        cancel_lo_queue.push(templates::random_cancel_lo().unwrap())
     }
 
     println!("new_mo_queue: {:?}", new_mo_queue);
     println!("cancel_lo_queue: {:?}", cancel_lo_queue);
-
 }
-
