@@ -2,11 +2,8 @@
 
 use crate::data::market::{Order, OrderType, Side};
 use rand::distributions::Uniform;
-use rand::Rng;
+use rand::{thread_rng, Rng};
 use std::time::{SystemTime, UNIX_EPOCH};
-
-// Create a random Order according to the provided parameters
-// it uses structs::marketdata::order::Order
 
 pub fn randomize_order(side: Side, price: f64, order_type: OrderType) -> Order {
     let mut uni_rand = rand::thread_rng();

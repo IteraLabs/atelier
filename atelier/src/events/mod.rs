@@ -1,1 +1,1 @@
-pub mod market;
+pub mod templates;
