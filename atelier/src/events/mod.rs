@@ -1,2 +1,2 @@
-pub mod templates;
 pub mod streams;
+pub mod templates;

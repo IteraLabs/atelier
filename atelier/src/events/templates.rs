@@ -58,11 +58,7 @@ pub struct EventData {
 }
 
 impl EventData {
-    pub fn new(
-        event_created_ts: u128,
-        event_type: MarketEventType,
-        user_id: u32,
-    ) -> Self {
+    pub fn new(event_created_ts: u128, event_type: MarketEventType, user_id: u32) -> Self {
         EventData {
             event_created_ts,
             event_type,
@@ -120,11 +116,7 @@ pub fn random_cancel_lo_template() -> Result<MarketEvent, errors::EventError> {
     let i_event_type = MarketEventType::CancelLimitOrder;
     let i_user_id = 321;
 
-    let i_event_data = EventData::new(
-        i_event_created_ts,
-        i_event_type,
-        i_user_id,
-    );
+    let i_event_data = EventData::new(i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
 
@@ -168,11 +160,7 @@ pub fn random_new_mo_template() -> Result<MarketEvent, errors::EventError> {
     let i_event_type = MarketEventType::NewMarketOrder;
     let i_user_id = 654;
 
-    let i_event_data = EventData::new(
-        i_event_created_ts,
-        i_event_type,
-        i_user_id,
-    );
+    let i_event_data = EventData::new(i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
 
@@ -204,7 +192,6 @@ pub fn random_new_mo_template() -> Result<MarketEvent, errors::EventError> {
 // ------------------------------------------------ ------------------------------- -- //
 
 pub fn random_modify_lo_template() -> Result<MarketEvent, errors::EventError> {
-    
     let current_ts = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
@@ -214,14 +201,10 @@ pub fn random_modify_lo_template() -> Result<MarketEvent, errors::EventError> {
 
     let i_event_created_ts = current_ts;
     let i_event_type = MarketEventType::ModifyLimitOrder;
-    
+
     let i_user_id = 654;
 
-    let i_event_data = EventData::new(
-        i_event_created_ts,
-        i_event_type,
-        i_user_id,
-    );
+    let i_event_data = EventData::new(i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
 
@@ -230,7 +213,7 @@ pub fn random_modify_lo_template() -> Result<MarketEvent, errors::EventError> {
     let i_order_ts = current_ts;
     let i_order_type = market::OrderType::Limit;
     let i_order_side = market::Side::random();
-    
+
     let i_order_price = 70_200.00;
     let i_order_amount = 01.01;
 
@@ -254,7 +237,6 @@ pub fn random_modify_lo_template() -> Result<MarketEvent, errors::EventError> {
 // --------------------------------------------------- ---------------------------- -- //
 
 pub fn random_new_lo_template() -> Result<MarketEvent, errors::EventError> {
-
     let current_ts = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
@@ -264,15 +246,11 @@ pub fn random_new_lo_template() -> Result<MarketEvent, errors::EventError> {
 
     let i_event_created_ts = current_ts;
     let i_event_type = MarketEventType::NewLimitOrder;
-    
+
     // TODO: Hash value for user_id + Create a list of users
     let i_user_id = 654;
 
-    let i_event_data = EventData::new(
-        i_event_created_ts,
-        i_event_type,
-        i_user_id,
-    );
+    let i_event_data = EventData::new(i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
 
@@ -282,7 +260,7 @@ pub fn random_new_lo_template() -> Result<MarketEvent, errors::EventError> {
     let i_order_ts = current_ts;
     let i_order_type = market::OrderType::Limit;
     let i_order_side = market::Side::random();
-   
+
     // perhaps pass these two
     let i_order_price = 70_300.00;
     let i_order_amount = 01.666;
