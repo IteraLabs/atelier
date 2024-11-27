@@ -53,7 +53,6 @@ enum_create!(
 #[derive(Debug)]
 pub struct EventData {
     pub event_created_ts: u128,
-    pub event_executed_ts: u128,
     pub event_type: MarketEventType,
     pub user_id: u32,
 }
@@ -61,13 +60,11 @@ pub struct EventData {
 impl EventData {
     pub fn new(
         event_created_ts: u128,
-        event_executed_ts: u128,
         event_type: MarketEventType,
         user_id: u32,
     ) -> Self {
         EventData {
             event_created_ts,
-            event_executed_ts,
             event_type,
             user_id,
         }
@@ -110,7 +107,7 @@ impl MarketEvent {
 // ------------------------------------------------ ------------------------------- -- //
 
 /// To create a pseudo-random Cancel Limit Order event
-pub fn random_cancel_lo() -> Result<MarketEvent, errors::EventError> {
+pub fn random_cancel_lo_template() -> Result<MarketEvent, errors::EventError> {
     let current_ts = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
@@ -125,7 +122,6 @@ pub fn random_cancel_lo() -> Result<MarketEvent, errors::EventError> {
 
     let i_event_data = EventData::new(
         i_event_created_ts,
-        i_event_executed_ts,
         i_event_type,
         i_user_id,
     );
@@ -159,7 +155,7 @@ pub fn random_cancel_lo() -> Result<MarketEvent, errors::EventError> {
 // -------------------------------------------------- Template for New Market Order -- //
 // -------------------------------------------------- ----------------------------- -- //
 
-pub fn random_new_mo() -> Result<MarketEvent, errors::EventError> {
+pub fn random_new_mo_template() -> Result<MarketEvent, errors::EventError> {
     let current_ts = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
@@ -174,7 +170,6 @@ pub fn random_new_mo() -> Result<MarketEvent, errors::EventError> {
 
     let i_event_data = EventData::new(
         i_event_created_ts,
-        i_event_executed_ts,
         i_event_type,
         i_user_id,
     );
@@ -208,12 +203,103 @@ pub fn random_new_mo() -> Result<MarketEvent, errors::EventError> {
 // ------------------------------------------------ Template for Modify Limit Order -- //
 // ------------------------------------------------ ------------------------------- -- //
 
-// TODO: implement random_modify_mo
+pub fn random_modify_lo_template() -> Result<MarketEvent, errors::EventError> {
+    
+    let current_ts = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_nanos() as u128;
+
+    // -- random event data -- //
+
+    let i_event_created_ts = current_ts;
+    let i_event_type = MarketEventType::ModifyLimitOrder;
+    
+    let i_user_id = 654;
+
+    let i_event_data = EventData::new(
+        i_event_created_ts,
+        i_event_type,
+        i_user_id,
+    );
+
+    // -- random event content -- //
+
+    let i_order_id = 012;
+
+    let i_order_ts = current_ts;
+    let i_order_type = market::OrderType::Limit;
+    let i_order_side = market::Side::random();
+    
+    let i_order_price = 70_200.00;
+    let i_order_amount = 01.01;
+
+    let i_order = market::Order::new(
+        i_order_id,
+        i_order_ts,
+        i_order_type,
+        i_order_side,
+        i_order_price,
+        i_order_amount,
+    );
+
+    let i_event_content = EventContent::new(i_order);
+    let r_market_event = MarketEvent::new(i_event_data, i_event_content);
+
+    // returns the message {event data, event content}
+    Ok(r_market_event)
+}
 
 // --------------------------------------------------- Template for New Limit Order -- //
 // --------------------------------------------------- ---------------------------- -- //
 
-// TODO: implement random_new_lo
+pub fn random_new_lo_template() -> Result<MarketEvent, errors::EventError> {
+
+    let current_ts = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_nanos() as u128;
+
+    // -- random event data -- //
+
+    let i_event_created_ts = current_ts;
+    let i_event_type = MarketEventType::NewLimitOrder;
+    
+    // TODO: Hash value for user_id + Create a list of users
+    let i_user_id = 654;
+
+    let i_event_data = EventData::new(
+        i_event_created_ts,
+        i_event_type,
+        i_user_id,
+    );
+
+    // -- random event content -- //
+
+    // TODO: Hash value for order_id
+    let i_order_id = 012;
+
+    let i_order_ts = current_ts;
+    let i_order_type = market::OrderType::Limit;
+    let i_order_side = market::Side::random();
+   
+    // perhaps pass these two
+    let i_order_price = 70_300.00;
+    let i_order_amount = 01.666;
+
+    let i_order = market::Order::new(
+        i_order_id,
+        i_order_ts,
+        i_order_type,
+        i_order_side,
+        i_order_price,
+        i_order_amount,
+    );
+
+    let i_event_content = EventContent::new(i_order);
+    let r_market_event = MarketEvent::new(i_event_data, i_event_content);
+    Ok(r_market_event)
+}
 
 // -- re-export macro
 pub use crate::enum_create;
