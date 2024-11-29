@@ -10,6 +10,20 @@ pub enum Side {
     Asks,
 }
 
+impl Side {
+    pub fn random() -> Self {
+        let now_ts = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("Time went backwards");
+
+        if now_ts.subsec_nanos() % 2 == 0 {
+            Side::Bids
+        } else {
+            Side::Asks
+        }
+    }
+}
+
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum OrderType {
     Market,
@@ -79,47 +93,6 @@ impl Order {
             side,
             price,
             amount,
-        }
-    }
-
-    /// Creates a new _random_ instance of an `Order`.
-    ///
-    /// # Parameters
-    ///
-    /// - `order_id`: The unique identifier for the order.
-    /// - `order_ts`: The timestamp for when the order was created.
-    /// - `order_type`: The type of the order (e.g., `OrderType::Limit`).
-    /// - `side`: The side of the order, either `Side::Bids` or `Side::Asks`.
-    /// - `price`: The price at which the order is placed.
-    /// - `amount`: The amount of the asset being ordered.
-    ///
-    pub fn randomize(side: Side, price: f64, order_type: OrderType) -> Self {
-        // Randomize order_ts
-        let now_ts = SystemTime::now();
-
-        let since_epoch_ts = now_ts
-            .duration_since(UNIX_EPOCH)
-            .expect("Time went backwards")
-            .as_nanos();
-
-        let order_ts_gen = since_epoch_ts as u128;
-
-        // Randomize amount
-        let order_amount_gen = 123.456;
-
-        // Randomize order_id
-        let order_id_gen: u32 = 123;
-
-        // Parse Order Type
-        let order_type_gen = order_type;
-
-        Order {
-            order_id: order_id_gen,
-            order_ts: order_ts_gen,
-            order_type: order_type_gen,
-            side,
-            price,
-            amount: order_amount_gen,
         }
     }
 }

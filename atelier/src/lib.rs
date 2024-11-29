@@ -10,11 +10,17 @@
 /// Core data types and data structures.
 pub mod data;
 
+/// The Order Management and Matching Engine logics.
+pub mod engine;
+
+/// Market event generator.
+pub mod events;
+
 /// Stochastic data generation with probabilistic models.
 pub mod generators;
 
-/// Metrics calculation about various aspects and processes.
-pub mod metrics;
-
 /// Messages structures for: Errors, Success, Events, and Logs.
 pub mod messages;
+
+/// Metrics calculation about various aspects and processes.
+pub mod metrics;

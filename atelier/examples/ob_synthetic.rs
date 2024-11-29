@@ -11,12 +11,12 @@ fn main() {
     let n_levels = 4;
     let n_orders = 2;
 
-    let n_orderbooks = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
+    let _n_orderbooks = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
     // println!("n_orderbooks: {:?}", n_orderbooks);
 
     // Define the step window (seconds)
-    let step_window: f64 = 1.0;
+    let _step_window: f64 = 1.0;
 
     // Within the step window, all the events need to take place
     let market_orders_times = hawkes::HawkesProcess {

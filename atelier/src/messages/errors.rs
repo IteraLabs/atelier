@@ -63,3 +63,10 @@ pub enum GeneratorError {
     #[error("The Generator did not produced a valid number")]
     GeneratorOutputTypeFailure,
 }
+
+#[derive(Error, Debug)]
+pub enum EventError {
+    // Event generator failed
+    #[error("The Event Generator function failed")]
+    EventFailure,
+}
