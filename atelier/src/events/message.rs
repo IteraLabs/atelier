@@ -23,11 +23,11 @@ macro_rules! enum_create {
 
         impl $enum_name {
 
-            fn variants() -> Vec<Self> {
+            pub fn variants() -> Vec<Self> {
                 vec![$(Self::$variant),+]
             }
 
-            fn random_variants(n_choice:usize) -> Vec<Self> {
+            pub fn random_variants(n_choice:usize) -> Vec<Self> {
                 let mut rng = thread_rng();
                 Self::variants()
                 .choose_multiple(&mut rng, n_choice)
@@ -76,7 +76,7 @@ impl EventInfo {
 // ---------------------------------------------------- --------------------------- -- //
 
 // Different market events can have different structures for the event_object. 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum EventContent {
     OrderCreation(market::Order),
     OrderCancellation(u32),

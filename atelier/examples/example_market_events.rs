@@ -1,8 +1,7 @@
-use atelier::data::market::Orderbook;
 use atelier::events::templates;
-use atelier::events::templates::enum_create;
-use rand::seq::SliceRandom;
-use rand::thread_rng;
+use atelier::data::market::Orderbook;
+use atelier::events::message;
+use atelier::events::message::{MarketEventType, MarketEvent};
 
 fn main() {
     // -- Base OrderBook -- //
@@ -14,19 +13,12 @@ fn main() {
     let n_levels = 20;
     let n_orders = 10;
 
-    let mut i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
+    let _i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
 
     // -------------------------------------------------------------- new limit order -- //
     // -------------------------------------------------------------- --------------- -- //
 
     // Use the macro to create the enum
-    enum_create!(
-        EventType,
-        CancelLimitOrder,
-        NewMarketOrder,
-        ModifyLimitOrder,
-        NewLimitOrder
-    );
 
     // Now you can use the enum
     // let _variants = EventType::variants();
@@ -50,32 +42,32 @@ fn main() {
     // ------------------------------------------------ Event generation simulation -- //
     // ------------------------------------------------ --------------------------- -- //
 
-    let mut vec_variants: Vec<EventType> = vec![];
+    let mut vec_variants: Vec<MarketEventType> = vec![];
 
     for _ in 1..4 {
-        vec_variants.push(EventType::random_variants(1)[0].clone());
+        vec_variants.push(MarketEventType::random_variants(1)[0].clone());
     }
 
     // let iter_variants = &vec_variants;
     println!("\ngenerated variants were: {:?}\n", &vec_variants);
 
-    let mut single_queue: Vec<templates::MarketEvent> = vec![];
+    let mut single_queue: Vec<MarketEvent> = vec![];
 
     for i_variant in vec_variants {
         match i_variant {
-            EventType::NewMarketOrder => {
+            MarketEventType::NewMarketOrder => {
                 single_queue.push(templates::random_new_mo_template().unwrap());
             }
 
-            EventType::CancelLimitOrder => {
+            MarketEventType::CancelLimitOrder => {
                 single_queue.push(templates::random_cancel_lo_template().unwrap());
             }
 
-            EventType::NewLimitOrder => {
+            MarketEventType::NewLimitOrder => {
                 single_queue.push(templates::random_new_lo_template().unwrap());
             }
 
-            EventType::ModifyLimitOrder => {
+            MarketEventType::ModifyLimitOrder => {
                 single_queue.push(templates::random_modify_lo_template().unwrap());
             }
         }
@@ -95,37 +87,24 @@ fn main() {
 
         let i_event = single_queue.pop().unwrap();
 
-        match i_event.event_data.event_type {
-            templates::MarketEventType::NewLimitOrder => {
-                let event_order = i_event.event_content.event_object;
+        match i_event.event_info.event_type {
 
-                println!("\nOrder to be inserted: {:?}\n", event_order);
+            message::MarketEventType::CancelLimitOrder => {
 
-                let r_order =
-                    i_ob.insert_order(event_order.side, event_order.price, event_order.amount);
+                let i_event_content = i_event.event_content;
+                // println!("\nOrder to be inserted: {:?}\n", &i_event_order);
 
-                println!("\nr_order: {:?}", r_order);
+                if let message::EventContent::OrderCancellation(i_order_id) = i_event_content {
+                    println!("Order created: {:?}", &i_order_id);
+                }
+                
             }
 
-            templates::MarketEventType::ModifyLimitOrder => {
-                let event_order = i_event.event_content.event_object;
+            _=> {
+            
 
-                println!("\n the Order to be modified is: {:?}", event_order);
             }
 
-            templates::MarketEventType::CancelLimitOrder => {
-                let event_order = i_event.event_content.event_object;
-
-                println!("\n the Order to be cancelled is: {:?}", event_order);
-            }
-
-            templates::MarketEventType::NewMarketOrder => {
-                let event_order = &i_event.event_data.event_type;
-                println!(
-                    "\nThe {:?} MarketEventType is not yet mapped to an exeuction\n",
-                    event_order
-                );
-            }
         }
     }
 }
