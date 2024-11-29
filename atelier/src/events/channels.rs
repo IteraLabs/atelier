@@ -1,4 +1,6 @@
-use crate::events::templates::MarketEventType;
+/// Channels
+
+use crate::events::message::MarketEventType;
 use crossbeam::channel::unbounded;
 
 pub fn create_channel() -> (
@@ -10,6 +12,11 @@ pub fn create_channel() -> (
 }
 
 fn main() {
-    let (cancel_lo_queue_s, cancel_lo_queue_r) = create_channel();
-    let (new_mo_queue_s, cancel_mo_queue_r) = create_channel();
+
+    let (cancel_lo_s, cancel_lo_r) = create_channel();
+    let (new_mo_s, new_mo_r) = create_channel();
+    let (modify_lo_s, modify_lo_r) = create_channel();
+    let (new_mo_s, new_mo_r) = create_channel();
+
 }
+

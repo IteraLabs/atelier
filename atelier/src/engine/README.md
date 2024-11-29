@@ -1,14 +1,30 @@
 # Engine Module
 
-Is the one in charge from the definition of communication and processing channels, to the creation and management of the queues, the routers for async order management to the logic of the matching engine. It is comprehended by the following:
+Within this module exists the definition of the validation processes for income events, routers for async order management, the logic of the matching engine. This module is organized in the following files:
 
-1. `channels.rs`: Communication and Processing channels.
-2. `queues.rs`: Order Queues.
-3. `management.rs`: Order Management Interface.
-4. `routers.rs`: Order Routing Algorithms.
-5. `matching.rs`: Matching Engine.
+1. `validation.rs`:
+2. `routing.rs`: Order Routing Algorithms.
+3. `matching.rs`: Matching Engine.
 
-## Communication and Processing Channels `channels.rs`
+## System Design Taxonomy
+
+Concurrent Publisher/Subscriber Pattern that uses unbounded and multi-producer/multi-consumer channels, with atomic events as messages, A routing algorithm to gather and inject the event's data into an execution queue to be consumed by an execution engine that ultimately alters the state represented in the Limit Order Book data structure. 
+
+## General Description
+
+- Inbound Events Pipeline (connectors, channels, producers):
+
+An External Data Source produces data, then a connector acting as the Internal API endpoint fetches that data, either through a querie using a REST connector, or through a received data package using a WebSocket connector. Then data goes through a validation/pre-processing layer (to make it compliant with the event-message schema). After validation, data is pre-processed for compliance with the event-message schema and passed into a `Publisher` so it can publish the event into the corresponding channel. 
+
+- Internal Routing:
+
+Since there are different channels to take events from, an Order Routing Strategy will decide the order of the channels and the amount of events to be extracted from each of them, to then be sent to the Global Executable Tasks Queue.
+
+- Execution:
+
+From the Executable Tasks Queue, it will consume tasks acording to the Execution Strategy, and if successfully executed, it will effectively change the state of the Order Book.
+
+## Communication Channels `channels.rs`
 
 *(pending)*
 
