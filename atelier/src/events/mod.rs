@@ -1,4 +1,4 @@
-/// channels where events are published to, and/or, subscribed from 
+/// channels where events are published to, and/or, subscribed from
 pub mod channels;
 
 /// message struct and formation

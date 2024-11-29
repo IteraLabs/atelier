@@ -6,4 +6,3 @@ pub struct User {
     pub last_name: String,
     pub email: String,
 }
-

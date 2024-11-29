@@ -1,7 +1,7 @@
-use atelier::events::templates;
 use atelier::data::market::Orderbook;
 use atelier::events::message;
-use atelier::events::message::{MarketEventType, MarketEvent};
+use atelier::events::message::{MarketEvent, MarketEventType};
+use atelier::events::templates;
 
 fn main() {
     // -- Base OrderBook -- //
@@ -88,23 +88,16 @@ fn main() {
         let i_event = single_queue.pop().unwrap();
 
         match i_event.event_info.event_type {
-
             message::MarketEventType::CancelLimitOrder => {
-
                 let i_event_content = i_event.event_content;
                 // println!("\nOrder to be inserted: {:?}\n", &i_event_order);
 
                 if let message::EventContent::OrderCancellation(i_order_id) = i_event_content {
                     println!("Order created: {:?}", &i_order_id);
                 }
-                
             }
 
-            _=> {
-            
-
-            }
-
+            _ => {}
         }
     }
 }

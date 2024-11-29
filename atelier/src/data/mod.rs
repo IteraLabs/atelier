@@ -6,4 +6,3 @@ pub mod market;
 
 /// Hashing types and functions.
 pub mod hasher;
-
