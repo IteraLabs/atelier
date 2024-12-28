@@ -1,4 +1,3 @@
-
 /// Results messages of success
 pub mod success;
 

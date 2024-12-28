@@ -5,4 +5,3 @@ pub struct Agent {
     event_freq: f64,
     user_id: u32,
 }
-

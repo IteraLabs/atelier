@@ -1,5 +1,4 @@
 /// Market event generator module
-
 use crate::data::market;
 use crate::generators;
 use crate::results::errors;
@@ -67,7 +66,7 @@ impl EventInfo {
         user_id: u32,
     ) -> Self {
         EventInfo {
-            event_id, 
+            event_id,
             event_received_ts,
             event_type,
             user_id,
@@ -102,4 +101,3 @@ impl MarketEvent {
         }
     }
 }
-

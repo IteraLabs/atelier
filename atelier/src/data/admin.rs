@@ -13,4 +13,3 @@ pub struct Symbol {
     quote_asset: String,
     base_asset: String,
 }
-

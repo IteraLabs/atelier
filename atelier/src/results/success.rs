@@ -12,4 +12,3 @@ pub enum OrderSuccess {
     OrderModified,
     OrderMatched,
 }
-

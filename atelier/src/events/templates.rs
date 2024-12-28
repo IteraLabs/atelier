@@ -23,12 +23,12 @@ pub fn random_cancel_lo_template() -> Result<message::MarketEvent, errors::Event
 
     // -- random event content -- //
     let random_order_id: u32 = 123;
-    let i_event_info =
-        message::EventInfo::new(
-        random_event_id,    
+    let i_event_info = message::EventInfo::new(
+        random_event_id,
         random_received_ts,
         random_event_type,
-        random_user_id);
+        random_user_id,
+    );
 
     let i_event_content = message::EventContent::OrderCancellation(random_order_id);
 
@@ -56,11 +56,8 @@ pub fn random_new_mo_template() -> Result<message::MarketEvent, errors::EventErr
     let i_user_id = 654;
     let i_event_id = 987;
 
-    let i_event_data = message::EventInfo::new(
-        i_event_id, 
-        i_event_created_ts, 
-        i_event_type,
-        i_user_id);
+    let i_event_data =
+        message::EventInfo::new(i_event_id, i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
 
@@ -104,11 +101,8 @@ pub fn random_modify_lo_template() -> Result<message::MarketEvent, errors::Event
     let i_user_id = 654;
     let i_event_id = 987;
 
-    let i_event_data = message::EventInfo::new(
-        i_event_id,
-        i_event_created_ts,
-        i_event_type,
-        i_user_id);
+    let i_event_data =
+        message::EventInfo::new(i_event_id, i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
 
@@ -140,11 +134,8 @@ pub fn random_new_lo_template() -> Result<message::MarketEvent, errors::EventErr
     let i_user_id = 654;
     let i_event_id = 987;
 
-    let i_event_data = message::EventInfo::new(
-        i_event_id,
-        i_event_created_ts,
-        i_event_type,
-        i_user_id);
+    let i_event_data =
+        message::EventInfo::new(i_event_id, i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
 

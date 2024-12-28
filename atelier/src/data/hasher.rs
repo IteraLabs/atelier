@@ -10,11 +10,9 @@ use std::hash::{DefaultHasher, Hash, Hasher};
 // ---------------------------------------------------------------- --------------- -- //
 
 impl Hash for User {
-
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.email.hash(state);
     }
-
 }
 
 fn hash_user(user: &User) -> u64 {
@@ -27,15 +25,13 @@ fn hash_user(user: &User) -> u64 {
 // --------------------------------------------------------------- ---------------- -- //
 
 impl Hash for Order {
-
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.order_id.hash(state);
     }
 }
 
 fn hash_order(order: &Order) -> u64 {
-        let mut hasher = DefaultHasher::new();
-        order.hash(&mut hasher);
-        hasher.finish()
+    let mut hasher = DefaultHasher::new();
+    order.hash(&mut hasher);
+    hasher.finish()
 }
-

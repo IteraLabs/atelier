@@ -1,4 +1,3 @@
-
 use atelier::data::market::Orderbook;
 use atelier::events::message;
 use atelier::events::message::{MarketEvent, MarketEventType};
