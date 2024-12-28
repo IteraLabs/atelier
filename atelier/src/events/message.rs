@@ -1,7 +1,7 @@
 /// Market event generator module
 use crate::data::market;
 use crate::generators;
-use crate::messages::errors;
+use crate::results::errors;
 
 use rand::seq::SliceRandom;
 use rand::thread_rng;
@@ -50,16 +50,23 @@ enum_create!(
 // ------------------------------------------------------- Market Event Info Struct -- //
 // ------------------------------------------------------- ------------------------ -- //
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, PartialOrd)]
 pub struct EventInfo {
+    pub event_id: u32,
     pub event_received_ts: u128,
     pub event_type: MarketEventType,
     pub user_id: u32,
 }
 
 impl EventInfo {
-    pub fn new(event_received_ts: u128, event_type: MarketEventType, user_id: u32) -> Self {
+    pub fn new(
+        event_id: u32,
+        event_received_ts: u128,
+        event_type: MarketEventType,
+        user_id: u32,
+    ) -> Self {
         EventInfo {
+            event_id,
             event_received_ts,
             event_type,
             user_id,
@@ -70,8 +77,7 @@ impl EventInfo {
 // ---------------------------------------------------- Market Event Content Struct -- //
 // ---------------------------------------------------- --------------------------- -- //
 
-// Different market events can have different structures for the event_object.
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, PartialOrd)]
 pub enum EventContent {
     OrderCreation(market::Order),
     OrderCancellation(u32),

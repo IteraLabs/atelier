@@ -7,6 +7,9 @@
 #![allow(dead_code)]
 #![allow(warnings)]
 
+/// Agentic artifacts and tools.
+pub mod agents;
+
 /// Core data types and data structures.
 pub mod data;
 
@@ -20,7 +23,7 @@ pub mod events;
 pub mod generators;
 
 /// Messages structures for: Errors, Success, Events, and Logs.
-pub mod messages;
+pub mod results;
 
 /// Metrics calculation about various aspects and processes.
 pub mod metrics;

@@ -6,6 +6,28 @@ A Computational Workshop for Market Microstructure Modeling, Synthetic Simulatio
 
 Use `atelier` for modeling market microstructure dynamics, it supports an `orderbook-based` market structure. Whether you need a high quality reproduction of any given market within a defined period of time (market replay), or, to generate `what-if` scnearios either completely random, or, with model specification (market simulation). 
 
+## Application Case Taxonomy
+
+A discrete, time-bounded, a-priori event-generation approach to produce synthetic progressions of the market microstructure.
+
+- **discrete**: The unit of change is Order Events, an event-driven approach, event-by-event, with "procedural" agents. i.e. agents contain conditions for behavior but without an evaluation of outcomes.
+
+- **time-bounded**: Each step length is pre-defined and always known, not necessarily constant, and the scale of time is also defined a-priori, not bounded by the time it takes for the computations to occur. i.e. The time step value is arbitrarly chosen, events are synched within each step.
+
+- **a-priori**: Order Events happen within a pre-defined time period, so the generation of the events is done in a step-by-step basis, and they are generated computationally independent but synched within each step.
+
+Steps for implementation
+
+1. Define parameters of the progression
+    1. No. of progressions: u32
+    2. No. of participating agents: u32
+    3. time-step : u128 | Vec<u128>
+
+2. Define parameters for each agent
+    1. agent_id: created randomly.
+    2. agent_type: decided according to a particular purpose.
+    3. agent_balance: decided according to a particular purpose.
+
 ## Contribute
 
 Feel free to contribute, just make sure you check the [CONTRIBUTING]() guidelines. Also consider to pick-up the existing [issues]().

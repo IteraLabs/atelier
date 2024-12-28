@@ -1,5 +1,5 @@
 use crate::generators::randomizer::randomize_order;
-use crate::messages::errors::{LevelError, OrderError};
+use crate::results::errors::{LevelError, OrderError};
 use core::f64;
 use std::task::Wake;
 use std::time::{SystemTime, UNIX_EPOCH};

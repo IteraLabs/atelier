@@ -38,7 +38,7 @@
 //! $\beta$: Decay rate (how quickly the excitement diminishes).\
 //!
 
-use crate::messages::errors;
+use crate::results::errors;
 use rand::Rng;
 
 pub struct HawkesProcess {

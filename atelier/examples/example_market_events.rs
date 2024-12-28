@@ -49,6 +49,7 @@ fn main() {
     }
 
     // let iter_variants = &vec_variants;
+
     println!("\ngenerated variants were: {:?}\n", &vec_variants);
 
     let mut single_queue: Vec<MarketEvent> = vec![];

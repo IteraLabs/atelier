@@ -1,10 +1,13 @@
 # Events Module
 
+All necessary artifacts related to the Event as the unit of change in the progressions. From the definition of a message as the event's content structure, to the communication channel, to the publisher and subscriber logic. Even some templates for demostration purposes. 
+
 ## Folder structure
 
 ```
 Events/ 
 ├── channels.rs
+├── message.rs
 ├── mod.rs
 ├── publishers.rs
 ├── subscribers.rs
@@ -12,9 +15,10 @@ Events/
 ```
 
 1. `channels.rs`: Where events are published to, and/or, subscribed from.
-2. `publishers.rs`: The publishers of the events.
-3. `subscribers.rs` The subscribers of the events.
-4. `templates.rs`: Definition of templates for the events and other uses.
+2. `message.rs`: Definition of a message as the event's content structure.
+3. `publishers.rs`: The publishers of the events.
+4. `subscribers.rs` The subscribers of the events.
+5. `templates.rs`: Definition of templates for the events and other uses.
 
 ## Market Event Types
 
@@ -38,6 +42,7 @@ MarketEvent {
     event_content: EventContent,
 }
 ```
+
 ### Event's information (kind of a meta-data) type structure
 
 ```
@@ -68,7 +73,6 @@ The necessary contents to be included in the `EventContent` given each of the `M
 | MarketEventType::NewLimitOrder     | market::Order
 
 With both the `order_id` and `order_amount` being the same type as the one in the `market::Order` struct.
-
 
 # Channels
 
