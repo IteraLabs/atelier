@@ -6,6 +6,9 @@ use crate::data::admin::User;
 use crate::data::market::Order;
 use std::hash::{DefaultHasher, Hash, Hasher};
 
+// ---------------------------------------------------------------- USER ID HASHING -- //
+// ---------------------------------------------------------------- --------------- -- //
+
 impl Hash for User {
 
     fn hash<H: Hasher>(&self, state: &mut H) {
@@ -19,3 +22,20 @@ fn hash_user(user: &User) -> u64 {
     user.hash(&mut hasher);
     hasher.finish()
 }
+
+// --------------------------------------------------------------- ORDER ID HASHING -- //
+// --------------------------------------------------------------- ---------------- -- //
+
+impl Hash for Order {
+
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.order_id.hash(state);
+    }
+}
+
+fn hash_order(order: &Order) -> u64 {
+        let mut hasher = DefaultHasher::new();
+        order.hash(&mut hasher);
+        hasher.finish()
+}
+
