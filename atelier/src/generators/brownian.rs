@@ -27,7 +27,7 @@
 //! [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion)
 use crate::generators::probabilistic;
 use crate::generators::probabilistic::Sampling;
-use crate::messages::errors;
+use crate::results::errors;
 
 fn gbm_return_valid_inputs(
     s0: &f64,

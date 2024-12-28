@@ -1,7 +1,7 @@
 use crate::data::market;
 use crate::events::message;
 use crate::generators;
-use crate::messages::errors;
+use crate::results::errors;
 
 use rand::seq::SliceRandom;
 use rand::thread_rng;
@@ -19,11 +19,16 @@ pub fn random_cancel_lo_template() -> Result<message::MarketEvent, errors::Event
         .as_nanos() as u128;
     let random_event_type = message::MarketEventType::CancelLimitOrder;
     let random_user_id = 123;
+    let random_event_id = 987;
 
     // -- random event content -- //
     let random_order_id: u32 = 123;
     let i_event_info =
-        message::EventInfo::new(random_received_ts, random_event_type, random_user_id);
+        message::EventInfo::new(
+        random_event_id,    
+        random_received_ts,
+        random_event_type,
+        random_user_id);
 
     let i_event_content = message::EventContent::OrderCancellation(random_order_id);
 
@@ -49,8 +54,13 @@ pub fn random_new_mo_template() -> Result<message::MarketEvent, errors::EventErr
     let i_event_executed_ts = current_ts + 1;
     let i_event_type = message::MarketEventType::NewMarketOrder;
     let i_user_id = 654;
+    let i_event_id = 987;
 
-    let i_event_data = message::EventInfo::new(i_event_created_ts, i_event_type, i_user_id);
+    let i_event_data = message::EventInfo::new(
+        i_event_id, 
+        i_event_created_ts, 
+        i_event_type,
+        i_user_id);
 
     // -- random event content -- //
 
@@ -91,10 +101,14 @@ pub fn random_modify_lo_template() -> Result<message::MarketEvent, errors::Event
 
     let i_event_created_ts = current_ts;
     let i_event_type = message::MarketEventType::ModifyLimitOrder;
-
     let i_user_id = 654;
+    let i_event_id = 987;
 
-    let i_event_data = message::EventInfo::new(i_event_created_ts, i_event_type, i_user_id);
+    let i_event_data = message::EventInfo::new(
+        i_event_id,
+        i_event_created_ts,
+        i_event_type,
+        i_user_id);
 
     // -- random event content -- //
 
@@ -124,8 +138,13 @@ pub fn random_new_lo_template() -> Result<message::MarketEvent, errors::EventErr
 
     // TODO: Hash value for user_id + Create a list of users
     let i_user_id = 654;
+    let i_event_id = 987;
 
-    let i_event_data = message::EventInfo::new(i_event_created_ts, i_event_type, i_user_id);
+    let i_event_data = message::EventInfo::new(
+        i_event_id,
+        i_event_created_ts,
+        i_event_type,
+        i_user_id);
 
     // -- random event content -- //
 
