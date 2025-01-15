@@ -1,6 +1,4 @@
 // Publishers
-<<<<<<< HEAD
-=======
 
 use rdkafka::producer::{FutureProducer, FutureRecord};
 use rdkafka::util::Timeout;
@@ -31,4 +29,3 @@ pub async fn produce(future_producer: FutureProducer, msg: String) {
         Err(e) => println!("Event not transmited, produced this error {:?}", e),
     }
 }
->>>>>>> be5a583 (Progress on multi-commit mod)
