@@ -75,7 +75,6 @@ pub fn gbm_return(
                     let diffusion = sigma * v_s[t] * dwt[t];
                     // dS_t = drift_t + diffusion_t
                     let ds = drift + diffusion;
-
                     // Update vector of prices
                     v_s.push(v_s[t] + ds);
                     // Update vector of differences of prices

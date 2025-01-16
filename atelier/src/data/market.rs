@@ -1,4 +1,7 @@
 use crate::generators::randomizer::randomize_order;
+use rand::distributions::Uniform;
+use rand::Rng;
+
 use crate::results::errors::{LevelError, OrderError};
 use core::f64;
 use std::task::Wake;
@@ -28,6 +31,18 @@ impl Side {
 pub enum OrderType {
     Market,
     Limit,
+}
+
+impl OrderType {
+    pub fn random() -> Self {
+        let now_ts = SystemTime::now().duration_since(UNIX_EPOCH).expect("");
+
+        if now_ts.subsec_nanos() % 2 == 0 {
+            OrderType::Limit
+        } else {
+            OrderType::Market
+        }
+    }
 }
 
 // ------------------------------------------------------------------------------------ ORDER -- //
@@ -85,6 +100,29 @@ impl Order {
                 amount,
             },
         };
+
+        Order {
+            order_id,
+            order_ts,
+            order_type,
+            side,
+            price,
+            amount,
+        }
+    }
+
+    pub fn random(price: f64, amount: f64, order_type: OrderType) -> Self {
+        let order_id = 1234;
+
+        let mut uni_rand = rand::thread_rng();
+        let now_ts = SystemTime::now();
+        let since_epoch_ts = now_ts
+            .duration_since(UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_nanos();
+        let ms_offset = uni_rand.sample(Uniform::new(1, 30));
+        let order_ts = since_epoch_ts + ms_offset as u128;
+        let side = Side::random();
 
         Order {
             order_id,
@@ -749,17 +787,20 @@ impl Orderbook {
     ///
     /// Returns a new `Orderbook` instance populated with synthetic bid and
     /// ask levels.
-    pub fn synthetize(
-        bid_price: f64,
-        ask_price: f64,
-        tick_size: f64,
-        n_levels: u32,
-        n_orders: u32,
-    ) -> Self {
+    
+    pub fn random() -> Self {
+        
+        let bid_price: f64 = 90_000.00;
+        let ask_price: f64 = 91_000.00;
+        let tick_size: f64 = 1.00;
+        let n_levels: u32 = 4;
+        let n_orders: u32 = 2;
+
         let mut i_bids = Vec::new();
         let mut i_asks = Vec::new();
 
         for i in 1..=n_levels {
+
             let i_bid_price = bid_price - (&tick_size * i as f64);
             let i_bid_side = Side::Bids;
             let i_order_type = OrderType::Limit;
@@ -770,7 +811,7 @@ impl Orderbook {
 
             v_bid_orders.sort_by_key(|order| order.order_ts);
 
-            let i_bid_volume: f64 = v_bid_orders.iter().map(|order| order.amount).sum();
+           let i_bid_volume: f64 = v_bid_orders.iter().map(|order| order.amount).sum();
 
             i_bids.push(Level {
                 level_id: i,
