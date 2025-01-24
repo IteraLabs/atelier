@@ -10,7 +10,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 /// Side
 ///
 /// Enum for identification of either a buy or sell side
-/// used to describe the Order side. 
+/// used to describe the Order side.
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
 pub enum Side {
     Bids,
@@ -18,13 +18,11 @@ pub enum Side {
 }
 
 impl Side {
-
-    /// 
+    ///
     /// Creates a random choice of the Side enum variants, which currently
     /// has implemented: {Bids, Asks}
     ///
     pub fn random() -> Self {
-        
         let now_ts = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
@@ -45,12 +43,11 @@ pub enum OrderType {
 }
 
 impl OrderType {
-
-    /// 
+    ///
     /// Creates a random choice of the OrderType enum variants, which currently
     /// has implemented: {Limit, Market} as variants.
     ///
-    
+
     pub fn random() -> Self {
         let now_ts = SystemTime::now().duration_since(UNIX_EPOCH).expect("");
 
@@ -92,7 +89,7 @@ impl Order {
     /// - `amount`: The amount of the asset being ordered.
     ///
 
-   pub fn new() -> Order {
+    pub fn new() -> Order {
         Order {
             order_id: None,
             order_ts: None,
@@ -109,12 +106,11 @@ impl Order {
     }
 
     pub fn order_ts(mut self, order_ts: u128) -> Self {
-        
         let default_ts = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-    
+
         self.order_ts = match Some(order_ts) {
             Some(order_ts) => Some(order_ts),
             None => Some(default_ts),
@@ -122,7 +118,7 @@ impl Order {
 
         self
     }
-    
+
     pub fn order_type(mut self, order_type: OrderType) -> Self {
         self.order_type = Some(order_type);
         self
@@ -134,7 +130,7 @@ impl Order {
     }
 
     pub fn price(mut self, price: f64) -> Self {
-        self.price = Some(price);        
+        self.price = Some(price);
         self
     }
 
@@ -149,12 +145,21 @@ impl Order {
             order_id: Some(rng.gen()),
             order_ts: Some(
                 std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
-                .as_nanos()),
-            order_type: Some(if rng.gen::<bool>() { OrderType::Limit } else { OrderType::Market }),
-            side: Some(if rng.gen::<bool>() { Side::Bids } else { Side::Asks }),
-            price: Some(rng.gen_range( 90_000.0..90_200.0)),
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos(),
+            ),
+            order_type: Some(if rng.gen::<bool>() {
+                OrderType::Limit
+            } else {
+                OrderType::Market
+            }),
+            side: Some(if rng.gen::<bool>() {
+                Side::Bids
+            } else {
+                Side::Asks
+            }),
+            price: Some(rng.gen_range(90_000.0..90_200.0)),
             amount: Some(rng.gen_range(0.1..100.0)),
         }
     }
@@ -753,7 +758,6 @@ impl Orderbook {
                     let moded_order = self.bids[found_level.abs() as usize - 1].orders[found_order];
                     let moded_order = to_moded_order;
                     Ok(moded_order.clone())
-
                 } else if found_level > 0 {
                     println!("\nfounded_level: {:?}", found_level.abs() as usize - 1);
 
@@ -811,9 +815,8 @@ impl Orderbook {
     ///
     /// Returns a new `Orderbook` instance populated with synthetic bid and
     /// ask levels.
-    
+
     pub fn random() -> Self {
-        
         let bid_price: f64 = 90_000.00;
         let ask_price: f64 = 91_000.00;
         let tick_size: f64 = 1.00;
@@ -824,7 +827,6 @@ impl Orderbook {
         let mut i_asks = Vec::new();
 
         for i in 1..=n_levels {
-
             let i_bid_price = bid_price - (&tick_size * i as f64);
             let i_bid_side = Side::Bids;
             let i_order_type = OrderType::Limit;
@@ -835,7 +837,10 @@ impl Orderbook {
 
             v_bid_orders.sort_by_key(|order| order.order_ts);
 
-           let i_bid_volume: f64 = v_bid_orders.iter().map(|order| order.amount.unwrap_or(0.0)).sum();
+            let i_bid_volume: f64 = v_bid_orders
+                .iter()
+                .map(|order| order.amount.unwrap_or(0.0))
+                .sum();
 
             i_bids.push(Level {
                 level_id: i,
