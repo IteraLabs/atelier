@@ -4,14 +4,9 @@ use atelier::metrics::orderbook::OrderBookMetric;
 
 fn main() {
     // Parameters for the Initial State for the Order Book
-    let bid_price = 70_000.00;
-    let ask_price = 70_100.00;
-    let tick_size = 200.0;
-    let n_levels = 4;
-    let n_orders = 2;
 
     // Create synthetic progression of orderbooks
-    let n_orderbooks = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
+    let n_orderbooks = Orderbook::random();
 
     // sides of the order book Vec<Level>
     let v_bids = n_orderbooks.bids;

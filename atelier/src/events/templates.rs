@@ -68,14 +68,7 @@ pub fn random_new_mo_template() -> Result<message::MarketEvent, errors::EventErr
     let i_order_price = 70_100.00;
     let i_order_amount = 01.01;
 
-    let i_order = market::Order::new(
-        i_order_id,
-        i_order_ts,
-        i_order_type,
-        i_order_side,
-        i_order_price,
-        i_order_amount,
-    );
+    let i_order = market::Order::random();
 
     let i_event_content = message::EventContent::OrderCreation(i_order);
 
@@ -150,15 +143,7 @@ pub fn random_new_lo_template() -> Result<message::MarketEvent, errors::EventErr
     let i_order_price = 70_300.00;
     let i_order_amount = 01.666;
 
-    let i_order = market::Order::new(
-        i_order_id,
-        i_order_ts,
-        i_order_type,
-        i_order_side,
-        i_order_price,
-        i_order_amount,
-    );
-
+    let i_order = market::Order::random();
     let i_event_content = message::EventContent::OrderCreation(i_order);
     let r_market_event = message::MarketEvent::new(i_event_data, i_event_content);
     Ok(r_market_event)

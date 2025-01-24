@@ -209,7 +209,7 @@ impl OrderBookMetric<Vec<Level>> for OrdersVolume {
                     .clone()
                     .orders
                     .into_iter()
-                    .map(|i_order| i_order.amount)
+                    .map(|i_order| i_order.amount.unwrap())
                     .sum(),
             );
         }

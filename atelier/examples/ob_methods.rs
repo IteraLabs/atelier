@@ -2,26 +2,21 @@ use atelier::data::market::{Level, Order, OrderType, Orderbook, Side};
 
 fn main() {
     // Parameters for synthetic orderbook generation
-    let bid_price = 50_000.00;
-    let ask_price = 50_100.00;
-    let tick_size = 100.0;
-    let n_levels = 2;
-    let n_orders = 2;
 
     // Generate a synthetic orderbook for testing
     // this determines the order of the Level objects within
     // the bids and asks vectors, and also, the order of each
     // order within each level.
 
-    let mut i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
+    let mut i_ob = Orderbook::random();
 
     // Generated Orderbook
-    // println!("{:?}", i_ob);
+    println!("{:?}", i_ob);
 
     // ------------------------------------------------------- Find Level -- //
     // ------------------------------------------------------- ---------- -- //
 
-    let price_level = 50_200.0;
+    let price_level = 91_001.0;
     let find_level_ob = i_ob.find_level(&price_level);
 
     println!("\n -- Find Level --");
@@ -65,7 +60,7 @@ fn main() {
     // --------------------------------------------------- Retrieve Level -- //
     // --------------------------------------------------- -------------- -- //
 
-    let find_this: f64 = 50_200.0;
+    let find_this: f64 = 91_001.0;
     let content_ob_level = i_ob.retrieve_level(&find_this).unwrap();
 
     println!("\n -- Retrieve Level --");
@@ -85,7 +80,7 @@ fn main() {
     // ----------------------------------------------------- ------------ -- //
 
     println!("\n -- Delete Level --");
-    let delete_this: f64 = 50_200.0;
+    let delete_this: f64 = 89998.0;
     println!(
         " 
         Delete the level with this price: {:?}",
@@ -101,14 +96,13 @@ fn main() {
     println!("\n -- Insert Level --");
     println!("");
 
-    let new_order = Order {
-        order_id: 123,
-        order_ts: 456,
-        order_type: OrderType::Limit,
-        side: Side::Asks,
-        price: 50_200.0,
-        amount: 0.123,
-    };
+    let new_order = Order::new()
+        .order_id(123)
+        .order_ts(456)
+        .order_type(OrderType::Limit)
+        .side(Side::Asks)
+        .price(50_200.0)
+        .amount(0.123);
 
     let new_level = Level {
         level_id: 123,
@@ -148,7 +142,11 @@ fn main() {
 
     println!("\n -- Find Order --");
     let i_order = &i_ob.bids[0].orders[0];
-    let found_order = i_ob.find_order(i_order.side, i_order.price, i_order.order_ts);
+    let found_order = i_ob.find_order(
+        i_order.side.unwrap(),
+        i_order.price.unwrap(),
+        i_order.order_ts.unwrap(),
+    );
 
     println!(
         "
@@ -167,7 +165,11 @@ fn main() {
     println!("\n -- Retrieve Order --");
     let i_order = &i_ob.bids[0].orders[0];
 
-    let retrieved_order = i_ob.retrieve_order(i_order.side, i_order.price, i_order.order_ts);
+    let retrieved_order = i_ob.retrieve_order(
+        i_order.side.unwrap(),
+        i_order.price.unwrap(),
+        i_order.order_ts.unwrap(),
+    );
 
     println!(
         "
@@ -202,9 +204,9 @@ fn main() {
     println!("\nPrevious orderbook.bids has :\n{:?}", i_ob.bids);
 
     let _deleted = i_ob.delete_order(
-        to_delete_order.side,
-        to_delete_order.price,
-        to_delete_order.order_ts,
+        to_delete_order.side.unwrap(),
+        to_delete_order.price.unwrap(),
+        to_delete_order.order_ts.unwrap(),
     );
 
     println!("\nNow orderbook.bids has :\n{:?}", i_ob.bids);
@@ -230,9 +232,9 @@ fn main() {
     let to_modify_order = i_ob.asks[0].orders[0].clone();
 
     let moded = i_ob.modify_order(
-        to_modify_order.order_ts,
-        to_modify_order.side,
-        to_modify_order.price,
+        to_modify_order.order_ts.unwrap(),
+        to_modify_order.side.unwrap(),
+        to_modify_order.price.unwrap(),
         999.999,
     );
 
