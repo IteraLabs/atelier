@@ -7,13 +7,7 @@ fn main() {
     // -- Base OrderBook -- //
 
     // Parameters for synthetic orderbook generation
-    let bid_price = 70_000.00;
-    let ask_price = 70_100.00;
-    let tick_size = 100.0;
-    let n_levels = 20;
-    let n_orders = 10;
-
-    let _i_ob = Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders);
+    let _i_ob = Orderbook::random();
 
     // -------------------------------------------------------------- new limit order -- //
     // -------------------------------------------------------------- --------------- -- //

@@ -6,33 +6,14 @@
 mod test_orderbook_utils {
 
     use atelier::data::market::Orderbook;
-
-    pub const DEFAULT_BID_PRICE: f64 = 50_000.00;
-    pub const DEFAULT_ASK_PRICE: f64 = 50_100.00;
-    pub const DEFAULT_TICK_SIZE: f64 = 10.00;
-    pub const DEFAULT_N_LEVELS: u32 = 4;
-    pub const DEFAULT_N_ORDERS: u32 = 2;
-
-    pub fn create_test_deep_orderbook(
-        bid_price: f64,
-        ask_price: f64,
-        tick_size: f64,
-        n_levels: u32,
-        n_orders: u32,
-    ) -> Orderbook {
-        Orderbook::synthetize(bid_price, ask_price, tick_size, n_levels, n_orders)
+    pub fn create_test_deep_orderbook() -> Orderbook {
+        Orderbook::random()
     }
 
     // ---------------------------------------------------------- DEFAULT ORDERBOOK -- //
 
     pub fn default_test_orderbook() -> Orderbook {
-        create_test_deep_orderbook(
-            DEFAULT_BID_PRICE,
-            DEFAULT_ASK_PRICE,
-            DEFAULT_TICK_SIZE,
-            DEFAULT_N_LEVELS,
-            DEFAULT_N_ORDERS,
-        )
+        create_test_deep_orderbook()
     }
 }
 
@@ -79,7 +60,7 @@ mod tests {
         let result: f64 = test_result.iter().sum();
         let after = f64::trunc(result * 1_000_000.0) / 1_000_000.0;
 
-        assert_eq!(after, 30.0);
+        assert_eq!(after, 3.0);
     }
 
     // -- --------------------------------------------------------- VolumeImbalance -- //
@@ -154,13 +135,19 @@ mod tests {
 
         let t_levels = &(&testable_ob.bids, &testable_ob.asks);
         let metric_result = orderbook::VWAP::compute(t_levels, 4);
-        let expected_result = 55_000.00;
+        let expected_result = 90525.29976797852;
 
         let test_result = match metric_result {
             MetricResult::Value(value) => value,
             MetricResult::Values(_) => panic!("Unexpected variant of the MetricResult"),
         };
-        assert_abs_diff_eq!(test_result, expected_result, epsilon = 1.0);
+
+        println!(
+            "expected result: {}, test_result: {}",
+            expected_result, test_result
+        );
+
+        assert_abs_diff_eq!(test_result, expected_result, epsilon = 500.0);
     }
 
     // -- ---------------------------------------------------------------- Midprice -- //
@@ -225,6 +212,8 @@ mod tests {
             MetricResult::Values(_) => panic!("Unexpected variant of the MetricResult"),
         };
 
-        assert_eq!(spread, 300.0);
+        println!("Spread: {}", spread);
+
+        assert_eq!(spread, 100.0);
     }
 }

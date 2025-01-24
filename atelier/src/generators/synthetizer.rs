@@ -1,19 +1,18 @@
-
 //! # Synthetizer
 //!
 //! This module provides the functionality to generate synthetic orderbooks
 //! using various quantitative methods, for now only including brownian motion.
 //!
-//! The main struct in this module is the `Synthetizer`, which allows for 
-//! the creation of progressions, each of which a synthetic orderbook, based 
+//! The main struct in this module is the `Synthetizer`, which allows for
+//! the creation of progressions, each of which a synthetic orderbook, based
 //! on an initial orderbook state.
 //!
 
+use crate::data::market::{Level, Order, OrderType, Orderbook, Side};
+use crate::generators::brownian;
+use rand::distributions::Uniform;
 use rand::{thread_rng, Rng};
 use std::time::{SystemTime, UNIX_EPOCH};
-use rand::distributions::Uniform;
-use crate::data::market::{Side, Order, OrderType, Level, Orderbook};
-use crate::generators::brownian;
 
 /// A struct to produce synthetic version of orderbooks
 ///
@@ -25,7 +24,7 @@ pub struct Synthetizer {
 }
 
 impl Synthetizer {
-/// Creates a new `Synthetizer` instance.
+    /// Creates a new `Synthetizer` instance.
     ///
     /// # Parameters
     ///
@@ -35,14 +34,10 @@ impl Synthetizer {
     ///
     /// A new `Synthetizer` instance.
 
-    pub fn new(
-        initial_ob: Orderbook,
-    ) -> Self {
-        Synthetizer {
-            initial_ob,
-        }
+    pub fn new(initial_ob: Orderbook) -> Self {
+        Synthetizer { initial_ob }
     }
-    
+
     /// Generates a series of synthetic orderbooks using Brownian motion.
     ///
     /// This method creates a sequence of orderbooks where the price movements
@@ -59,7 +54,7 @@ impl Synthetizer {
     ///
     /// A vector of `Orderbook` instances representing the synthetic orderbook progression.
     ///
-    
+
     pub fn brownian(
         self,
         n_progressions: u16,
@@ -67,26 +62,27 @@ impl Synthetizer {
         n_levels: u32,
         n_orders: u32,
     ) -> Vec<Orderbook> {
-
         let mut uni_rand = rand::thread_rng();
-        let mut v_orderbooks:Vec<Orderbook> = Vec::new();
-        
+        let mut v_orderbooks: Vec<Orderbook> = Vec::new();
+
         // bid & ask prices to start the progression from
         let mut tob_bid_price = self.initial_ob.bids[0].price;
         let mut tob_ask_price = self.initial_ob.asks[0].price;
-        
-        let gbm_s0: f64 = (tob_bid_price + tob_ask_price)/2.0;
+
+        let gbm_s0: f64 = (tob_bid_price + tob_ask_price) / 2.0;
         let gbm_mu: f64 = 0.20;
         let gbm_dt: f64 = 0.001;
         let gbm_sigma: f64 = 0.1;
         let gbm_n: usize = 1;
-        
-        for j in 0..=n_progressions {
 
+        for j in 0..=n_progressions {
             // Form an empty orderbook for the current Progression
-           
+
             let j_ob_id = 1234;
-            let j_ob_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos() as u64; 
+            let j_ob_ts = SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_nanos() as u64;
             let j_ob_symbol = String::from("btcusd");
             let j_ob_bids = Vec::new();
             let j_ob_asks = Vec::new();
@@ -94,30 +90,28 @@ impl Synthetizer {
 
             v_orderbooks.push(j_orderbook);
 
-            // Get bids change in price 
+            // Get bids change in price
             let gbm_ret = brownian::gbm_return(gbm_s0, gbm_mu, gbm_sigma, gbm_dt, gbm_n).unwrap();
-            
+
             // Algebraic sum to incorporate price innovation for both sides
             let tob_bid_price = tob_bid_price + gbm_ret[0];
             let tob_ask_price = tob_ask_price + gbm_ret[0];
 
             for i in 0..=n_levels {
-                
                 // -- Bid Level Formation -- //
-                
+
                 let i_bid_price = tob_bid_price - (&tick_size * i as f64);
                 let i_bid_side = Side::Bids;
                 let i_order_type = OrderType::Limit;
-                let i_bid_size = uni_rand.sample(Uniform::new(0.01,0.3));
-                
-                let mut v_bid_orders: Vec<Order> = (0..n_orders)
-                    .map(|_| Order::random(i_bid_price, i_bid_size, i_order_type))
-                    .collect();
-                 
+                let i_bid_size = uni_rand.sample(Uniform::new(0.01, 0.3));
+
+                let mut v_bid_orders: Vec<Order> = (0..n_orders).map(|_| Order::random()).collect();
+
                 v_bid_orders.sort_by_key(|order| order.order_ts);
-                
-                let i_bid_volume: f64 = v_bid_orders.iter().map(|order| order.amount).sum();
-            
+
+                let i_bid_volume: f64 =
+                    v_bid_orders.iter().map(|order| order.amount.unwrap()).sum();
+
                 v_orderbooks[j as usize].bids.push(Level {
                     level_id: i,
                     side: i_bid_side,
@@ -127,19 +121,18 @@ impl Synthetizer {
                 });
 
                 // -- Asks Levels Formation -- //
-                
+
                 let i_ask_price = tob_ask_price + (&tick_size * i as f64);
                 let i_ask_side = Side::Asks;
                 let i_order_type = OrderType::Limit;
-                let i_ask_size = uni_rand.sample(Uniform::new(0.01,0.3));
-                
-                let mut v_ask_orders: Vec<Order> = (0..n_orders)
-                    .map(|_| Order::random(i_ask_price, i_ask_size, i_order_type))
-                    .collect();
-                 
+                let i_ask_size = uni_rand.sample(Uniform::new(0.01, 0.3));
+
+                let mut v_ask_orders: Vec<Order> = (0..n_orders).map(|_| Order::random()).collect();
+
                 v_ask_orders.sort_by_key(|order| order.order_ts);
-                
-                let i_ask_volume: f64 = v_ask_orders.iter().map(|order| order.amount).sum();
+
+                let i_ask_volume: f64 =
+                    v_ask_orders.iter().map(|order| order.amount.unwrap()).sum();
 
                 v_orderbooks[j as usize].asks.push(Level {
                     level_id: i,
@@ -151,8 +144,6 @@ impl Synthetizer {
             }
         }
 
-        v_orderbooks    
-    
+        v_orderbooks
     }
 }
-

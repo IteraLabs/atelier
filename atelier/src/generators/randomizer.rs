@@ -34,12 +34,5 @@ pub fn randomize_order(side: Side, price: f64, order_type: OrderType) -> Order {
     // Parse Order Type
     let order_type = order_type;
 
-    Order {
-        order_id,
-        order_ts,
-        order_type,
-        side,
-        price,
-        amount,
-    }
+    Order::random()
 }

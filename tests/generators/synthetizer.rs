@@ -9,8 +9,7 @@ mod test_synthetizer_utils {
 
     // ---------------------------------------------------------- DEFAULT ORDERBOOK -- //
 
-    pub fn create_init_orderbook(
-    ) -> Orderbook {
+    pub fn create_init_orderbook() -> Orderbook {
         Orderbook::random()
     }
 
@@ -26,7 +25,6 @@ mod tests {
     #[test]
     // -- ---------------------------------------------------------------------------- //
     fn test_generator_synthetizer_output_type() {
-        
         // Parameters for this test
         use super::*;
         use test_synthetizer_utils::*;
@@ -39,7 +37,7 @@ mod tests {
         let test_n_orders = 3;
 
         let test_synthetizer = synthetizer::Synthetizer::new(test_init_ob.clone());
-        
+
         let synthetic_ob = test_synthetizer.brownian(
             test_n_progressions,
             test_tick_size,
@@ -67,8 +65,7 @@ mod tests {
         let test_n_orders = 3;
 
         let test_synthetizer = Synthetizer::new(test_init_ob.clone());
-        
-        
+
         let synthetic_ob = test_synthetizer.brownian(
             test_n_progressions,
             test_tick_size,
@@ -77,6 +74,5 @@ mod tests {
         );
 
         assert_eq!(synthetic_ob.len(), 1 + test_n_progressions as usize);
-     
     }
 }

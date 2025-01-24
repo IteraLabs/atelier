@@ -6,29 +6,30 @@ publish = false
 
 [dependencies]
 atelier = { path = "../atelier" }
-approx = { version = "0.5.1"}
+approx = { version = "0.5.1" }
+rand = { version = "0.8.5" }
 
 [[test]]
-name = "tests_orderbook_implementations"
-path = "orderbook/implementations.rs"
+name = "test_data_orders"
+path = "data/orders.rs"
 
 [[test]]
-name = "tests_orderbook_progressions"
-path = "orderbook/progressions.rs"
+name = "test_data_orderbooks"
+path = "data/orderbooks.rs"
 
 [[test]]
 name = "test_process_brownian"
-path = "process/brownian.rs"
+path = "generators/brownian.rs"
 
 [[test]]
 name = "test_process_hawkes"
-path = "process/hawkes.rs"
+path = "generators/hawkes.rs"
+
+[[test]]
+name = "test_generator_synthetizer"
+path = "generators/synthetizer.rs"
 
 [[test]]
 name = "test_metrics_orderbook"
 path = "metrics/orderbook.rs"
-
-[[test]]
-name = "test_metrics_market"
-path = "metrics/market.rs"
 

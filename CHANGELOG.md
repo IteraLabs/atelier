@@ -1,22 +1,28 @@
 # CHANGELOG
 
-## v0.0.5 
+## v0.0.90
+---
 
-Synthetic Orderbook Generation
+Synthetic structure & Metrics
 
 ### Added
 
-- Workspaces logic within the root `Cargo.toml`.
-- `examples/` with one example.
-- `tests/` 
-- `CONTRIBUTING.md` as the general effort for improve documentation.
-- lints content in `./Cargo.toml` tha will be inherited to members of the workspace.
+- `tests/generators/synthetizer.rs` with one test for the synthetic progressions generation. 
+- `atelier/src/generators/synthetizer.rs` with synthetic progression generator base logic.
+- `atelier/src/generators/mod.rs` to include generators module.
+
+- `atelier/src/data/market.rs` gets an implementation of builder pattern for new instances of Order, Level and Orderbook
 
 ### Modified
 
-- `README.md` for better clarity and specificity. 
-- `Cargo.toml` to refactor project for workspace support.  
+- `Orderbook::synthetize` moved from `market::Orderbook` to `generators::synthetizer`
+- `Orderbook::random()` is the replacement for the previous `Orderbook::synthetize`
+- `process/` renamed to `generators/`
 
 ### Deleted
 
-- All python, docker related files. 
+- `ob_gbm_synthetic.rs`, `ob_gbm_synthetic.rs`, `ob_visualizations.rs`, `probabilistic_generators.rs` where deleted from the `examples/` folder.
+
+### Roadmap
+
+- Orderbook.orderbook_id needs a hashed way to be generated
