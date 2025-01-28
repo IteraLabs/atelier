@@ -105,7 +105,9 @@ impl Synthetizer {
                 let i_order_type = OrderType::Limit;
                 let i_bid_size = uni_rand.sample(Uniform::new(0.01, 0.3));
 
-                let mut v_bid_orders: Vec<Order> = (0..n_orders).map(|_| Order::random()).collect();
+                let mut v_bid_orders: Vec<Order> = (0..n_orders)
+                    .map(|_| Order::random(None, None, None))
+                    .collect();
 
                 v_bid_orders.sort_by_key(|order| order.order_ts);
 
@@ -127,7 +129,9 @@ impl Synthetizer {
                 let i_order_type = OrderType::Limit;
                 let i_ask_size = uni_rand.sample(Uniform::new(0.01, 0.3));
 
-                let mut v_ask_orders: Vec<Order> = (0..n_orders).map(|_| Order::random()).collect();
+                let mut v_ask_orders: Vec<Order> = (0..n_orders)
+                    .map(|_| Order::random(None, None, None))
+                    .collect();
 
                 v_ask_orders.sort_by_key(|order| order.order_ts);
 

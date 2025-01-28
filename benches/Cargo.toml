@@ -1,0 +1,15 @@
+[package]
+name = "benches"
+version = "0.0.1"
+publish = false
+edition = "2021"
+license = "ApacheV2"
+
+[dependencies]
+criterion = "0.5.1"
+rand = "0.8"
+
+[[bench]]
+name = "orderbook_random"
+path = "orderbook_random.rs"
+harness = false

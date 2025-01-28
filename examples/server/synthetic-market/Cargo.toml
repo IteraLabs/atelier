@@ -1,0 +1,18 @@
+[package]
+name = "synthetic-market"
+version = "0.0.1"
+authors.workspace = true
+documentation.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme.workspace = true
+license.workspace = true
+exclude.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+tokio = { version = "1.43.0" }
+

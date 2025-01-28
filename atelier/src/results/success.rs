@@ -12,3 +12,7 @@ pub enum OrderSuccess {
     OrderModified,
     OrderMatched,
 }
+
+pub enum EventSuccess {
+    EventCreated,
+}

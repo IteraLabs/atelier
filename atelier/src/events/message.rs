@@ -77,10 +77,19 @@ impl EventInfo {
 // ---------------------------------------------------- Market Event Content Struct -- //
 // ---------------------------------------------------- --------------------------- -- //
 
+/// EventContent
+///
+/// The necessary contents are dependent of the type of the event, 
+/// there is a one to one requirement for every type of event: 
+/// OrderCancellation requires only u32
+/// MarketOrderCreation requires the actual market order,
+/// LimitOrderCreation requires the actual limit order,
+/// OrderModification requires a tupple of order_id and the order_amount.
+
 #[derive(Debug, PartialEq, PartialOrd)]
 pub enum EventContent {
-    OrderCreation(market::Order),
     OrderCancellation(u32),
+    OrderCreation(market::Order),
     OrderModification(u32, f64),
 }
 
