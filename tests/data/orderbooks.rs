@@ -135,7 +135,9 @@ mod tests {
             Ok(_) => {
                 println!(
                     "Level founded, level_id: {:?}, side: {:?}, price: {:?}",
-                    &level_to_delete.level_id, &level_to_delete.side, &level_to_delete.price
+                    &level_to_delete.level_id,
+                    &level_to_delete.side,
+                    &level_to_delete.price
                 )
             }
             Err(_) => {

@@ -1,5 +1,5 @@
 /// channels where events are published to, and/or, subscribed from
-pub mod channels;
+pub mod topics;
 
 /// message struct and formation
 pub mod message;

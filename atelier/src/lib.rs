@@ -7,14 +7,8 @@
 #![allow(dead_code)]
 #![allow(warnings)]
 
-/// Agentic artifacts and tools.
-pub mod agents;
-
 /// Core data types and data structures.
 pub mod data;
-
-/// The Order Management and Matching Engine logics.
-pub mod engine;
 
 /// Market event generator.
 pub mod events;

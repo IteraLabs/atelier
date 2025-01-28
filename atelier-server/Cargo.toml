@@ -1,0 +1,25 @@
+[package]
+name = "atelier-server"
+version = "0.0.1"
+edition = "2021"
+publish = false
+
+description = "Deployment Artifacts for the atelier.rs"
+authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
+
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+
+documentation = "https://docs.rs/atelier/"
+repository = "https://github.com/iteralabs/atelier"
+
+include = ["src/**/*", "katex-header.html"]
+
+[lints]
+workspace = true
+
+[dependencies]
+atelier = { path = "../atelier" }
+rdkafka = "0.37.0"
+tokio = "1.43.0"
+

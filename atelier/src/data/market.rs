@@ -49,9 +49,9 @@ impl OrderType {
     ///
 
     pub fn random() -> Self {
-        let now_ts = SystemTime::now().duration_since(UNIX_EPOCH).expect("");
+        let now_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
 
-        if now_ts.subsec_nanos() % 2 == 0 {
+        if now_ts.as_secs() % 2 == 0 {
             OrderType::Limit
         } else {
             OrderType::Market
@@ -139,29 +139,56 @@ impl Order {
         self
     }
 
-    pub fn random() -> Self {
+    pub fn random(
+        mo_amounts: Option<(f64, f64)>,
+        lo_prices: Option<(f64, f64)>,
+        lo_amounts: Option<(f64, f64)>
+    ) -> Self {
+        
         let mut rng = rand::thread_rng();
-        Order {
-            order_id: Some(rng.gen()),
-            order_ts: Some(
-                std::time::SystemTime::now()
-                    .duration_since(std::time::UNIX_EPOCH)
-                    .unwrap()
-                    .as_nanos(),
-            ),
-            order_type: Some(if rng.gen::<bool>() {
-                OrderType::Limit
-            } else {
-                OrderType::Market
-            }),
-            side: Some(if rng.gen::<bool>() {
-                Side::Bids
-            } else {
-                Side::Asks
-            }),
-            price: Some(rng.gen_range(90_000.0..90_200.0)),
-            amount: Some(rng.gen_range(0.1..100.0)),
+
+        let i_order = Order::new()
+            .order_id(rng.gen())
+            .order_ts(std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos())
+        .side(Side::random())
+        .order_type(OrderType::random());
+        
+        match i_order.order_type {
+            
+            Some(OrderType::Limit) => {
+
+                if let Some(lo_prices) = lo_prices {
+                    i_order.price(rng.gen_range(lo_prices.0..lo_prices.1));
+                } else {
+                    i_order.price(rng.gen_range(0.001..100_000.00));
+                }
+
+                if let Some(lo_amounts) = lo_amounts {
+                    i_order.amount(rng.gen_range(lo_amounts.0..lo_amounts.1));
+                } else {
+                    i_order.amount(rng.gen_range(0.00001..1.0));
+                }
+
+            }
+
+            Some(OrderType::Market) => {
+
+                if let Some(mo_amounts) = mo_amounts {
+                    i_order.amount(rng.gen_range(mo_amounts.0..mo_amounts.1));
+                } else {
+                    i_order.amount(rng.gen_range(0.00001..1.0));
+                }
+
+
+            }
+            _ => {}
         }
+
+        i_order.amount(rng.gen_range(0.1..100.0))
+
     }
 }
 
@@ -815,13 +842,16 @@ impl Orderbook {
     ///
     /// Returns a new `Orderbook` instance populated with synthetic bid and
     /// ask levels.
+    ///
+    /// TODO: update this to be done with builder method.
+    ///
 
     pub fn random() -> Self {
         let bid_price: f64 = 90_000.00;
         let ask_price: f64 = 91_000.00;
         let tick_size: f64 = 1.00;
-        let n_levels: u32 = 100;
-        let n_orders: u32 = 10;
+        let n_levels: u32 = 5;
+        let n_orders: u32 = 3;
 
         let mut i_bids = Vec::new();
         let mut i_asks = Vec::new();

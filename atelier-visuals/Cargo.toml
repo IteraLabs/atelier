@@ -1,0 +1,9 @@
+[package]
+name = "atelier-visuals"
+version = "0.0.1"
+publish = false
+edition = "2021"
+
+[dependencies]
+atelier = { path = "../atelier" }
+

@@ -1,0 +1,13 @@
+[package]
+name = "examples"
+version = "0.0.1"
+publish = false
+edition = "2021"
+
+[dependencies]
+atelier = { path = "../atelier" }
+
+[[example]]
+name = "tutorial_simple_orderbook"
+path = "tutorials_orderbook/01_simple_ob.rs"
+

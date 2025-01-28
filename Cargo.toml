@@ -2,6 +2,15 @@
 
 members = [
   "atelier",
+  "atelier-agents",
+  "atelier-engine",
+  "atelier-client",
+  "atelier-server",
+  "atelier-visuals",
+  
+  # Internal
+  "benches",
+  "examples",
   "tests",
 ]
 
