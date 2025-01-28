@@ -142,24 +142,23 @@ impl Order {
     pub fn random(
         mo_amounts: Option<(f64, f64)>,
         lo_prices: Option<(f64, f64)>,
-        lo_amounts: Option<(f64, f64)>
+        lo_amounts: Option<(f64, f64)>,
     ) -> Self {
-        
         let mut rng = rand::thread_rng();
 
         let i_order = Order::new()
             .order_id(rng.gen())
-            .order_ts(std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
-                .as_nanos())
-        .side(Side::random())
-        .order_type(OrderType::random());
-        
-        match i_order.order_type {
-            
-            Some(OrderType::Limit) => {
+            .order_ts(
+                std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos(),
+            )
+            .side(Side::random())
+            .order_type(OrderType::random());
 
+        match i_order.order_type {
+            Some(OrderType::Limit) => {
                 if let Some(lo_prices) = lo_prices {
                     i_order.price(rng.gen_range(lo_prices.0..lo_prices.1));
                 } else {
@@ -171,24 +170,19 @@ impl Order {
                 } else {
                     i_order.amount(rng.gen_range(0.00001..1.0));
                 }
-
             }
 
             Some(OrderType::Market) => {
-
                 if let Some(mo_amounts) = mo_amounts {
                     i_order.amount(rng.gen_range(mo_amounts.0..mo_amounts.1));
                 } else {
                     i_order.amount(rng.gen_range(0.00001..1.0));
                 }
-
-
             }
             _ => {}
         }
 
         i_order.amount(rng.gen_range(0.1..100.0))
-
     }
 }
 

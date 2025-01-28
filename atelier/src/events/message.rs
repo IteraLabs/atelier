@@ -79,8 +79,8 @@ impl EventInfo {
 
 /// EventContent
 ///
-/// The necessary contents are dependent of the type of the event, 
-/// there is a one to one requirement for every type of event: 
+/// The necessary contents are dependent of the type of the event,
+/// there is a one to one requirement for every type of event:
 /// OrderCancellation requires only u32
 /// MarketOrderCreation requires the actual market order,
 /// LimitOrderCreation requires the actual limit order,
