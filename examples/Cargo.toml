@@ -6,8 +6,13 @@ edition = "2021"
 
 [dependencies]
 atelier = { path = "../atelier" }
+rand = { version="0.8.5" }
 
 [[example]]
-name = "tutorial_simple_orderbook"
-path = "tutorials_orderbook/01_simple_ob.rs"
+name = "tutorial_basic_orderbook"
+path = "tutorials/orderbooks/basic_orderbook.rs"
+
+[[example]]
+name = "tutorial_basisc_engine"
+path = "tutorials/engine/basic_engine.rs"
 

@@ -35,5 +35,4 @@ pub fn randomize_order(side: Side, price: f64, order_type: OrderType) -> Order {
     let order_type = order_type;
 
     Order::random(None, None, None)
-
 }

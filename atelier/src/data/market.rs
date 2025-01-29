@@ -142,24 +142,23 @@ impl Order {
     pub fn random(
         mo_amounts: Option<(f64, f64)>,
         lo_prices: Option<(f64, f64)>,
-        lo_amounts: Option<(f64, f64)>
+        lo_amounts: Option<(f64, f64)>,
     ) -> Self {
-        
         let mut rng = rand::thread_rng();
 
         let i_order = Order::new()
             .order_id(rng.gen())
-            .order_ts(std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
-                .as_nanos())
-        .side(Side::random())
-        .order_type(OrderType::random());
-        
-        match i_order.order_type {
-            
-            Some(OrderType::Limit) => {
+            .order_ts(
+                std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos(),
+            )
+            .side(Side::random())
+            .order_type(OrderType::random());
 
+        match i_order.order_type {
+            Some(OrderType::Limit) => {
                 if let Some(lo_prices) = lo_prices {
                     i_order.price(rng.gen_range(lo_prices.0..lo_prices.1));
                 } else {
@@ -171,24 +170,19 @@ impl Order {
                 } else {
                     i_order.amount(rng.gen_range(0.00001..1.0));
                 }
-
             }
 
             Some(OrderType::Market) => {
-
                 if let Some(mo_amounts) = mo_amounts {
                     i_order.amount(rng.gen_range(mo_amounts.0..mo_amounts.1));
                 } else {
                     i_order.amount(rng.gen_range(0.00001..1.0));
                 }
-
-
             }
             _ => {}
         }
 
         i_order.amount(rng.gen_range(0.1..100.0))
-
     }
 }
 
@@ -846,23 +840,40 @@ impl Orderbook {
     /// TODO: update this to be done with builder method.
     ///
 
-    pub fn random() -> Self {
-        let bid_price: f64 = 90_000.00;
-        let ask_price: f64 = 91_000.00;
-        let tick_size: f64 = 1.00;
-        let n_levels: u32 = 5;
-        let n_orders: u32 = 3;
-
+    //
+    // left and right interval values for:
+    // tick sizes
+    // no. of levels
+    // no. of orders
+    // 
+    
+    pub fn random(
+        
+        bids_price: f64,
+        bids_orders: u32,
+        bids_levels: u32,
+        tick_size: f64,
+        asks_price: f64,
+        asks_orders: u32,
+        asks_levels: u32,
+    
+    ) -> Self {
+       
+        // -- Default values -- //
         let mut i_bids = Vec::new();
         let mut i_asks = Vec::new();
 
-        for i in 1..=n_levels {
-            let i_bid_price = bid_price - (&tick_size * i as f64);
-            let i_bid_side = Side::Bids;
-            let i_order_type = OrderType::Limit;
+        let r_orderbook_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
+        let r_orderbook_id = 1234;
 
-            let mut v_bid_orders: Vec<Order> = (0..n_orders)
-                .map(|_| randomize_order(i_bid_side, i_bid_price, i_order_type))
+        // -- Bid side level formation -- //
+        for i in 1..=bids_levels {
+
+            let mut v_bid_orders: Vec<Order> = (0..bids_orders)
+                .map(|_| randomize_order(
+                    Side::Bids,
+                    bids_price - (&tick_size * i as f64),
+                    OrderType::Limit))
                 .collect();
 
             v_bid_orders.sort_by_key(|order| order.order_ts);
@@ -874,17 +885,21 @@ impl Orderbook {
 
             i_bids.push(Level {
                 level_id: i,
-                side: i_bid_side,
-                price: i_bid_price,
+                side: Side::Bids,
+                price: bids_price - (&tick_size * i as f64),
                 volume: i_bid_volume,
                 orders: v_bid_orders,
             });
+        }
 
-            let i_ask_price = ask_price + (&tick_size * i as f64);
-            let i_ask_side = Side::Asks;
+        // -- Ask side level formation -- //
+        for i in 1..=asks_levels {
 
-            let mut v_ask_orders: Vec<Order> = (0..n_orders)
-                .map(|_| randomize_order(i_ask_side, i_ask_price, i_order_type))
+            let mut v_ask_orders: Vec<Order> = (0..asks_orders)
+                .map(|_| randomize_order(
+                    Side::Asks,
+                    asks_price + (&tick_size * i as f64),
+                    OrderType::Limit))
                 .collect();
 
             v_ask_orders.sort_by_key(|order| order.order_ts);
@@ -893,8 +908,8 @@ impl Orderbook {
 
             i_asks.push(Level {
                 level_id: i,
-                side: i_ask_side,
-                price: i_ask_price,
+                side: Side::Asks,
+                price: asks_price + (&tick_size * i as f64),
                 volume: i_ask_volume,
                 orders: v_ask_orders,
             });

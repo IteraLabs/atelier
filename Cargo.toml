@@ -2,7 +2,6 @@
 
 members = [
   "atelier",
-  "atelier-agents",
   "atelier-engine",
   "atelier-client",
   "atelier-server",

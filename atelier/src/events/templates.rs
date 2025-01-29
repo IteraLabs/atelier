@@ -65,11 +65,7 @@ pub fn random_new_mo_template() -> Result<message::MarketEvent, errors::EventErr
     let limitorder_amount = None;
     let limitorder_prices = None;
 
-    let r_order = market::Order::random(
-        marketorder_amount,
-        limitorder_amount,
-        limitorder_prices
-    );
+    let r_order = market::Order::random(marketorder_amount, limitorder_amount, limitorder_prices);
 
     let i_event_content = message::EventContent::OrderCreation(r_order);
 
