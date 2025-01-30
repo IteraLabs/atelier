@@ -1,8 +1,6 @@
 /// Market event generator module
-use crate::data::market;
-use crate::generators;
 use crate::results::errors;
-
+use atelier_data::orders::Order;
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -77,20 +75,21 @@ impl EventInfo {
 // ---------------------------------------------------- Market Event Content Struct -- //
 // ---------------------------------------------------- --------------------------- -- //
 
-/// EventContent
+/// OrderEvent
 ///
-/// The necessary contents are dependent of the type of the event,
-/// there is a one to one requirement for every type of event:
-/// OrderCancellation requires only u32
-/// MarketOrderCreation requires the actual market order,
-/// LimitOrderCreation requires the actual limit order,
-/// OrderModification requires a tupple of order_id and the order_amount.
+/// The necessary contents are dependent of the type of the order event,
+/// there is a one to one requirement for every type of order event:
+/// CancelLimitOrder requires only u32
+/// NewMarketOrder requires the actual market order,
+/// NewLimitOrder requires the actual limit order,
+/// ModifyLimitOrder requires a tupple of order_id and the order_amount.
 
 #[derive(Debug, PartialEq, PartialOrd)]
 pub enum EventContent {
-    OrderCancellation(u32),
-    OrderCreation(market::Order),
-    OrderModification(u32, f64),
+    CancelLimitOrder(u32),
+    NewMarketOrder(Order),
+    ModifyLimitOrder(Order),
+    NewLimitOrder(Order),
 }
 
 // ------------------------------------------------------------ Market Event Struct -- //
@@ -103,10 +102,12 @@ pub struct MarketEvent {
 }
 
 impl MarketEvent {
+
     pub fn new(event_info: EventInfo, event_content: EventContent) -> Self {
         MarketEvent {
             event_info,
             event_content,
         }
     }
+
 }

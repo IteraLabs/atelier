@@ -5,4 +5,5 @@ publish = false
 edition = "2021"
 
 [dependencies]
-atelier = { path = "../atelier" }
+# Error
+thiserror = { workspace = true }

@@ -13,13 +13,7 @@ categories = ["data-structures", "development-tools", "finance", "simulation"]
 documentation = "https://docs.rs/atelier/"
 repository = "https://github.com/iteralabs/atelier"
 
-include = ["src/**/*", "katex-header.html"]
-
-[lints]
-workspace = true
-
 [dependencies]
-atelier = { path = "../atelier" }
 rdkafka = "0.37.0"
 tokio = "1.43.0"
 

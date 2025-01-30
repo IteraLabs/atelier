@@ -1,4 +1,4 @@
-use crate::data::market::Level;
+use atelier_data::levels::Level;
 
 /// An enum to register the outputs for Metrics
 

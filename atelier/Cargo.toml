@@ -13,23 +13,37 @@ repository = "https://github.com/iteralabs/atelier"
 include = ["src/**/*", "katex-header.html"]
 
 [dependencies]
-serde = { version = "1.0.203", features = ["derive"] }
+
+# Atelier workbench
+atelier-data = { workspace = true, version = "0.0.1" }
+atelier-client = { workspace = true, version = "0.0.1" }
+atelier-engine = { workspace = true, version = "0.0.1" }
+atelier-generators = { workspace = true, version = "0.0.1" }
+atelier-execution = { workspace = true, version = "0.0.1" }
+atelier-server = { workspace = true, version = "0.0.1" }
+atelier-visuals = { workspace = true, version = "0.0.1" }
+
+# Error Handling
 thiserror = { version = "1.0.64" }
+
+# Probabilistic features
 rand = {version="0.8.5"}
 rand_distr = "0.4.3"
+
+# Async, event-driven processing
 crossbeam = "0.8"
 rdkafka = "0.37.0"
+serde = { version = "1.0.203", features = ["derive"] }
 
-[dev-dependencies]
+# Logging
+tracing = { version = "0.1.41" }
+tracing-subscriber = { version = "0.3.19" }
 
-[lib]
-name = "atelier"
-crate-type = ["lib"]
-test = true
-doctest = true
-
-[lints]
-workspace = true
+# Crytographic Signatures
+hmac = { version = "0.12.1" }
+sha2 = { version = "0.10.8" }
+hex = { version = "0.4.3" }
+base64 = { version = "0.22.1" }
 
 [package.metadata.docs.rs]
 rustdoc-args = [ "--html-in-header", "katex-header.html" ]

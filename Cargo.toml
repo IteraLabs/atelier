@@ -1,20 +1,57 @@
 [workspace]
-
+resolver = "2"
 members = [
+  # Core
   "atelier",
+  
+  # Operational
+  "atelier-data",
+  "atelier-execution",
   "atelier-engine",
   "atelier-client",
   "atelier-server",
-  "atelier-visuals",
-  
-  # Internal
+ 
+  # Scientific
+  "atelier-generators",
+
+  # Excellence
   "benches",
+
+  # Usability
   "examples",
-  "tests",
+  "atelier-visuals"
 ]
 
-resolver = "2"
+[workspace.dependencies]
 
-[workspace.lints.rust]
-unsafe_code = "forbid"
-unused_extern_crates = "warn"
+# Atelier workbench
+atelier-data = { path = "./atelier-data", version = "0.0.1" }
+atelier-client = { path = "./atelier-client", version = "0.0.1" }
+atelier-engine = { path = "./atelier-engine", version = "0.0.1" }
+atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
+atelier-execution = { path = "./atelier-execution", version = "0.0.1" }
+atelier-server = { path = "./atelier-server", version = "0.0.1" }
+atelier-visuals = { path = "./atelier-visuals", version = "0.0.1" }
+
+# Error Handling
+thiserror = { version = "1.0.64" }
+
+# Probabilistic features
+rand = {version="0.8.5"}
+rand_distr = "0.4.3"
+
+# Async, event-driven processing
+crossbeam = "0.8"
+rdkafka = "0.37.0"
+serde = { version = "1.0.203", features = ["derive"] }
+
+# Logging
+tracing = { version = "0.1.41" }
+tracing-subscriber = { version = "0.3.19" }
+
+# Crytographic Signatures
+hmac = { version = "0.12.1" }
+sha2 = { version = "0.10.8" }
+hex = { version = "0.4.3" }
+base64 = { version = "0.22.1" }
+

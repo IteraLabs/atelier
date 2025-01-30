@@ -7,14 +7,8 @@
 #![allow(dead_code)]
 #![allow(warnings)]
 
-/// Core data types and data structures.
-pub mod data;
-
 /// Market event generator.
 pub mod events;
-
-/// Stochastic data generation with probabilistic models.
-pub mod generators;
 
 /// Messages structures for: Errors, Success, Events, and Logs.
 pub mod results;

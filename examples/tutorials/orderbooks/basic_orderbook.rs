@@ -1,6 +1,6 @@
 // Tutorial for Limit Order Book interaction
 
-use atelier::data::market::Orderbook;
+use atelier_data::orderbooks::Orderbook;
 use rand::distributions::{Bernoulli, Uniform, Distribution};
 use rand::Rng;
 

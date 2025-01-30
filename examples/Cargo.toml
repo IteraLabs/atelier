@@ -5,14 +5,10 @@ publish = false
 edition = "2021"
 
 [dependencies]
-atelier = { path = "../atelier" }
+atelier-data = { path = "../atelier-data", version = "0.0.1" }
 rand = { version="0.8.5" }
 
 [[example]]
 name = "tutorial_basic_orderbook"
 path = "tutorials/orderbooks/basic_orderbook.rs"
-
-[[example]]
-name = "tutorial_basisc_engine"
-path = "tutorials/engine/basic_engine.rs"
 

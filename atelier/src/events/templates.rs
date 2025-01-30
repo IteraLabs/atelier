@@ -1,7 +1,8 @@
-use crate::data::market;
 use crate::events::message;
-use crate::generators;
 use crate::results::errors;
+use crate::events;
+
+use atelier_data::orders::{Order, OrderSide, OrderType};
 
 use rand::seq::SliceRandom;
 use rand::thread_rng;
@@ -30,7 +31,7 @@ pub fn random_cancel_lo_template() -> Result<message::MarketEvent, errors::Event
         random_user_id,
     );
 
-    let i_event_content = message::EventContent::OrderCancellation(random_order_id);
+    let i_event_content = message::EventContent::CancelLimitOrder(random_order_id);
 
     // -- market event formation -- //
     let r_market_event = message::MarketEvent::new(i_event_info, i_event_content);
@@ -65,10 +66,15 @@ pub fn random_new_mo_template() -> Result<message::MarketEvent, errors::EventErr
     let limitorder_amount = None;
     let limitorder_prices = None;
 
-    let r_order = market::Order::random(marketorder_amount, limitorder_amount, limitorder_prices);
+    let r_order = Order::random(
+        OrderType::Market,
+        OrderSide::random(), 
+        marketorder_amount,
+        limitorder_amount,
+        limitorder_prices
+    );
 
-    let i_event_content = message::EventContent::OrderCreation(r_order);
-
+    let i_event_content = message::EventContent::NewMarketOrder(r_order);
     let r_market_event = message::MarketEvent::new(i_event_data, i_event_content);
 
     // returns the message {event data, event content}
@@ -95,11 +101,15 @@ pub fn random_modify_lo_template() -> Result<message::MarketEvent, errors::Event
         message::EventInfo::new(i_event_id, i_event_created_ts, i_event_type, i_user_id);
 
     // -- random event content -- //
+    let i_replacing_order = Order::random(
+        OrderType::random(),
+        OrderSide::random(),
+        None,
+        None,
+        None,
+    );
 
-    let i_order_id = 012;
-    let i_order_amount = 01.01;
-
-    let i_event_content = message::EventContent::OrderModification(i_order_id, i_order_amount);
+    let i_event_content = message::EventContent::ModifyLimitOrder(i_replacing_order);
     let r_market_event = message::MarketEvent::new(i_event_data, i_event_content);
 
     // returns the message {event data, event content}
@@ -133,15 +143,15 @@ pub fn random_new_lo_template() -> Result<message::MarketEvent, errors::EventErr
     let i_order_id = 012;
 
     let i_order_ts = current_ts;
-    let i_order_type = market::OrderType::Limit;
-    let i_order_side = market::Side::random();
+    let i_order_type = atelier_data::orders::OrderType::Limit;
+    let i_order_side = atelier_data::orders::OrderSide::random();
 
     // perhaps pass these two
     let i_order_price = 70_300.00;
     let i_order_amount = 01.666;
 
-    let i_order = market::Order::random(None, None, None);
-    let i_event_content = message::EventContent::OrderCreation(i_order);
+    let i_order = atelier_data::orders::Order::random(OrderType::random(), OrderSide::random(), None, None, None);
+    let i_event_content = message::EventContent::NewLimitOrder(i_order);
     let r_market_event = message::MarketEvent::new(i_event_data, i_event_content);
     Ok(r_market_event)
 }

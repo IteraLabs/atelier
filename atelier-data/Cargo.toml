@@ -1,0 +1,19 @@
+[package]
+name = "atelier-data"
+version = "0.0.1"
+publish = false
+edition = "2021"
+
+[dependencies]
+
+# Error
+thiserror = { workspace = true }
+
+# Probabilistic features
+rand = { version = "0.8.5" }
+rand_distr = "0.4.3"
+
+[[test]]
+name = "test_ob_methods"
+path = "tests/orderbooks/ob_methods.rs"
+
