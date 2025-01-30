@@ -4,6 +4,8 @@ version = "0.0.1"
 publish = false
 edition = "2021"
 
+include = ["../katex-header.html"]
+
 [dependencies]
 
 # atelier workbench

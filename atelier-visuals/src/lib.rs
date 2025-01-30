@@ -1,5 +1,6 @@
-// atelier-visuals
+//! # atelier-visuals
+//!
+//! Data visualization components.
 
-#![allow(warnings)]
-
+/// Orderbook static and dynamic visualization.
 pub mod orderbook;

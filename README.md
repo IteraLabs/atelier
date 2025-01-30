@@ -16,6 +16,14 @@
 
 Use `atelier` for modeling market microstructure dynamics, it supports an `orderbook-based` market structure. Whether you need a high quality reproduction of any given market within a defined period of time (market replay), or, to generate `what-if` scnearios either completely random, or, with model specification (market simulation). 
 
+## KaTex Rendering
+
+The `katex-header.html` file is necessary, and also, either to pass the flags 
+
+```shell
+RUSTDOCFLAGS="--html-in-header katex-header.html" cargo doc --no-deps --all-features
+```
+
 ## Contribute
 
 Feel free to contribute, just make sure you check the [CONTRIBUTING]() guidelines. Also consider to pick-up the existing [issues]().

@@ -1,2 +1,4 @@
-// atelier-server: Event streaming engine with kafka
+//! # atelier-server
+//!
+//! Event streaming engine with kafka
 

@@ -1,4 +1,4 @@
-// atelier-client
-//
-// Client side configs and tools
-
+//! # atelier-client 
+//! 
+//! Client side connectors, processes and tools.
+//!

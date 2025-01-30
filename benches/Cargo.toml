@@ -13,3 +13,4 @@ rand = "0.8"
 name = "orderbook_random"
 path = "orderbook_random.rs"
 harness = false
+

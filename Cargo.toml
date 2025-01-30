@@ -22,6 +22,8 @@ members = [
   "atelier-visuals"
 ]
 
+include = ["katex-header.html"]
+
 [workspace.dependencies]
 
 # Atelier workbench

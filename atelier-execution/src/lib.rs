@@ -1,2 +1,5 @@
-// atelier-execution
+//! # atelier-execution
+//!
+//! Execution logic
+//!
 
