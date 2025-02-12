@@ -5,6 +5,9 @@ edition = "2021"
 publish = false
 
 [dependencies]
+
+# Atelier workbench
+atelier-data = { workspace = true }
+
 # Error
 thiserror = { workspace = true }
-

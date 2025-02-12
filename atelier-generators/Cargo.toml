@@ -8,7 +8,7 @@ include = ["../katex-header.html"]
 
 [dependencies]
 
-# atelier workbench
+# Atelier sub-modules 
 atelier-data = { workspace = true }
 
 # Error

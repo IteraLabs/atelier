@@ -5,6 +5,13 @@ publish = false
 edition = "2021"
 
 [dependencies]
+
 # Error
 thiserror = { workspace = true }
 
+# Visualizations
+plotters = { workspace = true }
+
+[[example]]
+name = "line_plot"
+path = "atelier-visuals/examples/line_plot.rs"

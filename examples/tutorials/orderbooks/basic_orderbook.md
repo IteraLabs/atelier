@@ -17,6 +17,17 @@ let ini_ticksize = 1.0;
 let r_ob = Orderbook::random();
 ```
 
+## Details on Orderbook::random()
+
+A more descriptive name for that method would be `::deterministic-side-level-random-order-generation`, but you can see already that is just too long. Still, fundamentally, `::random()` is that, a deterministic number of sides, and, number of levels per side, coupled with a random way of generating orders to fill-in each level. 
+
+- For each side, there is an N number of levels, and each of those contain an M number of orders.
+- The primary source of randomness is the way orders are generated.
+- The most simple and information-less way of generating a pseudo-random Orderbook is `Orderbook::random()`. Which has a deterministic part, and, a random part:
+
+- The deterministic part: When the code is executed, the timestamp is instantly taken as synthetic timestamp reference. Also only limit orders are supported, and, for each level, orders will be generated and ordered first-in-time using the reference synthetic time.
+- The random part: Only uniform distribution is used, for initial `best bid`, and, `best ask` prices according to the generated number of sides $[1, 2]$, also for number of levels per side $[0, 100]$, number of orders per side $[0, 10]$.
+
 ## Naive instance
 
 pseudo random orderbook generation, naive method, one orderbook.

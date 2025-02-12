@@ -1,20 +1,20 @@
 // Tutorial for Limit Order Book interaction
 
 use atelier_data::orderbooks::Orderbook;
-use rand::distributions::{Bernoulli, Uniform, Distribution};
+use rand::distr::{Bernoulli, Uniform, Distribution};
 use rand::Rng;
 
 fn main() {
 
     let ini_bid_price = 100_000.00;
     let ini_bid_levels = 2;
-    let ini_bid_orders = 3;
+    let ini_bid_orders = Some((1, 10));
 
     let ini_ask_price = 100_001.00;
     let ini_ask_levels = 2;
-    let ini_ask_orders = 3;
+    let ini_ask_orders = Some((1, 10));
 
-    let ini_ticksize = 1.0;
+    let ini_ticksize = Some((0.1, 1.1));
 
     let r_ob = Orderbook::random(
         ini_bid_price,
@@ -30,10 +30,11 @@ fn main() {
 
     for _ in 0..3 {
     
-        let mut uni_rand = rand::thread_rng();
-        let r_amount_ret = uni_rand.sample(Uniform::new(0.001, 0.005));
+        let mut uni_rand = rand::rng();
+        let r_amount_ret = uni_rand.sample(Uniform::new(0.001, 0.005)
+            .expect("Failed to sample from Uniform(0.0,0.5)"));
     
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let bernoulli = Bernoulli::new(0.3).unwrap();
         let r_sign_ret = if bernoulli.sample(&mut rng) { 1.0 } else { -1.0 };
         

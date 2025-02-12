@@ -12,7 +12,7 @@
 //! - [rand_distr](https://docs.rs/rand_distr/latest/rand_distr/)
 //!
 use rand::prelude::*;
-use rand_distr::{Normal, StandardNormal};
+use rand_distr::Normal;
 
 pub trait Sampling {
     fn sample(&self, n: usize) -> Vec<f64>;
@@ -24,14 +24,21 @@ pub struct NormalDistribution {
 }
 
 impl Sampling for NormalDistribution {
+
     fn sample(&self, n: usize) -> Vec<f64> {
-        let mut rng = thread_rng();
 
         if self.mu == 0.0 && self.sigma == 1.0 {
-            StandardNormal.sample_iter(&mut rng).take(n).collect()
+   
+            let std_normal = Normal::new(0.0, 1.0).unwrap();
+            let v_std_normal: Vec<f64> = std_normal.sample_iter(&mut rand::rng()).take(n).collect();
+            v_std_normal
+        
         } else {
-            let normal = Normal::new(self.mu, self.sigma).unwrap();
-            normal.sample_iter(&mut rng).take(n).collect()
+        
+            let normal = Normal::new(0.0, 1.0).unwrap();
+            let v_normal: Vec<f64> = normal.sample_iter(&mut rand::rng()).take(n).collect();
+            v_normal
+
         }
     }
 }

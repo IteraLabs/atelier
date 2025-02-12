@@ -6,7 +6,8 @@ edition = "2021"
 
 [dependencies]
 atelier-data = { path = "../atelier-data", version = "0.0.1" }
-rand = { version="0.8.5" }
+atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
+rand = { workspace = true }
 
 [[example]]
 name = "tutorial_basic_orderbook"

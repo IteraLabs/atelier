@@ -15,20 +15,20 @@ repository = "https://github.com/iteralabs/atelier"
 [dependencies]
 
 # Atelier workbench
-atelier-data = { workspace = true, version = "0.0.1" }
-atelier-client = { workspace = true, version = "0.0.1" }
-atelier-engine = { workspace = true, version = "0.0.1" }
-atelier-generators = { workspace = true, version = "0.0.1" }
-atelier-execution = { workspace = true, version = "0.0.1" }
-atelier-server = { workspace = true, version = "0.0.1" }
-atelier-visuals = { workspace = true, version = "0.0.1" }
+#atelier-data = { workspace = true, version = "0.0.1" }
+#atelier-client = { workspace = true, version = "0.0.1" }
+#atelier-engine = { workspace = true, version = "0.0.1" }
+#atelier-generators = { workspace = true, version = "0.0.1" }
+#atelier-execution = { workspace = true, version = "0.0.1" }
+#atelier-server = { workspace = true, version = "0.0.1" }
+#atelier-visuals = { workspace = true, version = "0.0.1" }
 
 # Error Handling
 thiserror = { version = "1.0.64" }
 
 # Probabilistic features
-rand = {version="0.8.5"}
-rand_distr = "0.4.3"
+rand = { workspace = true }
+rand_distr = { workspace = true }
 
 # Async, event-driven processing
 crossbeam = "0.8"

@@ -9,22 +9,26 @@ mod test_orderbook_utils {
     use atelier_data::orderbooks::Orderbook;
     use atelier_data::orders::OrderSide;
     
-    use rand::distributions::Uniform;
-    use rand::{thread_rng, Rng};
+    use rand::distr::Uniform;
+    use rand::{rng, Rng};
 
     // ------------------------------------------------------------- TEST ORDERBOOK -- //
 
     pub fn test_orderbook() -> Orderbook {
-        Orderbook::random(100_000.0, 4, 4, 1.0, 100_001.00, 4, 4)
+        Orderbook::random(100_000.0, 4, None, None,100_001.0, 4, None)
     }
 
     // ----------------------------------------------------------------- TEST LEVEL -- //
 
     pub fn test_level(testable_ob: &Orderbook) -> Result<Level, ()> {
         // Random samples
-        let mut uni_rand = thread_rng();
-        let rand_level_b = uni_rand.sample(Uniform::new(0, testable_ob.bids.len()-1));
-        let rand_level_a = uni_rand.sample(Uniform::new(0, testable_ob.asks.len()-1));
+        let mut uni_rand = rng();
+        let rand_level_b = uni_rand
+            .sample(Uniform::new(0, testable_ob.bids.len()-1)
+            .expect("Failed to create Uniform for Bids"));
+        let rand_level_a = uni_rand
+            .sample(Uniform::new(0, testable_ob.asks.len()-1)
+            .expect("Failed to create Uniform for Asks"));
 
         // Get a cloned random Level from the Test Orderbook
         let random_level = match OrderSide::random() {
@@ -96,8 +100,8 @@ mod tests {
     // ------------------------------------------------ RETRIEVE_LEVEL: OUTPUT VALUE -- /
 
     // #[test]
-    fn retrieve_level_output_value() {
-    }
+    //fn retrieve_level_output_value() {
+    //}
 
     // ---------------------------------------------------------------- DELETE_LEVEL -- /
     // ---------------------------------------------------------------- ------------ -- /
@@ -105,8 +109,8 @@ mod tests {
     // -------------------------------------------------- DELETE_LEVEL: OUTPUT VALUE -- /
 
     //#[test]
-    fn delete_level_output_value() {
-    }
+    //fn delete_level_output_value() {
+    //}
 
     // ---------------------------------------------------------------- INSERT_LEVEL -- /
     // ---------------------------------------------------------------- ------------ -- /

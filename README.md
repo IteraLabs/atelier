@@ -11,10 +11,11 @@
 [badge-license]: https://img.shields.io/badge/license-apachev2-blue.svg
 [url-license]: https://github.com/iteralabs/atelier/blob/develop/LICENSE
 
-
 ## Overview
 
 Use `atelier` for modeling market microstructure dynamics, it supports an `orderbook-based` market structure. Whether you need a high quality reproduction of any given market within a defined period of time (market replay), or, to generate `what-if` scnearios either completely random, or, with model specification (market simulation). 
+
+
 
 ## KaTex Rendering
 

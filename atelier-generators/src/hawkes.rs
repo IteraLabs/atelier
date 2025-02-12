@@ -1,4 +1,3 @@
-
 //! # Point process discrete simulation
 //!
 //! A Hawkes Process is a self-exciting point process where the intensity of events
@@ -81,7 +80,7 @@ impl HawkesProcess {
 
     // Method to generate N synthetic timestamps
     pub fn generate_values(&self, current_ts: f64, n: usize) -> Vec<f64> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let mut event_times = Vec::new();
         let mut current_time = current_ts.clone();
 
@@ -90,7 +89,7 @@ impl HawkesProcess {
             let intensity = self.lambda(current_time, &event_times);
 
             // Sample the waiting time until the next event
-            let wait_time = rng.gen_range(0.0..1.0 / intensity);
+            let wait_time = rng.random_range(0.0..1.0 / intensity);
             current_time += wait_time; // Update the current time
 
             // Store the new event time

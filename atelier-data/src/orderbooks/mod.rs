@@ -4,7 +4,10 @@ use crate::orders::{Order, OrderSide, OrderType};
 use crate::results::errors::LevelError;
 
 use std::time::{SystemTime, UNIX_EPOCH};
+use rand::Rng;
+use rand::distr::Uniform;
 
+// Change 
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Orderbook {
     pub orderbook_id: u32,
@@ -552,8 +555,8 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------ Synthetic Orderbook -- //
-    // ------------------------------------------------------------------ ------------------- -- //
+    // --------------------------------------------------------------------- Random Orderbook -- //
+    // --------------------------------------------------------------------- ---------------- -- //
 
     /// Generates a synthetic order book with specified parameters.
     ///
@@ -561,11 +564,13 @@ impl Orderbook {
     ///
     /// # Parameters
     ///
-    /// - `bid_price`: The starting price for the bids.
-    /// - `ask_price`: The starting price for the asks.
-    /// - `tick_size`: The minimum price increment between levels.
-    /// - `n_levels`: Number of price levels to generate for both bids and asks.
-    /// - `n_orders`: Number of individual orders to create at each price level.
+    /// - `bids_price`: The Best Bid (Top Of the Book).
+    /// - `bids_levels`: The amount of levels to create in the Buy (bids) side.
+    /// - `bids_orders`: Parameters of the distribution to sample values from. Uniform ~ (u32, u32).
+    /// - `tick_size`: Parameters of the distribution to sample from. Uniform ~ (f64, f64).
+    /// - `asks_price`: The Best Ask (Top Of the Book).
+    /// - `asks_levels`: The amount of levels to create in the Sell (asks) side.
+    /// - `asks_orders`: Parameters of the distribution to sample from. Uniform ~ (f64, f64).
     ///
     /// # Returns
     ///
@@ -574,73 +579,154 @@ impl Orderbook {
     ///
     /// TODO: update this to be done with builder method.
     ///
-
-    //
-    // left and right interval values for:
-    // tick sizes
-    // no. of levels
-    // no. of orders
-    // 
     
     pub fn random(
-        
+         
         bids_price: f64,
-        bids_orders: u32,
         bids_levels: u32,
-        tick_size: f64,
+        bids_orders: Option<(u32, u32)>,
+        
+        tick_size: Option<(f64, f64)>,
+        
         asks_price: f64,
-        asks_orders: u32,
         asks_levels: u32,
-    
+        asks_orders: Option<(u32, u32)>,
+         
     ) -> Self {
        
+        let mut rng = rand::rng();
+        
         // -- Default values -- //
         let mut i_bids = Vec::new();
         let mut i_asks = Vec::new();
 
         let r_orderbook_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
+        
+        //  TODO: Change this to a hashed formation of the Orderbook ID
         let r_orderbook_id = 1234;
 
-        // -- Bid side level formation -- //
+        // -- Generate all the ticks ahead -- //
+        
+        // -- Bids 
+        let mut v_bids_ticks: Vec<f64> = if let Some(bids_range) = tick_size {
+            let uni_rand = Uniform::new(bids_range.0, bids_range.1).expect("Failed to create distr");
+            (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
+        } else {
+            let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
+            (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
+        };
+
+        v_bids_ticks.insert(0, 0.0);
+        let mut v_bids_prices: Vec<f64> = vec![bids_price];
+
+        // -- Asks
+        let mut v_asks_ticks: Vec<f64> = if let Some(asks_range) = tick_size {
+            let uni_rand = Uniform::new(asks_range.0, asks_range.1).expect("Failed to create distr");
+            (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
+        } else {
+            let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
+            (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
+        };
+
+        v_asks_ticks.insert(0, 0.0);
+        let mut v_asks_prices: Vec<f64> = vec![asks_price];
+        
+        // --------------------------------------------------------------- Bid Side Formation -- //
+        
         for i in 1..=bids_levels {
 
-            let mut v_bid_orders: Vec<Order> = (0..bids_orders)
-                .map(|_| Order::random(OrderType::Limit, OrderSide::Bids, None, None, None))
+            // -- Id formation
+            
+            //  TODO: Change this to a hashed formation of the Level ID
+            let i_bids_id = 4321; 
+
+            // -- Side formation
+            
+            let i_bids_side = OrderSide::Bids;
+
+            // -- Price formation
+
+            let i_bids_price = v_bids_prices[(i - 1) as usize] - v_bids_ticks[(i - 1) as usize];
+            v_bids_prices.push(i_bids_price);
+            
+            // -- Orders formation
+
+            let i_bids_orders = if let Some(bid_orders_range) = bids_orders {
+                rng.random_range(bid_orders_range.0..bid_orders_range.1)
+            } else {
+                rng.sample(Uniform::new(1, 5).unwrap())
+            };
+
+            let mut v_bids_orders: Vec<Order> = (0..i_bids_orders)
+                .map(|_| Order::random(
+                    OrderType::Limit,
+                    OrderSide::Bids,
+                    Some((i_bids_price, i_bids_price)),
+                    None))
                 .collect();
 
-            v_bid_orders.sort_by_key(|order| order.order_ts);
+            v_bids_orders.sort_by_key(|order| order.order_ts);
 
-            let i_bid_volume: f64 = v_bid_orders
+            // -- Volume formation
+
+            let i_bids_volume: f64 = v_bids_orders
                 .iter()
                 .map(|order| order.amount.unwrap_or(0.0))
                 .sum();
 
+            // -- Result formation
+            
             i_bids.push(Level {
-                level_id: i,
-                side: OrderSide::Bids,
-                price: bids_price - (&tick_size * i as f64),
-                volume: i_bid_volume,
-                orders: v_bid_orders,
+                level_id: i_bids_id,
+                side: i_bids_side,
+                price: i_bids_price,
+                volume: i_bids_volume,
+                orders: v_bids_orders,
             });
         }
 
-        // -- Ask side level formation -- //
+        // --------------------------------------------------------------- Ask Side Formation -- //
+        
         for i in 1..=asks_levels {
 
-            let mut v_ask_orders: Vec<Order> = (0..asks_orders)
-                .map(|_| Order::random(OrderType::Limit, OrderSide::Asks, None, None, None))
+            let i_asks_id = 7654;
+            
+            let i_asks_side = OrderSide::Asks;
+            
+            let i_asks_price = v_asks_prices[(i - 1) as usize] - v_asks_ticks[(i - 1) as usize]; 
+            v_asks_prices.push(i_asks_price);
+
+            let i_asks_orders = if let Some(asks_orders_range) = asks_orders {
+                rng.random_range(asks_orders_range.0..asks_orders_range.1)
+            } else {
+                rng.sample(Uniform::new(1, 5).unwrap())
+            };
+
+            let mut v_asks_orders: Vec<Order> = (0..i_asks_orders)
+                .map(|_| Order::random(
+                    OrderType::Limit,
+                    OrderSide::Bids,
+                    Some((i_asks_price, i_asks_price)),
+                    None))
                 .collect();
 
-            v_ask_orders.sort_by_key(|order| order.order_ts);
+            v_asks_orders.sort_by_key(|order| order.order_ts);
 
-            let i_ask_volume: f64 = v_ask_orders.iter().map(|order| order.amount.unwrap()).sum();
+            // -- Volume formation
 
+            let i_asks_volume: f64 = v_asks_orders
+                .iter()
+                .map(|order| order.amount.unwrap_or(0.0))
+                .sum();
+
+            // -- Result formation
+            
             i_asks.push(Level {
-                level_id: i,
-                side: OrderSide::Asks,
-                price: asks_price + (&tick_size * i as f64),
-                volume: i_ask_volume,
-                orders: v_ask_orders,
+                level_id: i_asks_id,
+                side: i_asks_side,
+                price: i_asks_price,
+                volume: i_asks_volume,
+                orders: v_asks_orders,
             });
         }
 
@@ -653,3 +739,4 @@ impl Orderbook {
         }
     }
 }
+

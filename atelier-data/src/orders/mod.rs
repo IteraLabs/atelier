@@ -73,6 +73,7 @@ pub struct Order {
 }
 
 impl Order {
+    ///
     /// Creates a new _empty_ instance of an `Order`.
     ///
     /// # Parameters
@@ -138,14 +139,13 @@ impl Order {
     pub fn random(
         order_type: OrderType,
         order_side: OrderSide,
-        mo_amounts: Option<(f64, f64)>,
-        lo_prices: Option<(f64, f64)>,
-        lo_amounts: Option<(f64, f64)>,
+        order_prices: Option<(f64, f64)>,
+        order_amounts: Option<(f64, f64)>,
     ) -> Self {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
 
         let i_order = Order::new()
-            .order_id(rng.gen())
+            .order_id(123)
             .order_ts(
                 std::time::SystemTime::now()
                     .duration_since(std::time::UNIX_EPOCH)
@@ -157,28 +157,37 @@ impl Order {
 
         match i_order.order_type {
             Some(OrderType::Limit) => {
-                if let Some(lo_prices) = lo_prices {
-                    i_order.price(rng.gen_range(lo_prices.0..lo_prices.1));
-                } else {
-                    i_order.price(rng.gen_range(0.001..100_000.00));
+                
+                match order_prices {
+                
+                    Some(order_prices) if order_prices.0 != order_prices.1 => {
+                        i_order.price(rng.random_range(order_prices.0..order_prices.1));
+                    },
+                    Some(order_prices) if order_prices.0 == order_prices.1 => {
+                        i_order.price(order_prices.0);
+                    },
+                    _ => {
+                        i_order.price(rng.random_range(0.001..100_000.00));
+                    }    
+                
                 }
 
-                if let Some(lo_amounts) = lo_amounts {
-                    i_order.amount(rng.gen_range(lo_amounts.0..lo_amounts.1));
+                if let Some(order_amounts) = order_amounts {
+                    i_order.amount(rng.random_range(order_amounts.0..order_amounts.1));
                 } else {
-                    i_order.amount(rng.gen_range(0.00001..1.0));
+                    i_order.amount(rng.random_range(0.00001..1.0));
                 }
             }
 
             Some(OrderType::Market) => {
-                if let Some(mo_amounts) = mo_amounts {
-                    i_order.amount(rng.gen_range(mo_amounts.0..mo_amounts.1));
+                if let Some(order_amounts) = order_amounts {
+                    i_order.amount(rng.random_range(order_amounts.0..order_amounts.1));
                 } else {
-                    i_order.amount(rng.gen_range(0.00001..1.0));
+                    i_order.amount(rng.random_range(0.00001..1.0));
                 }
             }
             _ => {}
         }
-        i_order.amount(rng.gen_range(0.1..100.0))
+        i_order.amount(rng.random_range(0.1..100.0))
     }
 }

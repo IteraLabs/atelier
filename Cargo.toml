@@ -1,4 +1,5 @@
 [workspace]
+edition = "2021"
 resolver = "2"
 members = [
   # Core
@@ -39,13 +40,14 @@ atelier-visuals = { path = "./atelier-visuals", version = "0.0.1" }
 thiserror = { version = "1.0.64" }
 
 # Probabilistic features
-rand = {version="0.8.5"}
-rand_distr = "0.4.3"
+rand = { version = "0.9.0" }
+rand_distr = { version = "0.5.0" }
 
 # Async, event-driven processing
-crossbeam = "0.8"
-rdkafka = "0.37.0"
+crossbeam = { version = "0.8" }
+rdkafka = {version = "0.37.0" }
 serde = { version = "1.0.203", features = ["derive"] }
+tokio = "1.43.0"
 
 # Logging
 tracing = { version = "0.1.41" }
@@ -57,3 +59,5 @@ sha2 = { version = "0.10.8" }
 hex = { version = "0.4.3" }
 base64 = { version = "0.22.1" }
 
+# Visualizations
+plotters = { version = "0.3.3" }
