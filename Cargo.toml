@@ -1,0 +1,41 @@
+[workspace]
+
+resolver = "2"
+members = [
+  # Core
+  "atelier",
+  
+  # Operational
+  "atelier-data",
+ 
+  # Scientific
+  "atelier-generators",
+
+  # Excellence
+  "benches",
+
+  # Usability
+  # "examples",
+]
+
+[workspace.dependencies]
+
+# Atelier workbench
+atelier-data = { path = "./atelier-data" }
+atelier-generators = { path = "./atelier-generators" }
+
+# Error Handling
+thiserror = { version = "1.0.64" }
+
+# Probabilistic features
+rand = { version = "0.9.0" }
+rand_distr = { version = "0.5.0" }
+
+# Benchmarks
+criterion = { version = "0.3", features = ["html_reports"] }
+memuse = { version = "0.2.0" }
+human_bytes = { version = "0.4.1" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unused_extern_crates = "warn"

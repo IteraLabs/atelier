@@ -1,0 +1,27 @@
+[package]
+name = "atelier-data"
+version = "0.0.1"
+publish = false
+edition = "2021"
+
+[dependencies]
+
+# Error
+thiserror = { workspace = true }
+
+# Probabilistic features
+rand = { workspace = true }
+rand_distr = { workspace = true }
+
+[dev-dependencies]
+
+# Benchmarking
+criterion = { workspace = true }
+
+[[example]]
+name = "basic_orders"
+path = "examples/orders.rs"
+
+[[test]]
+name = "orderbook_methods"
+path = "tests/Orderbooks/ob_methods.rs"

@@ -1,0 +1,22 @@
+[package]
+name = "benches"
+version = "0.0.1"
+publish = false
+edition = "2021"
+license = "ApacheV2"
+
+[dependencies]
+
+# Atelier sub-modules 
+atelier-data = { workspace = true }
+
+criterion = { workspace = true }
+rand = { workspace = true }
+memuse = { workspace = true }
+human_bytes = { workspace = true }
+
+[[bench]]
+name = "orderbook_benchmark"
+path = "orderbook_benchmark.rs"
+harness = false
+
