@@ -4,25 +4,48 @@ resolver = "2"
 members = [
   # Core
   "atelier",
-  
   # Operational
   "atelier-data",
- 
   # Scientific
   "atelier-generators",
-
   # Excellence
   "benches",
-
   # Usability
-  # "examples",
+  "examples",
 ]
+
+default-members = [
+  "atelier",
+  "atelier-data",
+  "atelier-generators",
+  "benches",
+  "examples",
+]
+
+[workspace.package]
+
+edition = "2021"
+rust-version = "1.84.0"
+
+description = "Rust Engine for High Frequency, Synthetic and Historical, Market Microstructure Modeling"
+authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
+documentation = "https://docs.rs/atelier/"
+repository = "https://github.com/iteralabs/atelier"
+homepage = "https://iteralabs.ai/atelier"
+
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+exclude = ["assets/*", ".github", "Makefile.toml", "CONTRIBUTING.md", "*.log", "tags"]
+include = ["katex-header.html"]
+
+license = "Apache-2.0"
 
 [workspace.dependencies]
 
-# Atelier workbench
-atelier-data = { path = "./atelier-data" }
-atelier-generators = { path = "./atelier-generators" }
+# Atelier complements
+atelier = { path = "./atelier", version = "0.1.0" }
+atelier-data = { path = "./atelier-data", version = "0.0.1" }
+atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
 
 # Error Handling
 thiserror = { version = "1.0.64" }
@@ -39,3 +62,4 @@ human_bytes = { version = "0.4.1" }
 [workspace.lints.rust]
 unsafe_code = "forbid"
 unused_extern_crates = "warn"
+

@@ -1,13 +1,18 @@
 [package]
 name = "atelier-generators"
+description = "Probabilistic generators and events simulation for the Atelier crate"
 version = "0.0.1"
 publish = false
-edition = "2021"
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
 
 [dependencies]
-
-# Atelier sub-modules 
-atelier-data = { workspace = true }
 
 # Error
 thiserror = { workspace = true }

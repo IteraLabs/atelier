@@ -1,8 +1,16 @@
 [package]
 name = "atelier-data"
+description = "Data structures and I/O tools for the Atelier crate"
 version = "0.0.1"
 publish = false
-edition = "2021"
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
 
 [dependencies]
 
@@ -21,6 +29,10 @@ criterion = { workspace = true }
 [[example]]
 name = "basic_orders"
 path = "examples/orders.rs"
+
+[[example]]
+name = "basic_orderbook"
+path = "examples/orderbook.rs"
 
 [[test]]
 name = "orderbook_methods"

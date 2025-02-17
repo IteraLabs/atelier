@@ -1,4 +1,3 @@
-
 use atelier_data::orderbooks::Orderbook;
 
 fn main() {

@@ -1,24 +1,25 @@
 [package]
 name = "atelier"
-version = "0.1.0"
-edition = "2021"
-description = "a Computational Workshop for Market Microstructure Modeling, Synthetic Simulation and Historical Replay"
-authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
-license = "Apache-2.0"
-keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
-categories = ["data-structures", "development-tools", "finance", "simulation"]
-documentation = "https://docs.rs/atelier/"
-repository = "https://github.com/iteralabs/atelier"
+description = "Rust Engine for High Frequency, Synthetic and Historical, Market Microstructure Modeling"
+version = "0.0.1"
+publish = true
 
-include = ["src/**/*", "katex-header.html"]
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
 
 [dependencies]
 
 # Atelier workbench
 atelier-data = { workspace = true }
+atelier-generators = { workspace = true }
 
 # Error Handling
-thiserror = { version = "1.0.64" }
+thiserror = { workspace = true }
 
 # Probabilistic features
 rand = { workspace = true }

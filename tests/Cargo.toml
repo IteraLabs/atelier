@@ -1,6 +1,6 @@
 [package]
-name = "benches"
-description = "Benchmarks for the Atelier crate"
+name = "tests"
+description = "Tests for the Atelier crate"
 version = "0.0.1"
 publish = false
 
@@ -12,20 +12,17 @@ categories.workspace = true
 documentation.workspace = true
 repository.workspace = true
 
-[dependencies]
+[dev-dependencies]
 
 # Atelier sub-modules 
 atelier = { workspace = true }
 atelier-data = { workspace = true }
 atelier-generators = { workspace = true }
 
-criterion = { workspace = true }
-rand = { workspace = true }
-memuse = { workspace = true }
-human_bytes = { workspace = true }
+# Error Handling
+thiserror = { workspace = true }
 
-[[bench]]
-name = "orderbook_benchmark"
-path = "orderbook_benchmark.rs"
-harness = false
+# Probabilistic features
+rand = { workspace = true }
+rand_distr = { workspace = true }
 
