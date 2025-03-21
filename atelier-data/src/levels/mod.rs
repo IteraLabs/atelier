@@ -18,15 +18,18 @@ pub struct Level {
 }
 
 impl Level {
-    // ---------------------------------------------------------------------------- New Level -- //
-    // ---------------------------------------------------------------------------- --------- -- //
+    // ----------------------------------------------------------------------------
+    // New Level -- //
+    // ----------------------------------------------------------------------------
+    // --------- -- //
 
     /// Creates a new instance of `Level`.
     ///
     /// # Parameters
     ///
     /// - `level_id`: The unique identifier for the price level.
-    /// - `side`: The side of the order book, either `Side::Bids` or `Side::Asks`.
+    /// - `side`: The side of the order book, either `Side::Bids` or
+    ///   `Side::Asks`.
     /// - `price`: The price at which orders are placed at this level.
     /// - `volume`: The total volume of orders at this price level.
     /// - `orders`: A vector of `Order` representing the orders at this level.
@@ -35,7 +38,13 @@ impl Level {
     ///
     /// Returns a new `Level` instance with the specified parameters.
 
-    pub fn new(level_id: u32, side: OrderSide, price: f64, volume: f64, orders: Vec<Order>) -> Self {
+    pub fn new(
+        level_id: u32,
+        side: OrderSide,
+        price: f64,
+        volume: f64,
+        orders: Vec<Order>,
+    ) -> Self {
         match side {
             OrderSide::Bids => Level {
                 level_id,
@@ -62,4 +71,3 @@ impl Level {
         }
     }
 }
-

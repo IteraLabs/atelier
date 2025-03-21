@@ -1,7 +1,6 @@
 use atelier_data::orderbooks::Orderbook;
 
 fn main() {
-
     let ini_bid_price = 100_000.00;
     let ini_bid_levels = 2;
     let ini_bid_orders = Some((1, 10));
@@ -53,4 +52,3 @@ fn main() {
     println!("- No. of Orders at 2nd level, Asks side: {:?}", n_orders_a1);
     println!("");
 }
-

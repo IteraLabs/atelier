@@ -12,7 +12,17 @@ unsafe_code = "forbid"
 unused_extern_crates = "warn"
 ```
 
-## Code format
+## rustfmt.toml
+
+Consider all defaults to be present, and, the following changed:
+
+```toml
+imports_granularity = "crate"
+reorder_impl_items = true
+wrap_comments = true
+```
+
+## Code format with rustfmt
 
 For the `atelier` crate, there is a `.rustfmt.toml` config file, even though must of the values are exactly the same as the default, they were included for future-proof purposes in terms of formatting. 
  

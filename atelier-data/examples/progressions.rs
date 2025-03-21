@@ -1,12 +1,11 @@
-use rand_distr::{Distribution, Uniform, Bernoulli};
 use rand::Rng;
+use rand_distr::{Bernoulli, Distribution, Uniform};
 
 use atelier_data::orderbooks::Orderbook;
 
 fn main() {
-
     // -- Orderbook parameters -- //
-    
+
     let ini_bid_price = 100_000.00;
     let ini_bid_levels = 2;
     let ini_bid_orders = Some((1, 10));
@@ -19,23 +18,26 @@ fn main() {
 
     let mut v_orderbook = vec![];
     let n_progressions = 10;
-    
+
     // -- Probabilistic parameters -- //
-    
+
     let uni_params = vec![0.001, 0.005];
     let ber_params = vec![0.5];
 
     let mut rng = rand::rng();
-   
+
     // ---------------------------------------------------------------------------------------- //
     for _ in 0..n_progressions {
-
         let uni_rand = Uniform::new(uni_params[0], uni_params[1])
             .expect("Failed to create Uniform distribution sampler");
         let r_amount_ret = rng.sample(uni_rand);
 
         let bernoulli = Bernoulli::new(ber_params[0]).unwrap();
-        let r_sign_ret = if bernoulli.sample(&mut rng) { 1.0 } else { -1.0 };
+        let r_sign_ret = if bernoulli.sample(&mut rng) {
+            1.0
+        } else {
+            -1.0
+        };
 
         let v_bid_price = ini_bid_price + ini_bid_price * r_amount_ret * r_sign_ret;
         let v_ask_price = ini_ask_price + ini_ask_price * r_amount_ret * r_sign_ret;
@@ -51,17 +53,15 @@ fn main() {
         );
 
         v_orderbook.push(r_ob);
-
     }
 
-println!("\nbid prices: {:?}, {:?}, {:?}",
-    v_orderbook[0].bids[0].price,
-    v_orderbook[1].bids[0].price,
-    v_orderbook[2].bids[0].price);
+    println!(
+        "\nbid prices: {:?}, {:?}, {:?}",
+        v_orderbook[0].bids[0].price, v_orderbook[1].bids[0].price, v_orderbook[2].bids[0].price
+    );
 
-println!("\nask prices: {:?}, {:?}, {:?}",
-    v_orderbook[0].asks[0].price,
-    v_orderbook[1].asks[0].price,
-    v_orderbook[2].asks[0].price);
-
+    println!(
+        "\nask prices: {:?}, {:?}, {:?}",
+        v_orderbook[0].asks[0].price, v_orderbook[1].asks[0].price, v_orderbook[2].asks[0].price
+    );
 }

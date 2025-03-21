@@ -1,6 +1,6 @@
 [package]
-name = "atelier-generators"
-description = "Probabilistic generators and events simulation for the Atelier crate"
+name = "atelier-analytics"
+description = "Metrics and Data Analytics tools for the Atelier crate"
 version = "0.0.1"
 publish = false
 
@@ -12,14 +12,8 @@ categories.workspace = true
 documentation.workspace = true
 repository.workspace = true
 
-[dependencies]
-
-atelier-results = { path = "../atelier-results", version = "0.0.1" }
-
-# Error
-thiserror = { workspace = true }
+[dev-dependencies]
 
 # Probabilistic features
 rand = { workspace = true }
 rand_distr = { workspace = true }
-

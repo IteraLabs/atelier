@@ -1,2 +1,7 @@
 edition = "2021"
+reorder_imports = true
+reorder_modules = true
 imports_granularity = "crate"
+max_width = 100
+reorder_impl_items = true
+

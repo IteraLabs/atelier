@@ -1,7 +1,7 @@
 [package]
 name = "atelier"
 description = "Rust Engine for High Frequency, Synthetic and Historical, Market Microstructure Modeling"
-version = "0.0.1"
+version = "0.1.0"
 publish = true
 
 edition.workspace = true
@@ -15,6 +15,7 @@ repository.workspace = true
 [dependencies]
 
 # Atelier workbench
+atelier-analytics = { workspace = true }
 atelier-data = { workspace = true }
 atelier-generators = { workspace = true }
 

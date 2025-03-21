@@ -1,0 +1,21 @@
+[package]
+name = "atelier-results"
+description = "Standardized results, errors and successes, for the Atelier crate"
+version = "0.0.1"
+publish = false
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+# Error Handling
+thiserror = { version = "1.0.64" }
+
+[lints]
+workspace = true

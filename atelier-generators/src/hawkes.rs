@@ -1,20 +1,20 @@
 //! # Point process discrete simulation
 //!
-//! A Hawkes Process is a self-exciting point process where the intensity of events
-//! increases following the occurrence of previous events.
+//! A Hawkes Process is a self-exciting point process where the intensity of
+//! events increases following the occurrence of previous events.
 //!
 //! ## Linear - Univariate.
 //!
-//! The simplest caset is a self-exciting, one dimensional effect, i.e. the arrival
-//! of an event increases the likelihood of observing events in the
+//! The simplest caset is a self-exciting, one dimensional effect, i.e. the
+//! arrival of an event increases the likelihood of observing events in the
 //! near future. It is also useful to consider the case when there is
 //! more than one type of event, and there is mutual excitement
 //! between the different events. For $d$ such events, we define a
 //! $d$-dimensional Hawkes process:
 //!
 //! $$
-//!  \lambda_{i}(t) = \mu_{i} + \sum_{j=1}^{d} \sum_{t_{j,r} \leq t} \phi_{ij}(t - t_{j,r})
-//! $$
+//!  \lambda_{i}(t) = \mu_{i} + \sum_{j=1}^{d} \sum_{t_{j,r} \leq t} \phi_{ij}(t
+//! - t_{j,r}) $$
 //!
 //! Where:
 //!
@@ -36,9 +36,8 @@
 //! $\alpha$: Excitation factor (how much each event excites the
 //! future events). \
 //! $\beta$: Decay rate (how quickly the excitement diminishes).\
-//!
 
-use atelier_data::results::errors;
+use atelier_results::errors;
 use rand::Rng;
 
 pub struct HawkesProcess {

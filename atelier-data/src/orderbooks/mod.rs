@@ -1,25 +1,27 @@
-use crate::results::errors::OrderError;
-use crate::levels::Level;
-use crate::orders::{Order, OrderSide, OrderType};
-use crate::results::errors::LevelError;
+use crate::{
+    levels::Level,
+    orders::{Order, OrderSide, OrderType},
+    results::errors::{LevelError, OrderError},
+};
 
+use rand::{distr::Uniform, Rng};
 use std::time::{SystemTime, UNIX_EPOCH};
-use rand::Rng;
-use rand::distr::Uniform;
 
-// Change 
+// Change
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct Orderbook {
     pub orderbook_id: u32,
-    pub orderbook_ts: u128,
+    pub orderbook_ts: u64,
     pub symbol: String,
     pub bids: Vec<Level>,
     pub asks: Vec<Level>,
 }
 
 impl Orderbook {
-    // ------------------------------------------------------------------------ New Orderbook -- //
-    // ------------------------------------------------------------------------ ------------- -- //
+    // ------------------------------------------------------------------------ New
+    // Orderbook -- //
+    // ------------------------------------------------------------------------
+    // ------------- -- //
 
     // Creates a new instance of `Orderbook`.
     ///
@@ -34,10 +36,9 @@ impl Orderbook {
     /// # Returns
     ///
     /// Returns a new `Orderbook` instance.
-    ///
     pub fn new(
         orderbook_id: u32,
-        orderbook_ts: u128,
+        orderbook_ts: u64,
         symbol: String,
         bids: Vec<Level>,
         asks: Vec<Level>,
@@ -51,8 +52,10 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------------- Find a Level -- //
-    // ------------------------------------------------------------------------- ------------ -- //
+    // -------------------------------------------------------------------------
+    // Find a Level -- //
+    // -------------------------------------------------------------------------
+    // ------------ -- //
 
     /// If a level exists, either within the Bids, or, the Asks,
     /// it will return the index of it, positive for asks, negative for bids.
@@ -64,7 +67,6 @@ impl Orderbook {
     /// Ok(i32): Index of the Level found (if it exists),
     /// the sign encodes the side, negative (bids) and positive (asks)
     /// Err(LevelError): with LevelNotFound
-    ///
     pub fn find_level(&self, level_price: &f64) -> Result<i32, LevelError> {
         let mut i_level: i32 = 0;
 
@@ -89,8 +91,10 @@ impl Orderbook {
         Err(LevelError::LevelNotFound)
     }
 
-    // ----------------------------------------------------------- Retrieve an Existing Level -- //
-    // ----------------------------------------------------------- -------------------------- -- //
+    // ----------------------------------------------------------- Retrieve an
+    // Existing Level -- //
+    // -----------------------------------------------------------
+    // -------------------------- -- //
 
     /// If a Level exists, either within the Bids, or, the Asks, it will
     /// return a _cloned()_ version of it.
@@ -101,7 +105,6 @@ impl Orderbook {
     /// ## Returns
     /// Ok(Level) : A cloned version of the founded Level. \
     /// Err(LevelError): A custom error type as LevelError:LevelNotFound
-    ///
     pub fn retrieve_level(&self, level_price: &f64) -> Result<Level, LevelError> {
         // return the level_price if it exists, or, LevelError::LevelNotFound
         if let Ok(i_level) = self.find_level(level_price) {
@@ -129,8 +132,10 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------- Delete an Existing Level -- //
-    // ------------------------------------------------------------- ------------------------ -- //
+    // ------------------------------------------------------------- Delete an
+    // Existing Level -- //
+    // -------------------------------------------------------------
+    // ------------------------ -- //
 
     /// Deletes an existing level
     ///
@@ -160,8 +165,10 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------- Insert a New Level -- //
-    // ------------------------------------------------------------------- ------------------ -- //
+    // ------------------------------------------------------------------- Insert a
+    // New Level -- //
+    // -------------------------------------------------------------------
+    // ------------------ -- //
 
     /// Inserts a new level. If the level already exists, the new level over
     /// rides the existing one, if it does not exists, the new level is inserted
@@ -174,7 +181,6 @@ impl Orderbook {
     /// ## Returns
     /// Ok(Level)
     /// Err(LevelError): Custom Error Type of LevelInsertionFailed.
-    ///
     pub fn insert_level(&mut self, level: Level) -> Result<(), LevelError> {
         // return the level_price if it exists, or, LevelError::LevelNotFound
         if let Ok(i_level) = self.find_level(&level.price) {
@@ -278,8 +284,10 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------------ Find an Order -- //
-    // ------------------------------------------------------------------------ ------------- -- //
+    // ------------------------------------------------------------------------ Find
+    // an Order -- //
+    // ------------------------------------------------------------------------
+    // ------------- -- //
 
     /// To find if a given `Order` exists within the current Level.
     ///
@@ -291,16 +299,11 @@ impl Orderbook {
     /// ## Results
     /// Ok: (level_index: usize, order_index: usize)
     /// Err: OrderError
-    ///
 
-    pub fn find_order(
-        &self,
-        price: f64,
-        order_ts: u128,
-    ) -> Result<(i32, usize), OrderError> {
+    pub fn find_order(&self, price: f64, order_ts: u64) -> Result<(i32, usize), OrderError> {
         // see if level exists
         let find_level_ob = self.find_level(&price);
-        
+
         match find_level_ob {
             Ok(n) if n < 0 => {
                 let level_found = find_level_ob.unwrap().abs() as usize - 1;
@@ -309,7 +312,7 @@ impl Orderbook {
                 // Level has orders
                 if level_orders.len() > 0 {
                     let r_level = level_orders
-                        .binary_search_by(|order| order.order_ts.unwrap().cmp(&order_ts))
+                        .binary_search_by(|order| order.order_ts.cmp(&order_ts))
                         .unwrap();
 
                     Ok((n, r_level))
@@ -327,7 +330,7 @@ impl Orderbook {
                 // Level has orders
                 if level_orders.len() > 0 {
                     let r_level = level_orders
-                        .binary_search_by(|order| order.order_ts.unwrap().cmp(&order_ts))
+                        .binary_search_by(|order| order.order_ts.cmp(&order_ts))
                         .unwrap();
 
                     Ok((n, r_level))
@@ -343,8 +346,10 @@ impl Orderbook {
         }
     }
 
-    // ----------------------------------------------------------- Retrieve an Existing Order -- //
-    // ----------------------------------------------------------- -------------------------- -- //
+    // ----------------------------------------------------------- Retrieve an
+    // Existing Order -- //
+    // -----------------------------------------------------------
+    // -------------------------- -- //
 
     /// To retrieve info about an existing `Order`.
     ///
@@ -354,13 +359,8 @@ impl Orderbook {
     /// ## Results
     ///  
 
-    pub fn retrieve_order(
-        &self,
-        price: f64,
-        order_ts: u128,
-    ) -> Result<Order, OrderError> {
+    pub fn retrieve_order(&self, price: f64, order_ts: u64) -> Result<Order, OrderError> {
         if let Ok((found_level, found_order)) = self.find_order(price, order_ts) {
-            
             if found_level > 0 {
                 Ok(self.asks[found_level.abs() as usize].orders[found_order])
             } else {
@@ -371,21 +371,18 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------- Delete an Existing Order -- //
-    // ------------------------------------------------------------- ------------------------ -- //
+    // ------------------------------------------------------------- Delete an
+    // Existing Order -- //
+    // -------------------------------------------------------------
+    // ------------------------ -- //
 
     /// To delete an existing `Order`.
     ///
     /// ## Parameters
     ///
     /// ## Results
-    ///
 
-    pub fn delete_order(
-        &mut self,
-        price: f64,
-        order_ts: u128,
-    ) -> Result<(), OrderError> {
+    pub fn delete_order(&mut self, price: f64, order_ts: u64) -> Result<(), OrderError> {
         if let Ok((found_level, found_order)) = self.find_order(price, order_ts) {
             if found_level > 0 {
                 self.asks[found_level.abs() as usize - 1]
@@ -404,8 +401,10 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------- Insert a New Order -- //
-    // ------------------------------------------------------------------- ------------------ -- //
+    // ------------------------------------------------------------------- Insert a
+    // New Order -- //
+    // -------------------------------------------------------------------
+    // ------------------ -- //
 
     /// To insert a new `Order`.
     ///
@@ -417,7 +416,6 @@ impl Orderbook {
     ///
     ///
     /// ## Results
-    ///
 
     pub fn insert_order(&mut self, price: f64, amount: f64) -> Result<(), OrderError> {
         // see if level exists
@@ -429,15 +427,16 @@ impl Orderbook {
                 let bid_ts = SystemTime::now()
                     .duration_since(UNIX_EPOCH)
                     .unwrap()
-                    .as_nanos();
+                    .as_micros() as u64;
 
-                let i_order = Order::new()
-                    .order_id(123)
+                let i_order = Order::builder()
                     .order_ts(bid_ts)
                     .order_type(OrderType::Limit)
                     .side(OrderSide::Bids)
                     .price(self.bids[n as usize].price)
-                    .amount(amount);
+                    .amount(amount)
+                    .build()
+                    .expect("Order Failed");
 
                 self.bids[find_level_ob.unwrap() as usize]
                     .orders
@@ -451,15 +450,16 @@ impl Orderbook {
                 let ask_ts = SystemTime::now()
                     .duration_since(UNIX_EPOCH)
                     .unwrap()
-                    .as_nanos();
+                    .as_micros() as u64;
 
-                let i_order = Order::new()
-                    .order_id(123)
+                let i_order = Order::builder()
                     .order_ts(ask_ts)
                     .order_type(OrderType::Limit)
                     .side(OrderSide::Asks)
                     .price(self.asks[n as usize].price)
-                    .amount(amount);
+                    .amount(amount)
+                    .build()
+                    .expect("Order Failed");
 
                 self.asks[find_level_ob.unwrap() as usize]
                     .orders
@@ -473,19 +473,20 @@ impl Orderbook {
         }
     }
 
-    // ---------------------------------------------------------------------- Modify an Order -- //
-    // ---------------------------------------------------------------------- --------------- -- //
+    // ---------------------------------------------------------------------- Modify
+    // an Order -- //
+    // ----------------------------------------------------------------------
+    // --------------- -- //
 
     /// To modify an existing `Order`.
     ///
     /// ## Parameters
     ///
     /// ## Results
-    ///
 
     pub fn modify_order(
         &mut self,
-        order_ts: u128,
+        order_ts: u64,
         price: f64,
         amount: f64,
     ) -> Result<Order, OrderError> {
@@ -502,20 +503,23 @@ impl Orderbook {
                     let _moded_ts = SystemTime::now()
                         .duration_since(UNIX_EPOCH)
                         .unwrap()
-                        .as_nanos();
+                        .as_micros();
 
                     let founded_ts = founded_order.order_ts;
 
-                    let to_moded_order = Order::new()
-                        .order_id(founded_order.order_id.unwrap())
-                        .order_ts(founded_ts.unwrap())
-                        .order_type(founded_order.order_type.unwrap())
-                        .side(founded_order.side.unwrap())
+                    //  TODO: validate same order_id when a modification of
+                    // an order is done by creating a new one with all the same except the amount
+                    let to_moded_order = Order::builder()
+                        .side(founded_order.side)
+                        .order_type(founded_order.order_type)
+                        .order_ts(founded_ts)
                         .price(founded_order.price.unwrap())
-                        .amount(amount);
+                        .amount(amount)
+                        .build()
+                        .expect("Modification of order failed");
 
-                    let _moded_order = self.bids[found_level.abs() as usize - 1].orders[found_order];
                     let moded_order = to_moded_order;
+
                     Ok(moded_order.clone())
                 } else if found_level > 0 {
                     println!("\nfounded_level: {:?}", found_level.abs() as usize - 1);
@@ -528,19 +532,20 @@ impl Orderbook {
                     let _moded_ts = SystemTime::now()
                         .duration_since(UNIX_EPOCH)
                         .unwrap()
-                        .as_nanos();
+                        .as_micros();
 
                     let founded_ts = founded_order.order_ts;
 
-                    let to_moded_order = Order::new()
-                        .order_id(founded_order.order_id.unwrap())
-                        .order_ts(founded_ts.unwrap())
-                        .order_type(founded_order.order_type.unwrap())
-                        .side(founded_order.side.unwrap())
+                    //  TODO: validate same order_id when a modification of
+                    // an order is done by creating a new one with all the same except the amount
+                    let to_moded_order = Order::builder()
+                        .side(founded_order.side)
+                        .order_type(founded_order.order_type)
+                        .order_ts(founded_ts)
                         .price(founded_order.price.unwrap())
-                        .amount(amount);
-
-                    let _moded_order = self.asks[found_level.abs() as usize - 1].orders[found_order];
+                        .amount(amount)
+                        .build()
+                        .expect("Modification of order failed");
 
                     let moded_order = to_moded_order;
 
@@ -555,8 +560,10 @@ impl Orderbook {
         }
     }
 
-    // --------------------------------------------------------------------- Random Orderbook -- //
-    // --------------------------------------------------------------------- ---------------- -- //
+    // --------------------------------------------------------------------- Random
+    // Orderbook -- //
+    // ---------------------------------------------------------------------
+    // ---------------- -- //
 
     /// Generates a synthetic order book with specified parameters.
     ///
@@ -566,11 +573,14 @@ impl Orderbook {
     ///
     /// - `bids_price`: The Best Bid (Top Of the Book).
     /// - `bids_levels`: The amount of levels to create in the Buy (bids) side.
-    /// - `bids_orders`: Parameters of the distribution to sample values from. Uniform ~ (u32, u32).
-    /// - `tick_size`: Parameters of the distribution to sample from. Uniform ~ (f64, f64).
+    /// - `bids_orders`: Parameters of the distribution to sample values from.
+    ///   Uniform ~ (u32, u32).
+    /// - `tick_size`: Parameters of the distribution to sample from. Uniform ~
+    ///   (f64, f64).
     /// - `asks_price`: The Best Ask (Top Of the Book).
     /// - `asks_levels`: The amount of levels to create in the Sell (asks) side.
-    /// - `asks_orders`: Parameters of the distribution to sample from. Uniform ~ (f64, f64).
+    /// - `asks_orders`: Parameters of the distribution to sample from. Uniform
+    ///   ~ (f64, f64).
     ///
     /// # Returns
     ///
@@ -578,43 +588,41 @@ impl Orderbook {
     /// ask levels.
     ///
     /// TODO: update this to be done with builder method.
-    ///
-    
+
     pub fn random(
-        
         bids_price: f64,
         bids_levels: u32,
         bids_orders: Option<(u32, u32)>,
-        
+
         tick_size: Option<(f64, f64)>,
-        
+
         asks_price: f64,
         asks_levels: u32,
         asks_orders: Option<(u32, u32)>,
-         
     ) -> Self {
-       
         let mut rng = rand::rng();
-        
+
         // -- Default values -- //
         let mut i_bids = Vec::new();
         let mut i_asks = Vec::new();
 
-        let r_orderbook_ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos();
-        
+        let r_orderbook_ts = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_micros() as u64;
+
         //  TODO: Change this to a hashed formation of the Orderbook ID
         let r_orderbook_id = 1234;
 
         // -- Generate all the ticks ahead -- //
-        
-        // -- Bids 
+
+        // -- Bids
         let mut v_bids_ticks: Vec<f64> = if let Some(bids_range) = tick_size {
-            let uni_rand = Uniform::new(bids_range.0, bids_range.1)
-                .expect("Failed to create distr");
+            let uni_rand =
+                Uniform::new(bids_range.0, bids_range.1).expect("Failed to create distr");
             (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
         } else {
-            let uni_rand = Uniform::new(0.0, 1.0)
-                .expect("Failed to create Standard Uniform");
+            let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
             (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
         };
 
@@ -623,36 +631,35 @@ impl Orderbook {
 
         // -- Asks
         let mut v_asks_ticks: Vec<f64> = if let Some(asks_range) = tick_size {
-            let uni_rand = Uniform::new(asks_range.0, asks_range.1)
-                .expect("Failed to create distr");
+            let uni_rand =
+                Uniform::new(asks_range.0, asks_range.1).expect("Failed to create distr");
             (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
         } else {
-            let uni_rand = Uniform::new(0.0, 1.0)
-                .expect("Failed to create Standard Uniform");
+            let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
             (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
         };
 
         v_asks_ticks.insert(0, 0.0);
         let mut v_asks_prices: Vec<f64> = vec![asks_price];
-        
-        // --------------------------------------------------------------- Bid Side Formation -- //
-        
-        for i in 1..=bids_levels {
 
+        // --------------------------------------------------------------- Bid Side
+        // Formation -- //
+
+        for i in 1..=bids_levels {
             // -- Id formation
-            
+
             //  TODO: Change this to a hashed formation of the Level ID
-            let i_bids_id = 4321; 
+            let i_bids_id = 4321;
 
             // -- Side formation
-            
+
             let i_bids_side = OrderSide::Bids;
 
             // -- Price formation
 
             let i_bids_price = v_bids_prices[(i - 1) as usize] - v_bids_ticks[(i - 1) as usize];
             v_bids_prices.push(i_bids_price);
-            
+
             // -- Orders formation
 
             let i_bids_orders = if let Some(bid_orders_range) = bids_orders {
@@ -662,11 +669,15 @@ impl Orderbook {
             };
 
             let mut v_bids_orders: Vec<Order> = (0..i_bids_orders)
-                .map(|_| Order::random(
-                    OrderType::Limit,
-                    OrderSide::Bids,
-                    Some((i_bids_price, i_bids_price)),
-                    None))
+                .map(|_| {
+                    Order::random(
+                        OrderType::Limit,
+                        OrderSide::Bids,
+                        (10_000.01, 11_000.01),
+                        (0.001, 0.100),
+                    )
+                    .unwrap()
+                })
                 .collect();
 
             v_bids_orders.sort_by_key(|order| order.order_ts);
@@ -679,7 +690,7 @@ impl Orderbook {
                 .sum();
 
             // -- Result formation
-            
+
             i_bids.push(Level {
                 level_id: i_bids_id,
                 side: i_bids_side,
@@ -689,15 +700,15 @@ impl Orderbook {
             });
         }
 
-        // --------------------------------------------------------------- Ask Side Formation -- //
-        
-        for i in 1..=asks_levels {
+        // --------------------------------------------------------------- Ask Side
+        // Formation -- //
 
+        for i in 1..=asks_levels {
             let i_asks_id = 7654;
-            
+
             let i_asks_side = OrderSide::Asks;
-            
-            let i_asks_price = v_asks_prices[(i - 1) as usize] - v_asks_ticks[(i - 1) as usize]; 
+
+            let i_asks_price = v_asks_prices[(i - 1) as usize] - v_asks_ticks[(i - 1) as usize];
             v_asks_prices.push(i_asks_price);
 
             let i_asks_orders = if let Some(asks_orders_range) = asks_orders {
@@ -707,11 +718,15 @@ impl Orderbook {
             };
 
             let mut v_asks_orders: Vec<Order> = (0..i_asks_orders)
-                .map(|_| Order::random(
-                    OrderType::Limit,
-                    OrderSide::Bids,
-                    Some((i_asks_price, i_asks_price)),
-                    None))
+                .map(|_| {
+                    Order::random(
+                        OrderType::Limit,
+                        OrderSide::Asks,
+                        (10_000.01, 11_000.01),
+                        (0.001, 0.100),
+                    )
+                    .unwrap()
+                })
                 .collect();
 
             v_asks_orders.sort_by_key(|order| order.order_ts);
@@ -724,7 +739,7 @@ impl Orderbook {
                 .sum();
 
             // -- Result formation
-            
+
             i_asks.push(Level {
                 level_id: i_asks_id,
                 side: i_asks_side,
@@ -743,4 +758,3 @@ impl Orderbook {
         }
     }
 }
-

@@ -15,19 +15,19 @@ repository.workspace = true
 [dev-dependencies]
 
 # Atelier sub-modules 
-atelier = { workspace = true }
-atelier-data = { workspace = true }
-atelier-generators = { workspace = true }
+atelier = { path = "../atelier", version = "0.1.0" }
+atelier-analytics = { path = "../atelier-analytics", version = "0.0.1" }
+atelier-data = { path = "../atelier-data", version = "0.0.1" }
+atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
 
-# Error Handling
-thiserror = { workspace = true }
 
 # Probabilistic features
 rand = { workspace = true }
 rand_distr = { workspace = true }
 
-
-[[examples]]
+[[example]]
 name = "orderbook_progressions"
-path = "examples/orderbook_progressions.rs"
+path = "orderbook_progressions.rs"
 
+[lints]
+workspace = true

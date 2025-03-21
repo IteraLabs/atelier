@@ -4,12 +4,18 @@ resolver = "2"
 members = [
   # Core
   "atelier",
+
   # Operational
+  "atelier-analytics",
   "atelier-data",
+  
   # Scientific
   "atelier-generators",
+  
   # Excellence
   "benches",
+  "atelier-results",
+  
   # Usability
   "examples",
 ]
@@ -44,8 +50,10 @@ license = "Apache-2.0"
 
 # Atelier complements
 atelier = { path = "./atelier", version = "0.1.0" }
+atelier-analytics = { path = "./atelier-analytics", version = "0.0.1" }
 atelier-data = { path = "./atelier-data", version = "0.0.1" }
 atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
+atelier-results = { path = "./atelier-results", version = "0.0.1" }
 
 # Error Handling
 thiserror = { version = "1.0.64" }

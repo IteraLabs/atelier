@@ -37,3 +37,8 @@ path = "examples/orderbook.rs"
 [[test]]
 name = "orderbook_methods"
 path = "tests/Orderbooks/ob_methods.rs"
+
+[[test]]
+name = "order_methods"
+path = "tests/Orders/order_methods.rs"
+

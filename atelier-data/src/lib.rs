@@ -1,7 +1,6 @@
 //! # atelier-data
 //!
 //! Data structure definition.
-//!
 
 /// Implementation of orders: Market, Limit
 pub mod orders;
@@ -14,4 +13,3 @@ pub mod orderbooks;
 
 /// Results messages: Errors, and, Success.
 pub mod results;
-

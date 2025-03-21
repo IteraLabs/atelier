@@ -10,7 +10,6 @@
 //! ## References
 //!
 //! - [rand_distr](https://docs.rs/rand_distr/latest/rand_distr/)
-//!
 use rand::prelude::*;
 use rand_distr::Normal;
 
@@ -24,21 +23,15 @@ pub struct NormalDistribution {
 }
 
 impl Sampling for NormalDistribution {
-
     fn sample(&self, n: usize) -> Vec<f64> {
-
         if self.mu == 0.0 && self.sigma == 1.0 {
-   
             let std_normal = Normal::new(0.0, 1.0).unwrap();
             let v_std_normal: Vec<f64> = std_normal.sample_iter(&mut rand::rng()).take(n).collect();
             v_std_normal
-        
         } else {
-        
             let normal = Normal::new(0.0, 1.0).unwrap();
             let v_normal: Vec<f64> = normal.sample_iter(&mut rand::rng()).take(n).collect();
             v_normal
-
         }
     }
 }

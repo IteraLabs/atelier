@@ -1,34 +1,31 @@
 #[cfg(test)]
 
-// -- ----------------------------------------------------------------- TESTS UTILS -- //
-// -- ----------------------------------------------------------------- ----------- -- //
+// -- --------------------------------------------------------------------------- TESTS UTILS -- //
+// -- --------------------------------------------------------------------------- ----------- -- //
 
 mod test_orderbook_utils {
 
-    use atelier_data::levels::Level;
-    use atelier_data::orderbooks::Orderbook;
-    use atelier_data::orders::OrderSide;
-    
-    use rand::distr::Uniform;
-    use rand::{rng, Rng};
+    use atelier_data::{levels::Level, orderbooks::Orderbook, orders::OrderSide};
+    use rand::{distr::Uniform, rng, Rng};
+    use std::time::{SystemTime, UNIX_EPOCH};
 
-    // ------------------------------------------------------------- TEST ORDERBOOK -- //
+    // ----------------------------------------------------------------------- TEST ORDERBOOK -- //
 
     pub fn test_orderbook() -> Orderbook {
-        Orderbook::random(100_000.0, 4, None, None,100_001.0, 4, None)
+        Orderbook::random(100_000.0, 4, None, None, 100_001.0, 4, None)
     }
 
-    // ----------------------------------------------------------------- TEST LEVEL -- //
+    // --------------------------------------------------------------------------- TEST LEVEL -- //
 
     pub fn test_level(testable_ob: &Orderbook) -> Result<Level, ()> {
         // Random samples
         let mut uni_rand = rng();
-        let rand_level_b = uni_rand
-            .sample(Uniform::new(0, testable_ob.bids.len()-1)
-            .expect("Failed to create Uniform for Bids"));
-        let rand_level_a = uni_rand
-            .sample(Uniform::new(0, testable_ob.asks.len()-1)
-            .expect("Failed to create Uniform for Asks"));
+        let rand_level_b = uni_rand.sample(
+            Uniform::new(0, testable_ob.bids.len() - 1).expect("Failed to create Uniform for Bids"),
+        );
+        let rand_level_a = uni_rand.sample(
+            Uniform::new(0, testable_ob.asks.len() - 1).expect("Failed to create Uniform for Asks"),
+        );
 
         // Get a cloned random Level from the Test Orderbook
         let random_level = match OrderSide::random() {
@@ -38,24 +35,34 @@ mod test_orderbook_utils {
 
         Ok(random_level)
     }
+
+    // ------------------------------------------------------------------------ TEST TIMESTAMP --//
+
+    pub fn test_timestamp() -> u64 {
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_micros() as u64
+    }
 }
 
-// -- ------------------------------------------------------------- ORDERBOOK TESTS -- //
-// -- ------------------------------------------------------------- --------------- -- //
+// -- ----------------------------------------------------------------------- ORDERBOOK TESTS -- //
+// -- ----------------------------------------------------------------------- --------------- -- //
 
 mod tests {
 
-    // ------------------------------------------------------------------ FIND_LEVEL -- /
-    // ------------------------------------------------------------------ ---------- -- /
+    // ---------------------------------------------------------------------------- FIND_LEVEL -- /
+    // ---------------------------------------------------------------------------- ---------- -- /
 
-    // ---------------------------------------------------- FIND_LEVEL: OUTPUT VALUE -- /
+    // -------------------------------------------------------------- FIND_LEVEL: OUTPUT VALUE -- /
 
     #[test]
     fn find_level_output_value() {
-        use super::*;
-        use test_orderbook_utils::*;
+        use crate::test_orderbook_utils::{test_level, test_orderbook, test_timestamp};
 
-       // Get a random Orderbook from test_orderbook
+        println!("\ntest ran at: {:?}\n", test_timestamp());
+
+        // Get a random Orderbook from test_orderbook
         let testable_ob = test_orderbook();
         // Get a random Level from the test_level
         let random_level = test_level(&testable_ob).unwrap();
@@ -65,17 +72,23 @@ mod tests {
         let r_level_id = random_level.level_id.clone();
 
         println!("random level for the test");
-        println!("side: {:?}, price: {:?}, level_id: {:?}", r_side, r_price, r_level_id);
+        println!(
+            "side: {:?}, price: {:?}, level_id: {:?}",
+            r_side, r_price, r_level_id
+        );
 
         // Find the same Level using the function
         let find_level_ob = testable_ob.find_level(&r_price);
-        
+
         println!("level found result: {:?}", find_level_ob);
 
         match find_level_ob {
             Ok(n) if n < 0 => {
                 let bid_found = find_level_ob.unwrap().abs() as usize - 1;
-                println!("level found price: {:?}", &testable_ob.bids[bid_found].price);
+                println!(
+                    "level found price: {:?}",
+                    &testable_ob.bids[bid_found].price
+                );
                 let bid_level_found = testable_ob.bids[bid_found].clone();
                 assert_eq!(bid_level_found, random_level);
             }
@@ -90,77 +103,77 @@ mod tests {
             Ok(_) => {
                 println!("error");
             }
-            Err(_) => { }
+            Err(_) => {}
         }
     }
 
-    // -------------------------------------------------------------- RETRIEVE_LEVEL -- /
-    // -------------------------------------------------------------- -------------- -- /
+    // ------------------------------------------------------------------------ RETRIEVE_LEVEL -- /
+    // ------------------------------------------------------------------------ -------------- -- /
 
-    // ------------------------------------------------ RETRIEVE_LEVEL: OUTPUT VALUE -- /
+    // ---------------------------------------------------------- RETRIEVE_LEVEL: OUTPUT VALUE -- /
 
     // #[test]
     //fn retrieve_level_output_value() {
     //}
 
-    // ---------------------------------------------------------------- DELETE_LEVEL -- /
-    // ---------------------------------------------------------------- ------------ -- /
+    // -------------------------------------------------------------------------- DELETE_LEVEL -- /
+    // -------------------------------------------------------------------------- ------------ -- /
 
-    // -------------------------------------------------- DELETE_LEVEL: OUTPUT VALUE -- /
+    // ------------------------------------------------------------ DELETE_LEVEL: OUTPUT VALUE -- /
 
     //#[test]
     //fn delete_level_output_value() {
     //}
 
-    // ---------------------------------------------------------------- INSERT_LEVEL -- /
-    // ---------------------------------------------------------------- ------------ -- /
+    // -------------------------------------------------------------------------- INSERT_LEVEL -- /
+    // -------------------------------------------------------------------------- ------------ -- /
 
-    // -------------------------------------------------- INSERT_LEVEL: OUTPUT VALUE -- /
+    // ------------------------------------------------------------ INSERT_LEVEL: OUTPUT VALUE -- /
 
     // #[test]
     // fn insert_level_output_value() {
     // }
 
-    // ------------------------------------------------------------------ FIND_ORDER -- /
-    // ------------------------------------------------------------------ ---------- -- /
+    // ---------------------------------------------------------------------------- FIND_ORDER -- /
+    // ---------------------------------------------------------------------------- ---------- -- /
 
-    // ---------------------------------------------------- FIND_ORDER: OUTPUT VALUE -- /
+    // -------------------------------------------------------------- FIND_ORDER: OUTPUT VALUE -- /
 
     // #[test]
     // fn find_order_output_value() {
     // }
 
-    // -------------------------------------------------------------- RETRIEVE_ORDER -- /
-    // -------------------------------------------------------------- -------------- -- /
+    // ------------------------------------------------------------------------ RETRIEVE_ORDER -- /
+    // ------------------------------------------------------------------------ -------------- -- /
 
-    // ------------------------------------------------ RETRIEVE_ORDER: OUTPUT VALUE -- /
+    // ---------------------------------------------------------- RETRIEVE_ORDER: OUTPUT VALUE -- /
 
     // #[test]
     // fn retrieve_order_output_value() {
     // }
 
-    // ---------------------------------------------------------------- DELETE_ORDER -- /
-    // ---------------------------------------------------------------- ------------ -- /
+    // -------------------------------------------------------------------------- DELETE_ORDER -- /
+    // -------------------------------------------------------------------------- ------------ -- /
 
-    // -------------------------------------------------- DELETE_ORDER: OUTPUT VALUE -- /
+    // ------------------------------------------------------------ DELETE_ORDER: OUTPUT VALUE -- /
 
     // #[test]
     // fn delete_order_output_value() {
     // }
 
-    // ---------------------------------------------------------------- INSERT_ORDER -- /
-    // ---------------------------------------------------------------- ------------ -- /
+    // -------------------------------------------------------------------------- INSERT_ORDER -- /
+    // -------------------------------------------------------------------------- ------------ -- /
 
-    // -------------------------------------------------- INSERT_ORDER: OUTPUT VALUE -- /
+    // ------------------------------------------------------------ INSERT_ORDER: OUTPUT VALUE -- /
 
     // #[test]
     // fn insert_order_output_value() {
     // }
 
-    // ---------------------------------------------------------------- MODIFY_ORDER -- /
-    // ---------------------------------------------------------------- ------------ -- /
+    // -------------------------------------------------------------------------- MODIFY_ORDER -- /
+    // -------------------------------------------------------------------------- ------------ -- /
 
-    // -------------------------------------------------- MODIFY_ORDER: OUTPUT VALUE -- /
+    // ------------------------------------------------------------ MODIFY_ORDER: OUTPUT VALUE -- /
 
     // #[test]
     // fn modify_order_output_value() {

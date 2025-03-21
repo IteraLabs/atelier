@@ -13,22 +13,22 @@
 //!
 //! $S_{t}$: The price of the asset at time $t$. \
 //! $\mu$: The drift coefficient, representing the expected return. \
-//! $\sigma$: The diffusion coefficient, representing the degree of variation in returns. \
-//! $dW_{t}$: A $Wiener$ process as the source of randomness within the model. \
+//! $\sigma$: The diffusion coefficient, representing the degree of variation in
+//! returns. \ $dW_{t}$: A $Wiener$ process as the source of randomness within
+//! the model. \
 //!
 //! ## Implementation
 //! $\mu$: Is sometimes used to represent a $trend$ in the prices. \
-//! $\sigma$: Is sometimes used to represent the $volatility$ of the asset's return. \
-//! $dS_{t}$: is a non-negative, log-normally distributed, i.i.d process. Frequently
-//! used for Pricing Options (Black-Scholes), Value-at-risk (VaR) calculations, dummy
-//! examples of prices progression.
+//! $\sigma$: Is sometimes used to represent the $volatility$ of the asset's
+//! return. \ $dS_{t}$: is a non-negative, log-normally distributed, i.i.d
+//! process. Frequently used for Pricing Options (Black-Scholes), Value-at-risk
+//! (VaR) calculations, dummy examples of prices progression.
 //!
 //! ## References
 //! [Brownian motion](https://en.wikipedia.org/wiki/Brownian_motion)
 
-use crate::probabilistic;
-use crate::probabilistic::Sampling;
-use atelier_data::results::errors::GeneratorError;
+use crate::{probabilistic, probabilistic::Sampling};
+use atelier_results::errors::GeneratorError;
 
 fn gbm_return_valid_inputs(
     s0: &f64,
@@ -87,6 +87,5 @@ pub fn gbm_return(
         }
 
         Err(_e) => Err(GeneratorError::GeneratorInputTypeFailure),
-
     }
 }
