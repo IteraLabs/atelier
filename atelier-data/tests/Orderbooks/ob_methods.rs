@@ -58,9 +58,7 @@ mod tests {
 
     #[test]
     fn find_level_output_value() {
-        use crate::test_orderbook_utils::{test_level, test_orderbook, test_timestamp};
-
-        println!("\ntest ran at: {:?}\n", test_timestamp());
+        use crate::test_orderbook_utils::{test_level, test_orderbook};
 
         // Get a random Orderbook from test_orderbook
         let testable_ob = test_orderbook();
@@ -112,9 +110,29 @@ mod tests {
 
     // ---------------------------------------------------------- RETRIEVE_LEVEL: OUTPUT VALUE -- /
 
-    // #[test]
-    //fn retrieve_level_output_value() {
-    //}
+    #[test]
+    fn retrieve_level_output_value() {
+    
+        use crate::test_orderbook_utils::{test_level, test_orderbook};
+
+        // Get a random Orderbook from test_orderbook
+        let testable_ob = test_orderbook();
+        // Get a random Level from the test_level
+        let random_level = test_level(&testable_ob).unwrap();
+
+        let r_side = random_level.side.clone();
+        let r_price = random_level.price.clone();
+        let r_level_id = random_level.level_id.clone();
+
+        println!("\nrandom_level");
+        println!("\nside: {:?}, price: {:?}, level_id: {:?}", r_side, r_price, r_level_id);
+
+        let retrieved_level = testable_ob.retrieve_level(&r_price).unwrap();
+        println!("\nretrieved_level: {:?}", retrieved_level.price);
+        println!("assert_eq! {:?} == {:?}", r_price, retrieved_level.price);
+        // assert_eq!(r_price, retrieved_level.price)
+
+    }
 
     // -------------------------------------------------------------------------- DELETE_LEVEL -- /
     // -------------------------------------------------------------------------- ------------ -- /

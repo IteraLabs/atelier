@@ -4,8 +4,8 @@ use rand_distr::{Bernoulli, Distribution, Uniform};
 use atelier_data::orderbooks::Orderbook;
 
 fn main() {
-    // -- Orderbook parameters -- //
 
+    // -- Orderbook parameters -- //
     let ini_bid_price = 100_000.00;
     let ini_bid_levels = 2;
     let ini_bid_orders = Some((1, 10));
@@ -26,7 +26,7 @@ fn main() {
 
     let mut rng = rand::rng();
 
-    // ---------------------------------------------------------------------------------------- //
+    // ----------------------------------------------------------------------------------------- //
     for _ in 0..n_progressions {
         let uni_rand = Uniform::new(uni_params[0], uni_params[1])
             .expect("Failed to create Uniform distribution sampler");
@@ -55,13 +55,21 @@ fn main() {
         v_orderbook.push(r_ob);
     }
 
+    println!("\nNumber of progressions: {:?}\n", n_progressions);
+
     println!(
-        "\nbid prices: {:?}, {:?}, {:?}",
-        v_orderbook[0].bids[0].price, v_orderbook[1].bids[0].price, v_orderbook[2].bids[0].price
+        "\nfirst 4 bid prices: {:?}, {:?}, {:?}, {:?}",
+        v_orderbook[0].bids[0].price,
+        v_orderbook[1].bids[0].price,
+        v_orderbook[2].bids[0].price,
+        v_orderbook[3].bids[0].price
     );
 
     println!(
-        "\nask prices: {:?}, {:?}, {:?}",
-        v_orderbook[0].asks[0].price, v_orderbook[1].asks[0].price, v_orderbook[2].asks[0].price
+        "\nfirst 4 ask prices: {:?}, {:?}, {:?}, {:?}",
+        v_orderbook[0].asks[0].price,
+        v_orderbook[1].asks[0].price,
+        v_orderbook[2].asks[0].price,
+        v_orderbook[3].asks[0].price
     );
 }

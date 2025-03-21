@@ -26,6 +26,9 @@ rand_distr = { workspace = true }
 # Benchmarking
 criterion = { workspace = true }
 
+# ---------------------------------------------------------------------------------- Examples -- #
+# ---------------------------------------------------------------------------------- -------- -- #
+
 [[example]]
 name = "basic_orders"
 path = "examples/orders.rs"
@@ -33,6 +36,13 @@ path = "examples/orders.rs"
 [[example]]
 name = "basic_orderbook"
 path = "examples/orderbook.rs"
+
+[[example]]
+name = "basic_orderbook_progressions"
+path = "examples/progressions.rs"
+
+# ------------------------------------------------------------------------------------- Tests -- #
+# ------------------------------------------------------------------------------------- ----- -- #
 
 [[test]]
 name = "orderbook_methods"
