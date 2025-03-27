@@ -13,3 +13,7 @@ pub mod orderbooks;
 
 /// Results messages: Errors, and, Success.
 pub mod results;
+
+/// Implementation of trades (executed orders)
+pub mod trades;
+

@@ -1,0 +1,26 @@
+[package]
+name = "atelier-demm"
+description = "Decentralized Market Making Modeling"
+version = "0.0.1"
+publish = false
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+atelier-data = { path = "../atelier-data", version = "0.0.1" }
+atelier-results = { path = "../atelier-results", version = "0.0.1" }
+
+# Error
+thiserror = { workspace = true }
+
+# Probabilistic features
+rand = { workspace = true }
+rand_distr = { workspace = true }
+

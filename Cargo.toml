@@ -11,6 +11,9 @@ members = [
   
   # Scientific
   "atelier-generators",
+
+  # Modeling
+  "atelier-demm",
   
   # Excellence
   "benches",
@@ -54,6 +57,8 @@ atelier-analytics = { path = "./atelier-analytics", version = "0.0.1" }
 atelier-data = { path = "./atelier-data", version = "0.0.1" }
 atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
 atelier-results = { path = "./atelier-results", version = "0.0.1" }
+
+atelier-demm = { path = "./atelier-demm", version = "0.0.1" }
 
 # Error Handling
 thiserror = { version = "1.0.64" }
