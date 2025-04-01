@@ -50,7 +50,7 @@ Solarized dark             |  Solarized Ocean
 ![shallow](assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))_1.svg)  |  
 ![deep](assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))_2.svg)
 
-![Shallow](https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000,1300))_a_l_100_a_o_Some((1000,1300))_1.svg?sanitize=true)
+![Shallow](https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000%2C%201300))_a_l_100_a_o_Some((1000%2C%201300))_1.svg)
 
 ### Cases
 
