@@ -47,13 +47,13 @@ xdg-open target/criterion/report/index.html
 
 Description            |  Plot
 :-------------------------:|:-------------------------:
-PDF (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000%2C%201300))_a_l_100_a_o_Some((1000%2C%201300))_1.svg", width = "48">
+PDF (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000%2C%201300))_a_l_100_a_o_Some((1000%2C%201300))_1.svg" width = "200" height = "150">
 
-SD Hist (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000%2C%201300))_a_l_100_a_o_Some((1000%2C%201300))_2.svg", width = "48">
+SD Hist (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_100_b_o_Some((1000%2C%201300))_a_l_100_a_o_Some((1000%2C%201300))_2.svg" width = "200" height = "150">
 
-PDF (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_2_b_o_Some((5%2C%2010))_a_l_2_a_o_Some((5%2C%2010))_1.svg", width = "48">
+PDF (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_2_b_o_Some((5%2C%2010))_a_l_2_a_o_Some((5%2C%2010))_1.svg" width = "200" height="150">
 
-SD Hist (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_2_b_o_Some((5%2C%2010))_a_l_2_a_o_Some((5%2C%2010))_2.svg", width = "48">
+SD Hist (Times) | <img src="https://raw.githubusercontent.com/IteraLabs/atelier/refs/heads/main/assets/images/benches/orderbook_generation/b_l_2_b_o_Some((5%2C%2010))_a_l_2_a_o_Some((5%2C%2010))_2.svg" width = "200" height = "150">
 
 
 ### Cases
