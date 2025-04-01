@@ -1,0 +1,2420 @@
+   Compiling benches v0.0.1 (/Users/franciscome/git/iteralabs/atelier/benches)
+    Finished `bench` profile [optimized] target(s) in 1.26s
+     Running unittests src/lib.rs (target/release/deps/atelier-8b4e13d197a6959d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/release/deps/atelier_data-a435100a0d619e6c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/release/deps/atelier_generators-c7d85b344e336dab)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running orderbook_benchmark.rs (target/release/deps/orderbook_benchmark-4f792a95ab096766)
+Gnuplot not found, using plotters backend
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0035 s (2.2M iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+                        time:   [2.2826 µs 2.2842 µs 2.2859 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0576 s (439k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+                        time:   [11.483 µs 11.490 µs 11.497 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1255 s (197k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+                        time:   [26.063 µs 26.080 µs 26.097 µs]
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0552 s (101k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+                        time:   [50.180 µs 50.208 µs 50.235 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0258 s (439k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+                        time:   [11.450 µs 11.460 µs 11.470 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0264 s (242k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+                        time:   [20.804 µs 20.831 µs 20.859 µs]
+                        change: [-4.6060% -2.1683% -0.5994%] (p = 0.02 < 0.05)
+                        Change within noise threshold.
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1719 s (146k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+                        time:   [35.452 µs 35.503 µs 35.555 µs]
+                        change: [-0.3856% -0.1942% -0.0321%] (p = 0.03 < 0.05)
+                        Change within noise threshold.
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1068 s (86k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+                        time:   [59.608 µs 59.747 µs 59.906 µs]
+                        change: [-0.2958% -0.1324% +0.0573%] (p = 0.15 > 0.05)
+                        No change in performance detected.
+Found 8 outliers among 100 measurements (8.00%)
+  6 (6.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1307 s (197k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+                        time:   [26.073 µs 26.108 µs 26.145 µs]
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1547 s (146k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+                        time:   [35.285 µs 35.350 µs 35.437 µs]
+                        change: [+0.3050% +0.4598% +0.6200%] (p = 0.00 < 0.05)
+                        Change within noise threshold.
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0904 s (96k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+                        time:   [50.386 µs 51.261 µs 52.429 µs]
+                        change: [+1.6687% +2.5387% +3.8415%] (p = 0.00 < 0.05)
+                        Performance has regressed.
+Found 7 outliers among 100 measurements (7.00%)
+  1 (1.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.3487 s (71k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+                        time:   [74.190 µs 74.466 µs 74.960 µs]
+                        change: [+0.5447% +0.9082% +1.3149%] (p = 0.00 < 0.05)
+                        Change within noise threshold.
+Found 8 outliers among 100 measurements (8.00%)
+  2 (2.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0743 s (101k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((5, 10))
+                        time:   [50.255 µs 50.295 µs 50.336 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0921 s (86k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((5, 10))
+                        time:   [59.362 µs 59.432 µs 59.523 µs]
+                        change: [-8.6962% -4.2883% -1.4425%] (p = 0.01 < 0.05)
+                        Performance has improved.
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.2480 s (71k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((5, 10))
+                        time:   [77.574 µs 88.426 µs 102.87 µs]
+                        change: [+1.1026% +14.234% +32.238%] (p = 0.09 > 0.05)
+                        No change in performance detected.
+Found 13 outliers among 100 measurements (13.00%)
+  1 (1.00%) low severe
+  3 (3.00%) high mild
+  9 (9.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0316 s (61k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((5, 10))
+                        time:   [82.941 µs 83.249 µs 83.552 µs]
+                        change: [-18.846% -17.405% -16.252%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0557 s (298k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+                        time:   [16.141 µs 16.872 µs 17.965 µs]
+Found 10 outliers among 100 measurements (10.00%)
+  10 (10.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.3214 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+                        time:   [145.87 µs 147.75 µs 150.42 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.4617 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+                        time:   [363.88 µs 364.63 µs 365.35 µs]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.4383 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+                        time:   [724.89 µs 727.58 µs 730.19 µs]
+Found 11 outliers among 100 measurements (11.00%)
+  6 (6.00%) low mild
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0757 s (217k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+                        time:   [23.366 µs 23.446 µs 23.534 µs]
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.4569 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+                        time:   [154.14 µs 154.51 µs 154.88 µs]
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.6358 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+                        time:   [372.90 µs 379.57 µs 391.81 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.4414 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+                        time:   [722.63 µs 725.31 µs 729.04 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.1635 s (141k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+                        time:   [35.899 µs 36.461 µs 37.250 µs]
+Found 7 outliers among 100 measurements (7.00%)
+  2 (2.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0413 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+                        time:   [166.40 µs 167.71 µs 170.16 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.8790 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+                        time:   [388.53 µs 394.11 µs 402.05 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  3 (3.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.6136 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+                        time:   [754.32 µs 755.52 µs 756.78 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.1528 s (91k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((100, 200))
+                        time:   [56.787 µs 57.655 µs 58.795 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.8666 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((100, 200))
+                        time:   [189.43 µs 191.30 µs 194.29 µs]
+Found 7 outliers among 100 measurements (7.00%)
+  2 (2.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 6.2420 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((100, 200))
+                        time:   [411.49 µs 413.71 µs 416.72 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.9088 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((100, 200))
+                        time:   [807.31 µs 877.40 µs 963.17 µs]
+Found 14 outliers among 100 measurements (14.00%)
+  5 (5.00%) high mild
+  9 (9.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3303 s (76k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+                        time:   [64.061 µs 65.421 µs 67.096 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  3 (3.00%) low mild
+  1 (1.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.0885 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+                        time:   [596.05 µs 597.77 µs 599.68 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.7s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.7487 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.5174 ms 1.5294 ms 1.5507 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1595 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.0387 ms 3.0836 ms 3.1476 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.2605 s (71k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+                        time:   [71.872 µs 72.054 µs 72.253 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low severe
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.0167 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+                        time:   [593.86 µs 599.30 µs 608.75 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.5s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.5032 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.5016 ms 1.5067 ms 1.5128 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  7 (7.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0834 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+                        time:   [2.9937 ms 3.0000 ms 3.0067 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1872 s (61k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+                        time:   [87.177 µs 88.455 µs 90.197 µs]
+Found 10 outliers among 100 measurements (10.00%)
+  4 (4.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.2440 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+                        time:   [622.06 µs 626.87 µs 633.99 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  1 (1.00%) low mild
+  6 (6.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.8s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.7990 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.5455 ms 1.5528 ms 1.5620 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  1 (1.00%) low severe
+  2 (2.00%) low mild
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.2482 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.0633 ms 3.0692 ms 3.0754 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3716 s (50k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((500, 700))
+                        time:   [105.23 µs 105.45 µs 105.67 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.3116 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((500, 700))
+                        time:   [629.61 µs 631.48 µs 633.51 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  5 (5.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.7s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.7273 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.5323 ms 1.5402 ms 1.5542 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1884 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.0697 ms 3.1161 ms 3.1829 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.5746 s (45k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [123.12 µs 123.43 µs 123.74 µs]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.8s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.8071 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.1752 ms 1.1822 ms 1.1894 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  7 (7.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0084 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [2.9380 ms 2.9484 ms 2.9589 ms]
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.3947 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [5.8588 ms 5.8794 ms 5.9023 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.3645 s (40k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [132.90 µs 133.21 µs 133.55 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.9s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.8620 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.1646 ms 1.1672 ms 1.1701 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2367 s (1800 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [2.9322 ms 2.9567 ms 2.9980 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.3225 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [5.8814 ms 5.9010 ms 5.9207 ms]
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.1625 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [146.18 µs 146.60 µs 147.03 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.9s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.9210 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.1851 ms 1.1895 ms 1.1936 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2451 s (1800 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [2.9107 ms 2.9164 ms 2.9224 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  5 (5.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2855 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [5.8839 ms 5.9049 ms 5.9265 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0377 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [167.27 µs 169.11 µs 172.42 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.0s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 6.0346 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.1974 ms 1.2001 ms 1.2029 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  5 (5.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0132 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [2.9739 ms 2.9826 ms 2.9916 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.3678 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((5, 10))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [5.9471 ms 5.9680 ms 5.9890 ms]
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0146 s (323k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+                        time:   [15.602 µs 15.628 µs 15.654 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low severe
+  2 (2.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0771 s (217k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+                        time:   [23.482 µs 23.578 µs 23.737 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0831 s (141k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+                        time:   [36.064 µs 36.108 µs 36.151 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1999 s (91k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+                        time:   [56.896 µs 57.176 µs 57.659 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1892 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+                        time:   [147.46 µs 147.67 µs 147.88 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  5 (5.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.4465 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+                        time:   [154.27 µs 154.46 µs 154.67 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0261 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+                        time:   [166.32 µs 166.53 µs 166.75 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.7379 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+                        time:   [188.23 µs 188.54 µs 188.84 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.5420 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+                        time:   [364.14 µs 364.58 µs 365.05 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.6017 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+                        time:   [371.29 µs 371.78 µs 372.31 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.7966 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+                        time:   [384.57 µs 385.01 µs 385.49 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.1136 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+                        time:   [404.80 µs 405.27 µs 405.76 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.3338 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((5, 10))
+                        time:   [732.99 µs 734.03 µs 735.15 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.4349 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((5, 10))
+                        time:   [739.35 µs 740.15 µs 740.96 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.6561 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((5, 10))
+                        time:   [752.52 µs 753.45 µs 754.40 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.7976 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((5, 10))
+                        time:   [772.87 µs 773.61 µs 774.39 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0351 s (172k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+                        time:   [29.349 µs 29.385 µs 29.420 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) low severe
+  3 (3.00%) low mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.6740 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+                        time:   [161.29 µs 161.49 µs 161.68 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low severe
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.7520 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+                        time:   [380.01 µs 382.37 µs 387.18 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  3 (3.00%) low mild
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.5347 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+                        time:   [747.90 µs 748.98 µs 750.11 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.6687 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+                        time:   [161.23 µs 161.41 µs 161.63 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.8993 s (20k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+                        time:   [292.69 µs 293.16 µs 293.64 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.1491 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+                        time:   [511.91 µs 512.45 µs 513.01 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 8.8064 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+                        time:   [877.55 µs 878.68 µs 879.81 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.7241 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+                        time:   [380.99 µs 381.56 µs 382.15 µs]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.1613 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+                        time:   [512.24 µs 512.81 µs 513.37 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) low severe
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.4420 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+                        time:   [734.20 µs 743.03 µs 756.09 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  2 (2.00%) low mild
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.5s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.5314 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+                        time:   [1.1045 ms 1.1059 ms 1.1074 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  1 (1.00%) low severe
+  2 (2.00%) low mild
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.5175 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((100, 200))
+                        time:   [746.16 µs 746.88 µs 747.57 µs]
+Found 7 outliers among 100 measurements (7.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 8.8270 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((100, 200))
+                        time:   [878.80 µs 879.76 µs 880.76 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.5s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.5087 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((100, 200))
+                        time:   [1.1119 ms 1.1237 ms 1.1366 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  4 (4.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 8.6s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 8.5769 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((100, 200))
+                        time:   [1.4753 ms 1.4852 ms 1.4993 ms]
+Found 16 outliers among 100 measurements (16.00%)
+  16 (16.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1970 s (66k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+                        time:   [79.414 µs 79.545 µs 79.683 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.0950 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+                        time:   [615.33 µs 622.20 µs 631.61 µs]
+Found 7 outliers among 100 measurements (7.00%)
+  3 (3.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.6s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.6198 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.5132 ms 1.5163 ms 1.5196 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) low mild
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1025 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.0193 ms 3.0260 ms 3.0333 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  6 (6.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3187 s (25k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+                        time:   [210.83 µs 212.24 µs 213.81 µs]
+Found 14 outliers among 100 measurements (14.00%)
+  11 (11.00%) low mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.7440 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+                        time:   [860.39 µs 994.02 µs 1.1750 ms]
+Found 15 outliers among 100 measurements (15.00%)
+  2 (2.00%) high mild
+  13 (13.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 8.5s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 8.5360 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.6864 ms 1.7032 ms 1.7238 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.2079 s (1600 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.2440 ms 3.2534 ms 3.2626 ms]
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.7301 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+                        time:   [454.39 µs 533.52 µs 661.55 µs]
+Found 15 outliers among 100 measurements (15.00%)
+  1 (1.00%) low mild
+  5 (5.00%) high mild
+  9 (9.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.1s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1145 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+                        time:   [959.51 µs 964.61 µs 972.02 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.4s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 9.4333 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.8632 ms 1.8667 ms 1.8706 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0602 s (1500 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.6607 ms 3.8406 ms 4.0628 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  5 (5.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.8s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.8176 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((500, 700))
+                        time:   [815.99 µs 823.24 µs 834.41 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  4 (4.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.7s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.6979 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((500, 700))
+                        time:   [1.3483 ms 1.3651 ms 1.3869 ms]
+Found 12 outliers among 100 measurements (12.00%)
+  3 (3.00%) high mild
+  9 (9.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1233 s (2300 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((500, 700))
+                        time:   [2.2650 ms 2.2741 ms 2.2847 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0443 s (1300 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.7409 ms 3.7509 ms 3.7619 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.4987 s (40k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [136.52 µs 136.84 µs 137.17 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.9s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.9066 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.1663 ms 1.1690 ms 1.1718 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2328 s (1800 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [2.9163 ms 2.9214 ms 2.9268 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.3012 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [5.8824 ms 5.8995 ms 5.9184 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  6 (6.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.5893 s (20k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [275.63 µs 276.47 µs 277.35 µs]
+Found 12 outliers among 100 measurements (12.00%)
+  1 (1.00%) low severe
+  3 (3.00%) low mild
+  6 (6.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.7s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 6.7107 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.4924 ms 1.6682 ms 1.8990 ms]
+Found 20 outliers among 100 measurements (20.00%)
+  2 (2.00%) high mild
+  18 (18.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2477 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [3.0825 ms 3.1111 ms 3.1515 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  5 (5.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.3779 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [6.0762 ms 6.1439 ms 6.2225 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  3 (3.00%) high mild
+  8 (8.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0359 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [508.77 µs 518.85 µs 533.11 µs]
+Found 13 outliers among 100 measurements (13.00%)
+  6 (6.00%) high mild
+  7 (7.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.8s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 7.7589 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.6755 ms 2.0310 ms 2.5349 ms]
+Found 13 outliers among 100 measurements (13.00%)
+  2 (2.00%) high mild
+  11 (11.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2680 s (1600 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [3.3060 ms 3.3441 ms 3.3926 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  2 (2.00%) high mild
+  9 (9.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.5723 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [6.2218 ms 6.2362 ms 6.2520 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  7 (7.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 8.6835 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [866.78 µs 871.30 µs 877.05 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  4 (4.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.6s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 9.5529 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.8905 ms 1.8976 ms 1.9096 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0724 s (1400 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [3.6363 ms 3.6471 ms 3.6613 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2357 s (800 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((100, 200))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [6.5884 ms 6.6100 ms 6.6388 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  5 (5.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.3116 s (76k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+                        time:   [69.171 µs 69.770 µs 70.475 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0397 s (66k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+                        time:   [77.552 µs 78.730 µs 80.146 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.4251 s (61k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+                        time:   [88.788 µs 89.187 µs 89.570 µs]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0201 s (45k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+                        time:   [109.75 µs 110.50 µs 111.37 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.9815 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+                        time:   [592.15 µs 593.20 µs 594.51 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  2 (2.00%) low mild
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.0435 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+                        time:   [601.72 µs 602.64 µs 603.68 µs]
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low severe
+  5 (5.00%) low mild
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.1896 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+                        time:   [612.52 µs 613.76 µs 615.35 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) low mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.3823 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+                        time:   [634.32 µs 637.10 µs 641.75 µs]
+Found 7 outliers among 100 measurements (7.00%)
+  2 (2.00%) low mild
+  2 (2.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.5s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.5255 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+                        time:   [1.4954 ms 1.4977 ms 1.5002 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  1 (1.00%) low severe
+  3 (3.00%) low mild
+  1 (1.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.6s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.5776 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+                        time:   [1.5014 ms 1.5095 ms 1.5242 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.6s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.6131 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+                        time:   [1.5163 ms 1.5230 ms 1.5331 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  4 (4.00%) low mild
+  2 (2.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.8s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 7.8128 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+                        time:   [1.5381 ms 1.5498 ms 1.5725 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  1 (1.00%) low mild
+  5 (5.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0756 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((5, 10))
+                        time:   [2.9927 ms 2.9979 ms 3.0037 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0790 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((5, 10))
+                        time:   [2.9976 ms 3.0092 ms 3.0272 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  7 (7.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0938 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((5, 10))
+                        time:   [3.0050 ms 3.0101 ms 3.0153 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1462 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((5, 10))
+                        time:   [3.0336 ms 3.0502 ms 3.0742 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0207 s (61k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+                        time:   [83.279 µs 83.868 µs 84.726 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.3994 s (25k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+                        time:   [214.90 µs 215.23 µs 215.55 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  3 (3.00%) low mild
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 6.5373 s (15k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+                        time:   [432.92 µs 433.49 µs 434.06 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 8.0246 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+                        time:   [796.48 µs 797.45 µs 798.38 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 6.0906 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+                        time:   [605.06 µs 606.23 µs 607.46 µs]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.4455 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+                        time:   [736.82 µs 737.70 µs 738.52 µs]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 9.6182 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+                        time:   [954.52 µs 955.71 µs 957.04 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.6s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 6.6401 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+                        time:   [1.3206 ms 1.3223 ms 1.3240 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.6s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.5706 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+                        time:   [1.5043 ms 1.5065 ms 1.5086 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 8.2s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 8.2452 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+                        time:   [1.6326 ms 1.6358 ms 1.6396 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.3s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 9.3165 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+                        time:   [1.8677 ms 1.8760 ms 1.8848 ms]
+Found 16 outliers among 100 measurements (16.00%)
+  2 (2.00%) low mild
+  8 (8.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0894 s (2300 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+                        time:   [2.2225 ms 2.2268 ms 2.2314 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0801 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((100, 200))
+                        time:   [2.9996 ms 3.0051 ms 3.0110 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.3030 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((100, 200))
+                        time:   [3.1260 ms 3.1336 ms 3.1416 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0473 s (1500 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((100, 200))
+                        time:   [3.3436 ms 3.3491 ms 3.3545 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  3 (3.00%) low mild
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.1887 s (1400 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((100, 200))
+                        time:   [3.7041 ms 3.7106 ms 3.7169 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.2541 s (40k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+                        time:   [130.67 µs 131.10 µs 131.52 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) low mild
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.5170 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+                        time:   [648.56 µs 649.66 µs 650.96 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  3 (3.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.8s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.7985 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.5508 ms 1.5533 ms 1.5559 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1543 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.0462 ms 3.0514 ms 3.0566 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.5754 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+                        time:   [650.15 µs 651.18 µs 652.41 µs]
+Found 14 outliers among 100 measurements (14.00%)
+  8 (8.00%) high mild
+  6 (6.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.0s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.9637 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+                        time:   [1.1775 ms 1.1792 ms 1.1808 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) low severe
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0849 s (2400 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+                        time:   [2.1120 ms 2.1334 ms 2.1597 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0031 s (1400 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.6114 ms 3.6413 ms 3.6906 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.9s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.8704 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+                        time:   [1.5620 ms 1.5645 ms 1.5671 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) low mild
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0090 s (2400 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+                        time:   [2.0937 ms 2.0988 ms 2.1040 ms]
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1036 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+                        time:   [3.0126 ms 3.0200 ms 3.0276 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.4072 s (1200 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+                        time:   [4.5319 ms 4.5650 ms 4.6203 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1943 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((500, 700))
+                        time:   [3.0727 ms 3.0871 ms 3.1078 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0865 s (1400 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((500, 700))
+                        time:   [3.6692 ms 3.6946 ms 3.7229 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1043 s (1100 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((500, 700))
+                        time:   [4.4982 ms 4.5367 ms 4.6028 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.4724 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((500, 700))
+                        time:   [6.1646 ms 6.1808 ms 6.1972 ms]
+Found 12 outliers among 100 measurements (12.00%)
+  6 (6.00%) low mild
+  6 (6.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.8633 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [195.98 µs 196.68 µs 197.37 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.2s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 6.2146 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.2385 ms 1.2432 ms 1.2477 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0514 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [3.0283 ms 3.0773 ms 3.1447 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2946 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [5.9623 ms 5.9809 ms 6.0001 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 7.2013 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [720.55 µs 724.54 µs 731.67 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  8 (8.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 8.9s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 8.9152 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.7750 ms 1.7793 ms 1.7843 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2785 s (1500 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [3.5260 ms 3.5549 ms 3.6033 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2430 s (800 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [6.5373 ms 6.5597 ms 6.5826 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 8.2s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 8.2135 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [1.6258 ms 1.6296 ms 1.6337 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0490 s (1900 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [2.6741 ms 2.6792 ms 2.6846 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.3161 s (1200 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [4.4450 ms 4.4743 ms 4.5079 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.1605 s (700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [7.7774 ms 8.0033 ms 8.2714 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  1 (1.00%) high mild
+  8 (8.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.1601 s (1600 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [3.2074 ms 3.2192 ms 3.2314 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.1074 s (1200 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [4.2970 ms 4.3112 ms 4.3261 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.4524 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [5.9884 ms 6.0047 ms 6.0214 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.4459 s (600 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((500, 700))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [9.0863 ms 9.1154 ms 9.1456 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.4696 s (40k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+                        time:   [137.49 µs 137.79 µs 138.06 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  6 (6.00%) low mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.1377 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+                        time:   [144.40 µs 144.92 µs 145.42 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.6674 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+                        time:   [157.18 µs 157.64 µs 158.09 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.3681 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+                        time:   [177.39 µs 178.01 µs 178.67 µs]
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.0s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.0243 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+                        time:   [1.1776 ms 1.1810 ms 1.1846 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) low mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.1s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.1122 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+                        time:   [1.1749 ms 1.1789 ms 1.1831 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.0s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.0121 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+                        time:   [1.1931 ms 1.1954 ms 1.1976 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  2 (2.00%) low mild
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.1s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 6.1108 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+                        time:   [1.2172 ms 1.2206 ms 1.2240 ms]
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0150 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+                        time:   [2.9690 ms 2.9934 ms 3.0220 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.2628 s (1800 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+                        time:   [2.9851 ms 3.0087 ms 3.0368 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.2802 s (1800 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+                        time:   [2.9366 ms 2.9441 ms 2.9518 ms]
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.0110 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+                        time:   [2.9497 ms 2.9598 ms 2.9732 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.2961 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((5, 10))
+                        time:   [5.8951 ms 5.9333 ms 5.9800 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.2553 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((5, 10))
+                        time:   [5.9691 ms 5.9999 ms 6.0343 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  3 (3.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.3711 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((5, 10))
+                        time:   [5.9551 ms 5.9750 ms 5.9964 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Collecting 100 samples in estimated 5.3474 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((5, 10))
+                        time:   [5.9721 ms 6.0096 ms 6.0537 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.3660 s (35k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+                        time:   [149.52 µs 150.33 µs 151.32 µs]
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  9 (9.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.7000 s (20k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+                        time:   [281.28 µs 281.89 µs 282.52 µs]
+Found 7 outliers among 100 measurements (7.00%)
+  2 (2.00%) low mild
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0702 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+                        time:   [502.60 µs 507.25 µs 516.10 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 8.8070 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+                        time:   [868.22 µs 870.89 µs 874.09 µs]
+Found 10 outliers among 100 measurements (10.00%)
+  1 (1.00%) low mild
+  4 (4.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.0s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.9749 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+                        time:   [1.1828 ms 1.1874 ms 1.1928 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  7 (7.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.6s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 6.6109 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+                        time:   [1.3131 ms 1.3165 ms 1.3208 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.7s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 7.7215 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+                        time:   [1.5349 ms 1.5377 ms 1.5408 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.5s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 9.5419 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+                        time:   [1.8998 ms 1.9025 ms 1.9055 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0078 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+                        time:   [2.9274 ms 2.9325 ms 2.9378 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.1811 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+                        time:   [3.0543 ms 3.0611 ms 3.0685 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  6 (6.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.2399 s (1600 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+                        time:   [3.2701 ms 3.2768 ms 3.2840 ms]
+Found 12 outliers among 100 measurements (12.00%)
+  8 (8.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.0618 s (1400 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+                        time:   [3.6368 ms 3.6433 ms 3.6504 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.2765 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((100, 200))
+                        time:   [5.9025 ms 5.9220 ms 5.9436 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low mild
+  5 (5.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.3886 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((100, 200))
+                        time:   [6.0397 ms 6.0553 ms 6.0719 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  6 (6.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.6035 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((100, 200))
+                        time:   [6.2589 ms 6.2724 ms 6.2878 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Collecting 100 samples in estimated 5.2788 s (800 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((100, 200))
+                        time:   [6.6334 ms 6.6450 ms 6.6574 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.8455 s (30k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+                        time:   [192.93 µs 193.67 µs 194.48 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 7.1798 s (10k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+                        time:   [714.82 µs 715.87 µs 716.95 µs]
+Found 10 outliers among 100 measurements (10.00%)
+  3 (3.00%) low mild
+  4 (4.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 8.3s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 8.3448 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+                        time:   [1.6261 ms 1.6294 ms 1.6332 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0544 s (1600 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+                        time:   [3.1290 ms 3.1554 ms 3.2005 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.2s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 6.2210 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+                        time:   [1.2363 ms 1.2400 ms 1.2443 ms]
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.0s, enable flat sampling, or reduce sample count to 50.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 9.0015 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+                        time:   [1.7655 ms 1.7768 ms 1.7950 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0505 s (1900 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+                        time:   [2.6646 ms 2.6684 ms 2.6724 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3934 s (1300 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+                        time:   [4.1714 ms 4.1781 ms 4.1863 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.0208 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+                        time:   [2.9903 ms 3.0010 ms 3.0122 ms]
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3307 s (1500 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+                        time:   [3.6129 ms 3.6269 ms 3.6432 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) low mild
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3359 s (1200 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+                        time:   [4.4215 ms 4.4293 ms 4.4377 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  6 (6.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3645 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+                        time:   [5.9513 ms 5.9599 ms 5.9688 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3692 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((500, 700))
+                        time:   [5.9575 ms 5.9741 ms 5.9917 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1614 s (800 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((500, 700))
+                        time:   [6.4965 ms 6.5150 ms 6.5361 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  5 (5.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.1792 s (700 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((500, 700))
+                        time:   [7.4292 ms 7.4453 ms 7.4624 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Collecting 100 samples in estimated 5.3994 s (600 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((500, 700))
+                        time:   [8.9668 ms 8.9858 ms 9.0068 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  6 (6.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.0340 s (20k iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [251.10 µs 251.82 µs 252.50 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.5s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 6.4843 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [1.2897 ms 1.2973 ms 1.3112 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.1157 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [3.0157 ms 3.0227 ms 3.0301 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.4276 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_2_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [5.9946 ms 6.0052 ms 6.0164 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  7 (7.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.5s, enable flat sampling, or reduce sample count to 60.
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 6.5349 s (5050 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [1.3096 ms 1.3195 ms 1.3328 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  3 (3.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2070 s (2200 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [2.3247 ms 2.3298 ms 2.3352 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  1 (1.00%) low mild
+  6 (6.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2860 s (1300 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [4.0758 ms 4.0848 ms 4.0949 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  4 (4.00%) high mild
+  3 (3.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.6517 s (800 iterations)
+Benchmarking Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_20_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [7.0793 ms 7.1300 ms 7.2173 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.1295 s (1700 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [3.0256 ms 3.0465 ms 3.0781 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  4 (4.00%) high mild
+  5 (5.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2821 s (1300 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [4.0790 ms 4.0853 ms 4.0920 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  1 (1.00%) low mild
+  7 (7.00%) high mild
+  1 (1.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2529 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [5.8595 ms 5.8723 ms 5.8867 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  3 (3.00%) low mild
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2661 s (600 iterations)
+Benchmarking Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_50_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [8.8668 ms 8.9328 ms 9.0449 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  5 (5.00%) high mild
+  4 (4.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.4418 s (900 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_2_a_o_Some((1000, 1300))
+                        time:   [6.0034 ms 6.0144 ms 6.0264 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.6724 s (800 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_20_a_o_Some((1000, 1300))
+                        time:   [7.0942 ms 7.1155 ms 7.1403 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  4 (4.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.2940 s (600 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_50_a_o_Some((1000, 1300))
+                        time:   [8.8634 ms 8.8828 ms 8.9038 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  6 (6.00%) high mild
+  2 (2.00%) high severe
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Warming up for 3.0000 s
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Collecting 100 samples in estimated 5.8772 s (500 iterations)
+Benchmarking Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300)): Analyzing
+Orderbook Creation/random/b_l_100_b_o_Some((1000, 1300))_a_l_100_a_o_Some((1000, 1300))
+                        time:   [11.799 ms 11.879 ms 12.018 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  4 (4.00%) high mild
+  6 (6.00%) high severe
+

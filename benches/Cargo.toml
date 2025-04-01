@@ -1,6 +1,6 @@
 [package]
 name = "benches"
-description = "Benchmarks for the Atelier crate"
+description = "Benchmarks for the Atelier project"
 version = "0.0.1"
 publish = false
 
