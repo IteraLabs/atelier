@@ -40,13 +40,13 @@ fn create_orderbook(c: &mut Criterion) {
                         |b, &(bids_l, bids_o, asks_l, asks_o)| {
                             b.iter(|| {
                                 Orderbook::random(
-                                    black_box(ref_bid_price),   // bids_price
-                                    black_box(bids_l),          // bids_levels
-                                    black_box(bids_o),          // bids_orders
-                                    black_box(None),            // tick_size
-                                    black_box(ref_ask_price),   // asks_price
-                                    black_box(asks_l),          // asks_levels
-                                    black_box(asks_o),          // asks_orders
+                                    black_box(ref_bid_price), // bids_price
+                                    black_box(bids_l),        // bids_levels
+                                    black_box(bids_o),        // bids_orders
+                                    black_box(None),          // tick_size
+                                    black_box(ref_ask_price), // asks_price
+                                    black_box(asks_l),        // asks_levels
+                                    black_box(asks_o),        // asks_orders
                                 )
                             });
                         },

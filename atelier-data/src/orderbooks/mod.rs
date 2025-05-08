@@ -17,10 +17,9 @@ pub struct Orderbook {
 }
 
 impl Orderbook {
-    
     // ------------------------------------------------------------------------ New Orderbook -- //
     // ------------------------------------------------------------------------ ------------- -- //
-    
+
     /// Creates a new instance of `Orderbook`.
     ///
     /// # Parameters
@@ -570,13 +569,13 @@ impl Orderbook {
 
     pub fn random(
         bids_price: f64,
-        bids_levels: u32,
+        bids_levels: Option<(u32, u32)>,
         bids_orders: Option<(u32, u32)>,
 
         tick_size: Option<(f64, f64)>,
 
         asks_price: f64,
-        asks_levels: u32,
+        asks_levels: Option<(u32, u32)>,
         asks_orders: Option<(u32, u32)>,
     ) -> Self {
         let mut rng = rand::rng();
@@ -593,16 +592,28 @@ impl Orderbook {
         //  TODO: Change this to a hashed formation of the Orderbook ID
         let r_orderbook_id = 1234;
 
+        // -- Generate random value for bids_levels & ask_levels
+
+        let n_bids_levels = rng.sample(
+            Uniform::new(bids_levels.unwrap().0, bids_levels.unwrap().1)
+                .expect("Failed to create random n_bids_levels"),
+        );
+
+        let n_asks_levels = rng.sample(
+            Uniform::new(asks_levels.unwrap().0, asks_levels.unwrap().1)
+                .expect("Failed to create random n_asks_levels"),
+        );
+
         // -- Generate all the ticks ahead -- //
 
         // -- Bids
         let mut v_bids_ticks: Vec<f64> = if let Some(bids_range) = tick_size {
             let uni_rand =
                 Uniform::new(bids_range.0, bids_range.1).expect("Failed to create distr");
-            (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
+            (0..n_bids_levels).map(|_| rng.sample(uni_rand)).collect()
         } else {
             let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
-            (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
+            (0..n_bids_levels).map(|_| rng.sample(uni_rand)).collect()
         };
 
         v_bids_ticks.insert(0, 0.0);
@@ -612,10 +623,10 @@ impl Orderbook {
         let mut v_asks_ticks: Vec<f64> = if let Some(asks_range) = tick_size {
             let uni_rand =
                 Uniform::new(asks_range.0, asks_range.1).expect("Failed to create distr");
-            (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
+            (0..n_asks_levels).map(|_| rng.sample(uni_rand)).collect()
         } else {
             let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
-            (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
+            (0..n_asks_levels).map(|_| rng.sample(uni_rand)).collect()
         };
 
         v_asks_ticks.insert(0, 0.0);
@@ -623,7 +634,7 @@ impl Orderbook {
 
         // --------------------------------------------------------------- Bid Side Formation -- //
 
-        for i in 1..=bids_levels {
+        for i in 1..=n_bids_levels {
             // -- Id formation
 
             //  TODO: Change this to a hashed formation of the Level ID
@@ -680,7 +691,7 @@ impl Orderbook {
 
         // --------------------------------------------------------------- Ask Side Formation -- //
 
-        for i in 1..=asks_levels {
+        for i in 1..=n_asks_levels {
             let i_asks_id = 7654;
 
             let i_asks_side = OrderSide::Asks;

@@ -1,0 +1,18 @@
+
+# -- Orderbook parameters -- #
+
+ini_bid_price = 100_000.00
+ini_bid_levels = [2, 5]
+ini_bid_orders = [1, 10]
+
+ini_ask_price = 100_001.00
+ini_ask_levels = [2, 2]
+ini_ask_orders = [1, 10]
+
+ini_ticksize = [0.1, 1.1]
+
+# -- Probabilistic parameters -- #
+
+uni_params = [0.001, 0.005]
+ber_params = [0.5]
+

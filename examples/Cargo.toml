@@ -20,14 +20,22 @@ atelier-analytics = { path = "../atelier-analytics", version = "0.0.1" }
 atelier-data = { path = "../atelier-data", version = "0.0.1" }
 atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
 
-
 # Probabilistic features
 rand = { workspace = true }
 rand_distr = { workspace = true }
+serde = { workspace = true }
 
 [[example]]
 name = "orderbook_progressions"
 path = "orderbook_progressions.rs"
+
+[[example]]
+name = "orderbook_synthetizer"
+path = "orderbook_synthetizer.rs"
+
+[[example]]
+name = "distributed_markets"
+path = "distributed/synthetic_obs.rs"
 
 [lints]
 workspace = true

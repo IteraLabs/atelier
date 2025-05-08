@@ -2,6 +2,9 @@
 //!
 //! Data structure definition.
 
+/// Configurations and experiments
+pub mod configs;
+
 /// Implementation of orders: Market, Limit
 pub mod orders;
 

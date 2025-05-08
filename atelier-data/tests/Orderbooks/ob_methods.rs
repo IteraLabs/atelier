@@ -12,7 +12,15 @@ mod test_orderbook_utils {
     // ----------------------------------------------------------------------- TEST ORDERBOOK -- //
 
     pub fn test_orderbook() -> Orderbook {
-        Orderbook::random(100_000.0, 4, None, None, 100_001.0, 4, None)
+        Orderbook::random(
+            100_000.0,
+            None,
+            Some((1, 2)),
+            None,
+            100_001.0,
+            Some((1, 2)),
+            None,
+        )
     }
 
     // --------------------------------------------------------------------------- TEST LEVEL -- //
@@ -112,7 +120,6 @@ mod tests {
 
     #[test]
     fn retrieve_level_output_value() {
-    
         use crate::test_orderbook_utils::{test_level, test_orderbook};
 
         // Get a random Orderbook from test_orderbook
@@ -125,13 +132,15 @@ mod tests {
         let r_level_id = random_level.level_id.clone();
 
         println!("\nrandom_level");
-        println!("\nside: {:?}, price: {:?}, level_id: {:?}", r_side, r_price, r_level_id);
+        println!(
+            "\nside: {:?}, price: {:?}, level_id: {:?}",
+            r_side, r_price, r_level_id
+        );
 
         let retrieved_level = testable_ob.retrieve_level(&r_price).unwrap();
         println!("\nretrieved_level: {:?}", retrieved_level.price);
         println!("assert_eq! {:?} == {:?}", r_price, retrieved_level.price);
         // assert_eq!(r_price, retrieved_level.price)
-
     }
 
     // -------------------------------------------------------------------------- DELETE_LEVEL -- /
