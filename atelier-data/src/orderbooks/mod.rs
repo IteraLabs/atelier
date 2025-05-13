@@ -6,8 +6,9 @@ use crate::{
 
 use rand::{distr::Uniform, Rng};
 use std::time::{SystemTime, UNIX_EPOCH};
+use serde::Serialize;
 
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Serialize)]
 pub struct Orderbook {
     pub orderbook_id: u32,
     pub orderbook_ts: u64,

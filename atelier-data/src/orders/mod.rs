@@ -1,11 +1,12 @@
 use rand::Rng;
 use std::time::{SystemTime, UNIX_EPOCH};
+use serde::Serialize;
 
 /// OrderSide
 ///
 /// Enum for identification of either a buy or sell side
 /// used to describe the Order side.
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Serialize)]
 pub enum OrderSide {
     Bids,
     Asks,
@@ -33,7 +34,7 @@ impl OrderSide {
 ///
 /// Enum for identification of the supported Order Types
 /// currently Market and Limit.
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Serialize)]
 pub enum OrderType {
     Market,
     Limit,
@@ -59,7 +60,7 @@ impl OrderType {
 /// Method to generate unique Order ID values for individual orders.
 /// currently taking the timestamp, the Order Type and the Order Side to deliver
 /// a hashed u64 value.
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Serialize)]
 pub struct OrderId(u64);
 
 impl OrderId {
@@ -210,7 +211,7 @@ impl OrderBuilder {
 ///
 /// The `Order` struct contains details about an individual order, including
 /// its unique identifier, timestamp, type, side (buy/sell), price, and amount.
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Serialize)]
 pub struct Order {
     pub order_id: u64,
     pub order_ts: u64,

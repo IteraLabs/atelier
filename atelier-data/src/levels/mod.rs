@@ -1,4 +1,5 @@
 use crate::orders::{Order, OrderSide};
+use serde::Serialize;
 
 // ------------------------------------------------------------------------------------ LEVEL -- //
 // ------------------------------------------------------------------------------------ ----- -- //
@@ -8,7 +9,7 @@ use crate::orders::{Order, OrderSide};
 /// The `Level` struct contains details about a specific price level, including
 /// its unique identifier, side (buy/sell), price, total volume at that price,
 /// and a vector of orders associated with that level.
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Serialize)]
 pub struct Level {
     pub level_id: u32,
     pub side: OrderSide,
@@ -18,10 +19,8 @@ pub struct Level {
 }
 
 impl Level {
-    // ----------------------------------------------------------------------------
-    // New Level -- //
-    // ----------------------------------------------------------------------------
-    // --------- -- //
+    // ---------------------------------------------------------------------------- New Level -- //
+    // ---------------------------------------------------------------------------- --------- -- //
 
     /// Creates a new instance of `Level`.
     ///
