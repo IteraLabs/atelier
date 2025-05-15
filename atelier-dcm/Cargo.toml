@@ -1,0 +1,47 @@
+[package]
+name = "atelier-dcm"
+description = "Distributed Convex Methods"
+version = "0.0.1"
+publish = false
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+# Atelier sub-modules 
+atelier = { path = "../atelier", version = "0.1.0" }
+atelier-analytics = { path = "../atelier-analytics", version = "0.0.1" }
+atelier-data = { path = "../atelier-data", version = "0.0.1" }
+atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
+
+# Probabilistic features
+rand = { workspace = true }
+rand_distr = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# --- Dependencies for this crate
+tch = { version = "0.20" }
+
+[[example]]
+name = "synthetic_markets"
+path = "examples/synthetic_markets.rs"
+
+[[example]]
+name = "distributed_training"
+path = "examples/distributed_training.rs"
+
+[lints]
+workspace = true
+
+[env]
+LIBTORCH="$HOME/libtorch"
+DYLD_LIBRARY_PATH="$HOME/libtorch/lib"
+LIBTORCH_BYPASS_VERSION_CHECK="FALSE"
+
