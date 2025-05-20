@@ -25,7 +25,7 @@ fn main() {
 
     let mut rng = rand::rng();
 
-    // ----------------------------------------------------------------------------------------- //
+    // ------------------------------------------------------------------------------- //
     for _ in 0..n_progressions {
         let uni_rand = Uniform::new(uni_params[0], uni_params[1])
             .expect("Failed to create Uniform distribution sampler");

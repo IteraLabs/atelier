@@ -2,6 +2,8 @@
 //!
 //! Distributed Convex Methods
 
+#![allow(dead_code)]
+
 /// Distributed Agents
 pub mod agents;
 
@@ -20,5 +22,5 @@ pub mod functions;
 /// Distributed training algorithms
 pub mod training;
 
-/// Distributed Clock
-pub mod pacer;
+/// Distributed Models
+pub mod models;

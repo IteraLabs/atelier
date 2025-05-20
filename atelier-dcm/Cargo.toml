@@ -25,6 +25,7 @@ rand = { workspace = true }
 rand_distr = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
+toml = { workspace = true } 
 
 # --- Dependencies for this crate
 tch = { version = "0.20" }
@@ -32,6 +33,10 @@ tch = { version = "0.20" }
 [[example]]
 name = "synthetic_markets"
 path = "examples/synthetic_markets.rs"
+
+[[example]]
+name = "load_configs"
+path = "examples/load_configs.rs"
 
 [[example]]
 name = "distributed_training"

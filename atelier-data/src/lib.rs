@@ -2,6 +2,8 @@
 //!
 //! Data structure definition.
 
+#![allow(dead_code)]
+
 /// Configurations and experiments
 pub mod configs;
 

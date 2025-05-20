@@ -94,8 +94,8 @@ impl OrderId {
     }
 }
 
-// ------------------------------------------------------------------------------------ ORDER -- //
-// ------------------------------------------------------------------------------------ -------- //
+// -------------------------------------------------------------------------- ORDER -- //
+// -------------------------------------------------------------------------- -------- //
 
 #[derive(Debug, Copy, Clone)]
 pub struct OrderBuilder {
@@ -258,7 +258,11 @@ impl Order {
     /// ||└ 60 bits for timestamp (valid until ~2079)
     /// |└─ 1 bit for type (0=Market, 1=Limit)
     /// └── 1 bit for side (0=Bid, 1=Ask)
-    pub fn encode_order_id(order_side: OrderSide, order_type: OrderType, order_ts: u64) -> u64 {
+    pub fn encode_order_id(
+        order_side: OrderSide,
+        order_type: OrderType,
+        order_ts: u64,
+    ) -> u64 {
         // Highest bit
         let side_bit = match order_side {
             OrderSide::Bids => 0,

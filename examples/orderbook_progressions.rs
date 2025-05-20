@@ -28,7 +28,7 @@ fn main() {
 
     let mut rng = rand::rng();
 
-    // ---------------------------------------------------------------------------------------- //
+    // ------------------------------------------------------------------------------- //
     for _ in 0..n_progressions {
         let uni_rand = Uniform::new(uni_params[0], uni_params[1])
             .expect("Failed to create Uniform distribution sampler");
@@ -59,11 +59,15 @@ fn main() {
 
     println!(
         "\nbid prices: {:?}, {:?}, {:?}",
-        v_orderbook[0].bids[0].price, v_orderbook[1].bids[0].price, v_orderbook[2].bids[0].price
+        v_orderbook[0].bids[0].price,
+        v_orderbook[1].bids[0].price,
+        v_orderbook[2].bids[0].price
     );
 
     println!(
         "\nask prices: {:?}, {:?}, {:?}",
-        v_orderbook[0].asks[0].price, v_orderbook[1].asks[0].price, v_orderbook[2].asks[0].price
+        v_orderbook[0].asks[0].price,
+        v_orderbook[1].asks[0].price,
+        v_orderbook[2].asks[0].price
     );
 }

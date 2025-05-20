@@ -30,7 +30,9 @@ pub fn ob_vwap(
     Ok(vwap)
 }
 
-pub fn ob_wmidprice(orderbooks: &Vec<Orderbook>) -> Result<Vec<f64>, Box<dyn std::error::Error>> {
+pub fn ob_wmidprice(
+    orderbooks: &Vec<Orderbook>,
+) -> Result<Vec<f64>, Box<dyn std::error::Error>> {
     let vwap: Vec<f64> = orderbooks
         .iter()
         .map(|x| {
@@ -42,7 +44,9 @@ pub fn ob_wmidprice(orderbooks: &Vec<Orderbook>) -> Result<Vec<f64>, Box<dyn std
     Ok(vwap)
 }
 
-pub fn ob_midprice(orderbooks: &Vec<Orderbook>) -> Result<Vec<f64>, Box<dyn std::error::Error>> {
+pub fn ob_midprice(
+    orderbooks: &Vec<Orderbook>,
+) -> Result<Vec<f64>, Box<dyn std::error::Error>> {
     let mid_price: Vec<f64> = orderbooks
         .iter()
         .map(|x| (x.asks[0].price + x.bids[0].price) / 2.0)
