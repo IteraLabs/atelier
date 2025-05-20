@@ -18,3 +18,7 @@ pub mod orderbooks;
 
 /// Results messages: Errors, and, Success.
 pub mod results;
+
+/// Training environment
+pub mod training;
+

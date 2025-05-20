@@ -1,6 +1,10 @@
+use atelier_data::training;
 use atelier_dcm::{
-    agents::DistributedAgent, dataset, features, targets, training::distributed_training,
+    dataset, features, targets, 
+    agents::DistributedAgent,
+    training::distributed_training
 };
+
 
 use tch::{display, Kind, Tensor};
 
@@ -10,7 +14,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // --- experiment parameters
     let n_agents = 9;
-    let n_iterations = 10000;
+    let n_iterations = 500;
 
     // --- Agents
     let mut agents: Vec<_> = vec![];
@@ -58,26 +62,32 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .to_kind(Kind::Float);
 
         // --- Regularization Params
-        let lambda_1 = 0.1;
-        let lambda_2 = 0.01;
-        let eta = 0.33;
+        let lambda_1 = 0.015;
+        let lambda_2 = 0.015;
+        let eta = 0.11;
         let loss = Tensor::from(1e10);
+        let accuracy = Tensor::from(1.0);
 
         // -- Agent formation
-        let agnt = DistributedAgent::new(features, labels, lambda_1, lambda_2, eta, loss);
+        let agnt = DistributedAgent::new(features, labels, lambda_1, lambda_2, eta, loss,
+        accuracy);
 
         agents.push(agnt);
     }
 
+    let num_agents = 9;
+    let consensus_matrix = training::a_matrix(num_agents, "atelier-dcm/Config_01.toml");
+    
     // Run distributed training
-    distributed_training(&mut agents, n_iterations);
+    distributed_training(&mut agents, n_iterations, consensus_matrix.copy());
 
     println!("\n------ Finished Distributed Training ------\n");
 
     // Inspect final parameters
     for (i, agent) in agents.iter().enumerate() {
-        println!("Agent {} loss: {}", i, agent.loss);
+        println!("Agent {} loss: {} acc: {}", i, agent.loss, agent.accuracy);
     }
+    
 
     Ok(())
 }

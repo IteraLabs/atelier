@@ -1,10 +1,8 @@
 use crate::agents::DistributedAgent;
 use tch::{Kind, Tensor};
 
-pub fn consensus_matrix(num_agents: i64) -> Tensor {
-    // Row-stochastic matrix for fully connected graph
+pub fn empty_matrix(num_agents: i64) -> Tensor {
     let val = 1.0 / num_agents as f64;
-
     Tensor::from_slice(&vec![val; (num_agents * num_agents) as usize])
         .reshape(&[num_agents, num_agents])
         .to_kind(Kind::Float)
@@ -12,9 +10,14 @@ pub fn consensus_matrix(num_agents: i64) -> Tensor {
 
 // ----------------------------------------------------------------------------------- //
 
-pub fn distributed_training(agents: &mut Vec<DistributedAgent>, num_iterations: usize) {
-    let num_agents = agents.len() as i64;
-    let a_matrix = consensus_matrix(num_agents);
+pub fn distributed_training(
+    agents: &mut Vec<DistributedAgent>,
+    num_iterations: usize,
+    consensus_matrix: Tensor,
+) {
+    
+    // let num_agents = agents.len() as i64;
+    // let a_matrix = training::a_matrix(num_agents, "atelier-dcm/Config_01.toml");
 
     for iters in 0..num_iterations {
         println!("\n------ Iteration: {:?} ------ \n", iters);
@@ -30,7 +33,7 @@ pub fn distributed_training(agents: &mut Vec<DistributedAgent>, num_iterations: 
         //println!("Pre Compute Consensus");
         // --- 3. Compute consensus (matrix multiplication)
         let theta_stacked = Tensor::stack(&thetas, 0);
-        let consensus = a_matrix.matmul(&theta_stacked);
+        let consensus = consensus_matrix.matmul(&theta_stacked);
 
         //println!("Pre Compute Losses");
         // --- 4. Compute metrics --- //
@@ -46,13 +49,17 @@ pub fn distributed_training(agents: &mut Vec<DistributedAgent>, num_iterations: 
             //println!("Gradients: {}", gradients[i_agent]);
             // println!("Loss: {}", losses[i_agent]);
         //}
+        //
 
         // --- 4. Update parameters
         for (i, agent) in agents.iter_mut().enumerate() {
             let consensus_theta = consensus.get(i as i64);
             let new_theta = consensus_theta - agent.eta * &gradients[i];
+            let accuracy = agent.compute_accuracy(0.5);
+            
             agent.theta = new_theta;
             agent.loss = losses[i].shallow_clone();
+            agent.accuracy = accuracy; 
         }
        
     }

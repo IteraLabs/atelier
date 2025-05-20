@@ -1,6 +1,7 @@
 use tch;
 use tch::{Device, Kind, Tensor};
 
+
 #[derive(Debug)]
 pub struct AgetMetrics {
     pub loss: Tensor,
@@ -25,6 +26,7 @@ pub struct DistributedAgent {
 
     // Learning metrics
     pub loss: Tensor,
+    pub accuracy: Tensor,
 }
 
 impl DistributedAgent {
@@ -35,6 +37,7 @@ impl DistributedAgent {
         lambda2: f64,
         eta: f64,
         loss: Tensor,
+        accuracy: Tensor,
     ) -> Self {
         let n_features = features.size()[1];
 
@@ -46,6 +49,7 @@ impl DistributedAgent {
             features,
             labels,
             loss,
+            accuracy,
         }
     }
 
@@ -101,4 +105,37 @@ impl DistributedAgent {
         bce_loss + l1_reg + l2_reg
     }
 
+    pub fn compute_accuracy(&self, p_threshold: f64) -> Tensor {
+        
+        let logits = self.features.matmul(&self.theta.unsqueeze(-1)).squeeze();
+        let preds = logits.sigmoid();
+
+        // Apply threshold to get binary predictions (0 or 1)
+        let preds_binary = preds.ge(p_threshold).to_kind(tch::Kind::Int64);
+        
+        // Get true labels as int64
+        let labels_int = self.labels.squeeze().to_kind(tch::Kind::Int64);
+   
+        // Calculate confusion matrix components using tensor operations
+        // True Positives: prediction=1, actual=1
+        let tp = (&preds_binary * &labels_int).sum(Kind::Float);
+
+        // False Positives: prediction=1, actual=0
+        let fp = (&preds_binary * (Tensor::from(1.0) - &labels_int)).sum(Kind::Float);
+        
+        // False Negatives: prediction=0, actual=1
+        let fn_ = ((Tensor::from(1.0) - &preds_binary) * &labels_int).sum(Kind::Float);
+        
+        // True Negatives: prediction=0, actual=0
+        let tn = ((Tensor::from(1.0) - &preds_binary) * (Tensor::from(1.0) - &labels_int)).sum(Kind::Float);
+
+        // Calculate accuracy as (TP + TN) / total samples
+        let total = &tp + &fp + &fn_ + &tn;
+        let accuracy = (&tp + &tn) / total;
+
+        accuracy
+
+    }
+    
 }
+

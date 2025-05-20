@@ -22,6 +22,7 @@ rand = { workspace = true }
 rand_distr = { workspace = true }
 serde = { workspace = true }
 toml = { workspace = true }
+tch = { version = "0.20" }
 
 [dev-dependencies]
 
