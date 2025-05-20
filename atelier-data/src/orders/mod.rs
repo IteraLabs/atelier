@@ -1,11 +1,12 @@
 use rand::Rng;
+use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// OrderSide
 ///
 /// Enum for identification of either a buy or sell side
 /// used to describe the Order side.
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub enum OrderSide {
     Bids,
     Asks,
@@ -33,7 +34,7 @@ impl OrderSide {
 ///
 /// Enum for identification of the supported Order Types
 /// currently Market and Limit.
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub enum OrderType {
     Market,
     Limit,
@@ -59,7 +60,7 @@ impl OrderType {
 /// Method to generate unique Order ID values for individual orders.
 /// currently taking the timestamp, the Order Type and the Order Side to deliver
 /// a hashed u64 value.
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Serialize, Deserialize)]
 pub struct OrderId(u64);
 
 impl OrderId {
@@ -93,8 +94,8 @@ impl OrderId {
     }
 }
 
-// ------------------------------------------------------------------------------------ ORDER -- //
-// ------------------------------------------------------------------------------------ -------- //
+// -------------------------------------------------------------------------- ORDER -- //
+// -------------------------------------------------------------------------- -------- //
 
 #[derive(Debug, Copy, Clone)]
 pub struct OrderBuilder {
@@ -210,7 +211,7 @@ impl OrderBuilder {
 ///
 /// The `Order` struct contains details about an individual order, including
 /// its unique identifier, timestamp, type, side (buy/sell), price, and amount.
-#[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub struct Order {
     pub order_id: u64,
     pub order_ts: u64,
@@ -257,7 +258,11 @@ impl Order {
     /// ||└ 60 bits for timestamp (valid until ~2079)
     /// |└─ 1 bit for type (0=Market, 1=Limit)
     /// └── 1 bit for side (0=Bid, 1=Ask)
-    pub fn encode_order_id(order_side: OrderSide, order_type: OrderType, order_ts: u64) -> u64 {
+    pub fn encode_order_id(
+        order_side: OrderSide,
+        order_type: OrderType,
+        order_ts: u64,
+    ) -> u64 {
         // Highest bit
         let side_bit = match order_side {
             OrderSide::Bids => 0,

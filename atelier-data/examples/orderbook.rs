@@ -2,11 +2,11 @@ use atelier_data::orderbooks::Orderbook;
 
 fn main() {
     let ini_bid_price = 100_000.00;
-    let ini_bid_levels = 2;
+    let ini_bid_levels = Some((1, 2));
     let ini_bid_orders = Some((1, 10));
 
     let ini_ask_price = 100_001.00;
-    let ini_ask_levels = 2;
+    let ini_ask_levels = Some((1, 2));
     let ini_ask_orders = Some((1, 10));
 
     let ini_ticksize = Some((0.1, 1.1));

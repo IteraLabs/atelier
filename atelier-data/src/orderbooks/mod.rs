@@ -5,9 +5,10 @@ use crate::{
 };
 
 use rand::{distr::Uniform, Rng};
+use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub struct Orderbook {
     pub orderbook_id: u32,
     pub orderbook_ts: u64,
@@ -17,10 +18,9 @@ pub struct Orderbook {
 }
 
 impl Orderbook {
-    
-    // ------------------------------------------------------------------------ New Orderbook -- //
-    // ------------------------------------------------------------------------ ------------- -- //
-    
+    // -------------------------------------------------------------- New Orderbook -- //
+    // -------------------------------------------------------------- ------------- -- //
+
     /// Creates a new instance of `Orderbook`.
     ///
     /// # Parameters
@@ -50,8 +50,8 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------------- Find a Level -- //
-    // ------------------------------------------------------------------------- ------------ -- //
+    // --------------------------------------------------------------- Find a Level -- //
+    // --------------------------------------------------------------- ------------ -- //
 
     /// If a level exists, either within the Bids, or, the Asks,
     /// it will return the index of it, positive for asks, negative for bids.
@@ -88,8 +88,8 @@ impl Orderbook {
         Err(LevelError::LevelNotFound)
     }
 
-    // ----------------------------------------------------------- Retrieve an Existing Level -- //
-    // ----------------------------------------------------------- -------------------------- -- //
+    // ------------------------------------------------- Retrieve an Existing Level -- //
+    // ------------------------------------------------- -------------------------- -- //
 
     /// If a Level exists, either within the Bids, or, the Asks, it will
     /// return a _cloned()_ version of it.
@@ -127,8 +127,8 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------- Delete an Existing Level -- //
-    // ------------------------------------------------------------- ------------------------ -- //
+    // --------------------------------------------------- Delete an Existing Level -- //
+    // --------------------------------------------------- ------------------------ -- //
 
     /// Deletes an existing level
     ///
@@ -158,8 +158,8 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------- Insert a New Level -- //
-    // ------------------------------------------------------------------- ------------------ -- //
+    // --------------------------------------------------------- Insert a New Level -- //
+    // --------------------------------------------------------- ------------------ -- //
 
     /// Inserts a new level. If the level already exists, the new level over
     /// rides the existing one, if it does not exists, the new level is inserted
@@ -275,8 +275,8 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------------ Find an Order -- //
-    // ------------------------------------------------------------------------ ------------- -- //
+    // -------------------------------------------------------------- Find an Order -- //
+    // -------------------------------------------------------------- ------------- -- //
 
     /// To find if a given `Order` exists within the current Level.
     ///
@@ -289,7 +289,11 @@ impl Orderbook {
     /// Ok: (level_index: usize, order_index: usize)
     /// Err: OrderError
 
-    pub fn find_order(&self, price: f64, order_ts: u64) -> Result<(i32, usize), OrderError> {
+    pub fn find_order(
+        &self,
+        price: f64,
+        order_ts: u64,
+    ) -> Result<(i32, usize), OrderError> {
         // see if level exists
         let find_level_ob = self.find_level(&price);
 
@@ -335,8 +339,8 @@ impl Orderbook {
         }
     }
 
-    // ----------------------------------------------------------- Retrieve an Existing Order -- //
-    // ----------------------------------------------------------- -------------------------- -- //
+    // ------------------------------------------------- Retrieve an Existing Order -- //
+    // ------------------------------------------------- -------------------------- -- //
 
     /// To retrieve info about an existing `Order`.
     ///
@@ -358,8 +362,8 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------- Delete an Existing Order -- //
-    // ------------------------------------------------------------- ------------------------ -- //
+    // --------------------------------------------------- Delete an Existing Order -- //
+    // --------------------------------------------------- ------------------------ -- //
 
     /// To delete an existing `Order`.
     ///
@@ -386,8 +390,8 @@ impl Orderbook {
         }
     }
 
-    // ------------------------------------------------------------------- Insert a New Order -- //
-    // ------------------------------------------------------------------- ------------------ -- //
+    // --------------------------------------------------------- Insert a New Order -- //
+    // --------------------------------------------------------- ------------------ -- //
 
     /// To insert a new `Order`.
     ///
@@ -456,8 +460,8 @@ impl Orderbook {
         }
     }
 
-    // ---------------------------------------------------------------------- Modify an Order -- //
-    // ---------------------------------------------------------------------- --------------- -- //
+    // ------------------------------------------------------------ Modify an Order -- //
+    // ------------------------------------------------------------ --------------- -- //
 
     /// To modify an existing `Order`.
     ///
@@ -489,7 +493,9 @@ impl Orderbook {
                     let founded_ts = founded_order.order_ts;
 
                     //  TODO: validate same order_id when a modification of
-                    // an order is done by creating a new one with all the same except the amount
+                    // an order is done by creating a new one with all the
+                    // same except the amount
+
                     let to_moded_order = Order::builder()
                         .side(founded_order.side)
                         .order_type(founded_order.order_type)
@@ -518,7 +524,9 @@ impl Orderbook {
                     let founded_ts = founded_order.order_ts;
 
                     //  TODO: validate same order_id when a modification of
-                    // an order is done by creating a new one with all the same except the amount
+                    // an order is done by creating a new one with all the same
+                    // except the amount
+
                     let to_moded_order = Order::builder()
                         .side(founded_order.side)
                         .order_type(founded_order.order_type)
@@ -541,8 +549,8 @@ impl Orderbook {
         }
     }
 
-    // --------------------------------------------------------------------- Random Orderbook -- //
-    // --------------------------------------------------------------------- ---------------- -- //
+    // ----------------------------------------------------------- Random Orderbook -- //
+    // ----------------------------------------------------------- ---------------- -- //
 
     /// Generates a synthetic order book with specified parameters.
     ///
@@ -570,13 +578,13 @@ impl Orderbook {
 
     pub fn random(
         bids_price: f64,
-        bids_levels: u32,
+        bids_levels: Option<(u32, u32)>,
         bids_orders: Option<(u32, u32)>,
 
         tick_size: Option<(f64, f64)>,
 
         asks_price: f64,
-        asks_levels: u32,
+        asks_levels: Option<(u32, u32)>,
         asks_orders: Option<(u32, u32)>,
     ) -> Self {
         let mut rng = rand::rng();
@@ -593,16 +601,29 @@ impl Orderbook {
         //  TODO: Change this to a hashed formation of the Orderbook ID
         let r_orderbook_id = 1234;
 
+        // -- Generate random value for bids_levels & ask_levels
+
+        let n_bids_levels = rng.sample(
+            Uniform::new(bids_levels.unwrap().0, bids_levels.unwrap().1)
+                .expect("Failed to create random n_bids_levels"),
+        );
+
+        let n_asks_levels = rng.sample(
+            Uniform::new(asks_levels.unwrap().0, asks_levels.unwrap().1)
+                .expect("Failed to create random n_asks_levels"),
+        );
+
         // -- Generate all the ticks ahead -- //
 
         // -- Bids
         let mut v_bids_ticks: Vec<f64> = if let Some(bids_range) = tick_size {
             let uni_rand =
                 Uniform::new(bids_range.0, bids_range.1).expect("Failed to create distr");
-            (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
+            (0..n_bids_levels).map(|_| rng.sample(uni_rand)).collect()
         } else {
-            let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
-            (0..bids_levels).map(|_| rng.sample(uni_rand)).collect()
+            let uni_rand =
+                Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
+            (0..n_bids_levels).map(|_| rng.sample(uni_rand)).collect()
         };
 
         v_bids_ticks.insert(0, 0.0);
@@ -612,18 +633,19 @@ impl Orderbook {
         let mut v_asks_ticks: Vec<f64> = if let Some(asks_range) = tick_size {
             let uni_rand =
                 Uniform::new(asks_range.0, asks_range.1).expect("Failed to create distr");
-            (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
+            (0..n_asks_levels).map(|_| rng.sample(uni_rand)).collect()
         } else {
-            let uni_rand = Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
-            (0..asks_levels).map(|_| rng.sample(uni_rand)).collect()
+            let uni_rand =
+                Uniform::new(0.0, 1.0).expect("Failed to create Standard Uniform");
+            (0..n_asks_levels).map(|_| rng.sample(uni_rand)).collect()
         };
 
         v_asks_ticks.insert(0, 0.0);
         let mut v_asks_prices: Vec<f64> = vec![asks_price];
 
-        // --------------------------------------------------------------- Bid Side Formation -- //
+        // ----------------------------------------------------- Bid Side Formation -- //
 
-        for i in 1..=bids_levels {
+        for i in 1..=n_bids_levels {
             // -- Id formation
 
             //  TODO: Change this to a hashed formation of the Level ID
@@ -635,7 +657,8 @@ impl Orderbook {
 
             // -- Price formation
 
-            let i_bids_price = v_bids_prices[(i - 1) as usize] - v_bids_ticks[(i - 1) as usize];
+            let i_bids_price =
+                v_bids_prices[(i - 1) as usize] - v_bids_ticks[(i - 1) as usize];
             v_bids_prices.push(i_bids_price);
 
             // -- Orders formation
@@ -678,14 +701,15 @@ impl Orderbook {
             });
         }
 
-        // --------------------------------------------------------------- Ask Side Formation -- //
+        // ----------------------------------------------------- Ask Side Formation -- //
 
-        for i in 1..=asks_levels {
+        for i in 1..=n_asks_levels {
             let i_asks_id = 7654;
 
             let i_asks_side = OrderSide::Asks;
 
-            let i_asks_price = v_asks_prices[(i - 1) as usize] - v_asks_ticks[(i - 1) as usize];
+            let i_asks_price =
+                v_asks_prices[(i - 1) as usize] - v_asks_ticks[(i - 1) as usize];
             v_asks_prices.push(i_asks_price);
 
             let i_asks_orders = if let Some(asks_orders_range) = asks_orders {

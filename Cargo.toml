@@ -8,9 +8,12 @@ members = [
   # Operational
   "atelier-analytics",
   "atelier-data",
-  
+
   # Scientific
   "atelier-generators",
+
+  # Special Functionality
+  "atelier-dcm",
   
   # Excellence
   "benches",
@@ -23,6 +26,7 @@ members = [
 default-members = [
   "atelier",
   "atelier-data",
+  "atelier-dcm",
   "atelier-generators",
   "benches",
   "examples",
@@ -51,6 +55,7 @@ license = "Apache-2.0"
 # Atelier complements
 atelier = { path = "./atelier", version = "0.1.0" }
 atelier-analytics = { path = "./atelier-analytics", version = "0.0.1" }
+atelier-dcm = { path = "./atelier-dcm", version = "0.0.1" }
 atelier-data = { path = "./atelier-data", version = "0.0.1" }
 atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
 atelier-results = { path = "./atelier-results", version = "0.0.1" }
@@ -66,6 +71,11 @@ rand_distr = { version = "0.5.0" }
 criterion = { version = "0.5", features = ["html_reports"] }
 memuse = { version = "0.2.0" }
 human_bytes = { version = "0.4.1" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0" }
+
+# file management
+toml = { version = "0.8" }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

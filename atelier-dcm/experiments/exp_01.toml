@@ -1,0 +1,49 @@
+
+# ----------------------------------------------------------- Experiment Parameters -- //
+
+n_progressions = 10
+rand_ber_params = [0.5]
+
+# ------------------------------------------------------------------ Asia Orderbook -- //
+
+[asia]
+asia_bid_price = 100_000.00
+asia_bid_levels = [2, 5]
+asia_bid_orders = [1, 10]
+asia_ask_price = 100_001.00
+asia_ask_levels = [2, 2]
+asia_ask_orders = [1, 10]
+
+asia_ticksize = [0.1, 1.1]
+asia_uni_rands = [-0.001, 0.005]
+
+# ---------------------------------------------------------------- Europe Orderbook -- //
+
+[europe]
+europe_bid_price = 100_000.00
+europe_bid_levels = [2, 5]
+europe_bid_orders = [1, 10]
+europe_ask_price = 100_001.00
+europe_ask_levels = [2, 2]
+europe_ask_orders = [1, 10]
+
+europe_ticksize = [0.1, 1.1]
+europe_rands = [-0.001, 0.005]
+
+# -------------------------------------------------------------- Americas Orderbook -- //
+
+[americas]
+americas_bid_price = 100_000.00
+americas_bid_levels = [2, 5]
+americas_bid_orders = [1, 10]
+americas_ask_price = 100_001.00
+americas_ask_levels = [2, 2]
+americas_ask_orders = [1, 10]
+
+americas_ticksize = [0.1, 1.1]
+americas_rands = [-0.001, 0.005]
+
+# ------------------------------------------------------------------- Route folders -- //
+
+output_files = ""
+

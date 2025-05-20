@@ -2,6 +2,11 @@
 //!
 //! Data structure definition.
 
+#![allow(dead_code)]
+
+/// Configurations and experiments
+pub mod configs;
+
 /// Implementation of orders: Market, Limit
 pub mod orders;
 
