@@ -1,0 +1,311 @@
+[[experiments]]
+id = "distributed_00"
+n_progressions = 1000
+
+# ----------------------------------------------------------------- Asia Orderbooks -- //
+
+[[exchanges]]
+id = "ai_00"
+region = "asia"
+name = "binance"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "ai_01"
+region = "asia"
+name = "gate"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "ai_02"
+region = "asia"
+name = "okx"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+# --------------------------------------------------------------- Europe Orderbooks -- //
+
+[[exchanges]]
+id = "eu_00"
+region = "europe"
+name = "kraken"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "eu_01"
+region = "europe"
+name = "bitstamp"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "eu_02"
+region = "europe"
+name = "bitfinex"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+# ------------------------------------------------------------- Americas Orderbooks -- //
+
+[[exchanges]]
+id = "am_00"
+region = "americas"
+name = "coinbase"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "am_01"
+region = "americas"
+name = "bitso"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "am_02"
+region = "americas"
+name = "gemini"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.1]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+# ------------------------------------------------------------ Training Environment -- //
+
+[[training]]
+epochs = 100
+
+# --- row 0 --- #
+[[training.agent_connections]]
+from = 0
+to = 0
+weight = 0.20
+
+[[training.agent_connections]]
+from = 0
+to = 1
+weight = 0.20
+
+[[training.agent_connections]]
+from = 0
+to = 2
+weight = 0.20
+
+[[training.agent_connections]]
+from = 0
+to = 3
+weight = 0.20
+
+[[training.agent_connections]]
+from = 0
+to = 6
+weight = 0.20
+
+# --- row 1 --- #
+
+[[training.agent_connections]]
+from = 1
+to = 0
+weight = 0.50
+
+[[training.agent_connections]]
+from = 1
+to = 1
+weight = 0.50
+
+# --- row 2 --- #
+
+[[training.agent_connections]]
+from = 2
+to = 0
+weight = 0.50
+
+[[training.agent_connections]]
+from = 2
+to = 2
+weight = 0.50
+
+# --- row 3 --- #
+
+[[training.agent_connections]]
+from = 3
+to = 0
+weight = 0.20
+
+[[training.agent_connections]]
+from = 3
+to = 3
+weight = 0.20
+
+[[training.agent_connections]]
+from = 3
+to = 4
+weight = 0.20
+
+[[training.agent_connections]]
+from = 3
+to = 5
+weight = 0.20
+
+[[training.agent_connections]]
+from = 3
+to = 6
+weight = 0.20
+
+# --- row 4 --- #
+
+[[training.agent_connections]]
+from = 4
+to = 3
+weight = 0.50
+
+[[training.agent_connections]]
+from = 4
+to = 4
+weight = 0.50
+
+# --- row 5 --- #
+
+[[training.agent_connections]]
+from = 5
+to = 4
+weight = 0.50
+
+[[training.agent_connections]]
+from = 5
+to = 5
+weight = 0.50
+
+# --- row 6 --- #
+
+[[training.agent_connections]]
+from = 6
+to = 0
+weight = 0.20
+
+[[training.agent_connections]]
+from = 6
+to = 3
+weight = 0.20
+
+[[training.agent_connections]]
+from = 6
+to = 6
+weight = 0.20
+
+[[training.agent_connections]]
+from = 6
+to = 7
+weight = 0.20
+
+[[training.agent_connections]]
+from = 6
+to = 8
+weight = 0.20
+
+# --- row 7 --- #
+
+[[training.agent_connections]]
+from = 7
+to = 7
+weight = 0.50
+
+[[training.agent_connections]]
+from = 7
+to = 6
+weight = 0.50
+
+# --- row 8 --- #
+
+[[training.agent_connections]]
+from = 8
+to = 6
+weight = 0.50
+
+[[training.agent_connections]]
+from = 8
+to = 8
+weight = 0.50
+

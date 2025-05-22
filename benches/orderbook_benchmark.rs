@@ -7,19 +7,9 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 fn create_orderbook(c: &mut Criterion) {
     let mut group = c.benchmark_group("Orderbook Creation");
 
-    let v_bids_levels = [
-        Some((2, 5)),
-        Some((2, 5)),
-        Some((5, 10)),
-        Some((10, 20))
-    ];
-    
-    let v_asks_levels = [
-        Some((2, 5)),
-        Some((2, 5)),
-        Some((5, 10)),
-        Some((10, 20))
-    ];
+    let v_bids_levels = [Some((2, 5)), Some((2, 5)), Some((5, 10)), Some((10, 20))];
+
+    let v_asks_levels = [Some((2, 5)), Some((2, 5)), Some((5, 10)), Some((10, 20))];
 
     let v_bids_orders = [
         Some((5, 10)),

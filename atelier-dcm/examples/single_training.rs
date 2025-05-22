@@ -1,76 +1,54 @@
-use atelier_dcm::{dataset, features, targets};
-use tch::{
-    nn::{Adam, OptimizerConfig, VarStore},
-    Device, Kind, Reduction, Tensor, TrainableCModule,
-};
+use atelier_dcm::{dataset, features, targets, agents::DistributedAgent};
+use std::{env, path::Path};
+use tch::{Tensor, Kind};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // --- Files
-    let model_file = String::from(
-        "/Users/franciscome/git/iteralabs/atelier/atelier-torch/src/scripted_model.pt",
-    );
-    let data_file = String::from("americas_orderbook.json");
 
-    // -- Variable store
-    let vs = VarStore::new(Device::Cpu);
+    let manifest_dir = env!("CARGO_MANIFEST_DIR");
+    let workspace_root = Path::new(manifest_dir)
+        .parent()
+        .expect("Failed to get workspace root");
 
-    // --- Load scripted model
-    let mut model = TrainableCModule::load(model_file, vs.root())?;
-    model.set_train();
+    // --- Load input data
+    let data_file = workspace_root
+        .join("atelier-dcm")
+        .join("datasets")
+        .join("synthetic_ai_00_binance_ob.json");
 
-    // --- Features --- //
-    let v_orderbook_2 = dataset::read_json(&data_file)?;
-    let wmid_price: Vec<f64> = features::ob_wmidprice(&v_orderbook_2)?;
-    let vwap_price: Vec<f64> = features::ob_vwap(&v_orderbook_2, 2 as usize)?;
-    let wmid_price_tensor = Tensor::from_slice(&wmid_price).unsqueeze(1);
-    let vwap_price_tensor = Tensor::from_slice(&vwap_price).unsqueeze(1);
+    let v_orderbook = dataset::read_json(&data_file.to_str().unwrap().to_owned())?;
 
-    // --- Input data conversion to Tensor
-    let xs_vec = [wmid_price_tensor, vwap_price_tensor];
-    let xs_pre = Tensor::cat(&xs_vec, 1).to_kind(Kind::Float);
-    let xs = xs_pre.roll(&[1], &[0]); // shift=1 along dim=0 (rows)
-    let xs_mean = xs.mean(Kind::Float);
-    let xs_std = xs.std(true);
-    let xs = (&xs - &xs_mean) / (&xs_std + 1e-8);
+    // --- Features computation
 
-    // --- Target data conversion to Tensor
-    let ys_vec = targets::ob_price_direction(&v_orderbook_2)?;
-    let ys = Tensor::from_slice(&ys_vec)
+    let f1 = features::ob_vwap(&v_orderbook, 2 as usize)?;
+    let f1_tensor = Tensor::from_slice(&f1).unsqueeze(1);
+    let f2 = features::ob_wmidprice(&v_orderbook)?;
+    let f2_tensor = Tensor::from_slice(&f2).unsqueeze(1);
+    let x_tensor = Tensor::cat(&[f1_tensor, f2_tensor], 1).to_kind(Kind::Float);
+
+    // --- Pre-processing before parsing them into the model
+
+    // Shift 1 along dim=0 rows
+    let xs_tensor = x_tensor.roll(&[1], &[0]);
+    // Standardize values
+    let xs_1 = &xs_tensor - xs_tensor.mean(Kind::Float);
+    let xs_2 = xs_tensor.std(true) + 1e-8;
+    let features = (xs_1 / xs_2).to_kind(Kind::Float);
+
+    // --- Target data
+    let ys_vec = targets::ob_price_direction(&v_orderbook)?;
+    let labels = Tensor::from_slice(&ys_vec)
         .unsqueeze(1)
         .to_kind(Kind::Float);
 
-    // --- Distributed Specs --- //
-    // m  := Number of agents (one per exchange), m = 3
-    // G  := Undirected Communication Network Graph, G = ([m], edges)
-    // F  := Global Minimization Problem
-    // xi := Consensus update, xi = aij + sum (aij * xj)
-    //
+    // --- Regularization Params
+    let lambda_1 = 0.015;
+    let lambda_2 = 0.015;
+    let eta = 0.11;
+    let loss = Tensor::from(1e10);
+    let accuracy = Tensor::from(1.0);
 
-    // ----------------------------------------------------------------- Optimizer --- //
-    // ----------------------------------------------------------------- --------- --- //
-
-    let mut opt = Adam::default().build(&vs, 1e-3)?;
-
-    // ------------------------------------------------------------------ Training --- //
-    // ------------------------------------------------------------------ -------- --- //
-
-    for epoch in 1..=5000 {
-        // Forward pass
-        let predictions = model.forward_ts(&[xs.shallow_clone()])?.sigmoid();
-
-        // Loss
-        let loss = predictions.binary_cross_entropy::<Tensor>(&ys, None, Reduction::Mean);
-
-        // Backward pass
-        opt.zero_grad();
-        loss.backward();
-        opt.step();
-
-        // Log result
-        if epoch % 10 == 0 {
-            println!("Epoch: {:?}, Loss: {:?}", epoch, &loss);
-        }
-    }
+    let agent =
+        DistributedAgent::new(features, labels, lambda_1, lambda_2, eta, loss, accuracy);
 
     Ok(())
 }

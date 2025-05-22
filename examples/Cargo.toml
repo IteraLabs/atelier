@@ -30,9 +30,5 @@ serde = { workspace = true }
 name = "orderbook_progressions"
 path = "orderbook_progressions.rs"
 
-[[example]]
-name = "orderbook_synthetizer"
-path = "orderbook_synthetizer.rs"
-
 [lints]
 workspace = true

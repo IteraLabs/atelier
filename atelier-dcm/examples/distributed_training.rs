@@ -1,11 +1,9 @@
 use atelier_data::training;
 use atelier_dcm::{
-    dataset, features, targets, 
-    agents::DistributedAgent,
-    training::distributed_training
+    agents::DistributedAgent, dataset, features, targets, training::distributed_training,
 };
 
-
+use std::{env, path::Path};
 use tch::{display, Kind, Tensor};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -19,17 +17,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // --- Agents
     let mut agents: Vec<_> = vec![];
 
+    let manifest_dir = env!("CARGO_MANIFEST_DIR");
+    let workspace_root = Path::new(manifest_dir)
+        .parent()
+        .expect("Failed to get workspace root");
+
+    // --- Load input data
+    let data_route = workspace_root
+        .join("atelier-dcm")
+        .join("datasets");
+
     // --- Files
     let mut data_files = vec![
-        String::from("atelier-dcm/datasets/exp_00_ai_00_binance_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_ai_01_gate_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_ai_02_okx_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_eu_00_kraken_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_eu_01_bitstamp_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_eu_02_bitfinex_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_am_00_coinbase_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_am_01_bitso_ob.json"),
-        String::from("atelier-dcm/datasets/exp_00_am_02_gemini_ob.json")
+        String::from("exp_00_ai_00_binance_ob.json"),
+        String::from("exp_00_ai_01_gate_ob.json"),
+        String::from("exp_00_ai_02_okx_ob.json"),
+        String::from("exp_00_eu_00_kraken_ob.json"),
+        String::from("exp_00_eu_01_bitstamp_ob.json"),
+        String::from("exp_00_eu_02_bitfinex_ob.json"),
+        String::from("exp_00_am_00_coinbase_ob.json"),
+        String::from("exp_00_am_01_bitso_ob.json"),
+        String::from("exp_00_am_02_gemini_ob.json"),
     ];
 
     // --- Agents Formation --- //
@@ -38,7 +46,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("\nAgent {:?} preparation", i);
 
         // --- Features --- //
-        let v_orderbook = dataset::read_json(&data_files.pop().unwrap())?;
+        let i_route = data_route.join(&data_files.pop().unwrap());
+        println!("{:?}", i_route);
+        
+        let v_orderbook = dataset::read_json(i_route.to_str().unwrap())?;
 
         let wmid_price: Vec<f64> = features::ob_wmidprice(&v_orderbook)?;
         let vwap_price: Vec<f64> = features::ob_vwap(&v_orderbook, 2 as usize)?;
@@ -69,15 +80,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let accuracy = Tensor::from(1.0);
 
         // -- Agent formation
-        let agnt = DistributedAgent::new(features, labels, lambda_1, lambda_2, eta, loss,
-        accuracy);
+        let agnt = DistributedAgent::new(
+            features, labels, lambda_1, lambda_2, eta, loss, accuracy,
+        );
 
         agents.push(agnt);
     }
 
     let num_agents = 9;
-    let consensus_matrix = training::a_matrix(num_agents, "atelier-dcm/Config_01.toml");
-    
+    // --- Load input data
+    let training_file = workspace_root
+        .join("atelier-dcm")
+        .join("experiments")
+        .join("distributed_training_00.toml");
+
+    let consensus_matrix = training::a_matrix(
+        num_agents,
+        training_file.to_str().unwrap(),
+    );
+
     // Run distributed training
     distributed_training(&mut agents, n_iterations, consensus_matrix.copy());
 
@@ -87,7 +108,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     for (i, agent) in agents.iter().enumerate() {
         println!("Agent {} loss: {} acc: {}", i, agent.loss, agent.accuracy);
     }
-    
 
     Ok(())
 }

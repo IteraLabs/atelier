@@ -15,7 +15,6 @@ pub fn distributed_training(
     num_iterations: usize,
     consensus_matrix: Tensor,
 ) {
-    
     // let num_agents = agents.len() as i64;
     // let a_matrix = training::a_matrix(num_agents, "atelier-dcm/Config_01.toml");
 
@@ -45,9 +44,9 @@ pub fn distributed_training(
         //println!("Consensus: \n{}\n", consensus);
 
         //for i_agent in 0..gradients.len() {
-            // println!("\nAgent: {:?}\n", i_agent);
-            //println!("Gradients: {}", gradients[i_agent]);
-            // println!("Loss: {}", losses[i_agent]);
+        // println!("\nAgent: {:?}\n", i_agent);
+        //println!("Gradients: {}", gradients[i_agent]);
+        // println!("Loss: {}", losses[i_agent]);
         //}
         //
 
@@ -56,11 +55,10 @@ pub fn distributed_training(
             let consensus_theta = consensus.get(i as i64);
             let new_theta = consensus_theta - agent.eta * &gradients[i];
             let accuracy = agent.compute_accuracy(0.5);
-            
+
             agent.theta = new_theta;
             agent.loss = losses[i].shallow_clone();
-            agent.accuracy = accuracy; 
+            agent.accuracy = accuracy;
         }
-       
     }
 }

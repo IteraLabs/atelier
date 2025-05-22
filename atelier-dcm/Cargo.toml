@@ -42,6 +42,10 @@ path = "examples/load_configs.rs"
 name = "distributed_training"
 path = "examples/distributed_training.rs"
 
+[[example]]
+name = "single_training"
+path = "examples/single_training.rs"
+
 [lints]
 workspace = true
 

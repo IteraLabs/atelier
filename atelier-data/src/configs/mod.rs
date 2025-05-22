@@ -1,5 +1,5 @@
 use serde::Deserialize;
-use std::{fs, error::Error};
+use std::{error::Error, fs};
 use toml;
 
 #[derive(Debug, Deserialize, Clone)]
@@ -9,8 +9,8 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn load_from_toml(filename: &str) -> Result<Self, Box<dyn Error>> {
-        let contents = fs::read_to_string(filename)?;
+    pub fn load_from_toml(file_route: &str) -> Result<Self, Box<dyn Error>> {
+        let contents = fs::read_to_string(file_route)?;
         let config: Config = toml::from_str(&contents)?;
         Ok(config)
     }
@@ -31,12 +31,11 @@ pub struct ExchangeConfig {
 
     pub orderbook: Option<OrderbookConfig>,
     #[serde(default)]
-    pub params: Vec<f64>
+    pub params: Vec<f64>,
 }
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct OrderbookConfig {
-    
     pub bid_price: Option<f64>,
     pub bid_levels: Option<Vec<u32>>,
     pub bid_orders: Option<Vec<u32>>,
@@ -45,20 +44,16 @@ pub struct OrderbookConfig {
     pub ask_levels: Option<Vec<u32>>,
     pub ask_orders: Option<Vec<u32>>,
     pub rands: Option<Vec<f64>>,
-
 }
 
 impl OrderbookConfig {
-
     pub fn builder() -> OrderbookConfigBuilder {
         OrderbookConfigBuilder::new()
     }
-
 }
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct OrderbookConfigBuilder {
-    
     pub bid_price: Option<f64>,
     pub bid_levels: Option<Vec<u32>>,
     pub bid_orders: Option<Vec<u32>>,
@@ -67,7 +62,6 @@ pub struct OrderbookConfigBuilder {
     pub ask_levels: Option<Vec<u32>>,
     pub ask_orders: Option<Vec<u32>>,
     pub rands: Option<Vec<f64>>,
-    
 }
 
 impl OrderbookConfigBuilder {
@@ -89,12 +83,12 @@ impl OrderbookConfigBuilder {
         self
     }
 
-    pub fn bid_levels(mut self, bid_levels: Vec<u32> ) -> Self {
+    pub fn bid_levels(mut self, bid_levels: Vec<u32>) -> Self {
         self.bid_levels = Some(bid_levels);
         self
     }
 
-    pub fn bid_orders(mut self, bid_orders: Vec<u32> ) -> Self {
+    pub fn bid_orders(mut self, bid_orders: Vec<u32>) -> Self {
         self.bid_orders = Some(bid_orders);
         self
     }
@@ -104,17 +98,17 @@ impl OrderbookConfigBuilder {
         self
     }
 
-    pub fn ask_levels(mut self, ask_levels: Vec<u32> ) -> Self {
+    pub fn ask_levels(mut self, ask_levels: Vec<u32>) -> Self {
         self.ask_levels = Some(ask_levels);
         self
     }
 
-    pub fn ask_orders(mut self, ask_orders: Vec<u32> ) -> Self {
+    pub fn ask_orders(mut self, ask_orders: Vec<u32>) -> Self {
         self.ask_orders = Some(ask_orders);
         self
     }
 
-    pub fn ticksize(mut self, ticksize: Vec<f64> ) -> Self {
+    pub fn ticksize(mut self, ticksize: Vec<f64>) -> Self {
         self.ticksize = Some(ticksize);
         self
     }
@@ -141,5 +135,3 @@ impl OrderbookConfigBuilder {
         })
     }
 }
-
-
