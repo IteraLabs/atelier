@@ -5,6 +5,19 @@ pub struct AgetMetrics {
     pub loss: Tensor,
 }
 
+pub struct Optimizer {
+    pub name: String,
+    pub eta: f64,
+}
+
+pub struct Agent {
+    pub theta: Tensor,
+    pub optimizer: Optimizer,
+    pub features: Tensor,
+    pub labels: Tensor,
+    pub loss: Tensor,
+}
+
 // ----------------------------------------------------------------------------------- //
 
 pub struct DistributedAgent {
@@ -72,15 +85,9 @@ impl DistributedAgent {
             / self.features.size()[0] as f64;
 
         // Elastic net regularization
-        let grad_l1 = self
-            .theta
-            .abs()
-            .sum(Kind::Float) * self.lambda1;
+        let grad_l1 = self.theta.abs().sum(Kind::Float) * self.lambda1;
 
-        let grad_l2 = self
-            .theta
-            .pow(&Tensor::from(2.0))
-            .sum(Kind::Float) * self.lambda2;
+        let grad_l2 = self.theta.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
 
         grad_loss + grad_l1 + grad_l2
     }

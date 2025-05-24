@@ -20,9 +20,9 @@ fn main() {
 
     // Config file (toml)
     let config_file = workspace_root
-        .join("atelier-dcm")
-        .join("experiments")
-        .join("synthetic_markets_00.toml");
+        .join("atelier-synth")
+        .join("templates")
+        .join("single_orderbook.toml");
 
     println!("\nconfig_file: {:}\n", config_file.to_str().unwrap());
 
@@ -82,7 +82,7 @@ fn main() {
             .unwrap();
 
         // Random numbers
-        let uni_params = exchanges[i_e].orderbook.clone().unwrap().rands.unwrap();
+        let uni_params = vec![0.01, 0.11];
         let mut rng = rand::rng();
 
         // --- Generation progressions

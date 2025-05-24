@@ -1,14 +1,29 @@
-use atelier_dcm::{dataset, features, training, targets, agents::DistributedAgent};
+use atelier_core::templates;
+use atelier_dcm::{agents::DistributedAgent, dataset, features, targets, training};
 use std::{env, path::Path};
-use tch::{Tensor, Kind};
+use tch::{Kind, Tensor};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-
     // --- Set up working directory
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let workspace_root = Path::new(manifest_dir)
         .parent()
         .expect("Failed to get workspace root");
+
+    // --- Load config data
+    let config_file = workspace_root
+        .join("atelier-dcm")
+        .join("experiments")
+        .join("single_training_00.toml")
+        .to_str()
+        .unwrap()
+        .to_owned();
+
+    let config = templates::Config::load_from_toml(&config_file)
+        .unwrap()
+        .clone();
+
+    let _exp_id = &config.experiments[0].id;
 
     // --- Load input data
     let data_file = workspace_root
@@ -26,10 +41,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let x_tensor = Tensor::cat(&[f1_tensor, f2_tensor], 1).to_kind(Kind::Float);
 
     // --- Pre-processing features
-    
+
     // Shift 1 along dim=0 rows
     let xs_tensor = x_tensor.roll(&[1], &[0]);
-    
+
     // Standardize values
     let epsilon = 1e-8;
     let xs_1 = &xs_tensor - xs_tensor.mean(Kind::Float);
@@ -49,10 +64,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let loss = Tensor::from(1e10);
     let accuracy = Tensor::from(1.0);
 
-    let mut agent = DistributedAgent::new(
-        features, labels, lambda_1, lambda_2, eta, loss, accuracy);
+    let mut agent =
+        DistributedAgent::new(features, labels, lambda_1, lambda_2, eta, loss, accuracy);
 
-    training::training(&mut agent, 100, 0.04);
+    training::single_training(&mut agent, 100, 0.04);
 
     Ok(())
 }

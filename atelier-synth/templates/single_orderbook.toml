@@ -1,0 +1,26 @@
+[[experiments]]
+id = "exp_00"
+n_progressions = 5
+
+[[exchanges]]
+id = "ai_00"
+region = "asia"
+name = "binance"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+
+[[models]]
+id = "mod_00"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+

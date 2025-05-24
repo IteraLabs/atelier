@@ -1,4 +1,4 @@
-use atelier_data::training;
+use atelier_core::training;
 use atelier_dcm::{
     agents::DistributedAgent, dataset, features, targets, training::distributed_training,
 };
@@ -7,7 +7,6 @@ use std::{env, path::Path};
 use tch::{display, Kind, Tensor};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-
     display::set_print_options_full();
 
     // --- experiment parameters
@@ -23,9 +22,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .expect("Failed to get workspace root");
 
     // --- Load input data
-    let data_route = workspace_root
-        .join("atelier-dcm")
-        .join("datasets");
+    let data_route = workspace_root.join("atelier-dcm").join("datasets");
 
     // --- Files
     let mut data_files = vec![
@@ -42,13 +39,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // --- Agents Formation --- //
     for i in 0..n_agents {
-
         println!("\nAgent {:?} preparation", i);
 
         // --- Features --- //
         let i_route = data_route.join(&data_files.pop().unwrap());
         println!("{:?}", i_route);
-        
+
         let v_orderbook = dataset::read_json(i_route.to_str().unwrap())?;
 
         let wmid_price: Vec<f64> = features::ob_wmidprice(&v_orderbook)?;
@@ -94,10 +90,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .join("experiments")
         .join("distributed_training_00.toml");
 
-    let consensus_matrix = training::a_matrix(
-        num_agents,
-        training_file.to_str().unwrap(),
-    );
+    let consensus_matrix =
+        training::a_matrix(num_agents, training_file.to_str().unwrap());
 
     // Run distributed training
     distributed_training(&mut agents, n_iterations, consensus_matrix.copy());

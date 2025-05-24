@@ -7,19 +7,21 @@ n_progressions = 1000
 
 # ----------------------------------------------------------------- Asia Orderbooks -- //
 
-[[exchanges]]
-id = "ai_00"
-region = "asia"
-name = "binance"
-category = "cex"
+[[models]]
+id = "md_00"
+name = "LogisticRegression"
+category = "linear"
 
-[exchanges.orderbook]
+[models.parameters]
 bid_price = 100_000.00
-bid_levels = [5, 10]
-bid_orders = [5, 10]
-ticksize = [0.1, 1.0]
-ask_price = 100_001.00
-ask_levels = [5, 10]
-ask_orders = [5, 10]
-rands = [-0.01, 0.01]
+
+[[learning]]
+id = "lr_00"
+name = "GradientDescent"
+category = "gradient"
+
+[learning.parameters]
+lambda_1 = [0.015, 0.010, 0.005]
+lambda_2 = [0.015, 0.010, 0.05]
+eta = [0.5, 0.25, 0.10]
 

@@ -1,4 +1,4 @@
-use atelier_data::configs;
+use atelier_core::templates;
 use std::error::Error;
 
 // ----------------------------------------------------------------------------------- //
@@ -7,7 +7,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let config_file = "atelier-dcm/Config_01.toml";
 
     // Load configuration
-    let config = configs::Config::load_from_toml(config_file)
+    let config = templates::Config::load_from_toml(config_file)
         .unwrap()
         .clone();
     let exp_id = &config.experiments[0].id;

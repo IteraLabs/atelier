@@ -16,8 +16,7 @@ repository.workspace = true
 
 # Atelier sub-modules 
 atelier = { workspace = true }
-atelier-analytics = { workspace = true }
-atelier-data = { workspace = true }
+atelier-core = { workspace = true }
 atelier-generators = { workspace = true }
 
 criterion = { workspace = true }

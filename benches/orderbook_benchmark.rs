@@ -1,6 +1,6 @@
 //! Benchmark for Orderbook Methods
 
-use atelier_data::orderbooks::Orderbook;
+use atelier_core::orderbooks::Orderbook;
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 

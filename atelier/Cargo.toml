@@ -15,8 +15,7 @@ repository.workspace = true
 [dependencies]
 
 # Atelier workbench
-atelier-analytics = { workspace = true }
-atelier-data = { workspace = true }
+atelier-core = { workspace = true }
 atelier-generators = { workspace = true }
 
 # Error Handling

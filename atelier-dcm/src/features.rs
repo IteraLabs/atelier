@@ -1,4 +1,4 @@
-use atelier_data::orderbooks::Orderbook;
+use atelier_core::orderbooks::Orderbook;
 
 pub fn ob_vwap(
     orderbooks: &Vec<Orderbook>,

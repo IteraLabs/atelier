@@ -1,4 +1,4 @@
-use atelier_data::orderbooks::Orderbook;
+use atelier_core::orderbooks::Orderbook;
 
 pub fn ob_price_direction(
     orderbooks: &Vec<Orderbook>,

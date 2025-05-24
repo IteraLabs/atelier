@@ -10,33 +10,34 @@ pub fn empty_matrix(num_agents: i64) -> Tensor {
 
 // ----------------------------------------------------------------------------------- //
 
-pub fn training(
+pub fn single_training(
     agent: &mut DistributedAgent,
     num_iterations: usize,
-    learning_rate: f64) {
-
+    learning_rate: f64,
+) {
     let mut v_loss = vec![];
 
     for i in 0..num_iterations {
-
         // 1. Compute current loss for monitoring
         let loss = agent.compute_loss();
         let metric_acc = agent.compute_accuracy(0.70);
-        
-        println!("iteration: {:?}, loss: {:?}, acc: {:?}",
-            i, loss.to_kind(Kind::Float), metric_acc );
-        
+
+        println!(
+            "iteration: {:?}, loss: {:?}, acc: {:?}",
+            i,
+            loss.to_kind(Kind::Float),
+            metric_acc
+        );
+
         v_loss.push(loss);
-        
+
         // 2. Compute gradients for parameter update
         let gradients = agent.compute_gradient();
-        
+
         // 3. Update parameters using gradients
         agent.theta = &agent.theta - &(gradients * learning_rate);
     }
-
 }
-
 
 // ----------------------------------------------------------------------------------- //
 

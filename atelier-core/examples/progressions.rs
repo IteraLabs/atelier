@@ -1,13 +1,9 @@
-//! A Simple Example on the Orderbook struct and methods.
-
+use atelier_core::orderbooks::Orderbook;
 use rand::Rng;
 use rand_distr::{Bernoulli, Distribution, Uniform};
 
-use atelier_core::orderbooks::Orderbook;
-
 fn main() {
     // -- Orderbook parameters -- //
-
     let ini_bid_price = 100_000.00;
     let ini_bid_levels = Some((1, 2));
     let ini_bid_orders = Some((1, 10));
@@ -19,7 +15,7 @@ fn main() {
     let ini_ticksize = Some((0.1, 1.1));
 
     let mut v_orderbook = vec![];
-    let n_progressions = 50;
+    let n_progressions = 10;
 
     // -- Probabilistic parameters -- //
 
@@ -57,17 +53,21 @@ fn main() {
         v_orderbook.push(r_ob);
     }
 
+    println!("\nNumber of progressions: {:?}\n", n_progressions);
+
     println!(
-        "\nbid prices: {:?}, {:?}, {:?}",
+        "\nfirst 4 bid prices: {:?}, {:?}, {:?}, {:?}",
         v_orderbook[0].bids[0].price,
         v_orderbook[1].bids[0].price,
-        v_orderbook[2].bids[0].price
+        v_orderbook[2].bids[0].price,
+        v_orderbook[3].bids[0].price
     );
 
     println!(
-        "\nask prices: {:?}, {:?}, {:?}",
+        "\nfirst 4 ask prices: {:?}, {:?}, {:?}, {:?}",
         v_orderbook[0].asks[0].price,
         v_orderbook[1].asks[0].price,
-        v_orderbook[2].asks[0].price
+        v_orderbook[2].asks[0].price,
+        v_orderbook[3].asks[0].price
     );
 }

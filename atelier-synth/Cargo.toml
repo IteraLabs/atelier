@@ -1,6 +1,6 @@
 [package]
-name = "atelier-dcm"
-description = "Distributed Convex Methods"
+name = "atelier-synth"
+description = "Synthetic Data Generation"
 version = "0.0.1"
 publish = false
 
@@ -19,6 +19,10 @@ atelier = { path = "../atelier", version = "0.1.0" }
 atelier-core = { path = "../atelier-core", version = "0.0.1" }
 atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
 
+# Computing
+tokio = { version = "1", features = ["full"] }
+futures = { version = "0.3" }
+
 # Probabilistic features
 rand = { workspace = true }
 rand_distr = { workspace = true }
@@ -30,20 +34,12 @@ toml = { workspace = true }
 tch = { version = "0.20" }
 
 [[example]]
-name = "synthetic_markets"
-path = "examples/synthetic_markets.rs"
+name = "single_synthetic_ob"
+path = "examples/single_synthetic_ob.rs"
 
 [[example]]
-name = "load_configs"
-path = "examples/load_configs.rs"
-
-[[example]]
-name = "distributed_training"
-path = "examples/distributed_training.rs"
-
-[[example]]
-name = "single_training"
-path = "examples/single_training.rs"
+name = "multiple_synthetic_ob"
+path = "examples/multiple_synthetic_ob.rs"
 
 [lints]
 workspace = true
