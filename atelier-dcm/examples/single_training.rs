@@ -60,7 +60,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // --- Regularization Params
     let lambda_1 = 0.015;
     let lambda_2 = 0.015;
-    let eta = 0.11;
+    let eta = &config.models.0.11;
     let loss = Tensor::from(1e10);
     let accuracy = Tensor::from(1.0);
 

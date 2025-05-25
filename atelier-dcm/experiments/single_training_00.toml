@@ -1,9 +1,6 @@
-
-# ------------------------------------------------------------------ Asia Orderbook -- //
-
 [[experiments]]
 id = "distributed_00"
-n_progressions = 1000
+n_progressions = 10000
 
 # ----------------------------------------------------------------- Asia Orderbooks -- //
 
@@ -24,4 +21,10 @@ category = "gradient"
 lambda_1 = [0.015, 0.010, 0.005]
 lambda_2 = [0.015, 0.010, 0.05]
 eta = [0.5, 0.25, 0.10]
+
+[[exchanges]]
+id = "ai_00"
+region = "asia"
+name = "binance"
+category = "cex"
 

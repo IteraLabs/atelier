@@ -1,8 +1,8 @@
 [[experiments]]
 id = "distributed_00"
-n_progressions = 1000
+n_progressions = 5000
 
-# ----------------------------------------------------------------- Asia Models -- //
+# --------------------------------------------------------------------- Asia Models -- //
 
 [[models]]
 id = "mod_ai_00"
@@ -25,7 +25,7 @@ description = "Geometric Brownian Motion"
 params_labels = ["mu", "sigma"]
 params_values = [0.01, 0.001]
 
-# ----------------------------------------------------------------- Europe Models -- //
+# ------------------------------------------------------------------- Europe Models -- //
 
 [[models]]
 id = "mod_eu_00"
@@ -48,7 +48,7 @@ description = "Geometric Brownian Motion"
 params_labels = ["mu", "sigma"]
 params_values = [0.01, 0.001]
 
-# ----------------------------------------------------------------- America Models -- //
+# ------------------------------------------------------------------ America Models -- //
 
 [[models]]
 id = "mod_am_00"

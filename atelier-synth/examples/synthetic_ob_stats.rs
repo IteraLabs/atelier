@@ -24,8 +24,6 @@ fn main() {
         .join("templates")
         .join("single_orderbook.toml");
 
-    println!("\nconfig_file: {:}\n", config_file.to_str().unwrap());
-
     // Load configuration
     let config = templates::Config::load_from_toml(config_file.to_str().unwrap())
         .unwrap()
@@ -37,7 +35,7 @@ fn main() {
     let n_progressions = config.experiments[0].n_progressions;
     let exp_id = &config.experiments[0].id;
 
-    for i_e in 0..9 {
+    for i_e in 0..exchanges.len() {
         // --- File Name Formation Orderbook -- //
         let mut folder_route = workspace_root
             .join("atelier-dcm")
