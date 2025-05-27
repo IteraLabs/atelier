@@ -15,7 +15,6 @@ repository.workspace = true
 [dependencies]
 
 # Atelier sub-modules 
-atelier = { path = "../atelier", version = "0.1.0" }
 atelier-core = { path = "../atelier-core", version = "0.0.1" }
 atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
 
@@ -26,16 +25,17 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 toml = { workspace = true } 
 
-# --- Dependencies for this crate
-tch = { version = "0.20" }
-
-[[example]]
-name = "synthetic_markets"
-path = "examples/synthetic_markets.rs"
+# Computing 
+tch = { version = "0.20.0", features = ["download-libtorch"] }
+torch-sys = { version = "0.20.0", features = ["download-libtorch"] }
 
 [[example]]
 name = "load_configs"
 path = "examples/load_configs.rs"
+
+[[example]]
+name = "pytorch_training"
+path = "examples/pytorch_training.rs"
 
 [[example]]
 name = "distributed_training"
@@ -51,5 +51,5 @@ workspace = true
 [env]
 LIBTORCH="$HOME/libtorch"
 DYLD_LIBRARY_PATH="$HOME/libtorch/lib"
-LIBTORCH_BYPASS_VERSION_CHECK="FALSE"
+LIBTORCH_BYPASS_VERSION_CHECK="TRUE"
 

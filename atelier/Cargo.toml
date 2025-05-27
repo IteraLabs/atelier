@@ -1,7 +1,7 @@
 [package]
 name = "atelier"
 description = "Rust Engine for High Frequency, Synthetic and Historical, Market Microstructure Modeling"
-version = "0.1.0"
+version = "0.0.1"
 publish = true
 
 edition.workspace = true
@@ -16,7 +16,10 @@ repository.workspace = true
 
 # Atelier workbench
 atelier-core = { workspace = true }
+atelier-dcm = { workspace = true }
 atelier-generators = { workspace = true }
+atelier-results = { workspace = true }
+atelier-synth = { workspace = true }
 
 # Error Handling
 thiserror = { workspace = true }
@@ -24,4 +27,11 @@ thiserror = { workspace = true }
 # Probabilistic features
 rand = { workspace = true }
 rand_distr = { workspace = true }
+
+# Command Line Arguments
+clap = { workspace = true }
+
+# Data processing
+tokio = { workspace = true }
+serde_json = { workspace = true }
 

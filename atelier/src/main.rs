@@ -1,21 +1,52 @@
+//! # Atelier
+//!
+//! Is a computational Framework/Engine for Market Microstructure High Frequency
+//! Modeling. Provides the capacity to perform Synthetic Simulations, and/or,
+//! Historical Market Reconstruction/Replays.
+//!
+//! In depth use-cases documentation can be found in [website]
+//!
+//! [website]: https://www.iteralabs.ai/atelier/docs
+
 use atelier_core::{orderbooks::stats::Stats, templates};
-use atelier_synth::synthbooks::progressions;
-use std::{env, fs::File, io::Write, path::Path};
+use clap::Parser;
+
+use atelier_synth::synthbooks;
+use std::{
+    env,
+    fs::File,
+    io::Write,
+    path::{Path, PathBuf},
+};
+
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    /// Template File Path
+    #[arg(short, long)]
+    template: PathBuf,
+
+    /// Output Directory
+    #[arg(short, long)]
+    output_dir: PathBuf,
+
+    /// Experiment Suffix (Optional)
+    #[arg(short, long, default_value = "ob")]
+    suffix: String,
+}
 
 #[tokio::main]
 pub async fn main() {
+    let args = Args::parse();
+
     // --- Setup working directory
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let workspace_root = Path::new(manifest_dir)
         .parent()
         .expect("Failed to get workspace root");
 
-    // --- Template file (toml)
-    let template_file = workspace_root
-        .join("atelier-synth")
-        .join("templates")
-        .join("single_orderbook.toml");
-    let template = templates::Config::load_from_toml(template_file.to_str().unwrap())
+    // --- Template file (from command line argument)
+    let template = templates::Config::load_from_toml(args.template.to_str().unwrap())
         .unwrap()
         .clone();
 
@@ -26,9 +57,8 @@ pub async fn main() {
     let template_model = template.models[0].clone();
 
     // --- Create progressions
-    let v_rand_ob = progressions(template_orderbook, template_model, n_progres).await;
-
-    //let results_ob = v_rand_ob.into_iter().collect();
+    let v_rand_ob =
+        synthbooks::progressions(template_orderbook, template_model, n_progres).await;
 
     // --- Compute basic stats
     let level_bids: Vec<f32> = v_rand_ob
@@ -50,20 +80,24 @@ pub async fn main() {
 
     println!("bids_stats: {:?}, asks_stats {:?}", bids_stats, asks_stats);
 
+    // --- Use command line arguments for output
     let mut folder_route = workspace_root
-        .join("atelier-synth")
-        .join("datasets")
+        .join(&args.output_dir)
         .to_str()
         .unwrap()
         .to_owned();
 
     folder_route.push_str("/");
     folder_route.push_str(&exp_id);
-    folder_route.push_str(&"_asia.json");
+    folder_route.push_str("_");
+    folder_route.push_str(&args.suffix);
+    folder_route.push_str(".json");
 
     let i_ob = v_rand_ob.as_ref().unwrap();
 
     let ob_json = serde_json::to_string(&i_ob).unwrap();
     let mut file = File::create(&folder_route).unwrap();
     file.write_all(ob_json.as_bytes()).unwrap();
+
+    println!("Output written to: {}", folder_route);
 }

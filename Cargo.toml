@@ -30,12 +30,13 @@ default-members = [
   "atelier-core",
   "atelier-dcm",
   "atelier-generators",
+  "atelier-results",
+  "atelier-synth",
   "benches",
   "examples",
 ]
 
 [workspace.package]
-
 edition = "2021"
 rust-version = "1.84.0"
 
@@ -55,11 +56,12 @@ license = "Apache-2.0"
 [workspace.dependencies]
 
 # Atelier complements
-atelier = { path = "./atelier", version = "0.1.0" }
+atelier = { path = "./atelier", version = "0.0.1" }
 atelier-core = { path = "./atelier-core", version = "0.0.1" }
 atelier-dcm = { path = "./atelier-dcm", version = "0.0.1" }
 atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
 atelier-results = { path = "./atelier-results", version = "0.0.1" }
+atelier-synth = { path = "./atelier-synth", version = "0.0.1" }
 
 # Error Handling
 thiserror = { version = "1.0.64" }
@@ -77,6 +79,13 @@ serde_json = { version = "1.0" }
 
 # file management
 toml = { version = "0.8" }
+
+# command line
+clap = { version = "4.5", features = ["derive"] }
+
+# Computing
+tokio = { version = "1", features = ["full"] }
+futures = { version = "0.3" }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

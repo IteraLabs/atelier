@@ -152,4 +152,3 @@ pub async fn async_progressions(
 
     join_all(tasks).await
 }
-
