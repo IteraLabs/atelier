@@ -1,53 +1,73 @@
-# Build stage - specify platform for cross-compilation from macOS
+# ---------------------------------------------------------------- STAGE 1: builder --- #
+# ---------------------------------------------------------------- ---------------- --- #
 FROM rust:1.87-bullseye AS builder
 
-# Install required dependencies
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies needed for tch-rs and libtorch
 RUN apt-get update && apt-get install -y \
-    musl-dev \
-    musl-tools \
     build-essential \
-    gcc-x86-64-linux-gnu \
     wget \
     unzip \
     python3 \
     python3-pip \
+    ca-certificates \
+    pkg-config \
+    vim \
     && rm -rf /var/lib/apt/lists/*
 
-# Install torch using python & pip
-pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 \
-    --index-url https://download.pytorch.org/whl/cpu
+# Download and unzip libtorch (CPU-only version, adjust version as needed)
+RUN pip3 install torch==2.7 \
+  --index-url https://download.pytorch.org/whl/cpu
 
-# Set the working directory
-WORKDIR /app
-
-# Set environment variables for LibTorch and cross-compilation
+# Set enviroments
 ENV LIBTORCH=/app/libtorch
+ENV LIBTORCH_INCLUDE=/app/libtorch
+ENV LIBTORCH_LIB=/app/libtorch
 ENV LIBTORCH_USE_PYTORCH=1
 ENV LIBTORCH_BYPASS_VERSION_CHECK=1
-ENV LD_LIBRARY_PATH=${LIBTORCH}/lib:$LD_LIBRARY_PATH
-
+ENV LD_LIBRARY_PATH=/app/libtorch/lib
 ENV TORCH_CUDA_VERSION=cpu
-ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=x86_64-linux-gnu-gcc
-ENV CC_x86_64_unknown_linux_musl=x86_64-linux-gnu-gcc
-ENV CXX_x86_64_unknown_linux_musl=x86_64-linux-gnu-g++
 
-# Add the musl target for static linking
-RUN rustup target add x86_64-unknown-linux-musl
-
-# Copy workspace configuration files first (for better layer caching)
+# Copy Workspace configuration files
 COPY Cargo.toml ./
-
-# Copy all workspace member directories (including atelier)
 COPY atelier ./atelier
 COPY atelier-core ./atelier-core
 COPY atelier-dcm ./atelier-dcm
 COPY atelier-generators ./atelier-generators
 COPY atelier-results ./atelier-results
 COPY atelier-synth ./atelier-synth
+COPY benches ./benches
 
-# Build the final binary
-RUN cargo build --target x86_64-unknown-linux-musl --release -p atelier
+# Build the Rust binary in release mode
+RUN cargo build --release -p atelier
 
-# To be dropped into a Bash shell inside the container
-CMD ["/bin/bash"]
+# ----------------------------------------------------------------- STAGE 2: runner --- #
+# ----------------------------------------------------------------- --------------- --- #
+FROM debian:bullseye-slim AS runner
 
+# Set Working Directory
+WORKDIR /app
+
+# Install minimal vm with system dependencies and tooling
+RUN apt-get update && apt-get install -y \
+  libgomp1 \
+  vim
+
+# Get the binary, the templates and dependencies from Builder
+COPY --from=builder /app/target/release/atelier /usr/local/bin/atelier
+COPY --from=builder /app/atelier-synth/templates ./templates
+COPY --from=builder /usr/local/lib/python3*/dist-packages/torch/lib /usr/local/libtorch
+
+# Add locations in the new environment
+ENV LIBTORCH=/usr/local/libtorch
+ENV LIBTORCH_INCLUDE=/usr/local/libtorch
+ENV LIBTORCH_LIB=/usr/local/libtorch
+ENV LIBTORCH_USE_PYTORCH=0
+ENV LIBTORCH_BYPASS_VERSION_CHECK=1
+ENV LD_LIBRARY_PATH=/usr/local/libtorch
+ENV TORCH_CUDA_VERSION=cpu
+
+# Service entrypoint
+ENTRYPOINT ["/usr/local/bin/atelier"]
