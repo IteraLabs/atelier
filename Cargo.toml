@@ -2,11 +2,13 @@
 
 resolver = "2"
 members = [
-  # Core
+  
+  # Binary
   "atelier",
 
   # Operational
   "atelier-core",
+  "atelier-results",
 
   # Distributed Optimization for ML
   "atelier-dcm",
@@ -19,10 +21,6 @@ members = [
   
   # Excellence
   "benches",
-  "atelier-results",
-  
-  # Usability
-  "examples",
 ]
 
 default-members = [
@@ -32,8 +30,6 @@ default-members = [
   "atelier-generators",
   "atelier-results",
   "atelier-synth",
-  "benches",
-  "examples",
 ]
 
 [workspace.package]
@@ -83,9 +79,10 @@ toml = { version = "0.8" }
 # command line
 clap = { version = "4.5", features = ["derive"] }
 
-# Computing
+# computing
 tokio = { version = "1", features = ["full"] }
 futures = { version = "0.3" }
+tch = { version = "0.20.0" }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

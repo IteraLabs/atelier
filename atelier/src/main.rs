@@ -16,7 +16,7 @@ use std::{
     env,
     fs::File,
     io::Write,
-    path::{Path, PathBuf},
+    path::{Path, PathBuf}
 };
 
 #[derive(Parser, Debug)]
@@ -36,7 +36,7 @@ struct Args {
 }
 
 #[tokio::main]
-pub async fn main() {
+pub async fn main () {
     let args = Args::parse();
 
     // --- Setup working directory

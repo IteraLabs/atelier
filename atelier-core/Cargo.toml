@@ -23,7 +23,7 @@ rand_distr = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 toml = { workspace = true }
-tch = { version = "0.20" }
+tch = { workspace = true }
 
 [dev-dependencies]
 

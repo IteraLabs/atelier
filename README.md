@@ -21,15 +21,17 @@ At a high level it provides the following major components:
 - Order-Driven modeling with Market Events definitions, e.g. New Market Order, Cancel Limit Order, etc.
 - Stochastic process generators for rich/complex simulations (Brownian, Hawkes, etc).
 
-# Example
 
-Orderbook Synthetic Generation. Check []() for the complete version.
-
-```rust
+# Use
 
 
+## Docker (recommended)
 
-```
+The image builts the binary, 
+
+1. build the image
+2. run container
+3. generate data
 
 # Roadmap
 

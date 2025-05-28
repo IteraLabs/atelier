@@ -26,8 +26,7 @@ serde_json = { workspace = true }
 toml = { workspace = true } 
 
 # Computing 
-tch = { version = "0.20.0", features = ["download-libtorch"] }
-torch-sys = { version = "0.20.0", features = ["download-libtorch"] }
+tch = { workspace = true }
 
 [[example]]
 name = "load_configs"
@@ -47,9 +46,3 @@ path = "examples/single_training.rs"
 
 [lints]
 workspace = true
-
-[env]
-LIBTORCH="$HOME/libtorch"
-DYLD_LIBRARY_PATH="$HOME/libtorch/lib"
-LIBTORCH_BYPASS_VERSION_CHECK="TRUE"
-
