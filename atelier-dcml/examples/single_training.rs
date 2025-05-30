@@ -1,9 +1,10 @@
 use atelier_core::templates;
-use atelier_dcm::{agents::DistributedAgent, dataset, features, targets, training};
+use atelier_dcml::{agents::DistributedAgent, data, features, targets, training};
 use std::{env, path::Path};
 use tch::{Kind, Tensor};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+
     // --- Set up working directory
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let workspace_root = Path::new(manifest_dir)
@@ -31,7 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .join("datasets")
         .join("exp_00_ai_00_binance_ob.json");
 
-    let v_orderbook = dataset::read_json(&data_file.to_str().unwrap().to_owned())?;
+    let v_orderbook = data::read_json(&data_file.to_str().unwrap().to_owned())?;
 
     // --- Features computation
     let f1 = features::ob_vwap(&v_orderbook, 2 as usize)?;

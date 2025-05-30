@@ -8,7 +8,7 @@
 pub mod agents;
 
 /// Distributed dataset generators
-pub mod dataset;
+pub mod data;
 
 /// Distributed feature engineering
 pub mod features;

@@ -1,23 +1,76 @@
 use tch::{self, Device, Kind, Tensor};
+use crate::functions;
+use crate::functions::Regularized;
+
+use atelier_core::data::Dataset;
 
 #[derive(Debug)]
-pub struct AgetMetrics {
-    pub loss: Tensor,
+pub enum Action {
+    Forecast,
 }
 
-pub struct Optimizer {
-    pub name: String,
-    pub eta: f64,
-}
+// ----------------------------------------------------------------------------------- //
+// ----------------------------------------------------------------------------------- //
 
+#[derive(Debug)]
 pub struct Agent {
-    pub theta: Tensor,
-    pub optimizer: Optimizer,
-    pub features: Tensor,
-    pub labels: Tensor,
-    pub loss: Tensor,
+    pub agent_id: String,
+    pub action: Action,
+    pub data: Dataset,
 }
 
+impl Agent {
+    pub fn builder() -> AgentBuilder {
+        AgentBuilder::new()
+    }
+}
+
+pub struct AgentBuilder {
+    agent_id: Option<String>,
+    action: Option<Action>,
+    data: Option<Dataset>,
+}
+
+impl AgentBuilder {
+    pub fn new() -> Self {
+        AgentBuilder {
+            agent_id: None,
+            action: None,
+            data: None
+        }
+    }
+
+    pub fn agent_id(mut self, agent_id: String) -> Self {
+        self.agent_id = Some(agent_id);
+        self
+    }
+
+    pub fn action(mut self, action: Action) -> Self {
+        self.action = Some(action);
+        self
+    }
+
+    pub fn data(mut self, data: Dataset) -> Self {
+        self.data = Some(data);
+        self
+    }
+
+    pub fn build(self) -> Result<Agent, &'static str> {
+        
+        let agent_id = self.agent_id.ok_or("Missing agent_id value")?;
+        let action = self.action.ok_or("Missing action value")?;
+        let data = self.data.ok_or("Missing data value")?;
+
+        Ok(Agent {
+            agent_id,
+            action,
+            data,
+        })
+    }
+}
+
+
+// ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
 
 pub struct DistributedAgent {
@@ -76,7 +129,8 @@ impl DistributedAgent {
         let preds = logits.sigmoid();
         let error = &preds - &self.labels.squeeze();
 
-        // X^T * (preds - y) / n_samples
+        // error = y_hat - y
+        // (X^T * error) / n_samples
         let grad_loss = self
             .features
             .transpose(0, 1)
@@ -90,6 +144,23 @@ impl DistributedAgent {
         let grad_l2 = self.theta.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
 
         grad_loss + grad_l1 + grad_l2
+    }
+    
+    pub fn compute_bce(&self) -> Tensor {
+    
+        let y_hat = self.forward(&self.features);
+
+        let bce = functions::CrossEntropy::builder()
+            .theta(&self.theta)
+            .y(&self.labels)
+            .y_hat(&y_hat)
+            .epsilon(1e-4)
+            .build()
+            .expect("Failed new BCE creation");
+
+        let r_bce = bce.regularize(&functions::RegType::Elasticnet, vec![1.1, 0.4]) ;
+        r_bce
+
     }
 
     pub fn compute_loss(&self) -> Tensor {
@@ -127,6 +198,7 @@ impl DistributedAgent {
         let labels_int = self.labels.squeeze().to_kind(tch::Kind::Int64);
 
         // Calculate confusion matrix components using tensor operations
+
         // True Positives: prediction=1, actual=1
         let tp = (&preds_binary * &labels_int).sum(Kind::Float);
 

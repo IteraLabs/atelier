@@ -15,21 +15,20 @@ pub fn single_training(
     num_iterations: usize,
     learning_rate: f64,
 ) {
-    let mut v_loss = vec![];
 
     for i in 0..num_iterations {
         // 1. Compute current loss for monitoring
         let loss = agent.compute_loss();
-        let metric_acc = agent.compute_accuracy(0.70);
+        let metric_acc = agent.compute_accuracy(0.50);
+        let bce_loss = agent.compute_bce();
 
         println!(
-            "iteration: {:?}, loss: {:?}, acc: {:?}",
+            "iteration: {:?}, loss: {:?}, acc: {:?}, bce_loss: {:?}",
             i,
             loss.to_kind(Kind::Float),
-            metric_acc
+            metric_acc,
+            bce_loss
         );
-
-        v_loss.push(loss);
 
         // 2. Compute gradients for parameter update
         let gradients = agent.compute_gradient();

@@ -54,3 +54,4 @@ pub fn ob_midprice(
 
     Ok(mid_price)
 }
+

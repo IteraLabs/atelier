@@ -1,4 +1,4 @@
-use atelier_dcm::{dataset, features, targets};
+use atelier_dcml::{data, features, targets};
 use tch::{
     nn::{Adam, OptimizerConfig, VarStore},
     Device, Kind, Reduction, Tensor, TrainableCModule,
@@ -19,7 +19,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     model.set_train();
 
     // --- Features --- //
-    let v_orderbook_2 = dataset::read_json(&data_file)?;
+    let v_orderbook_2 = data::read_json(&data_file)?;
     let wmid_price: Vec<f64> = features::ob_wmidprice(&v_orderbook_2)?;
     let vwap_price: Vec<f64> = features::ob_vwap(&v_orderbook_2, 2 as usize)?;
     let wmid_price_tensor = Tensor::from_slice(&wmid_price).unsqueeze(1);

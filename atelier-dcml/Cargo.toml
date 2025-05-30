@@ -1,6 +1,6 @@
 [package]
-name = "atelier-dcm"
-description = "Distributed Convex Methods"
+name = "atelier-dcml"
+description = "Distributed Convex Machine Learning"
 version = "0.0.1"
 publish = false
 
