@@ -7,6 +7,9 @@
 /// Distributed Agents
 pub mod agents;
 
+/// Mathematical objects and definitions
+pub mod math;
+
 /// Distributed dataset generators
 pub mod data;
 
@@ -24,3 +27,10 @@ pub mod training;
 
 /// Distributed Models
 pub mod models;
+
+/// Optimizers and Learning Algorithms
+pub mod optimizers;
+
+/// Various metrics
+pub mod metrics;
+

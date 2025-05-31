@@ -33,6 +33,10 @@ name = "load_configs"
 path = "examples/load_configs.rs"
 
 [[example]]
+name = "compute_features"
+path = "examples/compute_features.rs"
+
+[[example]]
 name = "pytorch_training"
 path = "examples/pytorch_training.rs"
 

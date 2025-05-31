@@ -68,7 +68,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut agent =
         DistributedAgent::new(features, labels, lambda_1, lambda_2, eta, loss, accuracy);
 
-    training::single_training(&mut agent, 100, 0.04);
+    training::singular_training(&mut agent, 100, 0.04);
 
     Ok(())
 }

@@ -30,3 +30,9 @@ pub fn load_from_json(file_route: &str) -> Result<Vec<Orderbook>, Box<dyn Error>
     Ok(v_orderbook)
 }
 
+pub fn write_to_csv(data: Vec<f64>, file_route: &str) -> Result<(), Box<dyn Error>> {
+
+
+
+}
+

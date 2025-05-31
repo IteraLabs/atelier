@@ -1,16 +1,10 @@
 use crate::agents::DistributedAgent;
 use tch::{Kind, Tensor};
 
-pub fn empty_matrix(num_agents: i64) -> Tensor {
-    let val = 1.0 / num_agents as f64;
-    Tensor::from_slice(&vec![val; (num_agents * num_agents) as usize])
-        .reshape(&[num_agents, num_agents])
-        .to_kind(Kind::Float)
-}
 
 // ----------------------------------------------------------------------------------- //
 
-pub fn single_training(
+pub fn singular_training(
     agent: &mut DistributedAgent,
     num_iterations: usize,
     learning_rate: f64,
@@ -33,8 +27,14 @@ pub fn single_training(
         // 2. Compute gradients for parameter update
         let gradients = agent.compute_gradient();
 
-        // 3. Update parameters using gradients
+        // 3.1 Update parameters using gradients
         agent.theta = &agent.theta - &(gradients * learning_rate);
+
+        // 3.2 Update parameters using Optimizer
+        // GradientDescent::builder().learning_rate(0.05);
+        // GradientDescent.step(&model.weights, &gradients)
+        // agent.theta = &agent.theta - new_grad;
+
     }
 }
 
