@@ -1,0 +1,26 @@
+[[experiments]]
+id = "case_a"
+n_progressions = 4
+
+[[exchanges]]
+id = "exc_00"
+region = "region_a"
+name = "exchange_a"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+
+[[models]]
+id = "mod_00"
+label = "GD"
+description = "Gradient Descent"
+params_labels = ["learning_rate", "epsilon"]
+params_values = [0.01, 0.001]
+

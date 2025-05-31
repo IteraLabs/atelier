@@ -1,0 +1,225 @@
+[[experiments]]
+id = "case_b"
+n_progressions = 1000
+
+# --------------------------------------------------------------------- Asia Models -- //
+
+[[models]]
+id = "mod_ai_00"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+[[models]]
+id = "mod_ai_01"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+[[models]]
+id = "mod_ai_02"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+# ------------------------------------------------------------------- Europe Models -- //
+
+[[models]]
+id = "mod_eu_00"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+[[models]]
+id = "mod_eu_01"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+[[models]]
+id = "mod_eu_02"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+# ------------------------------------------------------------------ America Models -- //
+
+[[models]]
+id = "mod_am_00"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+[[models]]
+id = "mod_am_01"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+[[models]]
+id = "mod_am_02"
+label = "gbm"
+description = "Geometric Brownian Motion"
+params_labels = ["mu", "sigma"]
+params_values = [0.01, 0.001]
+
+# ----------------------------------------------------------------- Asia Orderbooks -- //
+
+[[exchanges]]
+id = "ai_00"
+region = "asia"
+name = "binance"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "ai_01"
+region = "asia"
+name = "gate"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "ai_02"
+region = "asia"
+name = "okx"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+# --------------------------------------------------------------- Europe Orderbooks -- //
+
+[[exchanges]]
+id = "eu_00"
+region = "europe"
+name = "kraken"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "eu_01"
+region = "europe"
+name = "bitstamp"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "eu_02"
+region = "europe"
+name = "bitfinex"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+# ------------------------------------------------------------- Americas Orderbooks -- //
+
+[[exchanges]]
+id = "am_00"
+region = "americas"
+name = "coinbase"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "am_01"
+region = "americas"
+name = "bitso"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.0]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+[[exchanges]]
+id = "am_02"
+region = "americas"
+name = "gemini"
+category = "cex"
+
+[exchanges.orderbook]
+bid_price = 100_000.00
+bid_levels = [5, 10]
+bid_orders = [5, 10]
+ticksize = [0.1, 1.1]
+ask_price = 100_001.00
+ask_levels = [5, 10]
+ask_orders = [5, 10]
+rands = [-0.01, 0.01]
+
+
+

@@ -1,0 +1,37 @@
+[package]
+name = "example"
+description = "Research Examples for the Atelier project"
+version = "0.0.1"
+publish = false
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+# Atelier sub-modules 
+atelier-agents = { workspace = true }
+atelier-core = { workspace = true }
+atelier-dcml = { workspace = true }
+atelier-synth = { workspace = true }
+
+criterion = { workspace = true }
+rand = { workspace = true }
+memuse = { workspace = true }
+human_bytes = { workspace = true }
+tch = { workspace = true }
+tokio = { workspace = true }
+
+[[example]]
+name = "case_a_data"
+path = "case_a/case_a_data.rs"
+
+[[example]]
+name = "case_a_training"
+path = "case_a/case_a_training.rs"
+
