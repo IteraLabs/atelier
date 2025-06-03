@@ -1,6 +1,6 @@
 /// Features Calculation
 
-use atelier_core::orderbooks::Orderbook;
+use atelier_core::{orderbooks::Orderbook, data};
 use std::error::Error;
 
 #[derive(Debug, Clone, Copy)]
@@ -134,13 +134,13 @@ impl FeatureSelector {
 pub fn compute_features(
     orderbooks: &[Orderbook],
     feature_names: &[&str],
+    depth: usize,
+    bps: f64,
     output_format: FeaturesOutput, 
     ) -> Result<Vec<Vec<f64>>, String> {
 
     let selector = FeatureSelector::new(feature_names)?;
     let mut feature_matrix = Vec::new();
-    let depth = 1;
-    let bps = 1.0;
 
     for ob in orderbooks {
         let features = selector.compute_values(ob, depth, bps);
@@ -157,26 +157,32 @@ pub fn compute_features(
     }
 }
 
+// --- Different Features Computations --- //
+
 /// Spread
 pub fn compute_spread(ob: &Orderbook) -> f64 {
-    &ob.asks[0].price - &ob.bids[0].price
+    let i_spread = &ob.asks[0].price - &ob.bids[0].price;
+    data::truncate_to_decimal(i_spread, 8)
 }
 
 /// Midprice
 pub fn compute_midprice(ob: &Orderbook) -> f64 {
-    (&ob.asks[0].price + &ob.bids[0].price) / 2.0
+    let i_midprice = (&ob.asks[0].price + &ob.bids[0].price) / 2.0;
+    data::truncate_to_decimal(i_midprice, 8)
 }
 
 /// Weighted Midprice
 pub fn compute_w_midprice(ob: &Orderbook) -> f64 {
-    ((ob.bids[0].price * ob.bids[0].volume) + 
+    let i_w_midprice = ((ob.bids[0].price * ob.bids[0].volume) + 
     (ob.asks[0].price * ob.asks[0].volume)) /
-    (ob.asks[0].volume + ob.bids[0].volume) as f64
+    (ob.asks[0].volume + ob.bids[0].volume) as f64;
+    data::truncate_to_decimal(i_w_midprice, 8)
 }
 
 /// Orderbook Volume Imbalance
 pub fn compute_imb(ob: &Orderbook) -> f64 {
-    &ob.asks[0].volume / (&ob.asks[0].volume + &ob.bids[0].volume)
+    let i_imb = &ob.asks[0].volume / (&ob.asks[0].volume + &ob.bids[0].volume);
+    data::truncate_to_decimal(i_imb, 8)
 }
 
 /// Volume-Weighted Average Price (With depth selector)
@@ -194,7 +200,8 @@ pub fn compute_vwap(ob: &Orderbook, depth: usize) -> f64 {
             (acc_p_v + level.price * level.volume, acc_v + level.volume)
         });
     if sum_v > 0.0 {
-        sum_p_v / sum_v
+        let vwap = sum_p_v / sum_v;
+        data::truncate_to_decimal(vwap, 8)
     } else {
         0.0
     }
@@ -222,7 +229,8 @@ pub fn compute_tav(ob: &Orderbook, bps: f64) -> f64 {
     .map(|level| level.volume)
     .sum();
 
-    bid_volume + ask_volume
+    let i_tav = bid_volume + ask_volume;
+    data::truncate_to_decimal(i_tav, 8)
 
 }
 

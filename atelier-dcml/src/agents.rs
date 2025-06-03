@@ -7,7 +7,7 @@ use crate::functions::Regularized;
 
 pub struct DistributedAgent {
     // Model parameters (weights)
-    pub theta: Tensor,
+    pub weights: Tensor,
 
     // Regularization parameters
     pub lambda1: f64,
@@ -38,7 +38,7 @@ impl DistributedAgent {
         let n_features = features.size()[1];
 
         Self {
-            theta: Tensor::zeros(&[n_features], (Kind::Float, Device::Cpu)),
+            weights: Tensor::zeros(&[n_features], (Kind::Float, Device::Cpu)),
             lambda1,
             lambda2,
             eta,
@@ -50,14 +50,14 @@ impl DistributedAgent {
     }
 
     pub fn forward(&self, features: &Tensor) -> Tensor {
-        let logits = features.matmul(&self.theta.unsqueeze(-1)).squeeze();
+        let logits = features.matmul(&self.weights.unsqueeze(-1)).squeeze();
         let preds = logits.sigmoid();
         preds
     }
 
     pub fn compute_gradient(&self) -> Tensor {
         // Logistic loss gradient
-        let logits = self.features.matmul(&self.theta.unsqueeze(-1)).squeeze();
+        let logits = self.features.matmul(&self.weights.unsqueeze(-1)).squeeze();
         let preds = logits.sigmoid();
         let error = &preds - &self.labels.squeeze();
 
@@ -71,9 +71,9 @@ impl DistributedAgent {
             / self.features.size()[0] as f64;
 
         // Elastic net regularization
-        let grad_l1 = self.theta.abs().sum(Kind::Float) * self.lambda1;
+        let grad_l1 = self.weights.abs().sum(Kind::Float) * self.lambda1;
 
-        let grad_l2 = self.theta.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
+        let grad_l2 = self.weights.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
 
         grad_loss + grad_l1 + grad_l2
     }
@@ -83,7 +83,7 @@ impl DistributedAgent {
         let y_hat = self.forward(&self.features);
 
         let bce = functions::CrossEntropy::builder()
-            .theta(&self.theta)
+            .weights(&self.weights)
             .y(&self.labels)
             .y_hat(&y_hat)
             .epsilon(1e-4)
@@ -96,7 +96,7 @@ impl DistributedAgent {
     }
 
     pub fn compute_loss(&self) -> Tensor {
-        let logits = self.features.matmul(&self.theta.unsqueeze(-1)).squeeze();
+        let logits = self.features.matmul(&self.weights.unsqueeze(-1)).squeeze();
         let preds = logits.sigmoid();
 
         // Manual binary cross-entropy calculation
@@ -113,14 +113,14 @@ impl DistributedAgent {
         let bce_loss = loss.mean(Kind::Float); // Average over all samples
 
         // Add regularization
-        let l1_reg = self.theta.abs().sum(Kind::Float) * self.lambda1;
-        let l2_reg = self.theta.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
+        let l1_reg = self.weights.abs().sum(Kind::Float) * self.lambda1;
+        let l2_reg = self.weights.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
 
         bce_loss + l1_reg + l2_reg
     }
 
     pub fn compute_accuracy(&self, p_threshold: f64) -> Tensor {
-        let logits = self.features.matmul(&self.theta.unsqueeze(-1)).squeeze();
+        let logits = self.features.matmul(&self.weights.unsqueeze(-1)).squeeze();
         let preds = logits.sigmoid();
 
         // Apply threshold to get binary predictions (0 or 1)

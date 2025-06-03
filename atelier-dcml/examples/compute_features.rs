@@ -28,7 +28,8 @@ fn main () -> Result<(), Box<dyn Error>> {
     println!("i_spread: {:?}", i_spread);
     println!("i_midprice: {:?}", i_midprice);
     println!("i_w_midprice: {:?}", i_w_midprice);
-    println!("i_tav: {:?}", i_tav);
+    println!("i_imb: {:?}", i_imb);
+    println!("i_vwap: {:?}", i_vwap);
     println!("i_tav: {:?}", i_tav);
 
     Ok(())

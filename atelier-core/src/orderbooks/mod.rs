@@ -8,8 +8,6 @@ use rand::{distr::Uniform, Rng};
 use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-pub mod stats;
-
 #[derive(Debug, Clone, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub struct Orderbook {
     pub orderbook_id: u32,

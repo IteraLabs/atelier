@@ -10,9 +10,6 @@ pub mod agents;
 /// Mathematical objects and definitions
 pub mod math;
 
-/// Distributed dataset generators
-pub mod data;
-
 /// Distributed feature engineering
 pub mod features;
 
@@ -23,7 +20,7 @@ pub mod targets;
 pub mod functions;
 
 /// Distributed training algorithms
-pub mod training;
+pub mod trainers;
 
 /// Distributed Models
 pub mod models;

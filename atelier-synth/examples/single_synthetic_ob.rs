@@ -30,8 +30,6 @@ pub async fn main() {
     // --- Create progressions
     let v_rand_ob = progressions(template_orderbook, template_model, n_progres).await;
 
-    //let results_ob = v_rand_ob.into_iter().collect();
-
     // --- Compute basic stats
     let level_bids: Vec<f32> = v_rand_ob
         .as_ref()

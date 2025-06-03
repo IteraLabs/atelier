@@ -32,7 +32,6 @@ pub fn transform(data: &Tensor, operation: Transformation) -> Tensor {
     transformed
 }
 
-
 pub fn empty_matrix(num_agents: i64) -> Tensor {
     let val = 1.0 / num_agents as f64;
     Tensor::from_slice(&vec![val; (num_agents * num_agents) as usize])

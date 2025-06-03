@@ -17,7 +17,7 @@ struct Training {
 }
 
 #[derive(Deserialize)]
-struct Config {
+struct TrainingTemplate {
     training: Vec<Training>,
 }
 
@@ -25,7 +25,7 @@ pub fn a_matrix(num_agents: i64, config_file: &str) -> Tensor {
     // Read and parse the TOML file
     let config_str = fs::read_to_string(config_file)
         .expect(&format!("Failed to read config file: {}", config_file));
-    let config: Config = toml::from_str(&config_str)
+    let config: TrainingTemplate = toml::from_str(&config_str)
         .expect(&format!("Failed to parse TOML from file: {}", config_file));
 
     // Create a zero-filled matrix as a flat vector

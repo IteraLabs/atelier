@@ -35,3 +35,11 @@ path = "case_a/case_a_data.rs"
 name = "case_a_training"
 path = "case_a/case_a_training.rs"
 
+[[example]]
+name = "case_b_data"
+path = "case_b/case_b_data.rs"
+
+[[example]]
+name = "case_b_training"
+path = "case_b/case_b_training.rs"
+

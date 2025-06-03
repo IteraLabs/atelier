@@ -6,16 +6,25 @@ formulations.
 
 ## Models
 
-- `models.rs`: hosts the `LogisticClassifier`, a convex linear model to perform binary classification. 
+- `models.rs`: hosts the `LogisticClassifier`, a convex linear model to perform binary classification.
+
+- Attributes: `id`, `weights` 
+- Methods: `compute_gradient`, `forward`
 
 ## Loss Functions
 
 - `functions`: hosts the `CrossEntropy`, the loss function to track learning for the binary 
-`LogisticClassifier`. In the same script the `Regularized` trait is defined, which will require to have a regularization operation named `RegType`, which has the *L1*, *L1*, and, *Elasticnet* variants, all compatible with loss functions and parameters used in convex linear methods. 
+`LogisticClassifier`. In the same script the `Regularized` trait is defined, which will require to have a regularization operation named `RegType`, which has the *L1*, *L1*, and, *Elasticnet* variants, all compatible with loss functions and parameters used in convex linear methods.
+
+- Attributes: 'weights', `y`, `y_hat`, `epsilon`
+- Methods: 'regularize'
 
 ## Optimizers
 
 - `optimizers.rs`: Includes the `GradientDescent`, the fundamental learning algorithm, which complies with the `Optimizer` trait also defined in this script.  
+
+- Attributes: 'id', 'learning_rate'
+- Methods: 'step', 'reset'
 
 Hierarchical Concepts: 
 
@@ -30,13 +39,19 @@ individually.
 
 ## Metrics (WIP)
 
-- **Classification**: Those metrics  related to classification problems ...
+- **Classification**: Accuracy, F1, Recall, Precission, Confussion Matrix, AuC, Roc.
 
 ## Experiments (WIP)
 
 - **Data-Modeling-Metrics** Triad with the complete cluster of modeling elements 
 in order to conduct a proper scientific experiment (which by itself will require the
 scientific method of Hypothesis-experiment-results-conclusion).
+
+Separation of concerns between Data, Model, Loss, Optimizer. All are independente components thata are orchestrated by a trainer in the following logic: 
+
+Dataset contains both features and targets, sharing the same index. 
+
+Model: Linear model architectures only, contains its weights
 
 ## Processes (WIP)
 

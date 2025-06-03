@@ -1,0 +1,37 @@
+[package]
+name = "atelier-svm"
+description = "Solana Virtual Machine Interface"
+version = "0.0.1"
+publish = false
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+solana-program = { version = "2.2.1" }
+solana-client = { version = "2.2.7" }
+solana-sdk = { version = "2.2.2" }
+spl-math = { version = "0.3.0" }
+
+# ------------------------------------------------------------------------- Examples -- #
+# ------------------------------------------------------------------------- -------- -- #
+
+[[example]]
+name = "basic_orders"
+path = "examples/orders.rs"
+
+# ---------------------------------------------------------------------------- Tests -- #
+# ---------------------------------------------------------------------------- ----- -- #
+
+[[test]]
+name = "model_methods"
+path = "tests/model_methods.rs"
+

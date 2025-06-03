@@ -16,7 +16,7 @@ repository.workspace = true
 
 # Atelier workbench
 atelier-core = { workspace = true }
-atelier-dcm = { workspace = true }
+atelier-dcml = { workspace = true }
 atelier-generators = { workspace = true }
 atelier-results = { workspace = true }
 atelier-synth = { workspace = true }

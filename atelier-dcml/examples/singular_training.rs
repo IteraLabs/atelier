@@ -1,8 +1,5 @@
-
 use std::{env, path::Path, error::Error};
-
 use atelier_core::{templates, data};
-use atelier_agents::singular;
 
 fn main () -> Result<(), Box<dyn Error>> {
 
@@ -27,7 +24,7 @@ fn main () -> Result<(), Box<dyn Error>> {
 
     let _exp_id = &config.experiments[0].id;
 
-    // --- Load input data
+    // --- Load Computed Features
     let data_file = workspace_root
         .join("atelier-dcm")
         .join("datasets")

@@ -1,6 +1,6 @@
 [[experiments]]
 id = "case_a"
-n_progressions = 4
+n_progressions = 100
 
 [[exchanges]]
 id = "exc_00"

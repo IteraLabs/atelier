@@ -8,7 +8,9 @@
 //!
 //! [website]: https://www.iteralabs.ai/atelier/docs
 
-use atelier_core::{orderbooks::stats::Stats, templates};
+use atelier_dcml::math::Stats;
+use atelier_core::templates;
+
 use clap::Parser;
 
 use atelier_synth::synthbooks;

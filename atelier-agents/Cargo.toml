@@ -1,0 +1,40 @@
+[package]
+name = "atelier-agents"
+description = "Agentic Functionality"
+version = "0.0.1"
+publish = false
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+
+# Atelier sub-modules 
+atelier-core = { path = "../atelier-core", version = "0.0.1" }
+
+# Data IO & Processing
+serde = { workspace = true }
+toml = { workspace = true } 
+
+# ------------------------------------------------------------------------- Examples -- #
+# ------------------------------------------------------------------------- -------- -- #
+
+[[example]]
+name = "agent_formation"
+path = "examples/agent_formation.rs"
+
+# ---------------------------------------------------------------------------- Tests -- #
+# ---------------------------------------------------------------------------- ----- -- #
+
+[[test]]
+name = "agent_methods"
+path = "tests/agent_methods.rs"
+

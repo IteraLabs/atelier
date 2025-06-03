@@ -18,34 +18,26 @@ An engine for High Frequency, Synthetic and Historical, Market Microstructure Mo
 At a high level it provides the following major components: 
 
 - Limit orderbook completeness with order-level specificity (Not only price and volume but actual order queues).
-- Order-Driven modeling with Market Events definitions, e.g. New Market Order, Cancel Limit Order, etc.
 - Stochastic process generators for rich/complex simulations (Brownian, Hawkes, etc).
-
 
 # Use
 
-
 ## Docker (recommended)
 
-The image builts the binary, 
-
-1. build the image
-2. run container
-3. generate data
+```shell
+docker build \
+    --platform linux/amd64 \
+    --target runner \
+    --file .Dockerfile \
+    --tag atelier-torch \
+    --no-cache . 
+```
 
 # Roadmap
 
 1. Async Backtesting Engine with computational and financial metrics.
 2. Order-Driven streaming tools for a Pub/Sub pattern.
 3. Async Matching Engine with FIFO logic.
-
-# Changelog
-
-The atelier repository contains multiple crates, and each one has its own CHANGELOG.
-
-- atelier: [view CHANGELOG](https://github.com/iteralabs/atelier/blob/main/atelier/CHANGELOG.md)
-- atelier-data: [view CHANGELOG](https://github.com/iteralabs/atelier/blob/main/atelier-data/CHANGELOG.md)
-- atelier-generators: [view CHANGELOG](https://github.com/iteralabs/atelier/blob/main/atelier-generators/CHANGELOG.md)
 
 # License
 

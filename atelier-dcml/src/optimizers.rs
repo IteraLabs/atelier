@@ -6,6 +6,7 @@ pub trait Optimizer {
 }
 
 pub struct GradientDescent {
+    id: String,
     learning_rate: f64,
 }
 
@@ -29,6 +30,7 @@ impl Optimizer for GradientDescent {
 }
 
 pub struct OptimizerBuilder {
+    id: Option<String>,
     learning_rate: Option<f64>,
 }
 
@@ -36,8 +38,14 @@ impl OptimizerBuilder {
 
     pub fn new() -> Self {
         OptimizerBuilder {
+            id: None,
             learning_rate: None
         }
+    }
+
+    pub fn id(mut self, id: String) -> Self {
+        self.id = Some(id);
+        self
     }
 
     pub fn learning_rate(mut self, learning_rate: f64) -> Self {
@@ -46,8 +54,9 @@ impl OptimizerBuilder {
     }
 
     pub fn build(self) -> Result<GradientDescent, &'static str> {
+        let id = self.id.ok_or("Missing id")?;
         let learning_rate = self.learning_rate.ok_or("Missing Learning Rate")?;
-        Ok(GradientDescent { learning_rate })
+        Ok(GradientDescent { id, learning_rate })
     }
 }
 
