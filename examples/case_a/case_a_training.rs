@@ -1,6 +1,6 @@
 /// Single Agent Training
 
-use atelier_dcml::{models, metrics};
+use atelier_dcml::{models, metrics, functions, optimizers, processes};
 use std::{path::Path, error::Error};
 
 // use tch::{Tensor, Kind, IndexOp};
@@ -40,36 +40,66 @@ pub fn main() -> Result<(), Box<dyn Error + 'static>> {
     let _n_progres = template.experiments[0].n_progressions as usize;
     let _template_model = template.models[0].clone();
    
-    // --- Features file (csv)
+
+    // --- Data Layer --- // 
+
+    // File specification and read
     let data_file = workspace_root
         .join("examples")
         .join("case_a")
         .to_str()
-        .unwrap().to_owned() + "/features_case_a.csv";
+        .unwrap().to_owned() + "/data_case_a.csv";
   
-    // --- Read Features File
-    let data = data::load_from_csv(&data_file);
+    let header = true;
+    let column_types = None;
+    let target_column = Some(7);
+
+    let a_data = data::Dataset::from_csv(
+        &data_file, header, column_types, target_column
+    );
+
+    let (features, target) = a_data.unwrap().from_csv_to_tensor();
+    let n_features = features.size()[1];
+    let n_target = target.size()[1];
     
-    // --- Initialize Model
-    let _lc_model = models::LogisticClassifier::builder()
-        .id("model".to_string())
-        .input_features(5)
-        .glorot_uniform()
-        .expect("Failed to initialize with Glorot Uniform")
-        .build()
-        .expect("Failed to build the model");
-   
+    // --- Model Layer --- //
+    //let a_model = models::LinearModel::builder()
+    //   .id("model".to_string())
+    //    .build()
+    //    .unwrap();
+
     // --- Initialize Metrics
+    let _a_metrics = metrics::Metrics::classification_suite();
 
-    let _lc_metrics = metrics::Metrics::classification_suite();
+    // --- Initialize Loss Function
+    let _a_loss = functions::Classification::CrossEntropy;
 
-    // --- Trainer Environment --- //
-    // model
-    // loss
-    // optimizer
-    // data
-    // metrics
-    // topology (only for distributed)
+    // --- Initialize Optimizer
+    let _a_optimizer = optimizers::Gradient::GradientDescent;
+
+    // --- Trainer Environment (Singular) --- //
+    // data: Features, Target
+    // model: Weight definition, compute gradient
+    // metrics: Model performance
+    // loss: Formula definition, regularization
+    // optimizer: step 
+
+    // process: Train
+
+    // let epochs = 100;
+
+    // let training_process = processes::Singular::builder()
+    //   .data(a_data)
+    //    .model(a_model)
+    //    .loss(a_loss)
+    //    .optimizer(a_optimizer)
+    //    .metrics(a_metrics)
+    //    .build();
+
+    // training_process.unwrap().train(epochs);
+
+    // process: Evaluate
+    //
 
     Ok(())
 }

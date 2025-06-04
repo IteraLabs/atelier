@@ -20,7 +20,7 @@ pub mod targets;
 pub mod functions;
 
 /// Distributed training algorithms
-pub mod trainers;
+pub mod processes;
 
 /// Distributed Models
 pub mod models;

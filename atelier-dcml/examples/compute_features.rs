@@ -1,3 +1,5 @@
+/// Compute Features 
+
 use std::{env, path::Path, error::Error};
 use atelier_dcml::features;
 use atelier_core::data;

@@ -1,3 +1,5 @@
+/// Conduct a Singular Training Process
+
 use std::{env, path::Path, error::Error};
 use atelier_core::{templates, data};
 

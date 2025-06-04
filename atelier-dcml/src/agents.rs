@@ -84,7 +84,7 @@ impl DistributedAgent {
 
         let bce = functions::CrossEntropy::builder()
             .weights(&self.weights)
-            .y(&self.labels)
+            .y_true(&self.labels)
             .y_hat(&y_hat)
             .epsilon(1e-4)
             .build()

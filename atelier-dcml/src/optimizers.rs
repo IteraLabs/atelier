@@ -5,6 +5,10 @@ pub trait Optimizer {
     fn reset(&mut self);
 }
 
+pub enum Gradient {
+    GradientDescent,
+}
+
 pub struct GradientDescent {
     id: String,
     learning_rate: f64,

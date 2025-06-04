@@ -8,6 +8,10 @@ pub enum RegType {
     Elasticnet,
 }
 
+pub enum Classification {
+    CrossEntropy,
+}
+
 pub trait Regularized {
     fn regularize(&self, operation: &RegType, params: Vec<f64>) -> Tensor;
 }
@@ -15,7 +19,7 @@ pub trait Regularized {
 #[derive(Debug)]
 pub struct CrossEntropyBuilder<'a> {
     weights: Option<&'a Tensor>,
-    y: Option<&'a Tensor>,
+    y_true: Option<&'a Tensor>,
     y_hat: Option<&'a Tensor>,
     epsilon: Option<f64>,
 }
@@ -25,7 +29,7 @@ impl<'a> CrossEntropyBuilder<'a> {
     pub fn new() -> Self {
         CrossEntropyBuilder {
             weights: None,
-            y: None,
+            y_true: None,
             y_hat: None,
             epsilon: None,
         }
@@ -36,8 +40,8 @@ impl<'a> CrossEntropyBuilder<'a> {
         self
     }
 
-    pub fn y(mut self, y: &'a Tensor) -> Self {
-        self.y = Some(y);
+    pub fn y_true(mut self, y: &'a Tensor) -> Self {
+        self.y_true = Some(y);
         self
     }
 
@@ -54,21 +58,22 @@ impl<'a> CrossEntropyBuilder<'a> {
     pub fn build(self) -> Result<CrossEntropy, &'static str> {
 
         let weights = self.weights.ok_or("Missing Weights value")?;
-        let y = self.y.ok_or("Missing y value")?;
+        let y_true = self.y_true.ok_or("Missing y value")?;
         let y_hat = self.y_hat.ok_or("Missing y_hat value")?;
         let epsilon = self.epsilon.ok_or("Missing epsilon value")?;
 
         Ok(CrossEntropy {
             weights: weights.copy(),
-            y: y.copy(),
+            y_true: y_true.copy(),
             y_hat: y_hat.copy(),
             epsilon})
     }
 }
 
+#[derive(Debug)]
 pub struct CrossEntropy {
     pub weights: Tensor,
-    pub y: Tensor,
+    pub y_true: Tensor,
     pub y_hat: Tensor,
     pub epsilon: f64,
 }
@@ -78,6 +83,13 @@ impl CrossEntropy {
     pub fn builder<'a>() -> CrossEntropyBuilder<'a> {
         CrossEntropyBuilder::new()
     }
+
+    pub fn compute_loss(self) -> Tensor {
+        let bce = self.y_hat.cross_entropy_for_logits(&self.y_true);
+        bce
+    }
+
+
 }
 
 impl Regularized for CrossEntropy {
@@ -98,6 +110,7 @@ impl Regularized for CrossEntropy {
                 let r_elasticnet = r_c * (r_lambda * r_l1 + (1.0 - r_lambda) * r_l2);
                 Tensor::from(r_elasticnet)
             }
+
         };
 
         regularized

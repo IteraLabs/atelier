@@ -3,18 +3,24 @@
 use tch::{Tensor, Kind, Device};
 use std::f64;
 
+#[derive(Debug)]
+pub enum Forecaster{
+    Linear(LinearModel),
+}
+
 pub trait Model {
+    fn id(&mut self, id: String);
     fn forward(&self, features: &Tensor) -> Tensor;
     fn compute_gradient(&self, features: &Tensor, targets: &Tensor) -> Tensor;
 }
 
 #[derive(Debug)]
-pub struct LogisticClassifier {
-    id: String,
-    weights: Tensor,
+pub struct LinearModel {
+    pub id: String,
+    pub weights: Tensor,
 }
 
-impl LogisticClassifier {
+impl LinearModel {
 
     pub fn builder() -> LinearModelBuilder {
         LinearModelBuilder::new()
@@ -22,7 +28,11 @@ impl LogisticClassifier {
 
 }
 
-impl Model for LogisticClassifier {
+impl Model for LinearModel {
+
+    fn id(&mut self, id: String) {
+        self.id = id;
+    }
 
     fn forward(&self, features: &Tensor) -> Tensor {
         let logits = features.matmul(&self.weights.unsqueeze(-1)).squeeze();
@@ -87,7 +97,7 @@ impl LinearModelBuilder {
         self
     }
 
-    fn glorot_uniform_init(fan_in: i64, fan_out: i64, device: Device) -> Tensor {
+    pub fn glorot_uniform_init(fan_in: i64, fan_out: i64, device: Device) -> Tensor {
 
         let limit = (6.0 / (fan_in + fan_out) as f64).sqrt();
         let weights = Tensor::rand(&[fan_in], (Kind::Float, device));
@@ -110,7 +120,7 @@ impl LinearModelBuilder {
 
     }
 
-    fn glorot_normal_init(fan_in: i64, fan_out: i64, device: Device) -> Tensor {
+    pub fn glorot_normal_init(fan_in: i64, fan_out: i64, device: Device) -> Tensor {
 
         let std = (2.0 / (fan_in + fan_out) as f64).sqrt();
         let weights = Tensor::randn(&[fan_in], (Kind::Float, device));
@@ -118,7 +128,7 @@ impl LinearModelBuilder {
 
     }
 
-    pub fn glorot_normal(mut self) -> Result<Self, &'static str> {
+   pub fn glorot_normal(mut self) -> Result<Self, &'static str> {
         let fan_in = self
             .fan_in.ok_or("fan_in must be specified for Glorot initialization")?;
         let fan_out = self.
@@ -129,11 +139,11 @@ impl LinearModelBuilder {
         Ok(self)
     }
 
-    pub fn build(self) -> Result<LogisticClassifier, &'static str> {
+    pub fn build(self) -> Result<LinearModel, &'static str> {
         let id = self.id.ok_or("Missing id")?;
         let weights = self.weights.ok_or("Missing weights")?;
 
-        Ok(LogisticClassifier { id, weights })
+        Ok(LinearModel { id, weights })
     }
 }
 

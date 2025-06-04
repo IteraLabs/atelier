@@ -37,6 +37,10 @@ name = "compute_features"
 path = "examples/compute_features.rs"
 
 [[example]]
+name = "loss_functions"
+path = "examples/loss_functions.rs"
+
+[[example]]
 name = "pytorch_training"
 path = "examples/pytorch_training.rs"
 
