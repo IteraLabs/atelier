@@ -1,11 +1,9 @@
-/// Compute Features 
-
-use std::{env, path::Path, error::Error};
-use atelier_dcml::features;
 use atelier_core::data;
+use atelier_dcml::features;
+/// Compute Features
+use std::{env, error::Error, path::Path};
 
-fn main () -> Result<(), Box<dyn Error>> {
-
+fn main() -> Result<(), Box<dyn Error>> {
     // --- Set up working directory
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let workspace_root = Path::new(manifest_dir)
@@ -19,7 +17,7 @@ fn main () -> Result<(), Box<dyn Error>> {
         .join("exp_00_ai_00_binance_ob.json");
 
     let ob_data = data::load_from_json(&data_file.to_str().unwrap().to_owned())?;
-   
+
     let i_spread = features::compute_spread(&ob_data[0]);
     let i_midprice = features::compute_midprice(&ob_data[0]);
     let i_w_midprice = features::compute_w_midprice(&ob_data[0]);
@@ -35,5 +33,4 @@ fn main () -> Result<(), Box<dyn Error>> {
     println!("i_tav: {:?}", i_tav);
 
     Ok(())
-
-}    
+}

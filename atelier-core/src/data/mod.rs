@@ -1,8 +1,20 @@
+/// Data
+
 use crate::orderbooks::Orderbook;
-use std::{error::Error, fs, io::Write, io::BufReader};
-use csv::{Writer, Reader, ReaderBuilder};
-use tch::{Tensor, Kind};
+use csv::{Reader, ReaderBuilder, Writer};
+use std::{
+    error::Error,
+    fs,
+    io::{BufReader, Write},
+};
+use tch::{Kind, Tensor};
 use toml;
+
+
+pub enum Transformation {
+    Standarize,
+    Scale,
+}
 
 #[derive(Debug, Clone)]
 pub struct Dataset {
@@ -20,13 +32,12 @@ pub struct DatasetBuilder {
 }
 
 impl DatasetBuilder {
-
     pub fn new() -> Self {
         DatasetBuilder {
             index: None,
             features: None,
             target: None,
-            auto_index: true
+            auto_index: true,
         }
     }
 
@@ -51,30 +62,33 @@ impl DatasetBuilder {
     }
 
     pub fn build(self) -> Result<Dataset, String> {
-    
         let features = self.features.ok_or("Missing features")?;
         let target = self.target.ok_or("Missing target")?;
 
         // Validate features and target have the same length
-        
+
         if features.len() != target.len() {
             return Err(format!(
                 "features and target length mismatch: {:?} vs {:?}",
                 features.len(),
-                target.len()));
+                target.len()
+            ));
         }
-            
+
         // Validate all feature vectors have the same length
 
         if !features.is_empty() {
-            // First feature is the expectation criteria 
+            // First feature is the expectation criteria
             let expected_feature_len = features[0].len();
 
             for (i, feature_vec) in features.iter().enumerate() {
                 if feature_vec.len() != expected_feature_len {
                     return Err(format!(
                         "feature vector at index {:?} has length {:?}, expected {:?}",
-                    i, feature_vec.len(), expected_feature_len));
+                        i,
+                        feature_vec.len(),
+                        expected_feature_len
+                    ));
                 }
             }
         }
@@ -85,7 +99,9 @@ impl DatasetBuilder {
                 if idx.len() != features.len() {
                     return Err(format!(
                         "Index length {:?} doesn't match data length {:?}",
-                        idx.len(), features.len()));
+                        idx.len(),
+                        features.len()
+                    ));
                 }
                 idx
             }
@@ -97,7 +113,7 @@ impl DatasetBuilder {
                 }
             }
         };
-       
+
         Ok(Dataset {
             index,
             features,
@@ -112,13 +128,92 @@ impl Dataset {
         DatasetBuilder::new()
     }
 
+    pub fn transform(&mut self, transformation: Transformation) -> Vec<(f64, f64)> {
+
+        let n_features = self.features[0].len();
+        let epsilon = 1e-8;
+
+        match transformation {
+        
+            Transformation::Standarize => {
+    
+            // Step 1: Transpose the data to get feature columns
+            let transposed: Vec<Vec<f64>> = (0..n_features)
+                .map(|i| self.features.iter().map(|row| row[i]).collect())
+                .collect();
+
+            // Step 2: Compute mean and std dev for each feature
+            let stats: Vec<(f64, f64)> = transposed.iter()
+                .map(|feature_col| {
+                    
+                    let n = feature_col.len() as f64;
+                    let mean: f64 = feature_col.iter().sum::<f64>() / n;
+    
+                    let variance = feature_col.iter()
+                        .map(|x| (x - mean).powi(2))
+                        .sum::<f64>() / n;
+                        
+                    let std_dev = variance.sqrt().max(epsilon);
+                        
+                        (mean, std_dev)
+                    })
+                .collect();
+
+            // Step 3: Apply normalization
+            self.features = self.features.iter()
+                .map(|row| {
+                    row.iter()
+                        .enumerate()
+                        .map(|(i, &x)| {
+                            let (mean, std_dev) = &stats[i];
+                            (x - mean) / std_dev
+                        })
+                        .collect()
+                })
+                .collect();
+            stats
+            }
+
+            Transformation::Scale => {
+
+                // Step 1: Transpose the data to get feature columns
+                let transposed: Vec<Vec<f64>> = (0..n_features)
+                    .map(|i| self.features.iter().map(|row| row[i]).collect())
+                    .collect();
+
+                // Step 2: Compute the max for each feature
+                let maxs: Vec<(f64, f64)> = transposed.iter()
+                    .map(|feature_col| {
+                        
+                        let max: f64 = feature_col.iter().cloned().fold(
+                        f64::NEG_INFINITY, f64::max).max(epsilon);
+                        (0.0, max)
+                        })
+                    .collect();
+
+                // Step 3: Divide every element by the max value for all features
+                self.features = self.features.iter()
+                    .map(|row| {
+                        row.iter()
+                            .enumerate()
+                            .map(|(i, &x)| {
+                                let (_mean, max) = maxs[i];
+                                x / max
+                            })
+                            .collect()
+                    })
+                    .collect();
+            maxs
+            }
+        }
+    }
+
     pub fn from_csv(
         file_route: &str,
-        header:bool,
-        column_types:Option<Vec<u32>>,
-        target_column: Option<u32>    
+        header: bool,
+        column_types: Option<Vec<u32>>,
+        target_column: Option<u32>,
     ) -> Result<Self, Box<dyn Error>> {
-       
         let file = fs::File::open(file_route)?;
         let mut rdr = ReaderBuilder::new().has_headers(header).from_reader(file);
 
@@ -136,7 +231,7 @@ impl Dataset {
             Some(ref v) if v.len() == 1 => vec![v[0]; col_count],
             Some(ref v) if v.len() == col_count => v.clone(),
             _ => {
-                // Default: all columns are features except the 
+                // Default: all columns are features except the
                 // first (index) and last (target)
                 let mut types = vec![1; col_count];
                 types[0] = 0; // index
@@ -152,10 +247,11 @@ impl Dataset {
         let mut features = Vec::new();
         let mut target = Vec::new();
 
-        let mut rdr =ReaderBuilder::new().has_headers(header).from_path(file_route)?;
+        let mut rdr = ReaderBuilder::new()
+            .has_headers(header)
+            .from_path(file_route)?;
 
         for result in rdr.records() {
-            
             let record = result?;
             let mut row_features = Vec::new();
             let mut row_index: Option<u32> = None;
@@ -198,13 +294,13 @@ impl Dataset {
             features,
             target,
         })
-
     }
 
-    pub fn from_csv_to_tensor(self) -> (Tensor, Tensor) {
-    
+    pub fn from_vec_to_tensor(self) -> (Tensor, Tensor) {
+
         let d_features = self.features;
         let d_targets = self.target;
+        
         let num_samples = d_features.len() as i64;
         let num_features = d_features[0].len() as i64;
 
@@ -216,20 +312,18 @@ impl Dataset {
 
         // Convert targets to 2D tensor
         let targets_tensor = Tensor::from_slice(&d_targets)
-            .reshape(&[num_samples, 1])
+            .reshape(&[num_samples])
             .to_kind(Kind::Float);
 
         (features_tensor, targets_tensor)
-
     }
 
-    pub fn from_vectors(self,
+    pub fn from_vectors(
+        self,
         features: Vec<Vec<f64>>,
-        target: Vec<f64>
+        target: Vec<f64>,
     ) -> Result<Self, String> {
-        
         Self::new().features(features).target(target).build()
-
     }
 
     pub fn get_pairs(&self) -> Vec<(Vec<f64>, f64)> {
@@ -248,12 +342,11 @@ impl Dataset {
             .collect()
     }
 
-
     pub fn len(&self) -> usize {
         self.features.len()
     }
 
-     pub fn is_empty(&self) -> bool {
+    pub fn is_empty(&self) -> bool {
         self.features.is_empty()
     }
 
@@ -288,10 +381,6 @@ impl Dataset {
             .and_then(|pos| self.get_sample(pos))
     }
 
-    pub fn to_tensor_format(&self) -> (Vec<Vec<f64>>, Vec<f64>) {
-        (self.features.clone(), self.target.clone())
-    }
-
     pub fn shift_features(&self) -> Dataset {
         if self.features.len() < 2 {
             return Dataset {
@@ -303,10 +392,10 @@ impl Dataset {
 
         // Shift features forward: drop first feature vector
         let shifted_features = self.features[1..].to_vec();
-        
+
         // Keep targets but drop the last one to align with shifted features
         let aligned_targets = self.target[..self.target.len() - 1].to_vec();
-        
+
         // Create new index for the aligned data
         let shifted_index = (0..shifted_features.len() as u32).collect();
 
@@ -316,7 +405,30 @@ impl Dataset {
             target: aligned_targets,
         }
     }
+}
 
+/// Data transformation
+pub fn transform(data: &Tensor, operation: Transformation) -> Tensor {
+    // Compensation error for numerical stability
+    let epsilon = 1e-8;
+
+    // Match the selected operation
+    let transformed = match operation {
+        // new_x = (x - mean(x)) / std(x)
+        Transformation::Standarize => {
+            let xs_1 = data - data.mean(Kind::Float);
+            let xs_2 = data.std(true) + epsilon;
+
+            (xs_1 / xs_2).to_kind(Kind::Float)
+        }
+
+        // new_x = x / max(x)
+        Transformation::Scale => {
+            let max_data = data.max();
+            data / max_data
+        }
+    };
+    transformed
 }
 
 /// Truncate decimals on a f64
@@ -349,7 +461,6 @@ pub fn write_to_json(ob_data: &Vec<Orderbook>, file_route: &str) {
 
 /// Load from CSV
 pub fn load_from_csv(file_route: &str) -> Result<Vec<Vec<f64>>, Box<dyn Error>> {
-    
     let mut rdr = Reader::from_path(file_route)?;
     let mut data = Vec::new();
 
@@ -364,52 +475,45 @@ pub fn load_from_csv(file_route: &str) -> Result<Vec<Vec<f64>>, Box<dyn Error>> 
         data.push(float_row?);
     }
     Ok(data)
-
 }
 
 /// Write Dataset to CSV file
-pub fn write_to_csv(
-    data: &Dataset,
-    file_route: &str,
-    ) {
-
+pub fn write_to_csv(data: &Dataset, file_route: &str) {
     let mut wtr = Writer::from_path(file_route).unwrap();
 
     // Write the header
     // Header should be based on the number of features, not the index
     if !data.features.is_empty() {
         let mut header = vec!["index".to_string()];
-        
+
         // Add feature column names based on the number of features per sample
         for i in 0..data.features[0].len() {
             header.push(format!("feature_{}", i));
         }
-        
+
         // Add target column
         header.push("target".to_string());
-        
+
         wtr.write_record(&header).unwrap();
     }
 
     // Write the data rows
     for i in 0..data.features.len() {
         let mut csv_row = Vec::new();
-        
+
         // Add index
         csv_row.push(data.index[i].to_string());
-        
+
         // Add all features for this sample
         for feature_value in &data.features[i] {
             csv_row.push(feature_value.to_string());
         }
-        
+
         // Add target value
         csv_row.push(data.target[i].to_string());
-        
-        wtr.write_record(&csv_row).unwrap();
 
+        wtr.write_record(&csv_row).unwrap();
     }
-    
+
     wtr.flush().unwrap();
 }
-

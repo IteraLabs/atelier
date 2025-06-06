@@ -1,10 +1,8 @@
+use atelier_core::{data, templates};
 /// Conduct a Singular Training Process
+use std::{env, error::Error, path::Path};
 
-use std::{env, path::Path, error::Error};
-use atelier_core::{templates, data};
-
-fn main () -> Result<(), Box<dyn Error>> {
-
+fn main() -> Result<(), Box<dyn Error>> {
     // --- Set up working directory
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let workspace_root = Path::new(manifest_dir)
@@ -33,7 +31,6 @@ fn main () -> Result<(), Box<dyn Error>> {
         .join("exp_00_ai_00_binance_ob.json");
 
     let _v_orderbook = data::load_from_json(&data_file.to_str().unwrap().to_owned())?;
-    
-    Ok(())
 
+    Ok(())
 }

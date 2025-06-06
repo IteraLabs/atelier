@@ -1,28 +1,26 @@
-use tch::{Kind, Tensor};
 use std::cmp::Ordering;
+use tch::{Kind, Tensor};
 
 pub enum Transformation {
     Standarize,
-    Scale
+    Scale,
 }
 
 /// Data transformation
 pub fn transform(data: &Tensor, operation: Transformation) -> Tensor {
-
     // Compensation error for numerical stability
     let epsilon = 1e-8;
 
     // Match the selected operation
     let transformed = match operation {
-        
         // new_x = (x - mean(x)) / std(x)
         Transformation::Standarize => {
             let xs_1 = data - data.mean(Kind::Float);
             let xs_2 = data.std(true) + epsilon;
-            
+
             (xs_1 / xs_2).to_kind(Kind::Float)
         }
-        
+
         // new_x = x / max(x)
         Transformation::Scale => {
             let max_data = data.max();
@@ -105,4 +103,3 @@ impl Stats {
         })
     }
 }
-

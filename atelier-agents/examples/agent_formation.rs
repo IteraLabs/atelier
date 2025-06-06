@@ -1,6 +1,3 @@
 // Placeholder
 
-fn main() {
-
-}
-
+fn main() {}

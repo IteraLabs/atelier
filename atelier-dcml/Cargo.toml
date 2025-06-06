@@ -21,16 +21,15 @@ atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
 # Probabilistic features
 rand = { workspace = true }
 rand_distr = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
+
+# Data
 toml = { workspace = true } 
+csv = { workspace = true }
 
 # Computing 
+serde = { workspace = true }
+serde_json = { workspace = true }
 tch = { workspace = true }
-
-[[example]]
-name = "load_configs"
-path = "examples/load_configs.rs"
 
 [[example]]
 name = "compute_features"
@@ -41,16 +40,8 @@ name = "loss_functions"
 path = "examples/loss_functions.rs"
 
 [[example]]
-name = "pytorch_training"
-path = "examples/pytorch_training.rs"
-
-[[example]]
-name = "distributed_training"
-path = "examples/distributed_training.rs"
-
-[[example]]
-name = "single_training"
-path = "examples/single_training.rs"
+name = "singular_training"
+path = "examples/singular_training.rs"
 
 [lints]
 workspace = true

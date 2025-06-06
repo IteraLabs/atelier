@@ -2,7 +2,7 @@ use atelier_core::data::Dataset;
 
 pub trait Forecaster {
     // Online forecast: f(X^n): R^n -> R
-    fn forecast(features: Vec<f64>) -> f64; 
+    fn forecast(features: Vec<f64>) -> f64;
 }
 
 #[derive(Debug)]
@@ -34,7 +34,7 @@ impl AgentBuilder {
         AgentBuilder {
             agent_id: None,
             action: None,
-            data: None
+            data: None,
         }
     }
 
@@ -54,7 +54,6 @@ impl AgentBuilder {
     }
 
     pub fn build(self) -> Result<Agent, &'static str> {
-        
         let agent_id = self.agent_id.ok_or("Missing agent_id value")?;
         let action = self.action.ok_or("Missing action value")?;
         let data = self.data.ok_or("Missing data value")?;
@@ -66,4 +65,3 @@ impl AgentBuilder {
         })
     }
 }
-

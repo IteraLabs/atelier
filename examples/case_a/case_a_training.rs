@@ -1,24 +1,15 @@
 /// Single Agent Training
-
-use atelier_dcml::{models, metrics, functions, optimizers, processes};
-use std::{path::Path, error::Error};
-
-// use tch::{Tensor, Kind, IndexOp};
-// use atelier_dcml::{
-//    agents::DistributedAgent,
-//    training,
-//    features,
-//    targets,
-// };
-//
-
-use atelier_core::{
-    data,
-    templates,
+use atelier_dcml::{
+    functions, metrics, models,
+    optimizers, processes
 };
 
-pub fn main() -> Result<(), Box<dyn Error + 'static>> {
+use std::{error::Error, path::Path};
+use tch::Device;
 
+use atelier_core::{data::{Dataset, Transformation}, templates};
+
+pub fn main() -> Result<(), Box<dyn Error + 'static>> {
     // --- Setup working directory
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let workspace_root = Path::new(manifest_dir)
@@ -39,68 +30,92 @@ pub fn main() -> Result<(), Box<dyn Error + 'static>> {
     let _exp_id = &template.experiments[0].id;
     let _n_progres = template.experiments[0].n_progressions as usize;
     let _template_model = template.models[0].clone();
-   
 
-    // --- Data Layer --- // 
+    // --- Data Layer --- //
 
     // File specification and read
     let data_file = workspace_root
         .join("examples")
         .join("case_a")
         .to_str()
-        .unwrap().to_owned() + "/data_case_a.csv";
-  
+        .unwrap()
+        .to_owned()
+        + "/data_case_a.csv";
+
     let header = true;
     let column_types = None;
     let target_column = Some(7);
 
-    let a_data = data::Dataset::from_csv(
-        &data_file, header, column_types, target_column
-    );
+    let mut a_dataset = Dataset::from_csv(
+        &data_file,
+        header,
+        column_types,
+        target_column)
+        .unwrap();
 
-    let (features, target) = a_data.unwrap().from_csv_to_tensor();
-    let n_features = features.size()[1];
-    let n_target = target.size()[1];
+    a_dataset.transform(Transformation::Scale);
+
+    println!("dataset.features: {:?}", a_dataset.features[0]);
     
     // --- Model Layer --- //
-    //let a_model = models::LinearModel::builder()
-    //   .id("model".to_string())
-    //    .build()
-    //    .unwrap();
+    let n_inputs = 6;
 
-    // --- Initialize Metrics
-    let _a_metrics = metrics::Metrics::classification_suite();
+    let a_model = models::LinearModel::new(n_inputs)
+        .id("model_00".to_string())
+        .device(Device::Cpu)
+        .glorot_uniform_init();
 
-    // --- Initialize Loss Function
-    let _a_loss = functions::Classification::CrossEntropy;
+    println!("a_model: {:?}", a_model);
 
-    // --- Initialize Optimizer
-    let _a_optimizer = optimizers::Gradient::GradientDescent;
+    // --- Optimizer Layer --- //
+
+    let a_optimizer = optimizers::GradientDescent::new()
+        .id("opt_00".to_string())
+        .learning_rate(0.2)
+        .build()
+        .unwrap();
+
+    // println!("a_optimizer: {:?}", a_optimizer);
+
+    // --- Loss Function Layer --- //
+    
+    let a_loss = functions::CrossEntropy::new()
+        .id(&"loss_00".to_string())
+        .build()
+        .unwrap();
+
+    // println!("a_loss: {:?}", a_loss);
+
+    // --- Metrics Layer --- //
+    
+    let a_metrics = metrics::Metrics::basic_classification();
+
+    // println!("a_metrics: {:?}", a_metrics.list_metrics());
 
     // --- Trainer Environment (Singular) --- //
-    // data: Features, Target
-    // model: Weight definition, compute gradient
-    // metrics: Model performance
-    // loss: Formula definition, regularization
-    // optimizer: step 
+    
+    let mut singular = processes::Singular::new()
+        .data(a_dataset)
+        .model(a_model)
+        .loss(a_loss)
+        .optimizer(a_optimizer)
+        .metrics(a_metrics)
+        .build()
+        .unwrap();
 
-    // process: Train
+    let epochs = 1000;
 
-    // let epochs = 100;
+    let _ = singular.train(epochs);
 
-    // let training_process = processes::Singular::builder()
-    //   .data(a_data)
-    //    .model(a_model)
-    //    .loss(a_loss)
-    //    .optimizer(a_optimizer)
-    //    .metrics(a_metrics)
-    //    .build();
-
-    // training_process.unwrap().train(epochs);
-
-    // process: Evaluate
-    //
+    let model_file = workspace_root
+        .join("examples")
+        .join("case_a")
+        .to_str()
+        .unwrap()
+        .to_owned()
+        + "/singular_model.pt";
+    
+    singular.save_model(&model_file);
 
     Ok(())
 }
-

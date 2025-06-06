@@ -1,6 +1,5 @@
+use crate::{functions, functions::Regularized};
 use tch::{self, Device, Kind, Tensor};
-use crate::functions;
-use crate::functions::Regularized;
 
 // ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
@@ -73,26 +72,24 @@ impl DistributedAgent {
         // Elastic net regularization
         let grad_l1 = self.weights.abs().sum(Kind::Float) * self.lambda1;
 
-        let grad_l2 = self.weights.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
+        let grad_l2 =
+            self.weights.pow(&Tensor::from(2.0)).sum(Kind::Float) * self.lambda2;
 
         grad_loss + grad_l1 + grad_l2
     }
-    
-    pub fn compute_bce(&self) -> Tensor {
-    
-        let y_hat = self.forward(&self.features);
 
-        let bce = functions::CrossEntropy::builder()
-            .weights(&self.weights)
-            .y_true(&self.labels)
-            .y_hat(&y_hat)
-            .epsilon(1e-4)
+    pub fn compute_bce(&self) -> Tensor {
+
+        let bce = functions::CrossEntropy::new()
             .build()
             .expect("Failed new BCE creation");
 
-        let r_bce = bce.regularize(&functions::RegType::Elasticnet, vec![1.1, 0.4]) ;
+        let r_bce = bce.regularize(
+            &self.weights,
+            &functions::RegType::Elasticnet,
+            vec![1.1, 0.4],
+        );
         r_bce
-
     }
 
     pub fn compute_loss(&self) -> Tensor {

@@ -1,6 +1,5 @@
 /// Features Calculation
-
-use atelier_core::{orderbooks::Orderbook, data};
+use atelier_core::{data, orderbooks::Orderbook};
 use std::error::Error;
 
 #[derive(Debug, Clone, Copy)]
@@ -20,7 +19,6 @@ pub enum OrderbookFeatures {
 }
 
 impl OrderbookFeatures {
-    
     pub fn name(&self) -> &'static str {
         match self {
             OrderbookFeatures::Spread => "spread",
@@ -38,26 +36,13 @@ impl OrderbookFeatures {
         depth: usize,
         bps: f64,
     ) -> Result<f64, Box<(dyn Error + 'static)>> {
-
         match self {
-            OrderbookFeatures::Spread => {
-                Ok(compute_spread(ob))
-            },
-            OrderbookFeatures::Midprice => {
-                Ok(compute_midprice(ob))
-            },
-            OrderbookFeatures::WeightedMidprice => {
-                Ok(compute_w_midprice(ob))
-            },
-            OrderbookFeatures::VWAP => {
-                Ok(compute_vwap(ob, depth))
-            }
-            OrderbookFeatures::Imb => {
-                Ok(compute_imb(ob))
-            },
-            OrderbookFeatures::TAV => {
-                Ok(compute_tav(ob, bps))
-            },
+            OrderbookFeatures::Spread => Ok(compute_spread(ob)),
+            OrderbookFeatures::Midprice => Ok(compute_midprice(ob)),
+            OrderbookFeatures::WeightedMidprice => Ok(compute_w_midprice(ob)),
+            OrderbookFeatures::VWAP => Ok(compute_vwap(ob, depth)),
+            OrderbookFeatures::Imb => Ok(compute_imb(ob)),
+            OrderbookFeatures::TAV => Ok(compute_tav(ob, bps)),
         }
     }
 
@@ -76,7 +61,7 @@ impl OrderbookFeatures {
     pub fn all_features() -> Vec<OrderbookFeatures> {
         vec![
             OrderbookFeatures::Spread,
-            OrderbookFeatures::Midprice, 
+            OrderbookFeatures::Midprice,
             OrderbookFeatures::WeightedMidprice,
             OrderbookFeatures::VWAP,
             OrderbookFeatures::Imb,
@@ -87,7 +72,6 @@ impl OrderbookFeatures {
     pub fn list_features() -> Vec<&'static str> {
         Self::all_features().iter().map(|f| f.name()).collect()
     }
-
 }
 
 #[derive(Debug)]
@@ -96,24 +80,30 @@ pub struct FeatureSelector {
 }
 
 impl FeatureSelector {
-    
     pub fn new(features_names: &[&str]) -> Result<Self, String> {
-        
         let mut features = Vec::new();
         for name in features_names {
             match OrderbookFeatures::from_name(name) {
                 Some(feature) => features.push(feature),
-                None => return Err(
-                    format!("Unknown feature: {}, the ones available are: {:?}",
-                    name, OrderbookFeatures::list_features())),
+                None => {
+                    return Err(format!(
+                        "Unknown feature: {}, the ones available are: {:?}",
+                        name,
+                        OrderbookFeatures::list_features()
+                    ))
+                }
             }
         }
-        Ok(FeatureSelector { selected_features: features } )
+        Ok(FeatureSelector {
+            selected_features: features,
+        })
     }
 
     /// Select Features by Enum Variant
     pub fn from_features(features: Vec<OrderbookFeatures>) -> Self {
-        FeatureSelector { selected_features: features }
+        FeatureSelector {
+            selected_features: features,
+        }
     }
 
     /// Compute all values
@@ -125,10 +115,9 @@ impl FeatureSelector {
     }
 
     /// Get all features names
-    pub fn features_names(&self) -> Vec<& 'static str> {
+    pub fn features_names(&self) -> Vec<&'static str> {
         self.selected_features.iter().map(|f| f.name()).collect()
     }
-
 }
 
 pub fn compute_features(
@@ -136,9 +125,8 @@ pub fn compute_features(
     feature_names: &[&str],
     depth: usize,
     bps: f64,
-    output_format: FeaturesOutput, 
-    ) -> Result<Vec<Vec<f64>>, String> {
-
+    output_format: FeaturesOutput,
+) -> Result<Vec<Vec<f64>>, String> {
     let selector = FeatureSelector::new(feature_names)?;
     let mut feature_matrix = Vec::new();
 
@@ -148,12 +136,8 @@ pub fn compute_features(
     }
 
     match output_format {
-        FeaturesOutput::Values => { 
-            Ok(feature_matrix)
-        }
-        FeaturesOutput::HashMap => { 
-            Ok(feature_matrix)
-        }
+        FeaturesOutput::Values => Ok(feature_matrix),
+        FeaturesOutput::HashMap => Ok(feature_matrix),
     }
 }
 
@@ -173,9 +157,9 @@ pub fn compute_midprice(ob: &Orderbook) -> f64 {
 
 /// Weighted Midprice
 pub fn compute_w_midprice(ob: &Orderbook) -> f64 {
-    let i_w_midprice = ((ob.bids[0].price * ob.bids[0].volume) + 
-    (ob.asks[0].price * ob.asks[0].volume)) /
-    (ob.asks[0].volume + ob.bids[0].volume) as f64;
+    let i_w_midprice = ((ob.bids[0].price * ob.bids[0].volume)
+        + (ob.asks[0].price * ob.asks[0].volume))
+        / (ob.asks[0].volume + ob.bids[0].volume) as f64;
     data::truncate_to_decimal(i_w_midprice, 8)
 }
 
@@ -190,15 +174,13 @@ pub fn compute_imb(ob: &Orderbook) -> f64 {
 /// Takes the orderbook bids and asks, up to the specified level, and
 /// calculates the classic Volume-Weighted Average Price.
 pub fn compute_vwap(ob: &Orderbook, depth: usize) -> f64 {
-    
     let bid_levels = ob.bids.iter().take(depth);
     let ask_levels = ob.asks.iter().take(depth);
     let all_levels = bid_levels.chain(ask_levels);
 
-    let (sum_p_v, sum_v) =
-        all_levels.fold((0.0, 0.0), |(acc_p_v, acc_v), level| {
-            (acc_p_v + level.price * level.volume, acc_v + level.volume)
-        });
+    let (sum_p_v, sum_v) = all_levels.fold((0.0, 0.0), |(acc_p_v, acc_v), level| {
+        (acc_p_v + level.price * level.volume, acc_v + level.volume)
+    });
     if sum_v > 0.0 {
         let vwap = sum_p_v / sum_v;
         data::truncate_to_decimal(vwap, 8)
@@ -207,30 +189,31 @@ pub fn compute_vwap(ob: &Orderbook, depth: usize) -> f64 {
     }
 }
 
-/// Total Available Volume 
+/// Total Available Volume
 ///
 /// The total volume posted in the orderbook within X bps of the midprice
 ///
 pub fn compute_tav(ob: &Orderbook, bps: f64) -> f64 {
-
     let best_bid = &ob.bids[0].price;
     let best_ask = &ob.asks[0].price;
-    let upper_ask = best_ask * ( 1.0 + bps );
-    let lower_bid = best_bid * ( 1.0 - bps);
+    let upper_ask = best_ask * (1.0 + bps);
+    let lower_bid = best_bid * (1.0 - bps);
 
     // find the closest bid leve to lower bid
-    let bid_volume: f64 = ob.bids.iter()
-    .filter(|level| level.price >= lower_bid)
-    .map(|level| level.volume)
-    .sum();
+    let bid_volume: f64 = ob
+        .bids
+        .iter()
+        .filter(|level| level.price >= lower_bid)
+        .map(|level| level.volume)
+        .sum();
 
-    let ask_volume: f64 = ob.asks.iter()
-    .filter(|level| level.price <= upper_ask)
-    .map(|level| level.volume)
-    .sum();
+    let ask_volume: f64 = ob
+        .asks
+        .iter()
+        .filter(|level| level.price <= upper_ask)
+        .map(|level| level.volume)
+        .sum();
 
     let i_tav = bid_volume + ask_volume;
     data::truncate_to_decimal(i_tav, 8)
-
 }
-

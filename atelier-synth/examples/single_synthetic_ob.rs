@@ -5,7 +5,6 @@ use std::{env, fs::File, io::Write, path::Path};
 
 #[tokio::main]
 pub async fn main() {
-
     // --- Setup working directory
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let workspace_root = Path::new(manifest_dir)

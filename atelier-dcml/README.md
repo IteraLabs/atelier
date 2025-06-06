@@ -4,9 +4,15 @@ Includes necessary definitions and tooling to conduct variations of a predictive
 process for High Frequency Data, Convex Linear Models, in singular and distributed learning
 formulations.
 
+## Dataset
+
+- `atelier-core/data`: Hosts the `Dataset` struct 
+- 
+
+
 ## Models
 
-- `models.rs`: hosts the `LogisticClassifier`, a convex linear model to perform binary classification.
+- `atelier-dcml/models.rs`: hosts the `LogisticClassifier`, a convex linear model to perform binary classification.
 
 - Attributes: `id`, `weights` 
 - Methods: `compute_gradient`, `forward`

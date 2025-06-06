@@ -1,17 +1,20 @@
-
-use tch::{Tensor, Kind};
 use std::collections::HashMap;
-
+use tch::{Kind, Tensor};
 
 // Metric Trait for all metrics
-pub trait Metric {
+pub trait Metric: std::fmt::Debug {
     fn id(&self) -> &str;
     fn metric_type(&self) -> MetricType;
-    fn compute(&self, y: &Tensor, y_pred: &Tensor, threshold: Option<f64>) -> MetricValue;
     fn update(&mut self, value: MetricValue);
     fn latest(&self) -> Option<&MetricValue>;
     fn history(&self) -> &Vec<MetricValue>;
     fn reset(&mut self);
+    fn compute(
+        &self,
+        y_true: &Tensor,
+        y_hat: &Tensor,
+        threshold: Option<f64>,
+    ) -> MetricValue;
 }
 
 #[derive(Debug, Clone)]
@@ -29,7 +32,6 @@ pub enum MetricValue {
 }
 
 impl MetricValue {
-
     pub fn as_scalar(&self) -> Option<f64> {
         match self {
             MetricValue::Scalar(val) => Some(*val),
@@ -62,9 +64,8 @@ pub struct ConfusionMatrixComponents {
 }
 
 impl ConfusionMatrixComponents {
-
     pub fn from_tensors(y: &Tensor, y_pred: &Tensor, threshold: Option<f64>) -> Self {
-        
+
         // Apply threshold to get binary predictions
         let threshold: f64 = threshold.unwrap_or(0.5);
         let preds_binary: Tensor = y_pred.ge(threshold).to_kind(Kind::Float);
@@ -86,10 +87,12 @@ impl ConfusionMatrixComponents {
     }
 
     pub fn total(&self) -> f64 {
-        self.true_positive + self.false_positive + self.false_negative + self.true_negative
+        self.true_positive
+            + self.false_positive
+            + self.false_negative
+            + self.true_negative
     }
 }
-
 
 // Concrete metric implementations
 #[derive(Debug)]
@@ -109,14 +112,22 @@ impl Accuracy {
 
 impl Metric for Accuracy {
 
-    fn id(&self) -> &str { &self.id }
-    fn metric_type(&self) -> MetricType { MetricType::Numerical }
+    fn id(&self) -> &str {
+        &self.id
+    }
+
+    fn metric_type(&self) -> MetricType {
+        MetricType::Numerical
+    }
 
     fn compute(&self, y: &Tensor, y_pred: &Tensor, thr: Option<f64>) -> MetricValue {
+
         let threshold = thr.unwrap_or(0.5);
         let cm = ConfusionMatrixComponents::from_tensors(y, y_pred, Some(threshold));
         let accuracy = (cm.true_positive + cm.true_negative) / cm.total();
+        
         MetricValue::Scalar(accuracy)
+         
     }
 
     fn update(&mut self, value: MetricValue) {
@@ -134,8 +145,8 @@ impl Metric for Accuracy {
     fn reset(&mut self) {
         self.values.clear();
     }
+    
 }
-
 
 #[derive(Debug)]
 pub struct ConfusionMatrix {
@@ -161,16 +172,21 @@ impl Metric for ConfusionMatrix {
         MetricType::Matrix
     }
 
-    fn compute(&self, y: &Tensor, y_pred: &Tensor, threshold: Option<f64>) -> MetricValue {
+    fn compute(
+        &self,
+        y: &Tensor,
+        y_pred: &Tensor,
+        threshold: Option<f64>,
+    ) -> MetricValue {
         let threshold = threshold.unwrap_or(0.5);
         let cm = ConfusionMatrixComponents::from_tensors(y, y_pred, Some(threshold));
-        
+
         // Return as 2x2 matrix: [[TN, FP], [FN, TP]]
         let matrix = vec![
             vec![cm.true_negative, cm.false_positive],
             vec![cm.false_negative, cm.true_positive],
         ];
-        
+
         MetricValue::Matrix(matrix)
     }
 
@@ -189,27 +205,25 @@ impl Metric for ConfusionMatrix {
     fn reset(&mut self) {
         self.values.clear();
     }
+
 }
 
-
 #[derive(Debug)]
-pub struct ComprehensiveMetrics {
+pub struct ClassificationMetrics {
     id: String,
     values: Vec<MetricValue>,
 }
 
-impl ComprehensiveMetrics {
-
+impl ClassificationMetrics {
     pub fn new() -> Self {
-        ComprehensiveMetrics {
-            id: "comprehensive_metrics".to_string(),
+        ClassificationMetrics {
+            id: "classification_metrics".to_string(),
             values: Vec::new(),
         }
     }
-
 }
 
-impl Metric for ComprehensiveMetrics {
+impl Metric for ClassificationMetrics {
     fn id(&self) -> &str {
         &self.id
     }
@@ -222,27 +236,34 @@ impl Metric for ComprehensiveMetrics {
         &self,
         y_true: &Tensor,
         y_pred: &Tensor,
-        threshold: Option<f64>
+        threshold: Option<f64>,
     ) -> MetricValue {
-
         let cm = ConfusionMatrixComponents::from_tensors(y_true, y_pred, threshold);
-        
+
         let accuracy = (cm.true_positive + cm.true_negative) / cm.total();
         let precision = if cm.true_positive + cm.false_positive > 0.0 {
-            cm.true_positive / (cm.true_positive + cm.false_positive) } 
-            else { 0.0 };
+            cm.true_positive / (cm.true_positive + cm.false_positive)
+        } else {
+            0.0
+        };
         let recall = if cm.true_positive + cm.false_negative > 0.0 {
-            cm.true_positive / (cm.true_positive + cm.false_negative) } 
-            else { 0.0 };
+            cm.true_positive / (cm.true_positive + cm.false_negative)
+        } else {
+            0.0
+        };
         let specificity = if cm.true_negative + cm.false_positive > 0.0 {
-            cm.true_negative / (cm.true_negative + cm.false_positive) } 
-            else { 0.0 };
+            cm.true_negative / (cm.true_negative + cm.false_positive)
+        } else {
+            0.0
+        };
         let f1 = if precision + recall > 0.0 {
-            2.0 * (precision * recall) / (precision + recall) } 
-            else { 0.0 };
-        
+            2.0 * (precision * recall) / (precision + recall)
+        } else {
+            0.0
+        };
+
         let mut results = HashMap::new();
-        
+
         results.insert("accuracy".to_string(), accuracy);
         results.insert("precision".to_string(), precision);
         results.insert("recall".to_string(), recall);
@@ -252,7 +273,7 @@ impl Metric for ComprehensiveMetrics {
         results.insert("fp".to_string(), cm.false_positive);
         results.insert("fn".to_string(), cm.false_negative);
         results.insert("tn".to_string(), cm.true_negative);
-        
+
         MetricValue::Multiple(results)
     }
 
@@ -274,9 +295,10 @@ impl Metric for ComprehensiveMetrics {
 }
 
 // Container for multiple metrics
+#[derive(Debug)]
 pub struct Metrics {
-    metrics: Vec<Box<dyn Metric>>,
-    threshold: f64,
+    pub metrics: Vec<Box<dyn Metric>>,
+    pub threshold: f64,
 }
 
 impl Metrics {
@@ -305,17 +327,16 @@ impl Metrics {
     pub fn compute_all(
         &mut self,
         y_true: &Tensor,
-        y_pred: &Tensor
+        y_pred: &Tensor,
     ) -> HashMap<String, MetricValue> {
-   
         let mut results = HashMap::new();
-        
+
         for metric in self.metrics.iter_mut() {
             let value = metric.compute(y_true, y_pred, Some(self.threshold));
             metric.update(value.clone());
             results.insert(metric.id().to_string(), value);
         }
-        
+
         results
     }
 
@@ -346,20 +367,16 @@ impl Metrics {
 
 // Convenience constructors
 impl Metrics {
-    pub fn classification_suite() -> Self {
+    pub fn complete_classification() -> Self {
         let mut metrics = Metrics::new();
-        metrics.add_metric(Box::new(Accuracy::new()));
-        //metrics.add_metric(Box::new(F1Score::new()));
-        //metrics.add_metric(Box::new(Recall::new()));
-        metrics.add_metric(Box::new(ConfusionMatrix::new()));
-        metrics.add_metric(Box::new(ComprehensiveMetrics::new()));
+        metrics.add_metric(Box::new(ClassificationMetrics::new()));
         metrics
     }
 
     pub fn basic_classification() -> Self {
         let mut metrics = Metrics::new();
         metrics.add_metric(Box::new(Accuracy::new()));
-        //metrics.add_metric(Box::new(F1Score::new()));
+        metrics.add_metric(Box::new(ConfusionMatrix::new()));
         metrics
     }
 }
