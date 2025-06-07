@@ -3,9 +3,9 @@
 
 use atelier_core::{
     orderbooks::Orderbook,
-    templates::{ModelConfig, OrderbookConfig},
+    templates::{ModelConfig, Models, OrderbookConfig},
 };
-use atelier_generators::brownian;
+use atelier_generators::{brownian, probabilistic};
 use futures::future::join_all;
 use std::error::Error;
 
@@ -84,14 +84,44 @@ pub async fn progressions(
 
     let ini_bid = template_orderbook.bid_price.unwrap();
     let ini_ask = template_orderbook.ask_price.unwrap();
-    let i_s0 = (ini_bid + ini_ask) / 2.0;
-    let i_dt = 0.01;
-    let i_n = n_progres;
+    let ini_price = (ini_bid + ini_ask) / 2.0;
 
-    let i_mu = template_model.params_values.as_ref().unwrap()[0];
-    let i_sigma = template_model.params_values.unwrap()[1];
+    let model_label:Models = template_model.label.unwrap();
 
-    let gbm_return = brownian::gbm_return(i_s0, i_mu, i_sigma, i_dt, i_n).unwrap();
+    let (r_1, r_2) = match model_label {
+
+        Models::Uniform => {
+    
+            let lower = template_model.params_values.as_ref().unwrap()[0];
+            let upper = template_model.params_values.as_ref().unwrap()[1];
+            let n = n_progres;
+
+            let r_1 = probabilistic::uniform_return(lower, upper, n);
+            let r_2 = probabilistic::uniform_return(lower, upper, n);
+
+            (r_1, r_2)
+
+        }
+
+        Models::GBM => {
+
+            let dt = 0.01;
+            let n = n_progres;
+            let mu = template_model.params_values.as_ref().unwrap()[0];
+            let sigma = template_model.params_values.unwrap()[1];
+            
+            (brownian::gbm_return(ini_bid, mu, sigma, dt, n).unwrap(),
+             brownian::gbm_return(ini_ask, mu, sigma, dt, n).unwrap())
+
+        }
+
+        _ => {
+
+            (vec![0.0], vec![0.0])
+
+        }
+
+    };
 
     let mut bid_price = template_orderbook.bid_price.unwrap();
     let bid_levels = template_orderbook.bid_levels.unwrap();
@@ -101,7 +131,8 @@ pub async fn progressions(
     let ask_levels = template_orderbook.ask_levels.unwrap();
     let ask_orders = template_orderbook.ask_orders.unwrap();
 
-    for i in 0..n_progres {
+    for i in 1..n_progres {
+
         let r_ob = Orderbook::random(
             bid_price,
             Some((bid_levels[0], bid_levels[1])),
@@ -114,11 +145,20 @@ pub async fn progressions(
 
         v_orderbooks.push(r_ob.clone());
 
+        let (bid_return, ask_return) = if r_1[i] < r_2[i] {
+            (r_1[i], r_2[i])
+        } else {
+            (r_2[i], r_1[i])
+        };
+
         // --- Progress next Orderbook
-        bid_price = r_ob.bids[0].price.clone() + gbm_return[i];
-        ask_price = r_ob.asks[0].price.clone() + gbm_return[i];
+        bid_price = ini_price.clone() * ( 1.0 + bid_return );
+        ask_price = ini_price.clone() * ( 1.0 + ask_return );
+
     }
+
     Ok(v_orderbooks)
+
 }
 
 /// Executes multiple orderbook progression scenarios concurrently.

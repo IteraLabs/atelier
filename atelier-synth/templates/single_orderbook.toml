@@ -1,6 +1,6 @@
 [[experiments]]
-id = "exp_00"
-n_progressions = 5
+id = "case_a"
+n_progressions = 100
 
 [[exchanges]]
 id = "ai_00"
@@ -19,8 +19,8 @@ ask_orders = [5, 10]
 
 [[models]]
 id = "mod_00"
-label = "gbm"
-description = "Geometric Brownian Motion"
-params_labels = ["mu", "sigma"]
-params_values = [0.01, 0.001]
+label = "Uniform"
+description = "Uniform Distribution"
+params_labels = ["lower", "upper"]
+params_values = [-0.1, 0.1]
 

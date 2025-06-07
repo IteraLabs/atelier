@@ -2,7 +2,7 @@
 
 use atelier_core::orderbooks::Orderbook;
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
 
 fn create_orderbook(c: &mut Criterion) {
     let mut group = c.benchmark_group("Orderbook Creation");

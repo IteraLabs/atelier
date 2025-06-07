@@ -20,6 +20,8 @@ pub async fn main() {
         .unwrap()
         .clone();
 
+    println!("model: {:?}", template.models[0].clone());
+
     // --- Extract parameters from template
     let exp_id = &template.experiments[0].id;
     let n_progres = template.experiments[0].n_progressions as usize;
@@ -50,15 +52,15 @@ pub async fn main() {
     println!("bids_stats: {:?}, asks_stats {:?}", bids_stats, asks_stats);
 
     let mut folder_route = workspace_root
-        .join("atelier-synth")
-        .join("datasets")
+        .join("examples")
+        .join("case_a")
         .to_str()
         .unwrap()
         .to_owned();
 
     folder_route.push_str("/");
     folder_route.push_str(&exp_id);
-    folder_route.push_str(&"_asia.json");
+    folder_route.push_str(&"_ob.json");
 
     let i_ob = v_rand_ob.as_ref().unwrap();
 
