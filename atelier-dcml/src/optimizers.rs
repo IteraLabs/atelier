@@ -3,23 +3,25 @@
 ///
 /// No hay exposicion sistematica de lineas de trabajo de profesores
 ///
-/// despues de este evento, no se invito a los estudiantes a compartir a 
+/// despues de este evento, no se invito a los estudiantes a compartir a
 /// otros estudiantes. no se invito al profesor a compartir con otros profesores
 /// no se invito a estudiatesn compartir con otros profesores
-/// no se invito al profesor compartir con otros estudiantes. 
+/// no se invito al profesor compartir con otros estudiantes.
 ///
 /// no se invito a coordinacion  de programa a compartir con profesor
-/// 
-/// 
+///
+///
 use tch::{Tensor, no_grad};
 
 pub trait Optimizer {
     fn id(&mut self, id: String);
-    fn step(&self,
+    fn step(
+        &self,
         weights: &mut Tensor,
         bias: &mut Tensor,
         weights_gradients: &Tensor,
-        bias_gradients: &Tensor) ;
+        bias_gradients: &Tensor,
+    );
     fn reset(&mut self);
 }
 
@@ -45,9 +47,8 @@ impl Optimizer for GradientDescent {
         weights: &mut Tensor,
         bias: &mut Tensor,
         weights_gradients: &Tensor,
-        bias_gradients: &Tensor
-    )   {
-   
+        bias_gradients: &Tensor,
+    ) {
         no_grad(|| {
             let _ = weights.f_sub_(&(weights_gradients * self.learning_rate));
             let _ = bias.f_sub_(&(bias_gradients * self.learning_rate));
@@ -86,5 +87,3 @@ impl OptimizerBuilder {
         Ok(GradientDescent { id, learning_rate })
     }
 }
-
-

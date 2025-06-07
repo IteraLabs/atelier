@@ -6,7 +6,7 @@
 mod test_orderbook_utils {
 
     use atelier_core::{levels::Level, orderbooks::Orderbook, orders::OrderSide};
-    use rand::{distr::Uniform, rng, Rng};
+    use rand::{Rng, distr::Uniform, rng};
     use std::time::{SystemTime, UNIX_EPOCH};
 
     // ------------------------------------------------------------- TEST ORDERBOOK -- //

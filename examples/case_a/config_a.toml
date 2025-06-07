@@ -1,6 +1,6 @@
 [[experiments]]
 id = "case_a"
-n_progressions = 100
+n_progressions = 1000
 
 [[exchanges]]
 id = "exc_00"
@@ -10,17 +10,24 @@ category = "cex"
 
 [exchanges.orderbook]
 bid_price = 100_000.00
-bid_levels = [5, 10]
-bid_orders = [5, 10]
-ticksize = [0.1, 1.0]
+bid_levels = [10, 50]
+bid_orders = [5, 15]
+ticksize = [0.1, 1.5]
 ask_price = 100_001.00
-ask_levels = [5, 10]
-ask_orders = [5, 10]
+ask_levels = [10, 50]
+ask_orders = [5, 15]
 
 [[models]]
-id = "mod_00"
+id = "returns_00"
+label = "Uniform"
+description = "Uniform Distribution"
+params_labels = ["lower", "upper"]
+params_values = [-0.005, 0.005]
+
+[[models]]
+id = "optimizer_00"
 label = "GD"
 description = "Gradient Descent"
 params_labels = ["learning_rate", "epsilon"]
-params_values = [0.01, 0.001]
+params_values = [0.1, 0.001]
 

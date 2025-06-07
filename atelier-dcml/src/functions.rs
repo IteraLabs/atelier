@@ -1,5 +1,4 @@
 /// Loss Functions
-
 use serde::{Deserialize, Serialize};
 use tch::{Kind, Tensor};
 
@@ -26,11 +25,8 @@ pub struct CrossEntropyBuilder<'a> {
 }
 
 impl<'a> CrossEntropyBuilder<'a> {
-
     pub fn new() -> Self {
-        CrossEntropyBuilder {
-            id: None,
-        }
+        CrossEntropyBuilder { id: None }
     }
 
     pub fn id(mut self, id: &'a String) -> Self {
@@ -38,13 +34,10 @@ impl<'a> CrossEntropyBuilder<'a> {
         self
     }
 
-
     pub fn build(self) -> Result<CrossEntropy, &'static str> {
         let id = self.id.ok_or("Missing id value")?;
 
-        Ok(CrossEntropy {
-            id: id.to_string(),
-        })
+        Ok(CrossEntropy { id: id.to_string() })
     }
 }
 
@@ -54,23 +47,23 @@ pub struct CrossEntropy {
 }
 
 impl CrossEntropy {
-
     pub fn new<'a>() -> CrossEntropyBuilder<'a> {
         CrossEntropyBuilder::new()
     }
 
     pub fn compute_loss(&self, y_hat: &Tensor, y_true: &Tensor) -> Tensor {
-        y_hat.binary_cross_entropy_with_logits::<&Tensor>(
-            &y_true,
-            None,                 // weight
-            None,                 // pos_weight
-            tch::Reduction::Mean  //
-        ).set_requires_grad(true)
+        y_hat
+            .binary_cross_entropy_with_logits::<&Tensor>(
+                &y_true,
+                None,                 // weight
+                None,                 // pos_weight
+                tch::Reduction::Mean, //
+            )
+            .set_requires_grad(true)
     }
 }
 
 impl Regularized for CrossEntropy {
-
     fn id(&mut self, id: String) {
         self.id = id;
     }

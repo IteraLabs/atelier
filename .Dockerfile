@@ -33,11 +33,13 @@ ENV TORCH_CUDA_VERSION=cpu
 # Copy Workspace configuration files
 COPY Cargo.toml ./
 COPY atelier ./atelier
+COPY atelier-agents ./atelier-agents
 COPY atelier-core ./atelier-core
-COPY atelier-dcm ./atelier-dcm
+COPY atelier-dcml ./atelier-dcml
 COPY atelier-generators ./atelier-generators
 COPY atelier-results ./atelier-results
 COPY atelier-synth ./atelier-synth
+COPY examples ./examples
 COPY benches ./benches
 
 # Build the Rust binary in release mode

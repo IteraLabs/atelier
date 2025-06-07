@@ -1,8 +1,6 @@
-
-pub fn main () {
-    
+pub fn main() {
     println!("case_b_training");
-    
+
     // --- Trainer Environment (Distributed) --- //
     // model
     // data
@@ -11,5 +9,4 @@ pub fn main () {
     // optimizer
     // metrics
     // topology (only for distributed)
-
 }

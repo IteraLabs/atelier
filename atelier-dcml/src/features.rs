@@ -90,7 +90,7 @@ impl FeatureSelector {
                         "Unknown feature: {}, the ones available are: {:?}",
                         name,
                         OrderbookFeatures::list_features()
-                    ))
+                    ));
                 }
             }
         }

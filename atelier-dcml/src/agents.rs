@@ -79,7 +79,6 @@ impl DistributedAgent {
     }
 
     pub fn compute_bce(&self) -> Tensor {
-
         let bce = functions::CrossEntropy::new()
             .build()
             .expect("Failed new BCE creation");

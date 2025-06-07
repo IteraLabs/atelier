@@ -3,6 +3,14 @@ use std::{error::Error, fs};
 use toml;
 
 #[derive(Debug, Deserialize, Clone)]
+pub enum Models {
+    Uniform,
+    GBM,
+    Hawkes,
+    GD,
+}
+
+#[derive(Debug, Deserialize, Clone)]
 pub struct Config {
     pub experiments: Vec<ExpConfig>,
     pub exchanges: Vec<ExchangeConfig>,
@@ -35,7 +43,7 @@ pub struct ExchangeConfig {
 #[derive(Debug, Deserialize, Clone)]
 pub struct ModelConfig {
     pub id: Option<String>,
-    pub label: Option<String>,
+    pub label: Option<Models>,
     pub description: Option<String>,
     pub params_labels: Option<Vec<String>>,
     pub params_values: Option<Vec<f64>>,
@@ -50,7 +58,7 @@ impl ModelConfig {
 #[derive(Debug, Deserialize, Clone)]
 pub struct ModelConfigBuilder {
     pub id: Option<String>,
-    pub label: Option<String>,
+    pub label: Option<Models>,
     pub description: Option<String>,
     pub params_labels: Option<Vec<String>>,
     pub params_values: Option<Vec<f64>>,
@@ -72,7 +80,7 @@ impl ModelConfigBuilder {
         self
     }
 
-    pub fn label(mut self, label: String) -> Self {
+    pub fn label(mut self, label: Models) -> Self {
         self.label = Some(label);
         self
     }

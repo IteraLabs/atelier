@@ -14,7 +14,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let data_file = workspace_root
         .join("atelier-dcml")
         .join("datasets")
-        .join("exp_00_ai_00_binance_ob.json");
+        .join("case_a_ob.json");
 
     let ob_data = data::load_from_json(&data_file.to_str().unwrap().to_owned())?;
 

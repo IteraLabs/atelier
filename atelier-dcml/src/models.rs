@@ -1,45 +1,36 @@
 /// Convex Linear Models
-
 use std::f64;
-use tch::{Device, Kind, Tensor, TchError};
+use tch::{Device, Kind, TchError, Tensor};
 
 pub trait Model {
-
     fn id(&mut self, id: String);
     fn forward(&self, features: &Tensor) -> Tensor;
     fn parameters(&self) -> Vec<&Tensor>;
     fn save_model(&self, file_path: &str) -> Result<(), TchError>;
     fn load_model(&mut self, file_path: &str) -> Result<(), TchError>;
-
 }
 
 #[derive(Debug)]
 pub struct LinearModel {
-
     pub id: String,
     pub weights: Tensor,
     pub bias: Tensor,
-
 }
 
 impl LinearModel {
-
     pub fn new(input_dim: i64) -> LinearModelBuilder {
         LinearModelBuilder::new(input_dim)
     }
-
 }
 
 impl Model for LinearModel {
-
     fn id(&mut self, id: String) {
         self.id = id;
     }
 
     fn forward(&self, features: &Tensor) -> Tensor {
-        let fw = features
-            .matmul(&self.weights)
-            .to_kind(Kind::Float) + &self.bias.to_kind(Kind::Float);
+        let fw = features.matmul(&self.weights).to_kind(Kind::Float)
+            + &self.bias.to_kind(Kind::Float);
 
         fw.to_kind(Kind::Float)
     }
@@ -48,8 +39,7 @@ impl Model for LinearModel {
         vec![&self.weights, &self.bias]
     }
 
-    fn save_model(&self, file_path: &str) -> Result<(), TchError>{
-        
+    fn save_model(&self, file_path: &str) -> Result<(), TchError> {
         // Create a state dictionary compatible with PyTorch
         let state_dict = vec![
             ("weights".to_string(), self.weights.shallow_clone()),
@@ -61,7 +51,6 @@ impl Model for LinearModel {
     }
 
     fn load_model(&mut self, file_path: &str) -> Result<(), TchError> {
-
         // Load state dictionary
         let state_dict = tch::Tensor::load_multi(file_path)?;
 
@@ -70,12 +59,15 @@ impl Model for LinearModel {
             match name.as_str() {
                 "weight" => self.weights = tensor,
                 "bias" => self.bias = tensor,
-                _ => return Err(
-                    tch::TchError::FileFormat(format!("Unexpected tensor: {}", name))
-                ),
+                _ => {
+                    return Err(tch::TchError::FileFormat(format!(
+                        "Unexpected tensor: {}",
+                        name
+                    )));
+                }
             }
         }
-    Ok(())
+        Ok(())
     }
 }
 
@@ -106,21 +98,18 @@ impl LinearModelBuilder {
     }
 
     pub fn glorot_uniform_init(self) -> LinearModel {
-
         // Initialize weights with Glorot uniform
         let limit = (6.0 as f64).sqrt() / ((self.input_dim + 1) as f64).sqrt();
 
-        let rand_weights = Tensor::rand(
-            &[self.input_dim],
-            (Kind::Float, self.device),
-        ) * limit;
+        let rand_weights =
+            Tensor::rand(&[self.input_dim], (Kind::Float, self.device)) * limit;
 
         // Initialize weights to "normalized initialization" factor.
         let weights = rand_weights.set_requires_grad(true);
 
         // Initialize bias to zeros
-        let bias = Tensor::zeros(&[1], (Kind::Float, self.device))
-            .set_requires_grad(true);
+        let bias =
+            Tensor::zeros(&[1], (Kind::Float, self.device)).set_requires_grad(true);
 
         LinearModel {
             id: self.id.unwrap_or_default(),
@@ -129,4 +118,3 @@ impl LinearModelBuilder {
         }
     }
 }
-

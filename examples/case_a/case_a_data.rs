@@ -27,13 +27,13 @@ pub async fn main() {
     let exp_id = &template.experiments[0].id;
     let n_progres = template.experiments[0].n_progressions as usize;
     let template_orderbook = template.exchanges[0].orderbook.clone().unwrap();
-    let template_model = template.models[0].clone();
+    let returns_model = template.models[0].clone();
 
     // --- Create Orderbook Progressions
-    let orderbook = progressions(template_orderbook, template_model, n_progres).await;
+    let orderbook = progressions(template_orderbook, returns_model, n_progres).await;
 
     // --- Orderbook data file (json)
-    let file_name_ob = "orderbook_".to_owned() + exp_id + ".json";
+    let file_name_ob = exp_id.to_owned() + "_ob" + ".json";
     let _folder_route_ob = workspace_root
         .join("examples")
         .join("case_a")
@@ -46,7 +46,7 @@ pub async fn main() {
 
     // --- Compute Features from Orderbook Synthetic Data
     let selected_features = ["spread", "midprice", "w_midprice", "vwap", "imb", "tav"];
-    let depth: usize = 1;
+    let depth: usize = 10;
     let bps: f64 = 1.0;
     let features_vec = features::compute_features(
         &orderbook.as_ref().unwrap(),
@@ -82,7 +82,7 @@ pub async fn main() {
     let dataset = pre_dataset.shift_features();
 
     // --- Features and Target file (csv)
-    let file_name_ft = "data_".to_owned() + exp_id + ".csv";
+    let file_name_ft = exp_id.to_owned() + "_data.csv";
     let features_target_csv = workspace_root
         .join("examples")
         .join("case_a")

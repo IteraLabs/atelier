@@ -65,7 +65,6 @@ pub struct ConfusionMatrixComponents {
 
 impl ConfusionMatrixComponents {
     pub fn from_tensors(y: &Tensor, y_pred: &Tensor, threshold: Option<f64>) -> Self {
-
         // Apply threshold to get binary predictions
         let threshold: f64 = threshold.unwrap_or(0.5);
         let preds_binary: Tensor = y_pred.ge(threshold).to_kind(Kind::Float);
@@ -111,7 +110,6 @@ impl Accuracy {
 }
 
 impl Metric for Accuracy {
-
     fn id(&self) -> &str {
         &self.id
     }
@@ -121,13 +119,11 @@ impl Metric for Accuracy {
     }
 
     fn compute(&self, y: &Tensor, y_pred: &Tensor, thr: Option<f64>) -> MetricValue {
-
         let threshold = thr.unwrap_or(0.5);
         let cm = ConfusionMatrixComponents::from_tensors(y, y_pred, Some(threshold));
         let accuracy = (cm.true_positive + cm.true_negative) / cm.total();
-        
+
         MetricValue::Scalar(accuracy)
-         
     }
 
     fn update(&mut self, value: MetricValue) {
@@ -145,7 +141,6 @@ impl Metric for Accuracy {
     fn reset(&mut self) {
         self.values.clear();
     }
-    
 }
 
 #[derive(Debug)]
@@ -205,7 +200,6 @@ impl Metric for ConfusionMatrix {
     fn reset(&mut self) {
         self.values.clear();
     }
-
 }
 
 #[derive(Debug)]

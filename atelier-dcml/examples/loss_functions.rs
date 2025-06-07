@@ -1,5 +1,4 @@
 /// Example: Loss Function
-
 use atelier_dcml::functions;
 use tch::{Kind, Tensor};
 
@@ -13,5 +12,4 @@ pub fn main() {
     println!("loss : {:?}", loss);
     let computed_loss = loss.unwrap().compute_loss(&y_hat, &y_true);
     println!("computed loss : {:?}", computed_loss);
-
 }

@@ -1,15 +1,13 @@
 use crate::{
     functions,
-    functions::{Regularized, RegType},
-    metrics,
-    models,
+    functions::{RegType, Regularized},
+    metrics, models,
     models::Model,
     optimizers,
     optimizers::Optimizer,
 };
 
 use atelier_core::data;
-/// Trainer Environment
 use serde::Deserialize;
 use std::{error::Error, fs};
 
@@ -44,7 +42,6 @@ pub struct ConnectionsMatrix {
 }
 
 impl ConnectionsMatrix {
-
     pub fn new(self, n_rows: &usize, n_cols: &usize) -> Self {
         let matrix_values = vec![0.0; (n_rows * n_cols) as usize];
         ConnectionsMatrix {
@@ -53,7 +50,6 @@ impl ConnectionsMatrix {
     }
 
     pub fn fill(mut self, connections_file: &str) -> Result<Self, Box<dyn Error>> {
-
         // Read and parse the TOML file
         let config_str = fs::read_to_string(connections_file)
             .expect(&format!("Failed to read config file: {}", connections_file));
@@ -82,7 +78,7 @@ impl ConnectionsMatrix {
     }
 }
 
-/// 
+///
 /// Singular training
 ///
 /// Models: Model definition
@@ -100,57 +96,60 @@ pub struct Singular {
 }
 
 impl Singular {
-    
     pub fn new() -> SingularBuilder {
         SingularBuilder::new()
     }
-    
-    pub fn train(&mut self, epochs: u32) -> Result<(), Box<dyn Error>> {
-         
-        let (features, targets) = &self.data.clone().from_vec_to_tensor();
-         
-        for epoch in 0..epochs { 
 
+    pub fn train(&mut self, epochs: u32) -> Result<(), Box<dyn Error>> {
+        let (features, targets) = &self.data.clone().from_vec_to_tensor();
+
+        for epoch in 0..epochs {
             // --- Forward Step --- //
             let y_hat = self.model.forward(&features);
-            
+
             // --- Compute Loss --- //
             let loss = self.loss.compute_loss(&y_hat, &targets);
 
             let reg_param_c = 1.9;
             let reg_param_lambda = 0.8;
 
-            let reg_loss = self.loss.regularize(
-                &self.model.weights,
-                &RegType::Elasticnet,
-                vec![reg_param_c, reg_param_lambda]
-                ).sum(Kind::Float);
-            
+            let reg_loss = self
+                .loss
+                .regularize(
+                    &self.model.weights,
+                    &RegType::Elasticnet,
+                    vec![reg_param_c, reg_param_lambda],
+                )
+                .sum(Kind::Float);
+
             let total_loss = &loss + &reg_loss;
             total_loss.backward();
-            
+
             // --- Compute Gradients --- //
             let c_w = self.model.weights.grad();
             let c_b = self.model.bias.grad();
-            
+
             // --- Compute Step of Learning Algorithm
             self.optimizer.step(
                 &mut self.model.weights,
                 &mut self.model.bias,
                 &c_w,
-                &c_b);
-            
+                &c_b,
+            );
+
             // --- Reset gradient value on weights and bias
             self.model.weights.zero_grad();
             self.model.bias.zero_grad();
-            
+
             // --- Get Metrics --- //
             let metrics = self.metrics.compute_all(&y_hat, &targets);
-            
-            println!("\n--- epoch {:?} --- loss {:?} --- accuracy: {:?}",
-                epoch, &loss, metrics["accuracy"]);
+
+            println!(
+                "\n--- epoch {:?} --- loss {:?} --- accuracy: {:?}",
+                epoch, &loss, metrics["accuracy"]
+            );
         }
-        Ok(()) 
+        Ok(())
     }
 
     pub fn save_model(self, file_route: &str) {
@@ -162,7 +161,6 @@ impl Singular {
         // --- Load a model's weight
         let _ = self.model.load_model(file_route);
     }
-
 }
 
 pub struct SingularBuilder {
@@ -174,7 +172,6 @@ pub struct SingularBuilder {
 }
 
 impl SingularBuilder {
-
     pub fn new() -> Self {
         SingularBuilder {
             data: None,
@@ -227,3 +224,37 @@ impl SingularBuilder {
     }
 }
 
+#[derive(Debug)]
+pub struct Distributed {
+    topology: Vec<Vec<f64>>,
+}
+
+impl Distributed {
+    pub fn new() -> DistributedBuilder {
+        DistributedBuilder::new()
+    }
+
+    pub fn train() -> Result<(), Box<dyn Error>> {
+        // 1. Compute Gradients
+        // 2. Collect parameters
+        // 3. Compute consensus
+        // 4. Compute metrics
+
+        Ok(())
+    }
+}
+
+pub struct DistributedBuilder {
+    topology: Option<Vec<Vec<f64>>>,
+}
+
+impl DistributedBuilder {
+    pub fn new() -> Self {
+        DistributedBuilder { topology: None }
+    }
+
+    pub fn topology(mut self, topology: Vec<Vec<f64>>) -> Self {
+        self.topology = Some(topology);
+        self
+    }
+}

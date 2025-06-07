@@ -1,13 +1,13 @@
 /// Single Agent Training
-use atelier_dcml::{
-    functions, metrics, models,
-    optimizers, processes
-};
+use atelier_dcml::{functions, metrics, models, optimizers, processes};
 
 use std::{error::Error, path::Path};
 use tch::Device;
 
-use atelier_core::{data::{Dataset, Transformation}, templates};
+use atelier_core::{
+    data::{Dataset, Transformation},
+    templates,
+};
 
 pub fn main() -> Result<(), Box<dyn Error + 'static>> {
     // --- Setup working directory
@@ -29,7 +29,7 @@ pub fn main() -> Result<(), Box<dyn Error + 'static>> {
     // --- Extract parameters from template
     let _exp_id = &template.experiments[0].id;
     let _n_progres = template.experiments[0].n_progressions as usize;
-    let _template_model = template.models[0].clone();
+    let optimizer_model = template.models[1].params_values.clone().unwrap();
 
     // --- Data Layer --- //
 
@@ -40,23 +40,19 @@ pub fn main() -> Result<(), Box<dyn Error + 'static>> {
         .to_str()
         .unwrap()
         .to_owned()
-        + "/data_case_a.csv";
+        + "/case_a_data.csv";
 
     let header = true;
     let column_types = None;
     let target_column = Some(7);
 
-    let mut a_dataset = Dataset::from_csv(
-        &data_file,
-        header,
-        column_types,
-        target_column)
-        .unwrap();
+    let mut a_dataset =
+        Dataset::from_csv(&data_file, header, column_types, target_column).unwrap();
 
     a_dataset.transform(Transformation::Scale);
 
     println!("dataset.features: {:?}", a_dataset.features[0]);
-    
+
     // --- Model Layer --- //
     let n_inputs = 6;
 
@@ -71,14 +67,14 @@ pub fn main() -> Result<(), Box<dyn Error + 'static>> {
 
     let a_optimizer = optimizers::GradientDescent::new()
         .id("opt_00".to_string())
-        .learning_rate(0.2)
+        .learning_rate(optimizer_model[0])
         .build()
         .unwrap();
 
     // println!("a_optimizer: {:?}", a_optimizer);
 
     // --- Loss Function Layer --- //
-    
+
     let a_loss = functions::CrossEntropy::new()
         .id(&"loss_00".to_string())
         .build()
@@ -87,13 +83,13 @@ pub fn main() -> Result<(), Box<dyn Error + 'static>> {
     // println!("a_loss: {:?}", a_loss);
 
     // --- Metrics Layer --- //
-    
+
     let a_metrics = metrics::Metrics::basic_classification();
 
     // println!("a_metrics: {:?}", a_metrics.list_metrics());
 
     // --- Trainer Environment (Singular) --- //
-    
+
     let mut singular = processes::Singular::new()
         .data(a_dataset)
         .model(a_model)
@@ -114,7 +110,7 @@ pub fn main() -> Result<(), Box<dyn Error + 'static>> {
         .unwrap()
         .to_owned()
         + "/singular_model.pt";
-    
+
     singular.save_model(&model_file);
 
     Ok(())

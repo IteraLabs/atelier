@@ -1,5 +1,4 @@
 /// Data
-
 use crate::orderbooks::Orderbook;
 use csv::{Reader, ReaderBuilder, Writer};
 use std::{
@@ -9,7 +8,6 @@ use std::{
 };
 use tch::{Kind, Tensor};
 use toml;
-
 
 pub enum Transformation {
     Standarize,
@@ -123,76 +121,78 @@ impl DatasetBuilder {
 }
 
 impl Dataset {
-
     pub fn new() -> DatasetBuilder {
         DatasetBuilder::new()
     }
 
     pub fn transform(&mut self, transformation: Transformation) -> Vec<(f64, f64)> {
-
         let n_features = self.features[0].len();
         let epsilon = 1e-8;
 
         match transformation {
-        
             Transformation::Standarize => {
-    
-            // Step 1: Transpose the data to get feature columns
-            let transposed: Vec<Vec<f64>> = (0..n_features)
-                .map(|i| self.features.iter().map(|row| row[i]).collect())
-                .collect();
+                // Step 1: Transpose the data to get feature columns
+                let transposed: Vec<Vec<f64>> = (0..n_features)
+                    .map(|i| self.features.iter().map(|row| row[i]).collect())
+                    .collect();
 
-            // Step 2: Compute mean and std dev for each feature
-            let stats: Vec<(f64, f64)> = transposed.iter()
-                .map(|feature_col| {
-                    
-                    let n = feature_col.len() as f64;
-                    let mean: f64 = feature_col.iter().sum::<f64>() / n;
-    
-                    let variance = feature_col.iter()
-                        .map(|x| (x - mean).powi(2))
-                        .sum::<f64>() / n;
-                        
-                    let std_dev = variance.sqrt().max(epsilon);
-                        
+                // Step 2: Compute mean and std dev for each feature
+                let stats: Vec<(f64, f64)> = transposed
+                    .iter()
+                    .map(|feature_col| {
+                        let n = feature_col.len() as f64;
+                        let mean: f64 = feature_col.iter().sum::<f64>() / n;
+
+                        let variance =
+                            feature_col.iter().map(|x| (x - mean).powi(2)).sum::<f64>()
+                                / n;
+
+                        let std_dev = variance.sqrt().max(epsilon);
+
                         (mean, std_dev)
                     })
-                .collect();
+                    .collect();
 
-            // Step 3: Apply normalization
-            self.features = self.features.iter()
-                .map(|row| {
-                    row.iter()
-                        .enumerate()
-                        .map(|(i, &x)| {
-                            let (mean, std_dev) = &stats[i];
-                            (x - mean) / std_dev
-                        })
-                        .collect()
-                })
-                .collect();
-            stats
+                // Step 3: Apply normalization
+                self.features = self
+                    .features
+                    .iter()
+                    .map(|row| {
+                        row.iter()
+                            .enumerate()
+                            .map(|(i, &x)| {
+                                let (mean, std_dev) = &stats[i];
+                                (x - mean) / std_dev
+                            })
+                            .collect()
+                    })
+                    .collect();
+                stats
             }
 
             Transformation::Scale => {
-
                 // Step 1: Transpose the data to get feature columns
                 let transposed: Vec<Vec<f64>> = (0..n_features)
                     .map(|i| self.features.iter().map(|row| row[i]).collect())
                     .collect();
 
                 // Step 2: Compute the max for each feature
-                let maxs: Vec<(f64, f64)> = transposed.iter()
+                let maxs: Vec<(f64, f64)> = transposed
+                    .iter()
                     .map(|feature_col| {
-                        
-                        let max: f64 = feature_col.iter().cloned().fold(
-                        f64::NEG_INFINITY, f64::max).max(epsilon);
+                        let max: f64 = feature_col
+                            .iter()
+                            .cloned()
+                            .fold(f64::NEG_INFINITY, f64::max)
+                            .max(epsilon);
                         (0.0, max)
-                        })
+                    })
                     .collect();
 
                 // Step 3: Divide every element by the max value for all features
-                self.features = self.features.iter()
+                self.features = self
+                    .features
+                    .iter()
                     .map(|row| {
                         row.iter()
                             .enumerate()
@@ -203,7 +203,7 @@ impl Dataset {
                             .collect()
                     })
                     .collect();
-            maxs
+                maxs
             }
         }
     }
@@ -297,10 +297,9 @@ impl Dataset {
     }
 
     pub fn from_vec_to_tensor(self) -> (Tensor, Tensor) {
-
         let d_features = self.features;
         let d_targets = self.target;
-        
+
         let num_samples = d_features.len() as i64;
         let num_features = d_features[0].len() as i64;
 

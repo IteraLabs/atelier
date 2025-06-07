@@ -4,7 +4,7 @@ use crate::{
     results::errors::{LevelError, OrderError},
 };
 
-use rand::{distr::Uniform, Rng};
+use rand::{Rng, distr::Uniform};
 use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};
 

@@ -60,7 +60,7 @@ impl TargetSelector {
                         "Unknown target: {}, the ones available are: {:?}",
                         name,
                         OrderbookTargets::list_targets()
-                    ))
+                    ));
                 }
             }
         }

@@ -2,7 +2,7 @@
 name = "atelier"
 description = "Rust Engine for High Frequency, Synthetic and Historical, Market Microstructure Modeling"
 version = "0.0.1"
-publish = true
+publish = false
 
 edition.workspace = true
 authors.workspace = true
