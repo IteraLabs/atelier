@@ -23,7 +23,7 @@ members = [
   "atelier-synth",
 
   # Solana Virtual Machine interface
-  #"atelier-svm",
+  "atelier-svm",
   
   # Usability and Excellence
   "benches",
@@ -37,12 +37,13 @@ default-members = [
   "atelier-generators",
   "atelier-results",
   "atelier-synth",
+  "atelier-svm",
   "examples",
 ]
 
 [workspace.package]
-edition = "2024"
-rust-version = "1.84.0"
+edition = "2021"
+rust-version = "1.84.1"
 
 description = "Rust Engine for High Frequency, Synthetic and Historical, Market Microstructure Modeling"
 authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
