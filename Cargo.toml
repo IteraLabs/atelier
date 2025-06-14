@@ -21,9 +21,6 @@ members = [
 
   # Synthetic Data Generation
   "atelier-synth",
-
-  # Solana Virtual Machine interface
-  #"atelier-svm",
   
   # Usability and Excellence
   "benches",
@@ -41,8 +38,8 @@ default-members = [
 ]
 
 [workspace.package]
-edition = "2024"
-rust-version = "1.84.0"
+edition = "2021"
+rust-version = "1.84.1"
 
 description = "Rust Engine for High Frequency, Synthetic and Historical, Market Microstructure Modeling"
 authors = ["IteraLabs.ai <contact@iteralabs.ai>"]
@@ -66,7 +63,6 @@ atelier-core = { path = "./atelier-core", version = "0.0.1" }
 atelier-dcml = { path = "./atelier-dcml", version = "0.0.1" }
 atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
 atelier-results = { path = "./atelier-results", version = "0.0.1" }
-atelier-svm = { path = "./atelier-svm", version = "0.0.1" }
 atelier-synth = { path = "./atelier-synth", version = "0.0.1" }
 
 # Error Handling
@@ -98,4 +94,4 @@ tch = { version = "0.20.0" }
 [workspace.lints.rust]
 unsafe_code = "forbid"
 unused_extern_crates = "warn"
-
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)'] }

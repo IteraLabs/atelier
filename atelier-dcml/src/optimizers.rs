@@ -1,14 +1,4 @@
 ///
-/// M.sc no invitacion a conferencias, ni concursos.
-///
-/// No hay exposicion sistematica de lineas de trabajo de profesores
-///
-/// despues de este evento, no se invito a los estudiantes a compartir a
-/// otros estudiantes. no se invito al profesor a compartir con otros profesores
-/// no se invito a estudiatesn compartir con otros profesores
-/// no se invito al profesor compartir con otros estudiantes.
-///
-/// no se invito a coordinacion  de programa a compartir con profesor
 ///
 ///
 use tch::{Tensor, no_grad};
