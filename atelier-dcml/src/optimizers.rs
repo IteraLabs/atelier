@@ -1,7 +1,4 @@
-///
-///
-///
-use tch::{Tensor, no_grad};
+use tch::{no_grad, Tensor};
 
 pub trait Optimizer {
     fn id(&mut self, id: String);

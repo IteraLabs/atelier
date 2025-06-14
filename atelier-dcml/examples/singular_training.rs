@@ -1,5 +1,5 @@
-use atelier_core::{data, templates};
 /// Conduct a Singular Training Process
+use atelier_data::{data, templates};
 use std::{env, error::Error, path::Path};
 
 fn main() -> Result<(), Box<dyn Error>> {

@@ -1,4 +1,4 @@
-use atelier_core::orderbooks::Orderbook;
+use atelier_data::orderbooks::Orderbook;
 use std::error::Error;
 
 #[derive(Debug, Clone, Copy)]

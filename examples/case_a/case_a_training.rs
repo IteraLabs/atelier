@@ -4,7 +4,7 @@ use atelier_dcml::{functions, metrics, models, optimizers, processes};
 use std::{error::Error, path::Path};
 use tch::Device;
 
-use atelier_core::{
+use atelier_data::{
     data::{Dataset, Transformation},
     templates,
 };

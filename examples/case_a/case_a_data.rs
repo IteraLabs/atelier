@@ -1,6 +1,6 @@
 //! Single Market Synthetic Data Generation
 
-use atelier_core::{data, templates};
+use atelier_data::{data, templates};
 use atelier_dcml::{features, targets};
 use atelier_synth::synthbooks::progressions;
 use std::{env, path::Path};

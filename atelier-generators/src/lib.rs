@@ -1,6 +1,7 @@
-//! # atelier-generators
+//! atelier-generators
 //!
-//! Stochastic generators.
+//! Probabilistic generators and events simulation for the atelier-rs engine.
+//!
 
 /// Brownian motion generators.
 pub mod brownian;

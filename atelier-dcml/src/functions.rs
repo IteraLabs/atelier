@@ -1,5 +1,4 @@
 /// Loss Functions
-use serde::{Deserialize, Serialize};
 use tch::{Kind, Tensor};
 
 pub trait Regularized {
@@ -12,7 +11,7 @@ pub trait Regularized {
     ) -> Tensor;
 }
 
-#[derive(Debug, Copy, Clone, Serialize, Deserialize)]
+#[derive(Debug, Copy, Clone)]
 pub enum RegType {
     L1,
     L2,

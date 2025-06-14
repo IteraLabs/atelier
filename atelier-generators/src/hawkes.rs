@@ -40,6 +40,7 @@
 use atelier_results::errors;
 use rand::Rng;
 
+/// Hawkes Point Process basic structure for the univariate case.
 pub struct HawkesProcess {
     pub mu: f64,
     pub alpha: f64,
@@ -47,6 +48,8 @@ pub struct HawkesProcess {
 }
 
 impl HawkesProcess {
+
+    /// Validate the input types for each parameter
     pub fn hawkes_valid_inputs(
         mu: &f64,
         alpha: &f64,
@@ -58,7 +61,7 @@ impl HawkesProcess {
         }
     }
 
-    // Constructor to initialize the Hawkes process parameters
+    /// Constructor to initialize the Hawkes process parameters
     pub fn new(mu: f64, alpha: f64, beta: f64) -> Result<Self, errors::GeneratorError> {
         match Self::hawkes_valid_inputs(&mu, &alpha, &beta) {
             Ok(()) => Ok(Self { mu, alpha, beta }),
@@ -66,7 +69,7 @@ impl HawkesProcess {
         }
     }
 
-    // Method to compute the intensity at a given time based on past events
+    /// Method to compute the intensity at a given time based on past events
     fn lambda(&self, t: f64, event_times: &[f64]) -> f64 {
         let mut intensity = self.mu;
         for &event_time in event_times {
@@ -77,7 +80,7 @@ impl HawkesProcess {
         intensity
     }
 
-    // Method to generate N synthetic timestamps
+    /// Method to generate N synthetic timestamps
     pub fn generate_values(&self, current_ts: f64, n: usize) -> Vec<f64> {
         let mut rng = rand::rng();
         let mut event_times = Vec::new();

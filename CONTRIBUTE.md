@@ -9,7 +9,13 @@ This project, for the stable version, has implemented the following lints:
 ```toml
 [workspace.lints.rust]
 unsafe_code = "forbid"
-unused_extern_crates = "warn"
+unused_extern_crates = "forbid"
+unreachable_code = "forbid"
+unreachable_patterns = "forbid"
+unused_variables = "warn"
+trivial_casts = "warn"
+trivial_numeric_casts = "warn"
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)'] }
 ```
 
 ## rustfmt.toml
@@ -17,14 +23,13 @@ unused_extern_crates = "warn"
 Consider all defaults to be present, and, the following changed:
 
 ```toml
-imports_granularity = "crate"
-reorder_impl_items = true
-wrap_comments = true
+reorder_modules = true
+max_width = 90
 ```
 
 ## Code format with rustfmt
 
-For the `atelier` crate, there is a `.rustfmt.toml` config file, even though must of the values are exactly the same as the default, they were included for future-proof purposes in terms of formatting. 
+For the `atelier-rs` crate, there is a `.rustfmt.toml` config file, even though must of the values are exactly the same as the default, they were included for future-proof purposes in terms of formatting. 
  
 ## Reporting a Bug
 

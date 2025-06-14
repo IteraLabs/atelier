@@ -1,5 +1,2 @@
-reorder_imports = true
 reorder_modules = true
-imports_granularity = "crate"
 max_width = 90
-reorder_impl_items = true

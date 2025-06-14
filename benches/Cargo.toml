@@ -1,27 +1,42 @@
 [package]
 name = "benches"
-description = "Benchmarks for the Atelier project"
-version = "0.0.1"
-publish = false
+description = "Benchmarks for the atelier-rs engine"
+publish = true
+readme = "README.md"
 
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-keywords.workspace = true
-categories.workspace = true
-documentation.workspace = true
-repository.workspace = true
+version = "0.0.1"
+rust-version = "1.84.1"
+edition = "2021"
+
+exclude = ["assets/*", ".github", "Makefile.toml", "*.log", "tags"]
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "README.md",
+    "../katex-header.html"
+]
+
+authors = ["IteraLabs.ai"]
+documentation = "https://docs.rs/atelier_rs/"
+repository = "https://github.com/iteralabs/atelier-rs"
+homepage = "https://iteralabs.ai/atelier-rs"
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+license = "Apache-2.0"
 
 [dependencies]
 
-# Atelier sub-modules 
-atelier-core = { workspace = true }
-atelier-generators = { workspace = true }
+# Probabilistic features
+rand = { version = "0.9.0" }
 
-criterion = { workspace = true }
-rand = { workspace = true }
-memuse = { workspace = true }
-human_bytes = { workspace = true }
+# Atelier sub-modules 
+atelier_data = { path = "../atelier-data", version = "0.0.1" }
+atelier_generators = { path = "../atelier-generators", version = "0.0.1" }
+
+# Benchmarks
+criterion = { version = "0.5", features = ["html_reports"] }
+memuse = { version = "0.2.0" }
+human_bytes = { version = "0.4.1" }
 
 [[bench]]
 name = "orderbook_benchmark"

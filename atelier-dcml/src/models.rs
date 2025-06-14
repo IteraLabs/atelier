@@ -99,7 +99,7 @@ impl LinearModelBuilder {
 
     pub fn glorot_uniform_init(self) -> LinearModel {
         // Initialize weights with Glorot uniform
-        let limit = (6.0 as f64).sqrt() / ((self.input_dim + 1) as f64).sqrt();
+        let limit = (6.0_f64).sqrt() / ((self.input_dim + 1) as f64).sqrt();
 
         let rand_weights =
             Tensor::rand(&[self.input_dim], (Kind::Float, self.device)) * limit;

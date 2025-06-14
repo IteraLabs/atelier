@@ -1,31 +1,52 @@
 [package]
 name = "example"
-description = "Research Examples for the Atelier project"
-version = "0.0.1"
-publish = false
+description = "Research and implementation examples for the atelier-rs engine"
+publish = true
+readme = "README.md"
 
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-keywords.workspace = true
-categories.workspace = true
-documentation.workspace = true
-repository.workspace = true
+version = "0.0.1"
+rust-version = "1.84.1"
+edition = "2021"
+
+exclude = ["assets/*", ".github", "Makefile.toml", "*.log", "tags"]
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "README.md",
+    "../katex-header.html"
+]
+
+authors = ["IteraLabs.ai"]
+documentation = "https://docs.rs/atelier_rs/"
+repository = "https://github.com/iteralabs/atelier-rs"
+homepage = "https://iteralabs.ai/atelier-rs"
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+license = "Apache-2.0"
 
 [dependencies]
 
-# Atelier sub-modules 
-atelier-agents = { workspace = true }
-atelier-core = { workspace = true }
-atelier-dcml = { workspace = true }
-atelier-synth = { workspace = true }
+# Atelier internal dependencies
+atelier_data = { path = "../atelier-data", version = "0.0.1" }
+atelier_dcml = { path = "../atelier-dcml", version = "0.0.1" }
+atelier_generators = { path = "../atelier-generators", version = "0.0.1" }
+atelier_results = { path = "../atelier-results", version = "0.0.1" }
+atelier_rs = { path = "../atelier-rs", version = "0.0.1" }
+atelier_synth = { path = "../atelier-synth", version = "0.0.1" }
 
-criterion = { workspace = true }
-rand = { workspace = true }
-memuse = { workspace = true }
-human_bytes = { workspace = true }
-tch = { workspace = true }
-tokio = { workspace = true }
+# Benchmarks
+criterion = { version = "0.5", features = ["html_reports"] }
+memuse = { version = "0.2.0" }
+human_bytes = { version = "0.4.1" }
+
+# Probabilistic features
+rand = { version = "0.9.0" }
+
+# AI/ML with LibTorch from C++
+tch = { version = "0.20.0" }
+
+# Computing
+tokio = { version = "1", features = ["full"] }
 
 [[example]]
 name = "case_a_data"

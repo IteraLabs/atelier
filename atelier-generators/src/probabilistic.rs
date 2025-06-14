@@ -10,15 +10,15 @@
 //! ## References
 //!
 //! - [rand_distr](https://docs.rs/rand_distr/latest/rand_distr/)
-use rand::prelude::*;
 use rand::distr::Uniform;
+use rand::prelude::*;
 use rand_distr::Normal;
 
 pub enum Distributions {
     Uniform,
     Normal,
     Poisson,
-    Exponential
+    Exponential,
 }
 
 pub trait Sampling {
@@ -30,25 +30,18 @@ pub struct UniformDistribution {
     pub upper: f64,
 }
 
-pub fn uniform_return(
-    lower: f64,
-    upper: f64,
-    n: usize,
-    ) -> Vec<f64> {
-
+pub fn uniform_return(lower: f64, upper: f64, n: usize) -> Vec<f64> {
     let uniform = UniformDistribution { lower, upper };
     let returns = uniform.sample(n);
     returns
 }
 
 impl Sampling for UniformDistribution {
-
     fn sample(&self, n: usize) -> Vec<f64> {
         let mut rng = rand::rng();
         let uni = Uniform::new(self.lower, self.upper).unwrap();
         (0..n).map(|_| rng.sample(uni)).collect()
     }
-
 }
 
 pub struct NormalDistribution {

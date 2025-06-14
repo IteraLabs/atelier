@@ -1,8 +1,8 @@
 //! Benchmark for Orderbook Methods
 
-use atelier_core::orderbooks::Orderbook;
+use atelier_data::orderbooks::Orderbook;
 
-use criterion::{Criterion, black_box, criterion_group, criterion_main};
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn create_orderbook(c: &mut Criterion) {
     let mut group = c.benchmark_group("Orderbook Creation");

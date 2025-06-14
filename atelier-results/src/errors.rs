@@ -1,7 +1,3 @@
-//! Custom Error Types
-//! Provides the definition of error types that are custom made for the atelier
-//! project.
-
 use thiserror::Error;
 
 #[derive(Error, Debug, Clone)]

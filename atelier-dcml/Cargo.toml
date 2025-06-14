@@ -1,39 +1,53 @@
 [package]
-name = "atelier-dcml"
-description = "Distributed Convex Machine Learning"
-version = "0.0.1"
-publish = false
+name = "atelier_dcml"
+description = "Distributed Convex Machine Learning for the atelier-rs engine"
+publish = true
+readme = "README.md"
 
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-keywords.workspace = true
-categories.workspace = true
-documentation.workspace = true
-repository.workspace = true
+version = "0.0.1"
+rust-version = "1.84.1"
+edition = "2021"
+
+exclude = ["assets/*", ".github", "Makefile.toml", "*.log", "tags"]
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "README.md",
+    "../katex-header.html"
+]
+
+authors = ["IteraLabs.ai"]
+documentation = "https://docs.rs/atelier_rs/"
+repository = "https://github.com/iteralabs/atelier-rs"
+homepage = "https://iteralabs.ai/atelier-rs"
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+license = "Apache-2.0"
+
+[lib]
+name = "atelier_dcml"
+path = "src/lib.rs"
 
 [dependencies]
 
 # Atelier sub-modules 
-atelier-core = { path = "../atelier-core", version = "0.0.1" }
-atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
+atelier_data = { path = "../atelier-data", version = "0.0.1" }
+atelier_generators = { path = "../atelier-generators", version = "0.0.1" }
 
 # Probabilistic features
-rand = { workspace = true }
-rand_distr = { workspace = true }
+rand = { version = "0.9.0" }
+rand_distr = { version = "0.5.0" }
 
-# Data
-toml = { workspace = true } 
-csv = { workspace = true }
+# File management
+toml = { version = "0.8" }
+csv = { version = "1.3" }
 
-# Computing 
-serde = { workspace = true }
-serde_json = { workspace = true }
-tch = { workspace = true }
+# Computing
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0" }
 
-[[example]]
-name = "compute_features"
-path = "examples/compute_features.rs"
+# AI/ML with LibTorch from C++
+tch = { version = "0.20.0" }
 
 [[example]]
 name = "loss_functions"
@@ -43,5 +57,13 @@ path = "examples/loss_functions.rs"
 name = "singular_training"
 path = "examples/singular_training.rs"
 
-[lints]
-workspace = true
+[lints.rust]
+unsafe_code = "forbid"
+unused_extern_crates = "allow"
+unreachable_code = "deny"
+unreachable_patterns = "deny"
+unused_variables = "warn"
+trivial_casts = "warn"
+trivial_numeric_casts = "warn"
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)'] }
+

@@ -30,11 +30,10 @@ ENV LIBTORCH_BYPASS_VERSION_CHECK=1
 ENV LD_LIBRARY_PATH=/app/libtorch/lib
 ENV TORCH_CUDA_VERSION=cpu
 
-# Copy Workspace configuration files
+# Copy Workspace Files
 COPY Cargo.toml ./
-COPY atelier ./atelier
-COPY atelier-agents ./atelier-agents
-COPY atelier-core ./atelier-core
+COPY atelier-rs ./atelier-rs
+COPY atelier-data ./atelier-data
 COPY atelier-dcml ./atelier-dcml
 COPY atelier-generators ./atelier-generators
 COPY atelier-results ./atelier-results
@@ -43,7 +42,7 @@ COPY examples ./examples
 COPY benches ./benches
 
 # Build the Rust binary in release mode
-RUN cargo build --release -p atelier
+RUN cargo build --release --bin synthetizer
 
 # ----------------------------------------------------------------- STAGE 2: runner --- #
 # ----------------------------------------------------------------- --------------- --- #
@@ -58,7 +57,7 @@ RUN apt-get update && apt-get install -y \
   vim
 
 # Get the binary, the templates and dependencies from Builder
-COPY --from=builder /app/target/release/atelier /usr/local/bin/atelier
+COPY --from=builder /app/target/release/synthetizer /usr/local/bin/synthetizer
 COPY --from=builder /app/atelier-synth/templates ./templates
 COPY --from=builder /usr/local/lib/python3*/dist-packages/torch/lib /usr/local/libtorch
 
@@ -72,4 +71,4 @@ ENV LD_LIBRARY_PATH=/usr/local/libtorch
 ENV TORCH_CUDA_VERSION=cpu
 
 # Service entrypoint
-ENTRYPOINT ["/usr/local/bin/atelier"]
+ENTRYPOINT ["/usr/local/bin/synthetizer"]

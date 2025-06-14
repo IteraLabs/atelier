@@ -1,5 +1,5 @@
 /// Features Calculation
-use atelier_core::{data, orderbooks::Orderbook};
+use atelier_data::{data, orderbooks::Orderbook};
 use std::error::Error;
 
 #[derive(Debug, Clone, Copy)]
@@ -159,7 +159,7 @@ pub fn compute_midprice(ob: &Orderbook) -> f64 {
 pub fn compute_w_midprice(ob: &Orderbook) -> f64 {
     let i_w_midprice = ((ob.bids[0].price * ob.bids[0].volume)
         + (ob.asks[0].price * ob.asks[0].volume))
-        / (ob.asks[0].volume + ob.bids[0].volume) as f64;
+        / (ob.asks[0].volume + ob.bids[0].volume);
     data::truncate_to_decimal(i_w_midprice, 8)
 }
 

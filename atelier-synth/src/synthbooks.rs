@@ -1,7 +1,4 @@
-//! Synthetic Generation of Centralized Exchange
-//! Orderbooks
-
-use atelier_core::{
+use atelier_data::{
     orderbooks::Orderbook,
     templates::{ModelConfig, Models, OrderbookConfig},
 };
@@ -86,12 +83,10 @@ pub async fn progressions(
     let ini_ask = template_orderbook.ask_price.unwrap();
     let ini_price = (ini_bid + ini_ask) / 2.0;
 
-    let model_label:Models = template_model.label.unwrap();
+    let model_label: Models = template_model.label.unwrap();
 
     let (r_1, r_2) = match model_label {
-
         Models::Uniform => {
-    
             let lower = template_model.params_values.as_ref().unwrap()[0];
             let upper = template_model.params_values.as_ref().unwrap()[1];
             let n = n_progres;
@@ -100,27 +95,21 @@ pub async fn progressions(
             let r_2 = probabilistic::uniform_return(lower, upper, n);
 
             (r_1, r_2)
-
         }
 
         Models::GBM => {
-
             let dt = 0.01;
             let n = n_progres;
             let mu = template_model.params_values.as_ref().unwrap()[0];
             let sigma = template_model.params_values.unwrap()[1];
-            
-            (brownian::gbm_return(ini_bid, mu, sigma, dt, n).unwrap(),
-             brownian::gbm_return(ini_ask, mu, sigma, dt, n).unwrap())
 
+            (
+                brownian::gbm_return(ini_bid, mu, sigma, dt, n).unwrap(),
+                brownian::gbm_return(ini_ask, mu, sigma, dt, n).unwrap(),
+            )
         }
 
-        _ => {
-
-            (vec![0.0], vec![0.0])
-
-        }
-
+        _ => (vec![0.0], vec![0.0]),
     };
 
     let mut bid_price = template_orderbook.bid_price.unwrap();
@@ -132,7 +121,6 @@ pub async fn progressions(
     let ask_orders = template_orderbook.ask_orders.unwrap();
 
     for i in 1..n_progres {
-
         let r_ob = Orderbook::random(
             bid_price,
             Some((bid_levels[0], bid_levels[1])),
@@ -152,13 +140,11 @@ pub async fn progressions(
         };
 
         // --- Progress next Orderbook
-        bid_price = ini_price.clone() * ( 1.0 + bid_return );
-        ask_price = ini_price.clone() * ( 1.0 + ask_return );
-
+        bid_price = ini_price.clone() * (1.0 + bid_return);
+        ask_price = ini_price.clone() * (1.0 + ask_return);
     }
 
     Ok(v_orderbooks)
-
 }
 
 /// Executes multiple orderbook progression scenarios concurrently.

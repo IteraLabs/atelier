@@ -1,28 +1,60 @@
 [package]
 name = "tests"
 description = "Tests for the Atelier crate"
-version = "0.0.1"
-publish = false
+publish = true
+readme = "README.md"
 
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-keywords.workspace = true
-categories.workspace = true
-documentation.workspace = true
-repository.workspace = true
+version = "0.0.1"
+rust-version = "1.84.1"
+edition = "2021"
+
+exclude = ["assets/*", ".github", "Makefile.toml", "*.log", "tags"]
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "README.md",
+    "../katex-header.html"
+]
+
+authors = ["IteraLabs.ai"]
+documentation = "https://docs.rs/atelier_rs/"
+repository = "https://github.com/iteralabs/atelier-rs"
+homepage = "https://iteralabs.ai/atelier-rs"
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+license = "Apache-2.0"
 
 [dev-dependencies]
 
 # Atelier sub-modules 
-atelier-core = { path = "../atelier-core", version = "0.0.1" }
-atelier-generators = { path = "../atelier-generators", version = "0.0.1" }
-atelier-dcml = { path = "../atelier-dcml", version = "0.0.1" }
+atelier_data = { path = "../atelier-data", version = "0.0.1" }
+atelier_dcml = { path = "../atelier-dcml", version = "0.0.1" }
+atelier_generators = { path = "../atelier-generators", version = "0.0.1" }
+atelier_results = { path = "../atelier-results", version = "0.0.1" }
+atelier_synth = { path = "../atelier-synth", version = "0.0.1" }
 
 # Error Handling
-thiserror = { workspace = true }
+thiserror = { version = "1.0.64" }
 
 # Probabilistic features
-rand = { workspace = true }
-rand_distr = { workspace = true }
+rand = { version = "0.9.0" }
+rand_distr = { version = "0.5.0" }
+
+# Computing
+tokio = { version = "1", features = ["full"] }
+futures = { version = "0.3" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0" }
+
+[[test]]
+name = "test_compute_features"
+path = "dcml/test_compute_features.rs"
+
+[[test]]
+name = "test_single_synthetic_ob"
+path = "synth/test_single_synthetic_ob.rs"
+
+[[test]]
+name = "test_basic_orderbook"
+path = "core/test_basic_orderbook.rs"
 

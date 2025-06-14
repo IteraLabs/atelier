@@ -5,7 +5,7 @@
 //! distributed convex optimization theory
 //!
 
-use atelier_core::{orderbooks::Orderbook, templates};
+use atelier_data::{orderbooks::Orderbook, templates};
 use rand::Rng;
 use rand_distr::Uniform;
 use serde_json;

@@ -1,25 +1,42 @@
 [package]
-name = "atelier-generators"
-description = "Probabilistic generators and events simulation for the Atelier crate"
-version = "0.0.1"
-publish = false
+name = "atelier_generators"
+description = "Probabilistic generators and events simulation for the atelier-[rs] ecosystem"
+publish = true
+readme = "README.md"
 
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-keywords.workspace = true
-categories.workspace = true
-documentation.workspace = true
-repository.workspace = true
+version = "0.0.1"
+rust-version = "1.84.1"
+edition = "2021"
+
+exclude = ["assets/*", ".github", "Makefile.toml", "*.log", "tags"]
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "README.md",
+    "../katex-header.html"
+]
+
+authors = ["IteraLabs.ai"]
+documentation = "https://docs.rs/atelier_rs/"
+repository = "https://github.com/iteralabs/atelier-rs"
+homepage = "https://iteralabs.ai/atelier-rs"
+keywords = ["machine-learning", "framework", "math", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+license = "Apache-2.0"
+
+[lib]
+name = "atelier_generators"
+path = "src/lib.rs"
 
 [dependencies]
 
-atelier-results = { path = "../atelier-results", version = "0.0.1" }
+# Atelier sub-modules 
+atelier_results = { path = "../atelier-results", version = "0.0.1" }
 
 # Error
-thiserror = { workspace = true }
+thiserror = { version = "1.0.64" }
 
 # Probabilistic features
-rand = { workspace = true }
-rand_distr = { workspace = true }
+rand = { version = "0.9.0" }
+rand_distr = { version = "0.5.0" }
 

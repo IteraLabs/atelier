@@ -7,7 +7,7 @@ use crate::{
     optimizers::Optimizer,
 };
 
-use atelier_core::data;
+use atelier_data::data;
 use serde::Deserialize;
 use std::{error::Error, fs};
 
@@ -26,7 +26,6 @@ struct Connection {
 
 #[derive(Debug, Deserialize)]
 struct Training {
-    epochs: u32,
     agents: u32,
     agent_connections: Vec<Connection>,
 }
@@ -36,14 +35,14 @@ struct TrainingTemplate {
     training: Vec<Training>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug)]
 pub struct ConnectionsMatrix {
     values: Vec<f64>,
 }
 
 impl ConnectionsMatrix {
     pub fn new(self, n_rows: &usize, n_cols: &usize) -> Self {
-        let matrix_values = vec![0.0; (n_rows * n_cols) as usize];
+        let matrix_values = vec![0.0; n_rows * n_cols];
         ConnectionsMatrix {
             values: matrix_values,
         }
@@ -58,7 +57,7 @@ impl ConnectionsMatrix {
             connections_file
         ));
 
-        let n_agents = template.training.first().unwrap().agents as u32;
+        let n_agents = template.training.first().unwrap().agents;
 
         // Fill in the matrix with connection weights
         if let Some(training) = template.training.first() {
@@ -234,11 +233,12 @@ impl Distributed {
         DistributedBuilder::new()
     }
 
-    pub fn train() -> Result<(), Box<dyn Error>> {
+    pub fn train(mut self) -> Result<(), Box<dyn Error>> {
         // 1. Compute Gradients
         // 2. Collect parameters
         // 3. Compute consensus
         // 4. Compute metrics
+        self.topology = vec![vec![0.0]];
 
         Ok(())
     }

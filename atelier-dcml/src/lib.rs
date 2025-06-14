@@ -1,28 +1,26 @@
-//! # atelier-dcm
+//! atelier-dcml
 //!
-//! Distributed Convex Methods
+//! Distributed Convex Machine Learning for the atelier-rs engine.
 
-#![allow(dead_code)]
-
-/// Distributed Agents
+/// Singular and Distributed Agents
 pub mod agents;
 
 /// Mathematical objects and definitions
 pub mod math;
 
-/// Distributed feature engineering
+/// Feature engineering
 pub mod features;
 
-/// Distributed target engineering
+/// target engineering
 pub mod targets;
 
-/// Distributed cost function engineering
+/// Loss function engineering
 pub mod functions;
 
-/// Distributed training algorithms
+/// Singular and Distributed Training Processes
 pub mod processes;
 
-/// Distributed Models
+/// Convex Linear Models
 pub mod models;
 
 /// Optimizers and Learning Algorithms

@@ -1,6 +1,8 @@
 # benches
 
-Benchmarks to attribute the resource utilization when running a relevant processes.
+# Overview
+
+Benchmarks for the atelier-rs engine.
 
 ## Single order book generation
 
@@ -57,4 +59,25 @@ xdg-open target/criterion/report/index.html
 |:----------:|:---------------:|:----------------:|:--------------------------------------:|
 | Shallowest |        2        |  (1,000 : 1,300) |                  0.002                 |
 | Deepest    |       100       |  (1,000 : 1,300) |                  11.78                 |
+
+# Workspace
+
+These are the other published crates members of the workspace: 
+
+- [atelier-data](https://crates.io/crates/atelier-data): Core data structures and I/O tools.
+- [atelier-dcml](https://crates.io/crates/atelier-dcml): Distributed Convex Machine Learning. 
+- [atelier-generators](https://crates.io/crates/atelier-generators): Probabilistic generators and events simulation.
+- [atelier-results](https://crates.io/crates/atelier-results): Standardized results, errors and successes.
+- [atelier-synth](https://crates.io/crates/atelier-synth): Synthetic Data Generation for the atelier-rs engine.
+
+Github hosted:
+
+- [benches](https://github.com/IteraLabs/atelier-rs/tree/main/benches)
+- [examples](https://github.com/IteraLabs/atelier-rs/tree/main/examples)
+- [tests](https://github.com/IteraLabs/atelier-rs/tree/main/tests)
+
+<br>
+
+---
+benches is a member of the [atelier-rs](https://github.com/iteralabs/atelier-rs) workspace
 

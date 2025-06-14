@@ -1,4 +1,4 @@
-use atelier_core::{orderbooks::Orderbook, templates};
+use atelier_data::{orderbooks::Orderbook, templates};
 use atelier_synth::synthbooks::async_progressions;
 use std::{error::Error, fs::File, io::Write, path::Path};
 
