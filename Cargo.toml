@@ -21,9 +21,6 @@ members = [
 
   # Synthetic Data Generation
   "atelier-synth",
-
-  # Solana Virtual Machine interface
-  "atelier-svm",
   
   # Usability and Excellence
   "benches",
@@ -37,7 +34,6 @@ default-members = [
   "atelier-generators",
   "atelier-results",
   "atelier-synth",
-  "atelier-svm",
   "examples",
 ]
 
@@ -67,7 +63,6 @@ atelier-core = { path = "./atelier-core", version = "0.0.1" }
 atelier-dcml = { path = "./atelier-dcml", version = "0.0.1" }
 atelier-generators = { path = "./atelier-generators", version = "0.0.1" }
 atelier-results = { path = "./atelier-results", version = "0.0.1" }
-atelier-svm = { path = "./atelier-svm", version = "0.0.1" }
 atelier-synth = { path = "./atelier-synth", version = "0.0.1" }
 
 # Error Handling
@@ -99,4 +94,4 @@ tch = { version = "0.20.0" }
 [workspace.lints.rust]
 unsafe_code = "forbid"
 unused_extern_crates = "warn"
-
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)'] }

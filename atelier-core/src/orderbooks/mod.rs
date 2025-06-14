@@ -1,9 +1,9 @@
 use crate::{
     levels::Level,
     orders::{Order, OrderSide, OrderType},
-    results::errors::{LevelError, OrderError},
 };
 
+use atelier_results::errors::{LevelError, OrderError};
 use rand::{Rng, distr::Uniform};
 use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};

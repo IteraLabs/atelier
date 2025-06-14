@@ -46,14 +46,6 @@ mod test_orderbook_utils {
         Ok(random_level)
     }
 
-    // -------------------------------------------------------------- TEST TIMESTAMP --//
-
-    pub fn test_timestamp() -> u64 {
-        SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .expect("Time went backwards")
-            .as_micros() as u64
-    }
 }
 
 // -- ------------------------------------------------------------- ORDERBOOK TESTS -- //
